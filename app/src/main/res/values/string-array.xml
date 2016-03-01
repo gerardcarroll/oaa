@@ -10,9 +10,15 @@
         <item>Leisure</item>
         <item>Family</item>
         <item>Gadgets</item>
-        <item>Home Improvement</item>
-        <item>Entertainment</item>
-        <item>Film and TV</item>
-        <item>Food</item>
+        <item>Furniture</item>
+        <item>Bedding</item>
+        <item>Fitness</item>
+        <item>Home Automation</item>
+        <item>Mobility</item>
+        <item>Personal Care</item>
+        <item>Shoes</item>
+        <item>Sport Shoes</item>
+        <item>Technology</item>
+        <item>Watches</item>
     </string-array>
 </resources>

@@ -2,10 +2,16 @@
 <project version="4">
   <component name="EclipseCodeFormatter">
     <option name="defaultSettings" value="true" />
+<<<<<<< HEAD
+    <option name="id" value="1455195309280" />
+    <option name="name" value="default" />
+    <option name="pathToConfigFileJava" value="$USER_HOME$/Downloads/OverstockConventionsEclipse4.xml" />
+=======
     <option name="formatter" value="ECLIPSE" />
     <option name="id" value="1456835789489" />
     <option name="name" value="default" />
     <option name="pathToConfigFileJava" value="$USER_HOME$/Downloads/OverstockConventionsNew.xml" />
+>>>>>>> d617a050408f6c4dc6ba7813d25abb7bfee2c936
     <option name="selectedJavaProfile" value="Overstock Conventions" />
   </component>
   <component name="EntryPointsManager">
@@ -45,7 +51,11 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
+<<<<<<< HEAD
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+=======
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+>>>>>>> d617a050408f6c4dc6ba7813d25abb7bfee2c936
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -22,68 +22,69 @@ import java.util.List;
  */
 public class CommunitiesActivity extends AppCompatActivity {
 
-  private RecyclerView recyclerView;
+    private RecyclerView recyclerView;
 
-  private CommunitiesAdapter communitiesAdapter;
+    private CommunitiesAdapter communitiesAdapter;
 
-  private Toolbar toolbar;
+    private Toolbar toolbar;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-    setContentView(R.layout.activity_communities);
+        setContentView(R.layout.activity_communities);
 
-    toolbar = (Toolbar)findViewById(R.id.oap_toolbar);
-    setSupportActionBar(toolbar);
+        toolbar = (Toolbar) findViewById(R.id.oap_toolbar);
+        setSupportActionBar(toolbar);
 
-    recyclerView = (RecyclerView) findViewById(R.id.rvCommunities);
-    recyclerView.setHasFixedSize(true);
-    communitiesAdapter = new CommunitiesAdapter(getApplicationContext(), getData());
-    recyclerView.setAdapter(communitiesAdapter);
-    recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-    recyclerView.stopNestedScroll();
-    recyclerView.setItemAnimator(new DefaultItemAnimator());
-  }
-
-  private List<Community> getData() {
-
-    List<Community> communities = new ArrayList<>();
-    int[] images = { R.drawable.man, R.drawable.woman, R.drawable.man_and_woman, R.drawable.home_decor,
-        R.drawable.games, R.drawable.leisure, R.drawable.family, R.drawable.gadgets, R.drawable.games,
-        R.drawable.leisure, R.drawable.family, R.drawable.gadgets };
-    String[] names = getResources().getStringArray(R.array.communities_array);
-
-    for (int i = 0; i < images.length && i < names.length; i++) {
-
-      Community community = new Community();
-
-      community.setImageId(images[i]);
-      community.setName(names[i]);
-
-      communities.add(community);
+        recyclerView = (RecyclerView) findViewById(R.id.rvCommunities);
+        recyclerView.setHasFixedSize(true);
+        communitiesAdapter = new CommunitiesAdapter(getApplicationContext(), getData());
+        recyclerView.setAdapter(communitiesAdapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.stopNestedScroll();
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
-    return communities;
-  }
+    private List<Community> getData() {
 
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
+        final List<Community> communities = new ArrayList<>();
+        final int[] images = {R.drawable.man, R.drawable.woman, R.drawable.man_and_woman, R.drawable.home_decor,
+                R.drawable.games, R.drawable.leisure, R.drawable.family, R.drawable.gadgets, R.drawable.furniture,
+                R.drawable.bedding, R.drawable.fitness, R.drawable.home_automation, R.drawable.mobility, R.drawable
+                .personal_care, R.drawable.shoes, R.drawable.sports_shoes, R.drawable.technology, R.drawable.watches};
+        final String[] names = getResources().getStringArray(R.array.communities_array);
 
-    getMenuInflater().inflate(R.menu.menu_main, menu);
-    return true;
-  }
+        for (int i = 0; i < images.length && i < names.length; i++) {
 
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
+            final Community community = new Community();
 
-    int id = item.getItemId();
+            community.setImageId(images[i]);
+            community.setName(names[i]);
 
-    if (id == R.id.action_settings || id == R.id.action_refresh){
-      Toast.makeText(this, "You clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();
-      return true;
+            communities.add(community);
+        }
+
+        return communities;
     }
 
-    return super.onOptionsItemSelected(item);
-  }
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+
+        final int id = item.getItemId();
+
+        if (id == R.id.action_settings || id == R.id.action_refresh) {
+            Toast.makeText(this, "You clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
