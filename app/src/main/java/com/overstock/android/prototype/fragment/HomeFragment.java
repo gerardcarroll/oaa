@@ -45,4 +45,6 @@ public class HomeFragment extends Fragment {
     public void guestLogin_onClick(){
         Toast.makeText(getActivity(), "Guest Login Coming Soon!", Toast.LENGTH_LONG).show();
     }
+
+
 }
