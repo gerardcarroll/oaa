@@ -4,4 +4,9 @@
     <!-- Community Activity Button -->
     <string name="btn_community_default">Select 4 Communities</string>
     <string name="btn_community_continue">Continue</string>
+
+    <!-- Tool Bar -->
+    <string name="action_settings">Settings</string>
+    <string name="action_refresh">Refresh</string>
+
 </resources>
