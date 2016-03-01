@@ -5,27 +5,27 @@ package com.overstock.android.prototype.models;
  */
 public class Community {
 
-    int imageId;
-    String name;
+  int imageId;
 
-//  public Community(String imageId, String name) {
-//       this.imageId = imageId;
-//       this.name = name;
-//  }
-    public int getImageId() {
-        return imageId;
-    }
+  String name;
 
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
-    }
+  // public Community(String imageId, String name) {
+  // this.imageId = imageId;
+  // this.name = name;
+  // }
+  public int getImageId() {
+    return imageId;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public void setImageId(int imageId) {
+    this.imageId = imageId;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
 }
-
