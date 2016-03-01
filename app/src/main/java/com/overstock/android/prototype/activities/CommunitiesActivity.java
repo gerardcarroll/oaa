@@ -41,11 +41,12 @@ public class CommunitiesActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
-    private static List<Community> getData(){
+    private List<Community> getData(){
 
         List<Community> communities = new ArrayList<>();
-        int [] images = { R.drawable.man, R.drawable.woman, R.drawable.man_and_woman, R.drawable.home_decor, R.drawable.games, R.drawable.leisure, R.drawable.family, R.drawable.gadgets }; // TODO images to be added to array
-        String [] names = { "Men", "Women", "Men & Women", "Home Decor", "Games", "Leisure", "Family", "Gadgets"}; // TODO names to be added to array
+        int [] images = { R.drawable.man, R.drawable.woman, R.drawable.man_and_woman, R.drawable.home_decor, R.drawable.games, R.drawable.leisure, R.drawable.family, R.drawable.gadgets, R.drawable.games, R.drawable.leisure, R.drawable.family, R.drawable.gadgets }; // TODO images to be added to array
+//        String [] names = { "Men", "Women", "Men & Women", "Home Decor", "Games", "Leisure", "Family", "Gadgets", "Games", "Leisure", "Family", "Gadgets"}; // TODO names to be added to array
+        String[] names = getResources().getStringArray(R.array.communities_array);
 
         for ( int i = 0; i < images.length && i < names.length; i++){
 
