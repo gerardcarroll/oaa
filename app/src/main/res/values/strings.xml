@@ -4,4 +4,7 @@
     <string name="faceBook_connect">Connect with Facebook</string>
     <string name="google_connect">Connect with G+</string>
     <string name="guest_connect"><u>Continue As Guest</u></string>
+
+    <string name="faceBook_login_toast">FaceBook Login Coming Soon!</string>
+    <string name="guest_login_toast">Guest Login Coming Soon!</string>
 </resources>
