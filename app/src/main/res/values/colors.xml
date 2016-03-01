@@ -3,4 +3,11 @@
     <color name="colorPrimary">#F44336</color>
     <color name="colorPrimaryDark">#D32F2F</color>
     <color name="colorAccent">#009688</color>
+    <color name="colorPrimaryTransparent">#BFF44336</color>
+    <color name="transparent">#80000000</color>
+
+    <color name="facebookBlue">#3b5998</color>
+    <color name="facebookBlue_75_Percent_Transparent">#BF3b5998</color>
+    <color name="googlePlusRed">#d34836</color>
+    <color name="googlePlusRed_75_Percent_Transparent">#BFd34836</color>
 </resources>

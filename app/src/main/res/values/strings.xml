@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">OAppPrototype</string>
+    <string name="home_page_label">O.com App</string>
+    <string name="faceBook_connect">Connect with Facebook</string>
+    <string name="google_connect">Connect with G+</string>
+    <string name="guest_connect"><u>Continue As Guest</u></string>
 </resources>

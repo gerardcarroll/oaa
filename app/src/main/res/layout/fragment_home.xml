@@ -1,0 +1,72 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragment.HomeFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elegantTextHeight="true"
+            android:text="@string/home_page_label"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/facebook_login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:background="@color/facebookBlue"
+            android:elevation="@dimen/activity_vertical_margin"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:text="@string/faceBook_connect"
+            android:textColor="@android:color/background_light" />
+
+        <Button
+            android:id="@+id/googlePlus_login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@color/googlePlusRed"
+            android:elevation="@dimen/activity_vertical_margin"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:text="@string/google_connect"
+            android:textColor="@android:color/background_light" />
+
+        <Button
+            android:id="@+id/guest_login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@android:color/transparent"
+            android:elevation="@dimen/activity_vertical_margin"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:soundEffectsEnabled="true"
+            android:text="@string/guest_connect"
+
+            android:textColor="@android:color/background_light" />
+
+
+    </LinearLayout>
+
+</LinearLayout>
