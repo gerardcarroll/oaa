@@ -1,45 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto" xmlns:app="http://schemas.android.com/tools"
+    android:id="@+id/cvCommunities"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true"
+    card_view:cardBackgroundColor="@color/grey"
+    card_view:cardCornerRadius="3dp"
+    card_view:cardElevation="8dp">
 
-    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/cvCommunities"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        app:cardPreventCornerOverlap="false"
-        app:cardUseCompatPadding="true"
-        card_view:cardBackgroundColor="@color/grey"
-        card_view:cardCornerRadius="3dp"
-        card_view:cardElevation="8dp">
+    <FrameLayout
+        android:id="@+id/flCommunities"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/flCommunities"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical">
+        <ImageView
+            android:id="@+id/ivCommunities"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_weight="1.0"
+            android:scaleType="fitXY" />
 
-            <ImageView
-                android:id="@+id/ivCommunities"
-                android:layout_width="wrap_content"
-                android:layout_height="150dp"
-                android:layout_weight="1.0"
-                android:scaleType="fitXY" />
+        <TextView
+            android:id="@+id/tvCommunities"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medium Text"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/darkGrey" />
 
-            <TextView
-                android:id="@+id/tvCommunities"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Medium Text"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/darkGrey" />
+    </FrameLayout>
 
-        </LinearLayout>
-
-    </android.support.v7.widget.CardView>
-</LinearLayout>
+</android.support.v7.widget.CardView>
