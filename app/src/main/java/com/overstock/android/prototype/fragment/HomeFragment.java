@@ -1,8 +1,8 @@
 package com.overstock.android.prototype.fragment;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,9 +28,13 @@ public class HomeFragment extends Fragment {
 
     @OnClick(R.id.googlePlus_login_btn)
     public void googlePlusLogin_onClick(){
-        //TODO added Login logic.
-    }
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        Fragment googleSigninFragment =  new GoogleFederatedIdentityFragment();
+        fragmentTransaction.add(R.id.home_activity, googleSigninFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
 
+    }
 
     @OnClick(R.id.facebook_login_btn)
     public void faceBookLogin_onClick(){
@@ -41,9 +45,4 @@ public class HomeFragment extends Fragment {
     public void guestLogin_onClick(){
         Toast.makeText(getActivity(), "Guest Login Coming Soon!", Toast.LENGTH_LONG).show();
     }
-
-
-
-
-
 }

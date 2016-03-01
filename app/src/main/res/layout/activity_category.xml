@@ -1,12 +1,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/home_activity"
+    android:id="@+id/category_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    tools:context=".activity.HomeActivity">
-
-
+    tools:context=".activity.CategoryActivity">
 
     <View
         android:layout_width="match_parent"
