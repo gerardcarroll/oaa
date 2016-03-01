@@ -6,6 +6,8 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.CommunitiesAdapter;
@@ -29,7 +31,7 @@ public class CommunitiesActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_communities);
 
-        cardView = (CardView)findViewById(R.id.cvCommunities);
+//        cardView = (CardView)findViewById(R.id.cvCommunities);
 
         recyclerView = (RecyclerView) findViewById(R.id.rvCommunities);
         recyclerView.setHasFixedSize(true);
@@ -57,4 +59,14 @@ public class CommunitiesActivity extends AppCompatActivity {
 
             return communities;
         }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
 }

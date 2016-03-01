@@ -65,12 +65,23 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
         ImageView communityImage;
         TextView communityTitle;
 
-        public CommunitiesViewHolder(View itemView) {
+        public CommunitiesViewHolder(final View itemView) {
             super(itemView);
 
             cardView = (CardView) itemView.findViewById(R.id.cvCommunities);
             communityImage = (ImageView) itemView.findViewById(R.id.ivCommunities);
             communityTitle = (TextView) itemView.findViewById(R.id.tvCommunities);
+
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//
+//                    Intent intent = new Intent(v.getContext(), FeedActivity.class);
+//                    v.getContext().startActivity(intent);
+//
+//                    //Toast.makeText(itemView.getContext(), "Item clicked", Toast.LENGTH_SHORT).show();
+//                }
+//            });
         }
     }
 }
