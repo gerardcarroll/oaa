@@ -1,46 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    android:id="@+id/cvCommunities"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true"
+    card_view:cardBackgroundColor="@color/grey"
+    card_view:cardCornerRadius="3dp"
+    card_view:cardElevation="8dp">
 
-    <android.support.v7.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/cvCommunities"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        card_view:cardBackgroundColor="@color/grey"
-        card_view:cardCornerRadius="3dp"
-        card_view:cardElevation="8dp"
-        app:cardPreventCornerOverlap="false"
-        app:cardUseCompatPadding="true"
-        android:layout_margin="5dp">
+    <RelativeLayout
+        android:id="@+id/flCommunities"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/flCommunities"
+        <ImageView
+            android:id="@+id/ivCommunities"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:scaleType="fitXY"/>
+
+        <TextView
+            android:id="@+id/tvCommunities"
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical"
-            >
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:text="Medium Text"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/darkGrey"
+            android:background="#d7d6d6"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"/>
 
-            <ImageView
-                android:id="@+id/ivCommunities"
-                android:layout_width="wrap_content"
-                android:layout_height="150dp"
-                android:layout_weight="1.0"
-                android:scaleType="fitXY" />
+        <CheckBox
+            android:id="@+id/communityCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"/>
+    </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tvCommunities"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
-                android:layout_gravity="center"
-                android:textColor="@color/darkGrey"/>
-        </LinearLayout>
-
-    </android.support.v7.widget.CardView>
-</LinearLayout>
+</android.support.v7.widget.CardView>
