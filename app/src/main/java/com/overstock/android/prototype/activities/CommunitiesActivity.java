@@ -39,6 +39,7 @@ public class CommunitiesActivity extends AppCompatActivity {
 
     toolbar = (Toolbar) findViewById(R.id.oap_toolbar);
     setSupportActionBar(toolbar);
+    setTitle("");
 
     recyclerView = (RecyclerView) findViewById(R.id.rvCommunities);
     recyclerView.setHasFixedSize(true);

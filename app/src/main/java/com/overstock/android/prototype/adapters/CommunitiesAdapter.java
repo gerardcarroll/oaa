@@ -43,7 +43,6 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
 
     final Community community = data.get(position);
 
-    // holder.cardView.set
     holder.communityImage.setImageResource(community.getImageId());
     holder.communityTitle.setText(community.getName());
     holder.chkSelected.setChecked(community.isSelected());
