@@ -15,7 +15,8 @@
     <string name="loading">Loading…</string>
 
     <!-- TODO(user): replace with overstock client ID -->
-    <string name="server_client_id">300026557750-1u9fibp7ukdkj090rm0r2l3tqr0i4h29.apps.googleusercontent.com</string>
+    <!--<string name="server_client_id">300026557750-1u9fibp7ukdkj090rm0r2l3tqr0i4h29.apps.googleusercontent.com</string>-->
+    <string name="server_client_id">751274716012-ei5adcf6mg79hfj5i8s93isfimvareqt.apps.googleusercontent.com</string>
     <string name="google_connect_failed">An unresolvable error has occurred and Google APIs (including Sign-In) will not be available.</string>
     <string name="title_activity_category">CategoryActivity</string>
     <string name="action_settings">Settings</string>

@@ -1,11 +1,18 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        debug {
+            keyAlias 'oappprototype'
+            keyPassword 'android'
+            storeFile file('C:/Program Files/Java/jdk1.8.0_73/bin/oapp_prototype_key.keystore')
+            storePassword 'android'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
-
     defaultConfig {
-        applicationId "com.overstock"
+        applicationId "com.overstock.android.prototype"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         minSdkVersion 19
         targetSdkVersion 23
@@ -21,16 +28,14 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-
     // Dependency for Google Sign-In
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.android.support:support-v4:23.2.0'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.google.android.gms:play-services:8.4.0'
     compile 'com.android.support:design:23.2.0'
-
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2') {
         // Necessary if your app targets Marshmallow (since Espresso
         // hasn't moved to Marshmallow yet)
@@ -42,6 +47,9 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
 }
+
+
+
 
 
 apply plugin: 'com.google.gms.google-services'
