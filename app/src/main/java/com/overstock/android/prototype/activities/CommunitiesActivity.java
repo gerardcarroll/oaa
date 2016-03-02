@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -92,16 +93,18 @@ public class CommunitiesActivity extends AppCompatActivity {
   private List<Community> getData() {
 
     final List<Community> communities = new ArrayList<>();
-    final int[] images = { R.drawable.man, R.drawable.woman, R.drawable.man_and_woman, R.drawable.home_decor,
-        R.drawable.games, R.drawable.leisure, R.drawable.family, R.drawable.gadgets, R.drawable.furniture,
-        R.drawable.bedding, R.drawable.fitness, R.drawable.home_automation, R.drawable.mobility,
-        R.drawable.personal_care, R.drawable.shoes, R.drawable.sports_shoes, R.drawable.technology,
-        R.drawable.watches };
+
+    final TypedArray imagesArray = getResources().obtainTypedArray(R.array.image_array);
+    final int len = imagesArray.length();
+    final int[] images = new int[len];
+
     final String[] names = getResources().getStringArray(R.array.communities_array);
 
-    for (int i = 0; i < images.length && i < names.length; i++) {
+    for (int i = 0; i < len && i < names.length; i++) {
 
       final Community community = new Community();
+
+      images[i] = imagesArray.getResourceId(i, 0);
 
       community.setImageId(images[i]);
       community.setName(names[i]);

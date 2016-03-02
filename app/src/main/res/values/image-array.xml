@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer-array name="image_array">
+        <item>@drawable/man</item>
+        <item>@drawable/woman</item>
+        <item>@drawable/man_and_woman</item>
+        <item>@drawable/home_decor</item>
+        <item>@drawable/games</item>
+        <item>@drawable/leisure</item>
+        <item>@drawable/family</item>
+        <item>@drawable/gadgets</item>
+        <item>@drawable/furniture</item>
+        <item>@drawable/bedding</item>
+        <item>@drawable/fitness</item>
+        <item>@drawable/home_automation</item>
+        <item>@drawable/mobility</item>
+        <item>@drawable/personal_care</item>
+        <item>@drawable/shoes</item>
+        <item>@drawable/sports_shoes</item>
+        <item>@drawable/technology</item>
+        <item>@drawable/watches</item>
+    </integer-array>
+
+</resources>

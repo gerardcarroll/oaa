@@ -5,7 +5,6 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-
     <include
         android:id="@+id/oap_toolbar"
         layout="@layout/app_bar"/>
