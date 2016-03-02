@@ -1,0 +1,33 @@
+@startuml
+actor user as u
+actor "Oapp\n<<Application>>" as Oapp
+actor "G+\n<<Application>>" as gPlus
+
+u --> Oapp: User opens Oapp, lands on home page
+u --> Oapp: click:connect with google+
+Oapp --> gPlus:redirect to google+ SSO activity
+gPlus --> u:prompt:use existing google account or connect with other
+alt use existing or add new
+u --> gPlus: user selects existing g+ account
+else
+u --> gPlus: add  account
+u --> gPlus: user enters google email
+u --> gPlus: user enters google email password
+end
+
+gPlus --> gPlus: authenicates user
+gPlus -->  u: asks user will they allow Oapp \nto access their G+ account \nfunctions/information
+alt allow/deny Oapp delegated authority on users google account
+u --> gPlus: allow
+gPlus --> gPlus: updates list of "connected app" to include Oapp
+Oapp --> Oapp: Redirect to category screen
+else
+u --> gPlus: deny
+Oapp --> Oapp: Redirect to home screen
+end
+
+
+title "Google+ "Federated Identity/Delegated Authorization" flow: user connect"
+
+@enduml
+

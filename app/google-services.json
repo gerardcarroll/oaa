@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_id": "api-project-300026557750",
+    "project_number": "300026557750",
+    "name": "API Project"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300026557750:android:7d623781eae6069e",
+        "client_id": "android:com.overstock",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.overstock"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "300026557750-1u9fibp7ukdkj090rm0r2l3tqr0i4h29.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.overstock",
+            "certificate_hash": "26F9468DB062CB471ABF1D47A3536FFF50CB4511"
+          }
+        },
+        {
+          "client_id": "300026557750-jaccpqo0i52m1nc3ersg8kj9evc6qnsn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}

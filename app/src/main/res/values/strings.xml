@@ -5,6 +5,21 @@
     <string name="google_connect">Connect with G+</string>
     <string name="guest_connect"><u>Continue As Guest</u></string>
 
+    <!-- GoogleSigninFragment string values-->
+    <string name="desc_google_icon">Google Logo</string>
+    <string name="title_text">Google Sign-In</string>
+    <string name="signed_out">Signed out</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="signed_in_fmt">Signed in as: %s</string>
+    <string name="loading">Loading…</string>
+
+    <!-- TODO(user): replace with overstock client ID -->
+    <string name="server_client_id">300026557750-1u9fibp7ukdkj090rm0r2l3tqr0i4h29.apps.googleusercontent.com</string>
+    <string name="google_connect_failed">An unresolvable error has occurred and Google APIs (including Sign-In) will not be available.</string>
+    <string name="title_activity_category">CategoryActivity</string>
+    <string name="action_settings">Settings</string>
     <string name="faceBook_login_toast">FaceBook Login Coming Soon!</string>
     <string name="guest_login_toast">Guest Login Coming Soon!</string>
+
 </resources>
