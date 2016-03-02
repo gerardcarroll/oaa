@@ -1,8 +1,5 @@
 package com.overstock.android.prototype.adapters;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +13,9 @@ import android.widget.TextView;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.models.Community;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by rconnolly on 2/29/2016.
@@ -138,5 +138,6 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
                 }
             });
         }
+
     }
 }
