@@ -14,11 +14,11 @@
         android:id="@+id/rvCommunities"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/btnCommunitySelection"
         android:layout_below="@+id/oap_toolbar"
-        android:scrollbars="vertical"
-        android:layout_above="@+id/btnCommunitySelection"/>
+        android:scrollbars="vertical"/>
 
-    <com.dd.processbutton.iml.ActionProcessButton
+    <com.dd.processbutton.iml.SubmitProcessButton
         android:id="@+id/btnCommunitySelection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

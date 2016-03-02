@@ -3,6 +3,7 @@ package com.overstock.android.prototype.activities;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -13,9 +14,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import com.dd.processbutton.iml.SubmitProcessButton;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.CommunitiesAdapter;
 import com.overstock.android.prototype.models.Community;
@@ -24,6 +27,9 @@ import com.overstock.android.prototype.models.Community;
  * Created by rconnolly on 2/29/2016.
  */
 public class CommunitiesActivity extends AppCompatActivity {
+
+  @Bind(R.id.btnCommunitySelection)
+  SubmitProcessButton progressButton;
 
   private RecyclerView recyclerView;
 
@@ -48,13 +54,39 @@ public class CommunitiesActivity extends AppCompatActivity {
     recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
     recyclerView.stopNestedScroll();
     recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+    // Set the Button to disabled initially
+    progressButton.setEnabled(false);
+
+    // implement the listener for the communities adapter to update the progress button
+    communitiesAdapter.setOnDataChangeListener(new CommunitiesAdapter.OnDataChangeListener() {
+      @Override
+      public void onDataChanged(final int size) {
+        if (size >= 3) {
+          progressButton.setProgress(100);
+        }
+        else if (size > 0) {
+          final double progress = (size / 3.0) * 100;
+          progressButton.setProgress((int) Math.ceil(progress));
+        }
+        else {
+          progressButton.setProgress(0);
+        }
+
+        if (progressButton.getProgress() == 100) {
+          progressButton.setEnabled(true);
+        }
+        else {
+          progressButton.setEnabled(false);
+        }
+      }
+    });
   }
 
   @OnClick(R.id.btnCommunitySelection)
   public void btnCommunitiesSelected() {
-    // TODO
-    final List<Community> communities = communitiesAdapter.getCommunityList();
-    Toast.makeText(this, "You Clicked the Button" + communities.get(0).isSelected(), Toast.LENGTH_LONG).show();
+    final Intent intent = new Intent(this, FeedActivity.class);
+    startActivity(intent);
   }
 
   private List<Community> getData() {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.overstock.android.prototype">
+<manifest package="com.overstock.android.prototype"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
@@ -10,20 +10,25 @@
         android:theme="@style/AppTheme">
         <activity android:name=".HomeActivity">
             <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
         <activity
             android:name=".activities.CommunitiesActivity"
             android:label="Communities"
             android:theme="@style/AppTheme">
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.FeedActivity"
+            android:label="Feed"
+            android:theme="@style/AppTheme">
         </activity>
     </application>
 
