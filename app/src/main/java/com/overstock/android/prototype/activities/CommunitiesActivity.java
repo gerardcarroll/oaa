@@ -10,12 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dd.processbutton.iml.SubmitProcessButton;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.CommunitiesAdapter;
 import com.overstock.android.prototype.models.Community;
@@ -41,26 +39,22 @@ public class CommunitiesActivity extends AppCompatActivity {
 
   private Toolbar toolbar;
 
+  private TextView toolBarText;
+
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_communities);
     ButterKnife.bind(this);
 
+//    final Animation anim = AnimationUtils.loadAnimation(this, R.anim.scale);
+
     // Instantiate Toolbar
     toolbar = (Toolbar) findViewById(R.id.oap_toolbar);
     setSupportActionBar(toolbar);
     setTitle("");
-
-    // Universal Image Loader configuration
-    DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
-            .cacheInMemory(true)
-            .cacheOnDisk(true)
-            .build();
-    ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
-            .defaultDisplayImageOptions(defaultOptions)
-            .build();
-    ImageLoader.getInstance().init(config);
+    toolBarText = (TextView) findViewById(R.id.tvToolbarMsg);
+    toolBarText.setText(R.string.communitiesToolbarText);
 
     // Instantiate Recycler View
     recyclerView = (RecyclerView) findViewById(R.id.rvCommunities);
@@ -80,19 +74,16 @@ public class CommunitiesActivity extends AppCompatActivity {
       public void onDataChanged(final int size) {
         if (size >= 3) {
           progressButton.setProgress(100);
-        }
-        else if (size > 0) {
+        } else if (size > 0) {
           final double progress = (size / 3.0) * 100;
           progressButton.setProgress((int) Math.ceil(progress));
-        }
-        else {
+        } else {
           progressButton.setProgress(0);
         }
 
         if (progressButton.getProgress() == 100) {
           progressButton.setEnabled(true);
-        }
-        else {
+        } else {
           progressButton.setEnabled(false);
         }
       }
@@ -111,25 +102,18 @@ public class CommunitiesActivity extends AppCompatActivity {
 
     final TypedArray typedArray = getResources().obtainTypedArray(R.array.community_image_array);
     int len = typedArray.length();
-    int[] extImagesArray = new int[len];
+    int[] imagesArray = new int[len];
     for ( int i = 0; i < len; i++) {
-      extImagesArray[i] = typedArray.getResourceId(i, 0);
+      imagesArray[i] = typedArray.getResourceId(i, 0);
     }
-
-//    final int[] inyImagesArray = new int[]{ R.drawable.man, R.drawable.woman, R.drawable.man_and_woman,
-//                                    R.drawable.home_decor, R.drawable.games, R.drawable.leisure,
-//                                    R.drawable.family, R.drawable.gadgets, R.drawable.furniture,
-//                                    R.drawable.bedding, R.drawable.fitness, R.drawable.home_automation,
-//                                    R.drawable.mobility, R.drawable.personal_care, R.drawable.shoes,
-//                                    R.drawable.sports_shoes, R.drawable.technology, R.drawable.watches};
 
     final String[] names = getResources().getStringArray(R.array.communities_array);
 
-    for (int i = 0; i < extImagesArray.length && i < names.length; i++) {
+    for (int i = 0; i < imagesArray.length && i < names.length; i++) {
 
       final Community community = new Community();
 
-      community.setImageId(extImagesArray[i]);
+      community.setImageId(imagesArray[i]);
       community.setName(names[i]);
 
       communities.add(community);
