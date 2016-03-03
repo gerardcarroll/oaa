@@ -27,12 +27,13 @@
         android:orientation="vertical">
 
         <Button
+            style=""
             android:id="@+id/facebook_login_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:background="@color/facebookBlue"
+            android:background="@drawable/ripple_facebook"
             android:elevation="@dimen/activity_vertical_margin"
             android:padding="@dimen/activity_horizontal_margin"
             android:text="@string/faceBook_connect"
@@ -45,7 +46,7 @@
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:background="@color/googlePlusRed"
+            android:background="@drawable/ripple_google_plus"
             android:elevation="@dimen/activity_vertical_margin"
             android:padding="@dimen/activity_horizontal_margin"
             android:text="@string/google_connect"
@@ -58,10 +59,9 @@
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:background="@android:color/transparent"
+            android:background="@drawable/ripple_guest"
             android:elevation="@dimen/activity_vertical_margin"
             android:padding="@dimen/activity_horizontal_margin"
-            android:soundEffectsEnabled="true"
             android:text="@string/guest_connect"
 
             android:textColor="@android:color/background_light" />

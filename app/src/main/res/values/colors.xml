@@ -7,9 +7,14 @@
     <color name="colorPrimaryTransparent">#BFF44336</color>
     <color name="transparent">#80000000</color>
 
-    <color name="facebookBlue">#3b5998</color>
+    <!--FaceBook Colors-->
+    <color name="facebookBluePrimaryDark">#3b5998</color>
+    <color name="facebookBluePrimary">#8b9dc3</color>
     <color name="facebookBlue_75_Percent_Transparent">#BF3b5998</color>
-    <color name="googlePlusRed">#d34836</color>
+
+    <!--Google Plus Colors-->
+    <color name="googlePlusRedPrimary">#d34836</color>
+    <color name="googlePlusRedPrimaryLight">#EC6D5C</color>
     <color name="googlePlusRed_75_Percent_Transparent">#BFd34836</color>
 
     <color name="blue_grey_500">#607D8B</color>
