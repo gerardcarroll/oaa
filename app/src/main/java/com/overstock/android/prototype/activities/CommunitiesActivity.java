@@ -1,5 +1,7 @@
 package com.overstock.android.prototype.activities;
 
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -14,17 +16,17 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 import com.dd.processbutton.iml.SubmitProcessButton;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.CommunitiesAdapter;
 import com.overstock.android.prototype.models.Community;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import icepick.Icepick;
+import icepick.State;
 
 /**
  * Created by rconnolly on 2/29/2016.
@@ -40,24 +42,31 @@ public class CommunitiesActivity extends AppCompatActivity {
   @Bind(R.id.oap_toolbar)
   Toolbar toolbar;
 
-  private CommunitiesAdapter communitiesAdapter;
+  @Bind(R.id.tvToolbarMsg)
+  TextView toolBarText;
 
-  private TextView toolBarText;
+  @State
+  ArrayList<Community> communities;
+
+  private CommunitiesAdapter communitiesAdapter;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_communities);
+    Icepick.restoreInstanceState(this, savedInstanceState);
     ButterKnife.bind(this);
 
     // Instantiate Toolbar
     setSupportActionBar(toolbar);
     setTitle("");
-    toolBarText = (TextView) findViewById(R.id.tvToolbarMsg);
     toolBarText.setText(R.string.communitiesToolbarText);
 
+    if (communities == null) {
+      communities = getData();
+    }
     // Instantiate the CommunitiesAdapter
-    communitiesAdapter = new CommunitiesAdapter(getApplicationContext(), getData());
+    communitiesAdapter = new CommunitiesAdapter(getApplicationContext(), communities);
     // Instantiate Recycler View
     recyclerView.setHasFixedSize(true);
     recyclerView.setAdapter(communitiesAdapter);
@@ -104,9 +113,9 @@ public class CommunitiesActivity extends AppCompatActivity {
     startActivity(intent);
   }
 
-  private List<Community> getData() {
+  private ArrayList<Community> getData() {
 
-    final List<Community> communities = new ArrayList<>();
+    final ArrayList<Community> communities = new ArrayList<>();
 
     final TypedArray typedArray = getResources().obtainTypedArray(R.array.community_image_array);
 
@@ -147,5 +156,11 @@ public class CommunitiesActivity extends AppCompatActivity {
     }
 
     return super.onOptionsItemSelected(item);
+  }
+
+  @Override
+  public void onSaveInstanceState(final Bundle outState) {
+    super.onSaveInstanceState(outState);
+    Icepick.saveInstanceState(this, outState);
   }
 }

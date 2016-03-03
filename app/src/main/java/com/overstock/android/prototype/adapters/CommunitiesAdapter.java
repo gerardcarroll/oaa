@@ -1,5 +1,8 @@
 package com.overstock.android.prototype.adapters;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -13,28 +16,26 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.models.Community;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by rconnolly on 2/29/2016.
  */
 public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.CommunitiesViewHolder> {
 
-    private final Context context;
-    private final int VIEW_CARDS = 1;
-    private final int VIEW_PROG = 0;
-    OnDataChangeListener mOnDataChangeListener;
-    private LayoutInflater inflater;
-    private List<Community> data;
+  private final Context context;
+
+  OnDataChangeListener mOnDataChangeListener;
+
+  private LayoutInflater inflater;
+
+  private List<Community> data;
 
   public CommunitiesAdapter(final Context context, final List<Community> data) {
 
@@ -65,15 +66,15 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
       }
 
       @Override
-      public void onError() {
-      }
+      public void onError() {}
     });
 
     holder.communityTitle.setText(community.getName());
     // If the Community isSelected (true) change color on title label
-    if (!community.isSelected()){
+    if (!community.isSelected()) {
       holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_default);
-    } else {
+    }
+    else {
       holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_green);
     }
     // If the Community isSelected (true) set the CheckBox to checked
@@ -110,8 +111,8 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
           mOnDataChangeListener.onDataChanged(getSelectedCommunityList().size());
         }
 
-          // Add Animation to view
-          v.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
+        // Add Animation to view
+        v.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
       }
     });
   }
@@ -163,15 +164,15 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
 
     public CommunitiesViewHolder(final View itemView) {
 
-        super(itemView);
-        ButterKnife.bind(this, itemView);
+      super(itemView);
+      ButterKnife.bind(this, itemView);
 
-        itemView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return false;
-            }
-        });
+      itemView.setOnTouchListener(new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(final View v, final MotionEvent event) {
+          return false;
+        }
+      });
     }
   }
 }
