@@ -1,31 +1,28 @@
 {
   "project_info": {
-    "project_id": "api-project-300026557750",
-    "project_number": "300026557750",
-    "name": "API Project"
+    "project_id": "oappprototype",
+    "project_number": "751274716012",
+    "name": "OAppProtoType"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:300026557750:android:7d623781eae6069e",
-        "client_id": "android:com.overstock",
+        "mobilesdk_app_id": "1:751274716012:android:5ecc901b3ef6e920",
+        "client_id": "android:com.overstock.android.prototype",
         "client_type": 1,
         "android_client_info": {
-          "package_name": "com.overstock"
+          "package_name": "com.overstock.android.prototype",
+          "certificate_hash": []
         }
       },
       "oauth_client": [
         {
-          "client_id": "300026557750-1u9fibp7ukdkj090rm0r2l3tqr0i4h29.apps.googleusercontent.com",
+          "client_id": "751274716012-ei5adcf6mg79hfj5i8s93isfimvareqt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.overstock",
-            "certificate_hash": "26F9468DB062CB471ABF1D47A3536FFF50CB4511"
+            "package_name": "com.overstock.android.prototype",
+            "certificate_hash": "AE6BC42D8E23977FEF1DC2FCEC0052993CAF321D"
           }
-        },
-        {
-          "client_id": "300026557750-jaccpqo0i52m1nc3ersg8kj9evc6qnsn.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [],
@@ -34,7 +31,7 @@
           "status": 1
         },
         "cloud_messaging_service": {
-          "status": 1,
+          "status": 2,
           "apns_config": []
         },
         "appinvite_service": {
@@ -45,7 +42,9 @@
           "status": 2
         },
         "ads_service": {
-          "status": 1
+          "status": 2,
+          "test_banner_ad_unit_id": "ca-app-pub-3940256099942544/6300978111",
+          "test_interstitial_ad_unit_id": "ca-app-pub-3940256099942544/1033173712"
         }
       }
     }

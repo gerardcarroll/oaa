@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="communities_array">
+        <item>Men</item>
+        <item>Women</item>
+        <item>Men and Women</item>
+        <item>Home Decor</item>
+        <item>Games</item>
+        <item>Leisure</item>
+        <item>Family</item>
+        <item>Gadgets</item>
+        <item>Furniture</item>
+        <item>Bedding</item>
+        <item>Fitness</item>
+        <item>Home Automation</item>
+        <item>Mobility</item>
+        <item>Personal Care</item>
+        <item>Shoes</item>
+        <item>Sport Shoes</item>
+        <item>Technology</item>
+        <item>Watches</item>
+    </string-array>
+</resources>
