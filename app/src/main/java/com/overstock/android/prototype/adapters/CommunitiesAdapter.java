@@ -11,8 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.models.Community;
@@ -46,15 +48,34 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
 
     holder.communityImage.setImageResource(community.getImageId());
     holder.communityTitle.setText(community.getName());
+    // If the Community isSelected (true) set the CheckBox to checked
     holder.chkSelected.setChecked(community.isSelected());
+    // Set the tag on CardView and CheckBox to hold the community object
     holder.chkSelected.setTag(community);
+    holder.cardView.setTag(community);
 
     holder.chkSelected.setOnClickListener(new View.OnClickListener() {
+      @Override
       public void onClick(final View v) {
-        final CheckBox cb = (CheckBox) v;
-        final Community com = (Community) cb.getTag();
+        // When Checkbox Clicked just performClick of the CardView
+        holder.cardView.performClick();
+      }
+    });
 
-        com.setSelected(cb.isChecked());
+    holder.cardView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(final View v) {
+        final CardView cv = (CardView) v;
+        final Community com = (Community) cv.getTag();
+        if (com.isSelected()) {
+          com.setSelected(false);
+          holder.chkSelected.setChecked(false);
+        }
+        else {
+          com.setSelected(true);
+          holder.chkSelected.setChecked(true);
+        }
+
         if (mOnDataChangeListener != null) {
           mOnDataChangeListener.onDataChanged(getSelectedCommunityList().size());
         }
@@ -92,43 +113,21 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
 
   public class CommunitiesViewHolder extends RecyclerView.ViewHolder {
 
+    @Bind(R.id.cvCommunities)
     CardView cardView;
 
+    @Bind(R.id.ivCommunities)
     ImageView communityImage;
 
+    @Bind(R.id.tvCommunities)
     TextView communityTitle;
 
+    @Bind(R.id.communityCheckBox)
     CheckBox chkSelected;
 
     public CommunitiesViewHolder(final View itemView) {
       super(itemView);
-
-      cardView = (CardView) itemView.findViewById(R.id.cvCommunities);
-      communityImage = (ImageView) itemView.findViewById(R.id.ivCommunities);
-      communityTitle = (TextView) itemView.findViewById(R.id.tvCommunities);
-      chkSelected = (CheckBox) itemView.findViewById(R.id.communityCheckBox);
-
-      itemView.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(final View v) {
-          final CardView cv = (CardView) v;
-          final RelativeLayout relLayout = (RelativeLayout) cv.getChildAt(0);
-          final Community com = (Community) relLayout.getChildAt(2).getTag();
-          if (com.isSelected()) {
-            com.setSelected(false);
-            chkSelected.setChecked(false);
-          }
-          else {
-            com.setSelected(true);
-            chkSelected.setChecked(true);
-          }
-
-          if (mOnDataChangeListener != null) {
-            mOnDataChangeListener.onDataChanged(getSelectedCommunityList().size());
-          }
-        }
-      });
-
+      ButterKnife.bind(this, itemView);
     }
   }
 }
