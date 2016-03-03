@@ -44,140 +44,128 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
         anim = AnimationUtils.loadAnimation(context, R.anim.scale);
     }
 
-    @Override
-    public int getItemViewType(final int position) {
-        return data.get(position) != null ? VIEW_CARDS : VIEW_PROG;
-    }
+  @Override
+  public CommunitiesViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
+    final View view = inflater.inflate(R.layout.activity_communities_card, parent, false);
+    return new CommunitiesViewHolder(view);
+  }
 
-    @Override
-    public CommunitiesViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
-        if (viewType == VIEW_CARDS) {
-            final View view = inflater.inflate(R.layout.activity_communities_card, parent, false);
-            return new CommunitiesViewHolder(view);
-        } else {
-            final View view = inflater.inflate(R.layout.activity_communities_card, parent, false);
-            return new CommunitiesViewHolder(view);
+  @Override
+  public void onBindViewHolder(final CommunitiesViewHolder holder, final int position) {
+
+    final Community community = data.get(position);
+    holder.progressBar.setVisibility(View.VISIBLE);
+
+      Picasso.with(context)
+              .load(community.getImageId())
+              .into(holder.communityImage, new Callback() {
+                  @Override
+                  public void onSuccess() {
+                      if (holder.progressBar != null) {
+                          holder.progressBar.setVisibility(View.GONE);
+                      }
+                  }
+
+                  @Override
+                  public void onError() {
+                  }
+              });
+
+    holder.communityTitle.setText(community.getName());
+    holder.chkSelected.setChecked(community.isSelected());
+    holder.chkSelected.setTag(community);
+
+    holder.chkSelected.setOnClickListener(new View.OnClickListener() {
+      public void onClick(final View v) {
+        final CheckBox cb = (CheckBox) v;
+        final Community com = (Community) cb.getTag();
+
+        com.setSelected(cb.isChecked());
+        if (mOnDataChangeListener != null) {
+          mOnDataChangeListener.onDataChanged(getSelectedCommunityList().size());
         }
+      }
+    });
+  }
+
+  @Override
+  public void onAttachedToRecyclerView(final RecyclerView recyclerView) {
+    super.onAttachedToRecyclerView(recyclerView);
+  }
+
+  @Override
+  public int getItemCount() {
+    return data.size();
+  }
+
+  private List<Community> getSelectedCommunityList() {
+    final List<Community> selectedCommunities = new ArrayList<>();
+    for (final Community community : data) {
+      if (community.isSelected()) {
+        selectedCommunities.add(community);
+      }
     }
+    return selectedCommunities;
+  }
 
-    @Override
-    public void onBindViewHolder(final CommunitiesViewHolder holder, final int position) {
+  public void setOnDataChangeListener(final OnDataChangeListener onDataChangeListener) {
+    mOnDataChangeListener = onDataChangeListener;
+  }
 
-        final Community community = data.get(position);
-        holder.progressBar.setVisibility(View.VISIBLE);
+  public interface OnDataChangeListener {
+    void onDataChanged(int size);
+  }
 
-        Picasso.with(context)
-                .load(community.getImageId())
-                .into(holder.communityImage, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        if (holder.progressBar != null){
-                            holder.progressBar.setVisibility(View.GONE);
-                        }
-                    }
+  public class CommunitiesViewHolder extends RecyclerView.ViewHolder {
 
-                    @Override
-                    public void onError() {
-                    }
-                });
+    CardView cardView;
 
-        holder.communityTitle.setText(community.getName());
-        holder.chkSelected.setChecked(community.isSelected());
-        holder.chkSelected.setTag(community);
-        holder.progressBar.setVisibility(View.VISIBLE);
+    ImageView communityImage;
 
-        holder.chkSelected.setOnClickListener(new View.OnClickListener() {
+    TextView communityTitle;
+
+    CheckBox chkSelected;
+
+    ProgressBar progressBar;
+
+    public CommunitiesViewHolder(final View itemView) {
+        super(itemView);
+
+        cardView = (CardView) itemView.findViewById(R.id.cvCommunities);
+        communityImage = (ImageView) itemView.findViewById(R.id.ivCommunities);
+        communityTitle = (TextView) itemView.findViewById(R.id.tvCommunities);
+        chkSelected = (CheckBox) itemView.findViewById(R.id.communityCheckBox);
+        progressBar = (ProgressBar) itemView.findViewById(R.id.pbCommunities);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(final View v) {
-                final CheckBox cb = (CheckBox) v;
-                final Community com = (Community) cb.getTag();
+                final CardView cv = (CardView) v;
+                final RelativeLayout relLayout = (RelativeLayout) cv.getChildAt(0);
+                final Community com = (Community) relLayout.getChildAt(3).getTag();
+                if (com.isSelected()) {
+                    com.setSelected(false);
+                    chkSelected.setChecked(false);
+                } else {
+                    com.setSelected(true);
+                    chkSelected.setChecked(true);
+                }
 
-                com.setSelected(cb.isChecked());
                 if (mOnDataChangeListener != null) {
                     mOnDataChangeListener.onDataChanged(getSelectedCommunityList().size());
                 }
             }
         });
-    }
 
-    @Override
-    public void onAttachedToRecyclerView(final RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-    }
+        itemView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
 
-    @Override
-    public int getItemCount() {
-        return data.size();
-    }
+                //v.startAnimation(anim);
 
-    private List<Community> getSelectedCommunityList() {
-        final List<Community> selectedCommunities = new ArrayList<>();
-        for (final Community community : data) {
-            if (community.isSelected()) {
-                selectedCommunities.add(community);
+                return false;
             }
-        }
-        return selectedCommunities;
+        });
     }
-
-    public void setOnDataChangeListener(final OnDataChangeListener onDataChangeListener) {
-        mOnDataChangeListener = onDataChangeListener;
-    }
-
-    public interface OnDataChangeListener {
-        void onDataChanged(int size);
-    }
-
-    public class CommunitiesViewHolder extends RecyclerView.ViewHolder {
-
-        CardView cardView;
-
-        ImageView communityImage;
-
-        TextView communityTitle;
-
-        CheckBox chkSelected;
-
-        ProgressBar progressBar;
-
-        public CommunitiesViewHolder(final View itemView) {
-            super(itemView);
-
-            cardView = (CardView) itemView.findViewById(R.id.cvCommunities);
-            communityImage = (ImageView) itemView.findViewById(R.id.ivCommunities);
-            communityTitle = (TextView) itemView.findViewById(R.id.tvCommunities);
-            chkSelected = (CheckBox) itemView.findViewById(R.id.communityCheckBox);
-            progressBar = (ProgressBar) itemView.findViewById(R.id.pbCommunities);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View v) {
-                    final CardView cv = (CardView) v;
-                    final RelativeLayout relLayout = (RelativeLayout) cv.getChildAt(0);
-                    final Community com = (Community) relLayout.getChildAt(3).getTag();
-                    if (com.isSelected()) {
-                        com.setSelected(false);
-                        chkSelected.setChecked(false);
-                    } else {
-                        com.setSelected(true);
-                        chkSelected.setChecked(true);
-                    }
-
-                    if (mOnDataChangeListener != null) {
-                        mOnDataChangeListener.onDataChanged(getSelectedCommunityList().size());
-                    }
-                }
-            });
-
-            itemView.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-
-                    //v.startAnimation(anim);
-
-                    return false;
-                }
-            });
-        }
-
-    }
+  }
 }
