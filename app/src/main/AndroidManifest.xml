@@ -17,7 +17,7 @@
         </activity>
         <activity
             android:name=".activities.CommunitiesActivity"
-            android:label="Communities"
+            android:label="@string/communities_activity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -27,7 +27,7 @@
         </activity>
         <activity
             android:name=".activities.FeedActivity"
-            android:label="Feed"
+            android:label="@string/feed_activity"
             android:theme="@style/AppTheme">
         </activity>
     </application>

@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.Bind;
@@ -20,9 +21,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import com.dd.processbutton.iml.SubmitProcessButton;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.CommunitiesAdapter;
 import com.overstock.android.prototype.models.Community;
@@ -43,22 +41,21 @@ public class CommunitiesActivity extends AppCompatActivity {
 
   private CommunitiesAdapter communitiesAdapter;
 
+  private TextView toolBarText;
+
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_communities);
     ButterKnife.bind(this);
 
+    // final Animation anim = AnimationUtils.loadAnimation(this, R.anim.scale);
+
     // Instantiate Toolbar
     setSupportActionBar(toolbar);
     setTitle("");
-
-    // Universal Image Loader configuration
-    final DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true)
-        .build();
-    final ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
-        .defaultDisplayImageOptions(defaultOptions).build();
-    ImageLoader.getInstance().init(config);
+    toolBarText = (TextView) findViewById(R.id.tvToolbarMsg);
+    toolBarText.setText(R.string.communitiesToolbarText);
 
     // Instantiate the CommunitiesAdapter
     communitiesAdapter = new CommunitiesAdapter(getApplicationContext(), getData());
@@ -112,26 +109,20 @@ public class CommunitiesActivity extends AppCompatActivity {
     final List<Community> communities = new ArrayList<>();
 
     final TypedArray typedArray = getResources().obtainTypedArray(R.array.community_image_array);
-    final int len = typedArray.length();
-    final int[] extImagesArray = new int[len];
-    for (int i = 0; i < len; i++) {
-      extImagesArray[i] = typedArray.getResourceId(i, 0);
-    }
 
-    // final int[] inyImagesArray = new int[]{ R.drawable.man, R.drawable.woman, R.drawable.man_and_woman,
-    // R.drawable.home_decor, R.drawable.games, R.drawable.leisure,
-    // R.drawable.family, R.drawable.gadgets, R.drawable.furniture,
-    // R.drawable.bedding, R.drawable.fitness, R.drawable.home_automation,
-    // R.drawable.mobility, R.drawable.personal_care, R.drawable.shoes,
-    // R.drawable.sports_shoes, R.drawable.technology, R.drawable.watches};
+    final int len = typedArray.length();
+    final int[] imagesArray = new int[len];
+    for (int i = 0; i < len; i++) {
+      imagesArray[i] = typedArray.getResourceId(i, 0);
+    }
 
     final String[] names = getResources().getStringArray(R.array.communities_array);
 
-    for (int i = 0; i < extImagesArray.length && i < names.length; i++) {
+    for (int i = 0; i < imagesArray.length && i < names.length; i++) {
 
       final Community community = new Community();
 
-      community.setImageId(extImagesArray[i]);
+      community.setImageId(imagesArray[i]);
       community.setName(names[i]);
 
       communities.add(community);
