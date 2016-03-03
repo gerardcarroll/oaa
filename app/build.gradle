@@ -5,10 +5,11 @@ android {
         debug {
             keyAlias 'oappprototype'
             keyPassword 'android'
-            storeFile file('C:/Program Files/Java/jdk1.8.0_73/bin/oapp_prototype_key.keystore')
+            storeFile file('oapp_prototype_key.keystore')
             storePassword 'android'
         }
     }
+
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
     defaultConfig {
