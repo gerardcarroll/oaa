@@ -33,11 +33,13 @@ public class CommunitiesActivity extends AppCompatActivity {
   @Bind(R.id.btnCommunitySelection)
   SubmitProcessButton progressButton;
 
-  private RecyclerView recyclerView;
+  @Bind(R.id.rvCommunities)
+  RecyclerView recyclerView;
+
+  @Bind(R.id.oap_toolbar)
+  Toolbar toolbar;
 
   private CommunitiesAdapter communitiesAdapter;
-
-  private Toolbar toolbar;
 
   private TextView toolBarText;
 
@@ -47,44 +49,49 @@ public class CommunitiesActivity extends AppCompatActivity {
     setContentView(R.layout.activity_communities);
     ButterKnife.bind(this);
 
-//    final Animation anim = AnimationUtils.loadAnimation(this, R.anim.scale);
+    // final Animation anim = AnimationUtils.loadAnimation(this, R.anim.scale);
 
     // Instantiate Toolbar
-    toolbar = (Toolbar) findViewById(R.id.oap_toolbar);
     setSupportActionBar(toolbar);
     setTitle("");
     toolBarText = (TextView) findViewById(R.id.tvToolbarMsg);
     toolBarText.setText(R.string.communitiesToolbarText);
 
-    // Instantiate Recycler View
-    recyclerView = (RecyclerView) findViewById(R.id.rvCommunities);
-    recyclerView.setHasFixedSize(true);
+    // Instantiate the CommunitiesAdapter
     communitiesAdapter = new CommunitiesAdapter(getApplicationContext(), getData());
+    // Instantiate Recycler View
+    recyclerView.setHasFixedSize(true);
     recyclerView.setAdapter(communitiesAdapter);
+    // Setting the LayoutManager for the RecyclerView. Depending on Resolution it will have 2 or 3 columns
     recyclerView
         .setLayoutManager(new GridLayoutManager(this, getResources().getInteger(R.integer.communities_columns)));
     recyclerView.stopNestedScroll();
     recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-    // Set the Button to disabled initially
-    progressButton.setEnabled(false);
+    // Setup the CommunitiesAdapter Data Change Listener
+    setupOnDataChangeListener();
+  }
 
+  private void setupOnDataChangeListener() {
     // implement the listener for the communities adapter to update the progress button
     communitiesAdapter.setOnDataChangeListener(new CommunitiesAdapter.OnDataChangeListener() {
       @Override
       public void onDataChanged(final int size) {
         if (size >= 3) {
           progressButton.setProgress(100);
-        } else if (size > 0) {
+        }
+        else if (size > 0) {
           final double progress = (size / 3.0) * 100;
           progressButton.setProgress((int) Math.ceil(progress));
-        } else {
+        }
+        else {
           progressButton.setProgress(0);
         }
 
         if (progressButton.getProgress() == 100) {
           progressButton.setEnabled(true);
-        } else {
+        }
+        else {
           progressButton.setEnabled(false);
         }
       }
@@ -102,9 +109,10 @@ public class CommunitiesActivity extends AppCompatActivity {
     final List<Community> communities = new ArrayList<>();
 
     final TypedArray typedArray = getResources().obtainTypedArray(R.array.community_image_array);
-    int len = typedArray.length();
-    int[] imagesArray = new int[len];
-    for ( int i = 0; i < len; i++) {
+
+    final int len = typedArray.length();
+    final int[] imagesArray = new int[len];
+    for (int i = 0; i < len; i++) {
       imagesArray[i] = typedArray.getResourceId(i, 0);
     }
 
@@ -119,13 +127,11 @@ public class CommunitiesActivity extends AppCompatActivity {
 
       communities.add(community);
     }
-
     return communities;
   }
 
   @Override
   public boolean onCreateOptionsMenu(final Menu menu) {
-
     getMenuInflater().inflate(R.menu.menu_main, menu);
     return true;
   }

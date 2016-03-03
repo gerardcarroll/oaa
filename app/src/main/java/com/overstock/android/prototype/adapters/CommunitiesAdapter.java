@@ -11,7 +11,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.overstock.android.prototype.R;
@@ -21,6 +20,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by rconnolly on 2/29/2016.
@@ -34,12 +36,12 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
     private LayoutInflater inflater;
     private List<Community> data;
 
-    public CommunitiesAdapter(final Context context, final List<Community> data) {
+  public CommunitiesAdapter(final Context context, final List<Community> data) {
 
-        this.context = context;
-        this.data = data;
-        this.inflater = inflater.from(context);
-    }
+    this.context = context;
+    this.data = data;
+    this.inflater = inflater.from(context);
+  }
 
   @Override
   public CommunitiesViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
@@ -53,34 +55,53 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
     final Community community = data.get(position);
     holder.progressBar.setVisibility(View.VISIBLE);
 
-      Picasso.with(context)
-              .load(community.getImageId())
-              .into(holder.communityImage, new Callback() {
-                  @Override
-                  public void onSuccess() {
-                      if (holder.progressBar != null) {
-                          holder.progressBar.setVisibility(View.GONE);
-                      }
-                  }
+    Picasso.with(context).load(community.getImageId()).into(holder.communityImage, new Callback() {
+      @Override
+      public void onSuccess() {
+        if (holder.progressBar != null) {
+          holder.progressBar.setVisibility(View.GONE);
+        }
+      }
 
-                  @Override
-                  public void onError() {
-                  }
-              });
+      @Override
+      public void onError() {}
+    });
 
     holder.communityTitle.setText(community.getName());
+    // If the Community isSelected (true) set the CheckBox to checked
     holder.chkSelected.setChecked(community.isSelected());
+    // Set the tag on CardView and CheckBox to hold the community object
     holder.chkSelected.setTag(community);
+    holder.cardView.setTag(community);
 
     holder.chkSelected.setOnClickListener(new View.OnClickListener() {
+      @Override
       public void onClick(final View v) {
-        final CheckBox cb = (CheckBox) v;
-        final Community com = (Community) cb.getTag();
+        // When Checkbox Clicked just performClick of the CardView
+        holder.cardView.performClick();
+      }
+    });
 
-        com.setSelected(cb.isChecked());
+    holder.cardView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(final View v) {
+        final CardView cv = (CardView) v;
+        final Community com = (Community) cv.getTag();
+        if (com.isSelected()) {
+          com.setSelected(false);
+          holder.chkSelected.setChecked(false);
+        }
+        else {
+          com.setSelected(true);
+          holder.chkSelected.setChecked(true);
+        }
+
         if (mOnDataChangeListener != null) {
           mOnDataChangeListener.onDataChanged(getSelectedCommunityList().size());
         }
+
+          // Add Animation to view
+          v.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
       }
     });
   }
@@ -115,53 +136,60 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
 
   public class CommunitiesViewHolder extends RecyclerView.ViewHolder {
 
+    @Bind(R.id.cvCommunities)
     CardView cardView;
 
+    @Bind(R.id.ivCommunities)
     ImageView communityImage;
 
+    @Bind(R.id.tvCommunities)
     TextView communityTitle;
 
+    @Bind(R.id.communityCheckBox)
     CheckBox chkSelected;
 
+    @Bind(R.id.pbCommunities)
     ProgressBar progressBar;
 
     public CommunitiesViewHolder(final View itemView) {
+
         super(itemView);
+        ButterKnife.bind(this, itemView);
 
-        cardView = (CardView) itemView.findViewById(R.id.cvCommunities);
-        communityImage = (ImageView) itemView.findViewById(R.id.ivCommunities);
-        communityTitle = (TextView) itemView.findViewById(R.id.tvCommunities);
-        chkSelected = (CheckBox) itemView.findViewById(R.id.communityCheckBox);
-        progressBar = (ProgressBar) itemView.findViewById(R.id.pbCommunities);
+//        cardView = (CardView) itemView.findViewById(R.id.cvCommunities);
+//        communityImage = (ImageView) itemView.findViewById(R.id.ivCommunities);
+//        communityTitle = (TextView) itemView.findViewById(R.id.tvCommunities);
+//        chkSelected = (CheckBox) itemView.findViewById(R.id.communityCheckBox);
+//        progressBar = (ProgressBar) itemView.findViewById(R.id.pbCommunities);
 
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                final CardView cv = (CardView) v;
-                final RelativeLayout relLayout = (RelativeLayout) cv.getChildAt(0);
-                final Community com = (Community) relLayout.getChildAt(3).getTag();
-                if (com.isSelected()) {
-                    com.setSelected(false);
-                    chkSelected.setChecked(false);
-                } else {
-                    com.setSelected(true);
-                    chkSelected.setChecked(true);
-                }
-
-                if (mOnDataChangeListener != null) {
-                    mOnDataChangeListener.onDataChanged(getSelectedCommunityList().size());
-                }
-
-                // Add Animation to view
-                v.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
-            }
-        });
+//        itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(final View v) {
+//                final CardView cv = (CardView) v;
+//                final RelativeLayout relLayout = (RelativeLayout) cv.getChildAt(0);
+//                final Community com = (Community) relLayout.getChildAt(3).getTag();
+//                if (com.isSelected()) {
+//                    com.setSelected(false);
+//                    chkSelected.setChecked(false);
+//                } else {
+//                    com.setSelected(true);
+//                    chkSelected.setChecked(true);
+//                }
+//
+//                if (mOnDataChangeListener != null) {
+//                    mOnDataChangeListener.onDataChanged(getSelectedCommunityList().size());
+//                }
+//
+//                // Add Animation to view
+//                //v.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
+//            }
+//        });
 
         itemView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-//                v.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
+//              v.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
                 return false;
             }
         });

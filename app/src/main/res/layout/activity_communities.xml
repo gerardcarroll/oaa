@@ -26,6 +26,7 @@
         android:text="@string/btn_community_default"
         android:textColor="@android:color/white"
         android:textSize="18sp"
+        android:enabled="false"
         custom:pb_colorComplete="@color/green_complete"
         custom:pb_colorNormal="@color/blue_normal"
         custom:pb_colorPressed="@color/blue_pressed"
