@@ -1,15 +1,20 @@
 package com.overstock.android.prototype.activity;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +48,7 @@ public class CommunitiesActivity extends AppCompatActivity {
 
   private TextView toolBarText;
 
+  @TargetApi(Build.VERSION_CODES.LOLLIPOP)
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
