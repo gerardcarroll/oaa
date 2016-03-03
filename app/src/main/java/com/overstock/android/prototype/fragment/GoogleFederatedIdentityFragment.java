@@ -16,6 +16,7 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.CategoryActivity;
+import com.overstock.android.prototype.activity.CommunitiesActivity;
 
 /**
  * @author itowey
@@ -94,7 +95,7 @@ public class GoogleFederatedIdentityFragment extends Fragment  {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             Toast.makeText(this.getContext(), getString(R.string.signed_in_fmt, acct.getDisplayName()),Toast.LENGTH_SHORT).show();
-            Intent signInIntent = new Intent(this.getContext(),CategoryActivity.class);
+            Intent signInIntent = new Intent(this.getContext(),CommunitiesActivity.class);
             startActivity(signInIntent);
         } else {
             Toast.makeText(this.getContext(), "Not logged in",Toast.LENGTH_SHORT).show();

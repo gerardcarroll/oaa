@@ -18,6 +18,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activity.CommunitiesActivity"
+            android:label="Communities"
+            android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".activity.FeedActivity"
+            android:label="Feed"
+            android:theme="@style/AppTheme"></activity>
+
+        <activity
             android:name=".activity.CategoryActivity"
             android:label="@string/title_activity_category"
             android:theme="@style/AppTheme.NoActionBar"></activity>

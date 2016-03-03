@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:custom="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+    <include
+        android:id="@+id/oap_toolbar"
+        layout="@layout/app_bar"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvCommunities"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnCommunitySelection"
+        android:layout_below="@+id/oap_toolbar"
+        android:scrollbars="vertical"/>
+
+    <com.dd.processbutton.iml.SubmitProcessButton
+        android:id="@+id/btnCommunitySelection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/btn_community_default"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        custom:pb_colorComplete="@color/green_complete"
+        custom:pb_colorNormal="@color/blue_normal"
+        custom:pb_colorPressed="@color/blue_pressed"
+        custom:pb_colorProgress="@color/purple_progress"
+        custom:pb_textComplete="@string/btn_community_continue"
+        custom:pb_textProgress="@string/btn_community_default"/>
+</RelativeLayout>
