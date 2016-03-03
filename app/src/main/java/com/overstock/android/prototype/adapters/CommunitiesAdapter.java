@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -34,14 +33,12 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
     OnDataChangeListener mOnDataChangeListener;
     private LayoutInflater inflater;
     private List<Community> data;
-    private final Animation anim;
 
     public CommunitiesAdapter(final Context context, final List<Community> data) {
 
         this.context = context;
         this.data = data;
         this.inflater = inflater.from(context);
-        anim = AnimationUtils.loadAnimation(context, R.anim.scale);
     }
 
   @Override
@@ -154,6 +151,9 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
                 if (mOnDataChangeListener != null) {
                     mOnDataChangeListener.onDataChanged(getSelectedCommunityList().size());
                 }
+
+                // Add Animation to view
+                v.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
             }
         });
 
@@ -161,8 +161,7 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                //v.startAnimation(anim);
-
+//                v.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
                 return false;
             }
         });

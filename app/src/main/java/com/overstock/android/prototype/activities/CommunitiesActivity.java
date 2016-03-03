@@ -135,7 +135,7 @@ public class CommunitiesActivity extends AppCompatActivity {
 
     final int id = item.getItemId();
 
-    if (id == R.id.action_settings || id == R.id.action_refresh) {
+    if (id == R.id.action_settings || id == R.id.action_refresh || id == R.id.action_logout) {
       Toast.makeText(this, "You clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();
       return true;
     }
