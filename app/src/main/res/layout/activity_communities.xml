@@ -32,5 +32,5 @@
         custom:pb_colorPressed="@color/blue_pressed"
         custom:pb_colorProgress="@color/purple_progress"
         custom:pb_textComplete="@string/btn_community_continue"
-        custom:pb_textProgress="@string/btn_community_default"/>
+        custom:pb_textProgress="@string/btn_community_default" />
 </RelativeLayout>

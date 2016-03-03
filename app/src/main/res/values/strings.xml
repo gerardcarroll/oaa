@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">OAppPrototype</string>
+    <string name="app_title">O.com App</string>
 
     <!-- Community Activity Button -->
     <string name="btn_community_default">Select 3 Communities</string>

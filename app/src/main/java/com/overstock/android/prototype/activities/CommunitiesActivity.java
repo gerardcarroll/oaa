@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,8 +49,6 @@ public class CommunitiesActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_communities);
     ButterKnife.bind(this);
-
-    // final Animation anim = AnimationUtils.loadAnimation(this, R.anim.scale);
 
     // Instantiate Toolbar
     setSupportActionBar(toolbar);
@@ -90,6 +89,7 @@ public class CommunitiesActivity extends AppCompatActivity {
 
         if (progressButton.getProgress() == 100) {
           progressButton.setEnabled(true);
+          progressButton.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down));
         }
         else {
           progressButton.setEnabled(false);
