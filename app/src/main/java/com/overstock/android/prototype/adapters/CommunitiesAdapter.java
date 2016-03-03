@@ -128,6 +128,7 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
           }
         }
       });
+
     }
   }
 }
