@@ -37,7 +37,8 @@
             android:elevation="@dimen/activity_vertical_margin"
             android:padding="@dimen/activity_horizontal_margin"
             android:text="@string/faceBook_connect"
-            android:textColor="@android:color/background_light" />
+            android:textColor="@android:color/background_light"
+            />
 
         <Button
             android:id="@+id/googlePlus_login_btn"
