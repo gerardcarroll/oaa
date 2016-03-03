@@ -53,6 +53,7 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
   public void onBindViewHolder(final CommunitiesViewHolder holder, final int position) {
 
     final Community community = data.get(position);
+
     holder.progressBar.setVisibility(View.VISIBLE);
 
     Picasso.with(context).load(community.getImageId()).into(holder.communityImage, new Callback() {
@@ -64,10 +65,17 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
       }
 
       @Override
-      public void onError() {}
+      public void onError() {
+      }
     });
 
     holder.communityTitle.setText(community.getName());
+    // If the Community isSelected (true) change color on title label
+    if (!community.isSelected()){
+      holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_default);
+    } else {
+      holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_green);
+    }
     // If the Community isSelected (true) set the CheckBox to checked
     holder.chkSelected.setChecked(community.isSelected());
     // Set the tag on CardView and CheckBox to hold the community object
@@ -90,10 +98,12 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
         if (com.isSelected()) {
           com.setSelected(false);
           holder.chkSelected.setChecked(false);
+          holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_default);
         }
         else {
           com.setSelected(true);
           holder.chkSelected.setChecked(true);
+          holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_green);
         }
 
         if (mOnDataChangeListener != null) {
@@ -156,40 +166,9 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
         super(itemView);
         ButterKnife.bind(this, itemView);
 
-//        cardView = (CardView) itemView.findViewById(R.id.cvCommunities);
-//        communityImage = (ImageView) itemView.findViewById(R.id.ivCommunities);
-//        communityTitle = (TextView) itemView.findViewById(R.id.tvCommunities);
-//        chkSelected = (CheckBox) itemView.findViewById(R.id.communityCheckBox);
-//        progressBar = (ProgressBar) itemView.findViewById(R.id.pbCommunities);
-
-//        itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(final View v) {
-//                final CardView cv = (CardView) v;
-//                final RelativeLayout relLayout = (RelativeLayout) cv.getChildAt(0);
-//                final Community com = (Community) relLayout.getChildAt(3).getTag();
-//                if (com.isSelected()) {
-//                    com.setSelected(false);
-//                    chkSelected.setChecked(false);
-//                } else {
-//                    com.setSelected(true);
-//                    chkSelected.setChecked(true);
-//                }
-//
-//                if (mOnDataChangeListener != null) {
-//                    mOnDataChangeListener.onDataChanged(getSelectedCommunityList().size());
-//                }
-//
-//                // Add Animation to view
-//                //v.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
-//            }
-//        });
-
         itemView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
-//              v.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
                 return false;
             }
         });
