@@ -23,32 +23,32 @@
             android:id="@+id/ivCommunities"
             android:layout_width="wrap_content"
             android:layout_height="150dp"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitCenter"/>
 
         <!--<TextView-->
-            <!--android:id="@+id/tvCommunities"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:text="Medium Text"-->
-            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
-            <!--android:textColor="@color/darkGrey"-->
-            <!--android:background="@color/silver"-->
-            <!--android:paddingStart="10dp"-->
-            <!--android:paddingEnd="10dp" />-->
+        <!--android:id="@+id/tvCommunities"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:text="Medium Text"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:textColor="@color/darkGrey"-->
+        <!--android:background="@color/silver"-->
+        <!--android:paddingStart="10dp"-->
+        <!--android:paddingEnd="10dp" />-->
 
         <TextView
             android:id="@+id/tvCommunities"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="110dp"
+            android:background="@drawable/rounded_corner"
+            android:padding="5dp"
             android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/darkGrey"
-            android:padding="5dp"
-            android:layout_marginTop="110dp"
-            android:background="@drawable/rounded_corner"
             android:textSize="12sp"/>
 
         <CheckBox

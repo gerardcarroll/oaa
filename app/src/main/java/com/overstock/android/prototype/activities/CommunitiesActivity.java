@@ -52,7 +52,8 @@ public class CommunitiesActivity extends AppCompatActivity {
     recyclerView.setHasFixedSize(true);
     communitiesAdapter = new CommunitiesAdapter(getApplicationContext(), getData());
     recyclerView.setAdapter(communitiesAdapter);
-    recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+    recyclerView
+        .setLayoutManager(new GridLayoutManager(this, getResources().getInteger(R.integer.communities_columns)));
     recyclerView.stopNestedScroll();
     recyclerView.setItemAnimator(new DefaultItemAnimator());
 
