@@ -1,0 +1,33 @@
+@startuml
+actor User as u
+actor "Client Application" as ca
+actor "Service Provider" as sp
+
+alt <<one time step performed during integration>>
+ca -> sp: registerApp
+sp --> sp: createClientCredential(clientDetails)
+sp -> ca: <b>return</b> clientCredential
+note right of ca: ClientCredential = {\n\t"clientId":"KuZ0j9wQJ21ejJFjCQADFiVFe",\n\t"clientSecret":"CqyrLJkHHNAxo1JFvdPxUGYqsh3PS5smWhxHnfK5ysloTI150J"\n}
+end
+
+
+sp -> u: canClientAppAccessResourse(resourceURI)
+note right of ca: User may have to allow by authenicating with username/password for the service provider
+u -> sp: <b>return</b> true
+note right of sp: Access token usually scoped and temporally valid
+note right of sp: resourseAccessToken ={\n\t"accessToken":"570c60f0-e123-11e5-992a-1bfba6b17b43",\n\t"refreshToken":"8dd28aca-e127-11e5-a120-a781d5c537f9": \n\t"toksnScope":"http://service.provider.com/resources?u=100004&resourceId=2d8a08c6-e124-11e5-bb6c-4b6c091df821",\n\t"validUntil":"2016-12-31 23:59:59"\n}
+sp -> ca: <b>return </b>accessToken
+alt Access Token Invalid (resourseAccessToken.validUntil < sysdate)
+ca -> sp: refeshToken("8dd28aca-e127-11e5-a120-a781d5c537f9")
+note right of sp: resourseAccessToken ={\n\t"accessToken":"480265f2-e12b-11e5-9670-03627883cda1",\n\t"refreshToken":"489eb330-e12b-11e5-a45a-438281504ae9": \n\t"toksnScope":"http://service.provider.com/resources?u=100004&resourceId=2d8a08c6-e124-11e5-bb6c-4b6c091df821",\n\t"validUntil":"2017-12-32 23:59:59"\n}
+sp -> ca: <b>return </b>accessToken
+end
+note right of ca: Client app requests Users resourse from Service provider
+note right of ca: resourceRequest={\n\t"clientId":"KuZ0j9wQJ21ejJFjCQADFiVFe",\n\t"clientSecret":"CqyrLJkHHNAxo1JFvdPxUGYqsh3PS5smWhxHnfK5ysloTI150J",\n\t"accessToken":"570c60f0-e123-11e5-992a-1bfba6b17b43",\n\t"resourceURI":"http://service.provider.com/resources?u=100004&resourceId=2d8a08c6-e124-11e5-bb6c-4b6c091df821"\n}
+ca -> sp: Resource getUsersServiceProviderHostedResourse(resourseURI, clientCredential, accessToken)
+sp -> ca: <b>return</b> resourse
+ca -> u: <b>return</b> resourse
+
+title "Oauth 2.0 Client flow"
+@enduml
+
