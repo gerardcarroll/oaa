@@ -23,14 +23,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:enabled="false"
         android:text="@string/btn_community_default"
         android:textColor="@android:color/white"
         android:textSize="18sp"
-        android:enabled="false"
         custom:pb_colorComplete="@color/green_complete"
         custom:pb_colorNormal="@color/blue_normal"
         custom:pb_colorPressed="@color/blue_pressed"
         custom:pb_colorProgress="@color/purple_progress"
         custom:pb_textComplete="@string/btn_community_continue"
-        custom:pb_textProgress="@string/btn_community_default" />
+        custom:pb_textProgress="@string/btn_community_default"/>
 </RelativeLayout>
