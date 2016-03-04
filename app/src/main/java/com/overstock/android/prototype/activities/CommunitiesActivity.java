@@ -1,10 +1,9 @@
 package com.overstock.android.prototype.activities;
 
-import java.util.ArrayList;
-
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -16,15 +15,16 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 import com.dd.processbutton.iml.SubmitProcessButton;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.CommunitiesAdapter;
 import com.overstock.android.prototype.models.Community;
 
+import java.util.ArrayList;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import icepick.Icepick;
 import icepick.State;
 
@@ -50,6 +50,8 @@ public class CommunitiesActivity extends AppCompatActivity {
 
   private CommunitiesAdapter communitiesAdapter;
 
+  private CollapsingToolbarLayout collapsingToolbarLayout = null;
+
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -60,7 +62,12 @@ public class CommunitiesActivity extends AppCompatActivity {
     // Instantiate Toolbar
     setSupportActionBar(toolbar);
     setTitle("");
-    toolBarText.setText(R.string.communitiesToolbarText);
+
+    android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+
+    collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+    collapsingToolbarLayout.setTitle("Communities");
+    collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.transparent));
 
     if (communities == null) {
       communities = getData();

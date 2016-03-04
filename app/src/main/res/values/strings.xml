@@ -9,7 +9,7 @@
     <!-- Tool Bar -->
     <string name="action_settings">Settings</string>
     <string name="action_refresh">Refresh</string>
-    <string name="communitiesToolbarText">Tap to add communities you are interested in.</string>
+    <string name="communitiesToolbarText">Tap to add communities.</string>
     <string name="feedToolbarText">Your Interests</string>
     <string name="communities_activity">Communities Activity</string>
     <string name="feed_activity">Feed Activity</string>
