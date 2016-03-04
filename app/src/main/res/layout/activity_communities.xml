@@ -61,14 +61,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:enabled="false"
         android:text="@string/btn_community_default"
         android:textColor="@android:color/white"
         android:textSize="18sp"
-        android:enabled="false"
         app:pb_colorComplete="@color/green_complete"
         app:pb_colorNormal="@color/blue_normal"
         app:pb_colorPressed="@color/blue_pressed"
         app:pb_colorProgress="@color/purple_progress"
         app:pb_textComplete="@string/btn_community_continue"
         app:pb_textProgress="@string/btn_community_default" />
+
 </RelativeLayout>

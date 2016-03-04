@@ -72,6 +72,13 @@ public class CommunitiesActivity extends AppCompatActivity {
     if (communities == null) {
       communities = getData();
     }
+
+    if (savedInstanceState != null) {
+      if (savedInstanceState.getInt("button") == 100) {
+        progressButton.setEnabled(true);
+      }
+    }
+
     // Instantiate the CommunitiesAdapter
     communitiesAdapter = new CommunitiesAdapter(getApplicationContext(), communities);
     // Instantiate Recycler View
@@ -168,6 +175,7 @@ public class CommunitiesActivity extends AppCompatActivity {
   @Override
   public void onSaveInstanceState(final Bundle outState) {
     super.onSaveInstanceState(outState);
+    outState.putInt("button", progressButton.getProgress());
     Icepick.saveInstanceState(this, outState);
   }
 }

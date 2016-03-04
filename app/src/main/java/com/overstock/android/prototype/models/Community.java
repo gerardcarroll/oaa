@@ -12,7 +12,7 @@ public class Community {
 
   String name;
 
-  boolean isSelected;
+  boolean selected;
 
   public Community() { /* Required empty constructor */ }
 
@@ -38,10 +38,10 @@ public class Community {
   }
 
   public boolean isSelected() {
-    return isSelected;
+    return selected;
   }
 
   public void setSelected(final boolean isSelected) {
-    this.isSelected = isSelected;
+    this.selected = isSelected;
   }
 }

@@ -6,6 +6,9 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 import com.overstock.android.prototype.R;
 
 /**
@@ -13,21 +16,22 @@ import com.overstock.android.prototype.R;
  */
 public class FeedActivity extends AppCompatActivity {
 
-  private Toolbar toolbar;
+  @Bind(R.id.oap_toolbar)
+  Toolbar toolbar;
 
-  private TextView toolBarText;
+  @Bind(R.id.tvToolbarMsg)
+  TextView toolBarText;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
     setContentView(R.layout.activity_feed);
+    ButterKnife.bind(this);
 
     // Instantiate Toolbar
-    toolbar = (Toolbar) findViewById(R.id.oap_toolbar);
     setSupportActionBar(toolbar);
     setTitle("");
-    toolBarText = (TextView) findViewById(R.id.tvToolbarMsg);
     toolBarText.setText(R.string.feedToolbarText);
 
     Toast.makeText(this, "You made it!!", Toast.LENGTH_SHORT).show();
