@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">OAppPrototype</string>
+    <string name="app_title">O.com App</string>
 
     <string name="home_page_label">O.com App</string>
     <string name="faceBook_connect">Connect with Facebook</string>
@@ -30,11 +31,12 @@
     <!-- Tool Bar -->
 
     <string name="action_refresh">Refresh</string>
-    <string name="communitiesToolbarText">Tap to add communities you are interested in.</string>
+    <string name="communitiesToolbarText">Tap to add communities.</string>
     <string name="feedToolbarText">Your Interests</string>
     <string name="communities_activity">Communities Activity</string>
     <string name="feed_activity">Feed Activity</string>
     <string name="action_logout">Log Out</string>
+    <string name="communities_activity_title">Communities</string>
 
 
 </resources>

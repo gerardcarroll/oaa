@@ -1,18 +1,18 @@
 package com.overstock.android.prototype.models;
 
-import org.parceler.Parcel;
+import auto.parcel.AutoParcel;
 
 /**
  * Created by rconnolly on 3/1/2016.
  */
-@Parcel
+@AutoParcel
 public class Community {
 
   int imageId;
 
   String name;
 
-  boolean isSelected;
+  boolean selected;
 
   public Community() { /* Required empty constructor */ }
 
@@ -38,10 +38,10 @@ public class Community {
   }
 
   public boolean isSelected() {
-    return isSelected;
+    return selected;
   }
 
   public void setSelected(final boolean isSelected) {
-    this.isSelected = isSelected;
+    this.selected = isSelected;
   }
 }

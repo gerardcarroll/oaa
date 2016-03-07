@@ -1,17 +1,17 @@
 package com.overstock.android.prototype.activity;
 
 import android.annotation.TargetApi;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.transition.Slide;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.AnimationUtils;
@@ -24,11 +24,12 @@ import com.overstock.android.prototype.adapters.CommunitiesAdapter;
 import com.overstock.android.prototype.models.Community;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import icepick.Icepick;
+import icepick.State;
 
 /**
  * Created by rconnolly on 2/29/2016.
@@ -44,27 +45,46 @@ public class CommunitiesActivity extends AppCompatActivity {
   @Bind(R.id.oap_toolbar)
   Toolbar toolbar;
 
+  @Bind(R.id.tvToolbarMsg)
+  TextView toolBarText;
+
+  @State
+  ArrayList<Community> communities;
+
   private CommunitiesAdapter communitiesAdapter;
 
-  private TextView toolBarText;
+  private CollapsingToolbarLayout collapsingToolbarLayout = null;
 
   @TargetApi(Build.VERSION_CODES.LOLLIPOP)
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_communities);
+    Icepick.restoreInstanceState(this, savedInstanceState);
     ButterKnife.bind(this);
-
-    // final Animation anim = AnimationUtils.loadAnimation(this, R.anim.scale);
 
     // Instantiate Toolbar
     setSupportActionBar(toolbar);
     setTitle("");
-    toolBarText = (TextView) findViewById(R.id.tvToolbarMsg);
-    toolBarText.setText(R.string.communitiesToolbarText);
+
+    android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+
+    collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+    collapsingToolbarLayout.setTitle(getString(R.string.communities_activity_title));
+    collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.transparent));
+
+    if (communities == null) {
+      communities = getData();
+    }
+
+    if (savedInstanceState != null) {
+      if (savedInstanceState.getInt("button") == 100) {
+        progressButton.setEnabled(true);
+      }
+    }
 
     // Instantiate the CommunitiesAdapter
-    communitiesAdapter = new CommunitiesAdapter(getApplicationContext(), getData());
+    communitiesAdapter = new CommunitiesAdapter(getApplicationContext(), communities);
     // Instantiate Recycler View
     recyclerView.setHasFixedSize(true);
     recyclerView.setAdapter(communitiesAdapter);
@@ -96,6 +116,7 @@ public class CommunitiesActivity extends AppCompatActivity {
 
         if (progressButton.getProgress() == 100) {
           progressButton.setEnabled(true);
+          progressButton.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down));
         }
         else {
           progressButton.setEnabled(false);
@@ -107,12 +128,13 @@ public class CommunitiesActivity extends AppCompatActivity {
   @OnClick(R.id.btnCommunitySelection)
   public void btnCommunitiesSelected() {
     final Intent intent = new Intent(this, FeedActivity.class);
-    startActivity(intent);
+    ActivityOptions options = ActivityOptions.makeScaleUpAnimation(progressButton, 0, 0, progressButton.getWidth(), progressButton.getHeight());
+    startActivity(intent, options.toBundle());
   }
 
-  private List<Community> getData() {
+  private ArrayList<Community> getData() {
 
-    final List<Community> communities = new ArrayList<>();
+    final ArrayList<Community> communities = new ArrayList<>();
 
     final TypedArray typedArray = getResources().obtainTypedArray(R.array.community_image_array);
 
@@ -153,5 +175,12 @@ public class CommunitiesActivity extends AppCompatActivity {
     }
 
     return super.onOptionsItemSelected(item);
+  }
+
+  @Override
+  public void onSaveInstanceState(final Bundle outState) {
+    super.onSaveInstanceState(outState);
+    outState.putInt("button", progressButton.getProgress());
+    Icepick.saveInstanceState(this, outState);
   }
 }
