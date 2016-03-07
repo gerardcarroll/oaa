@@ -14,5 +14,6 @@
     <string name="communities_activity">Communities Activity</string>
     <string name="feed_activity">Feed Activity</string>
     <string name="action_logout">Log Out</string>
+    <string name="communities_activity_title">Communities</string>
 
 </resources>

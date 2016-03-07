@@ -1,5 +1,6 @@
 package com.overstock.android.prototype.activities;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -66,7 +67,7 @@ public class CommunitiesActivity extends AppCompatActivity {
     android.support.v7.app.ActionBar actionBar = getSupportActionBar();
 
     collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-    collapsingToolbarLayout.setTitle("Communities");
+    collapsingToolbarLayout.setTitle(getString(R.string.communities_activity_title));
     collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.transparent));
 
     if (communities == null) {
@@ -124,7 +125,8 @@ public class CommunitiesActivity extends AppCompatActivity {
   @OnClick(R.id.btnCommunitySelection)
   public void btnCommunitiesSelected() {
     final Intent intent = new Intent(this, FeedActivity.class);
-    startActivity(intent);
+    ActivityOptions options = ActivityOptions.makeScaleUpAnimation(progressButton, 0, 0, progressButton.getWidth(), progressButton.getHeight());
+    startActivity(intent, options.toBundle());
   }
 
   private ArrayList<Community> getData() {
