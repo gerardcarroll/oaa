@@ -17,6 +17,8 @@
     <color name="googlePlusRedPrimaryLight">#EC6D5C</color>
     <color name="googlePlusRed_75_Percent_Transparent">#BFd34836</color>
 
+    <color name="white_Transparent">#CCFFFFFF</color>
+
     <color name="blue_grey_500">#607D8B</color>
     <color name="blue_grey_600">#546E7A</color>
     <color name="blue_grey_700">#455A64</color>
