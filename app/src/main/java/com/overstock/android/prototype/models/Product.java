@@ -5,38 +5,30 @@ package com.overstock.android.prototype.models;
  */
 public class Product {
 
-    String imageBaseUrl;
-    String name;
-    Float formattedPrice;
+  String imageBaseUrl;
 
-    public Product(String imageBaseUrl, String name, Float formattedPrice) {
-        this.imageBaseUrl = imageBaseUrl;
-        this.name = name;
-        this.formattedPrice = formattedPrice;
-    }
+  String name;
 
-    public String getImageBaseUrl() {
-        return imageBaseUrl;
-    }
+  Float formattedPrice;
 
-    public void setImageBaseUrl(String imageBaseUrl) {
-        this.imageBaseUrl = imageBaseUrl;
-    }
+  public Product() {}
 
-    public String getName() {
-        return name;
-    }
+  public Product(String imageBaseUrl, String name, Float formattedPrice) {
+    this.imageBaseUrl = imageBaseUrl;
+    this.name = name;
+    this.formattedPrice = formattedPrice;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getImageBaseUrl() {
+    return imageBaseUrl;
+  }
 
-    public Float getFormattedPrice() {
-        return formattedPrice;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setFormattedPrice(Float formattedPrice) {
-        this.formattedPrice = formattedPrice;
-    }
+  public Float getFormattedPrice() {
+    return formattedPrice;
+  }
 
 }

@@ -59,12 +59,12 @@ public class BrandActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
-                Log.i("Products onResponse ", "statusCode" + response.code());
+                Log.i("ProductsResponse ", "statusCode" + response.code());
 
                 if (response.isSuccess()) {
                     List<Product> result = response.body();
 
-                    Log.i("Products", result.toString());
+                    Log.i("ProductsResponse", result.toString());
 
                 }
             }
