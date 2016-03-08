@@ -19,7 +19,6 @@ public class HomeActivity extends AppCompatActivity {
   @Inject
   HomeFragment homeFragment;
 
-  @TargetApi(Build.VERSION_CODES.LOLLIPOP)
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
