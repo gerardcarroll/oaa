@@ -8,7 +8,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -77,19 +76,7 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
     else {
       holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_green);
     }
-    // If the Community isSelected (true) set the CheckBox to checked
-    holder.chkSelected.setChecked(community.isSelected());
-    // Set the tag on CardView and CheckBox to hold the community object
-    holder.chkSelected.setTag(community);
     holder.cardView.setTag(community);
-
-    holder.chkSelected.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(final View v) {
-        // When Checkbox Clicked just performClick of the CardView
-        holder.cardView.performClick();
-      }
-    });
 
     holder.cardView.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -98,12 +85,10 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
         final Community com = (Community) cv.getTag();
         if (com.isSelected()) {
           com.setSelected(false);
-          holder.chkSelected.setChecked(false);
           holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_default);
         }
         else {
           com.setSelected(true);
-          holder.chkSelected.setChecked(true);
           holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_green);
         }
 
@@ -155,9 +140,6 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
 
     @Bind(R.id.tvCommunities)
     TextView communityTitle;
-
-    @Bind(R.id.communityCheckBox)
-    CheckBox chkSelected;
 
     @Bind(R.id.pbCommunities)
     ProgressBar progressBar;
