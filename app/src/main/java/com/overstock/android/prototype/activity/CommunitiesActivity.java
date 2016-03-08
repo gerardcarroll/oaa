@@ -1,10 +1,8 @@
 package com.overstock.android.prototype.activity;
 
-import android.annotation.TargetApi;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.res.TypedArray;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +24,7 @@ import com.overstock.android.prototype.models.Community;
 import java.util.ArrayList;
 
 import butterknife.Bind;
+import butterknife.BindInt;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import icepick.Icepick;
@@ -35,6 +34,8 @@ import icepick.State;
  * Created by rconnolly on 2/29/2016.
  */
 public class CommunitiesActivity extends AppCompatActivity {
+
+  private static final int ONE_HUNDRED = 100;
 
   @Bind(R.id.btnCommunitySelection)
   SubmitProcessButton progressButton;
@@ -48,6 +49,12 @@ public class CommunitiesActivity extends AppCompatActivity {
   @Bind(R.id.tvToolbarMsg)
   TextView toolBarText;
 
+  @BindInt(R.integer.min_selected_communities)
+  int minSelectedCommunities;
+
+  @BindInt(R.integer.communities_columns)
+  int numCommunitiesColumns;
+
   @State
   ArrayList<Community> communities;
 
@@ -55,7 +62,6 @@ public class CommunitiesActivity extends AppCompatActivity {
 
   private CollapsingToolbarLayout collapsingToolbarLayout = null;
 
-  @TargetApi(Build.VERSION_CODES.LOLLIPOP)
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -78,7 +84,7 @@ public class CommunitiesActivity extends AppCompatActivity {
     }
 
     if (savedInstanceState != null) {
-      if (savedInstanceState.getInt("button") == 100) {
+      if (savedInstanceState.getInt("button") == ONE_HUNDRED) {
         progressButton.setEnabled(true);
       }
     }
@@ -90,7 +96,7 @@ public class CommunitiesActivity extends AppCompatActivity {
     recyclerView.setAdapter(communitiesAdapter);
     // Setting the LayoutManager for the RecyclerView. Depending on Resolution it will have 2 or 3 columns
     recyclerView
-        .setLayoutManager(new GridLayoutManager(this, getResources().getInteger(R.integer.communities_columns)));
+        .setLayoutManager(new GridLayoutManager(this, numCommunitiesColumns));
     recyclerView.stopNestedScroll();
     recyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -101,20 +107,14 @@ public class CommunitiesActivity extends AppCompatActivity {
   private void setupOnDataChangeListener() {
     // implement the listener for the communities adapter to update the progress button
     communitiesAdapter.setOnDataChangeListener(new CommunitiesAdapter.OnDataChangeListener() {
+
       @Override
       public void onDataChanged(final int size) {
-        if (size >= 3) {
-          progressButton.setProgress(100);
-        }
-        else if (size > 0) {
-          final double progress = (size / 3.0) * 100;
-          progressButton.setProgress((int) Math.ceil(progress));
-        }
-        else {
-          progressButton.setProgress(0);
-        }
 
-        if (progressButton.getProgress() == 100) {
+        int progress = Math.min((int)Math.ceil(((double)size  /  minSelectedCommunities) * ONE_HUNDRED),ONE_HUNDRED);
+        progressButton.setProgress(progress);
+
+        if (progressButton.getProgress() == ONE_HUNDRED) {
           progressButton.setEnabled(true);
           progressButton.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down));
         }
