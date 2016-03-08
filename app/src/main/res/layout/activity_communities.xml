@@ -50,7 +50,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@+id/btnCommunitySelection"
-                android:layout_marginBottom="50dp"
                 android:scrollbars="vertical"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
@@ -62,7 +61,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/continue_button"
+        android:layout_margin="20dp"
         android:enabled="false"
+        android:alpha="0.75"
         android:text="@string/btn_community_default"
         android:textColor="@android:color/white"
         android:textSize="18sp"
