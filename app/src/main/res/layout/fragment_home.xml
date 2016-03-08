@@ -1,9 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".fragment.HomeFragment">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/shape_scrim"
+              android:orientation="vertical"
+              tools:context=".fragment.HomeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,9 +15,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:elegantTextHeight="true"
             android:text="@string/home_page_label"
-            android:textSize="25sp" />
+            android:textColor="@color/white"
+            android:textSize="25sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -28,49 +29,35 @@
 
         <Button
             android:id="@+id/facebook_login_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="300dp"
-            android:maxWidth="300dp"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_width="200dp"
+            android:layout_height="36dp"
             android:background="@color/facebookBluePrimaryDark"
-            android:elevation="@dimen/activity_vertical_margin"
-            android:padding="@dimen/activity_horizontal_margin"
+            android:elevation="@dimen/button_elevation"
             android:text="@string/faceBook_connect"
             android:textColor="@android:color/background_light"
-            />
+            android:typeface="normal"/>
 
         <Button
             android:id="@+id/googlePlus_login_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="300dp"
-            android:maxWidth="300dp"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_width="200dp"
+            android:layout_height="36dp"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:background="@color/googlePlusRedPrimary"
-            android:elevation="@dimen/activity_vertical_margin"
-            android:padding="@dimen/activity_horizontal_margin"
+            android:elevation="@dimen/button_elevation"
             android:text="@string/google_connect"
-            android:textColor="@android:color/background_light" />
+            android:textColor="@android:color/background_light"
+            android:typeface="normal"/>
 
         <Button
             android:id="@+id/guest_login_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="300dp"
-            android:maxWidth="300dp"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_width="200dp"
+            android:layout_height="36dp"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:background="@android:color/transparent"
-            android:elevation="@dimen/activity_vertical_margin"
-            android:padding="@dimen/activity_horizontal_margin"
+            android:elevation="@dimen/button_elevation"
             android:text="@string/guest_connect"
-
-            android:textColor="@android:color/background_light" />
+            android:textColor="@android:color/background_light"
+            android:typeface="normal"/>
 
 
     </LinearLayout>
