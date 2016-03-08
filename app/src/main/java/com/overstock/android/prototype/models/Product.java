@@ -5,22 +5,22 @@ package com.overstock.android.prototype.models;
  */
 public class Product {
 
-    String image;
+    String imageBaseUrl;
     String name;
-    Float price;
+    Float formattedPrice;
 
-    public Product(String image, String name, Float price) {
-        this.image = image;
+    public Product(String imageBaseUrl, String name, Float formattedPrice) {
+        this.imageBaseUrl = imageBaseUrl;
         this.name = name;
-        this.price = price;
+        this.formattedPrice = formattedPrice;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageBaseUrl() {
+        return imageBaseUrl;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageBaseUrl(String imageBaseUrl) {
+        this.imageBaseUrl = imageBaseUrl;
     }
 
     public String getName() {
@@ -31,12 +31,12 @@ public class Product {
         this.name = name;
     }
 
-    public Float getPrice() {
-        return price;
+    public Float getFormattedPrice() {
+        return formattedPrice;
     }
 
-    public void setPrice(Float price) {
-        this.price = price;
+    public void setFormattedPrice(Float formattedPrice) {
+        this.formattedPrice = formattedPrice;
     }
 
 }
