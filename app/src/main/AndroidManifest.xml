@@ -15,17 +15,13 @@
             android:name=".activities.CommunitiesActivity"
             android:label="@string/communities_activity"
             android:theme="@style/AppTheme">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
         </activity>
         <activity android:name=".BrandActivity"
             android:label="Brand"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -37,7 +33,6 @@
             android:name=".activity.FeedActivity"
             android:label="Feed"
             android:theme="@style/AppTheme" />
-        <activity android:name=".BrandActivity"></activity>
     </application>
 
 </manifest>
