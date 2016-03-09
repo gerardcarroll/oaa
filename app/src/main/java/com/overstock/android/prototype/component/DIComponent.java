@@ -6,6 +6,7 @@ import com.overstock.android.prototype.BrandFragment;
 import com.overstock.android.prototype.activity.HomeActivity;
 import com.overstock.android.prototype.fragment.GoogleFederatedIdentityFragment;
 import com.overstock.android.prototype.fragment.HomeFragment;
+import com.overstock.android.prototype.models.ProductDataService;
 import com.overstock.android.prototype.module.ApplicationModule;
 
 import dagger.Component;
@@ -24,4 +25,7 @@ public interface DIComponent {
   void inject(final GoogleFederatedIdentityFragment googleFederatedIdentityFragment);
 
   void inject(final BrandFragment brandFragment);
+
+  void inject(final ProductDataService productDataService);
+
 }

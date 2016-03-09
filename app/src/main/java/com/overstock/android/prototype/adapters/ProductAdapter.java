@@ -39,8 +39,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
     final Product product = products.get(position);
     // holder.imageView.setBackground(Drawable.createFromPath("/drawable/superbowl_nails.jpg"));
     Picasso picasso = new Picasso.Builder(context).memoryCache(new LruCache(45000)).build();
-    picasso.with(context).load("http://daringboy.com/wp-content/uploads/2015/02/nfl-atmosphere_dez.jpg")
-        .placeholder(R.drawable.superbowl_nails).into(holder.imageView);
+    picasso.with(context).load("http://ak1.ostkcdn.com/images/products/" + product.getImageLarge())
+            .placeholder(R.drawable.superbowl_nails).into(holder.imageView);
 
   }
 
