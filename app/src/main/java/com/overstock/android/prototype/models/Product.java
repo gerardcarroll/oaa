@@ -5,7 +5,7 @@ package com.overstock.android.prototype.models;
  */
 public class Product {
 
-  String imageLarge;
+  String imageMedium1;
 
   String name;
 
@@ -13,14 +13,14 @@ public class Product {
 
   public Product() {}
 
-  public Product(String imageLarge, String name, Float memberPrice) {
-    this.imageLarge = imageLarge;
+  public Product(String imageMedium, String name, Float memberPrice) {
+    this.imageMedium1 = imageMedium;
     this.name = name;
     this.memberPrice = memberPrice;
   }
 
-  public String getImageLarge() {
-    return imageLarge;
+  public String getImageMedium1() {
+    return imageMedium1;
   }
 
   public String getName() {

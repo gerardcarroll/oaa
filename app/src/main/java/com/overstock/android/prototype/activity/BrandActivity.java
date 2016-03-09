@@ -63,7 +63,7 @@ public class BrandActivity extends AppCompatActivity {
 
         ProductService service = retrofit.create(ProductService.class);
 
-//        Call<ProductsResponse> products = service.getProducts("iPod");
+        //Call<ProductsResponse> products = service.getProducts("nfl");
         Call<ProductsResponse> products = service.getProducts();
 
         products.enqueue(new Callback<ProductsResponse>() {
@@ -77,7 +77,7 @@ public class BrandActivity extends AppCompatActivity {
 
                     for (Product product : result.getProducts().getProductsList()) {
 
-                        imageUrl = String.format("http://ak1.ostkcdn.com/images/products/%s", product.getImageLarge());
+                        imageUrl = String.format("http://ak1.ostkcdn.com/images/products/%s", product.getImageMedium1());
 
                         progressBar.setVisibility(View.VISIBLE);
                         Picasso.with(getApplicationContext()).load(imageUrl).

@@ -21,8 +21,13 @@ public interface ProductService {
 //    @GET("search.json?keywords={productType}")
 //    Call<ProductsResponse> getProducts(@Query("productType") String productType);
 
-    @GET("search.json?keywords=iPod")
+    @GET("search.json?keywords=nfl")
     Call<ProductsResponse> getProducts();
 
-    // TODO add call to retrieve the 10 best selling products
+//    @GET("search.json?keywords=nfl")
+//    Observable<ProductsResponse> getProducts();
+
+
+//    @GET("search.json?keywords=top+selling&count=5")
+//    Call<ProductsResponse> getTopSellingProducts();
 }
