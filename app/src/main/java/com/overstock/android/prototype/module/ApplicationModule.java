@@ -1,8 +1,8 @@
 package com.overstock.android.prototype.module;
 
-import javax.inject.Singleton;
-
 import com.overstock.android.prototype.fragment.HomeFragment;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -18,5 +18,7 @@ public class ApplicationModule {
   public HomeFragment homeFragment() {
     return new HomeFragment();
   }
+
+
 
 }
