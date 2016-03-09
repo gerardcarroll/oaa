@@ -21,16 +21,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.CommunitiesActivity"
             android:label="Communities"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".activity.FeedActivity"
-            android:label="Feed"
-            android:theme="@style/AppTheme" />
-
+            android:name=".activity.YourInterestsActivity"
+            android:label="@string/title_activity_your_interests"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
