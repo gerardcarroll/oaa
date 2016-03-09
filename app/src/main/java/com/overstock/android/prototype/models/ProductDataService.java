@@ -13,9 +13,9 @@ public class ProductDataService {
 
   private ProductService productService;
 
-  private String bestSellers = "Recommended";
+  private String bestSellers = "recommended";
 
-  private String newArrivals = "New Arrivals";
+  private String newArrivals = "newArrivals";
 
   @Inject
   public ProductDataService(final ProductService productService) {

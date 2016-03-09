@@ -12,9 +12,9 @@ import rx.Observable;
 public interface ProductService {
 
     @GET("search.json?keywords=nfl&count=10")
-    Observable<ProductsResponse> getBestSellers(@Query("sort") String sort);
+    Observable<ProductsResponse> getBestSellers(@Query("sort") String sortValue);
 
     @GET("search.json?keywords=nfl&count=10")
-    Observable<ProductsResponse> getNewArrivals(@Query("sort") String sort);
+    Observable<ProductsResponse> getNewArrivals(@Query("sort") String sortValue);
 
 }
