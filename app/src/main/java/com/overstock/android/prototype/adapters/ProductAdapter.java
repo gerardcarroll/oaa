@@ -1,7 +1,5 @@
 package com.overstock.android.prototype.adapters;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +9,8 @@ import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.models.Product;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 /**
  * @author LeeMeehan Created on 08-Mar-16.
@@ -38,8 +38,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
   public void onBindViewHolder(ProductViewHolder holder, int position) {
     final Product product = products.get(position);
     // holder.imageView.setBackground(Drawable.createFromPath("/drawable/superbowl_nails.jpg"));
-    Picasso picasso = new Picasso.Builder(context).memoryCache(new LruCache(45000)).build();
-    picasso.with(context).load("http://ak1.ostkcdn.com/images/products/" + product.getImageLarge())
+    Picasso picasso = new Picasso.Builder(context).memoryCache(new LruCache(30000)).build();
+    picasso.with(context).load("http://ak1.ostkcdn.com/images/products/" + product.getImageMedium1()).resize(500, 500)
             .placeholder(R.drawable.superbowl_nails).into(holder.imageView);
 
   }

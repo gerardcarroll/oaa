@@ -55,8 +55,8 @@ public class BrandActivity extends AppCompatActivity {
 
         ProductService service = retrofit.create(ProductService.class);
 
-        //Call<ProductsResponse> products = service.getProducts("nfl");
-//        Call<ProductsResponse> products = service.getProducts();
+        //Call<ProductsResponse> products = service.getBestSellers("nfl");
+//        Call<ProductsResponse> products = service.getBestSellers();
 //
 //        products.enqueue(new Callback<ProductsResponse>() {
 //            @Override
@@ -67,7 +67,7 @@ public class BrandActivity extends AppCompatActivity {
 //                if (response.isSuccess()) {
 //                    ProductsResponse result = response.body();
 //
-//                    for (Product product : result.getProducts().getProductsList()) {
+//                    for (Product product : result.getBestSellers().getProductsList()) {
 //
 //                        imageUrl = String.format("http://ak1.ostkcdn.com/images/products/%s", product.getImageMedium1());
 //

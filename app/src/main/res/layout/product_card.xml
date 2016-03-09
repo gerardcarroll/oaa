@@ -9,14 +9,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/product_card_img"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:minWidth="100dp"
-        android:minHeight="100dp"
-        android:scaleType="fitXY"
-        />
+        <ImageView
+            android:id="@+id/product_card_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:minWidth="100dp"
+            android:minHeight="100dp"
+            android:scaleType="fitXY"
+            />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pbProducts"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:visibility="gone" />
 
     </FrameLayout>
 

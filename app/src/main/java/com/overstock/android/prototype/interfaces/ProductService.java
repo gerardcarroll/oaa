@@ -3,7 +3,7 @@ package com.overstock.android.prototype.interfaces;
 import com.overstock.android.prototype.models.ProductsResponse;
 
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
+import retrofit2.http.Query;
 import rx.Observable;
 
 /**
@@ -11,27 +11,10 @@ import rx.Observable;
  */
 public interface ProductService {
 
-    @Headers(
-            {
-                    "Accept: application/json",
-                    "Content-Type: application/json"
-            }
-    )
+    @GET("search.json?keywords=nfl&count=10")
+    Observable<ProductsResponse> getBestSellers(@Query("sort") String sort);
 
-//    @GET("search.json?keywords={productType}")
-//    Call<ProductsResponse> getProducts(@Query("productType") String productType);
-
-//    @GET("search.json?keywords=nfl")
-//            Call<ProductsResponse> getProducts();
-
-//    @GET("search.json?keywords=nfl")
-//    Observable<ProductsResponse> getProducts();
-
-
-//    @GET("search.json?keywords=top+selling&count=5")
-//    Call<ProductsResponse> getTopSellingProducts();
-
-    @GET("search.json?keywords=nfl")
-    Observable<ProductsResponse> getProducts();
+    @GET("search.json?keywords=nfl&count=10")
+    Observable<ProductsResponse> getNewArrivals(@Query("sort") String sort);
 
 }

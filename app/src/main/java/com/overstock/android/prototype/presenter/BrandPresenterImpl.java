@@ -1,22 +1,21 @@
 package com.overstock.android.prototype.presenter;
 
+import android.util.Log;
+
+import com.overstock.android.prototype.models.Product;
+import com.overstock.android.prototype.models.ProductDataService;
+import com.overstock.android.prototype.models.ProductsResponse;
+import com.overstock.android.prototype.view.BrandView;
+
 import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
-
-import android.util.Log;
-
-import com.overstock.android.prototype.interfaces.TheOAppClient;
-import com.overstock.android.prototype.models.Product;
-import com.overstock.android.prototype.models.ProductDataService;
-import com.overstock.android.prototype.models.ProductsResponse;
-import com.overstock.android.prototype.view.BrandView;
-
-import javax.inject.Inject;
 
 /**
  * @author LeeMeehan Created on 07-Mar-16.
@@ -47,23 +46,42 @@ public class BrandPresenterImpl implements BrandPresenter {
 
   public void refresh() {
 
-    productDataService.getProducts().subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+    productDataService.getBestSellers().subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
         .subscribe(new Observer<ProductsResponse>() {
           @Override
-          public void onCompleted() {}
+          public void onCompleted() {
+            Log.i("COMPLETED", "Finished loading Best Sellers");
+          }
 
           @Override
           public void onError(Throwable e) {
-            Log.i("HI THERE", "FAIL");
+            Log.i("FAILURE", "Failed to load Best Sellers");
           }
 
           @Override
           public void onNext(ProductsResponse productsResponse) {
-            Log.i("HI THERE", "SUCCESS");
+            Log.i("SUCCESS", "Best Sellers successfully loaded");
             brandView.displayBestSellers((ArrayList<Product>) productsResponse.getProducts().getProductsList());
-            brandView.displayNewArrivals((ArrayList<Product>) productsResponse.getProducts().getProductsList());
           }
         });
 
+    productDataService.getNewArrivals().subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Observer<ProductsResponse>() {
+          @Override
+          public void onCompleted() {
+            Log.i("COMPLETED", "Finished loading New Arrivals");
+          }
+
+          @Override
+          public void onError(Throwable e) {
+            Log.i("FAILURE", "Failed to load New Arrivals");
+          }
+
+          @Override
+          public void onNext(ProductsResponse productsResponse) {
+            Log.i("SUCCESS", "New Arrivals successfully loaded");
+            brandView.displayNewArrivals((ArrayList<Product>) productsResponse.getProducts().getProductsList());
+          }
+        });
   }
 }
