@@ -5,30 +5,30 @@ package com.overstock.android.prototype.models;
  */
 public class Product {
 
-  String imageBaseUrl;
+  String imageLarge;
 
   String name;
 
-  Float formattedPrice;
+  Float memberPrice;
 
   public Product() {}
 
-  public Product(String imageBaseUrl, String name, Float formattedPrice) {
-    this.imageBaseUrl = imageBaseUrl;
+  public Product(String imageLarge, String name, Float memberPrice) {
+    this.imageLarge = imageLarge;
     this.name = name;
-    this.formattedPrice = formattedPrice;
+    this.memberPrice = memberPrice;
   }
 
-  public String getImageBaseUrl() {
-    return imageBaseUrl;
+  public String getImageLarge() {
+    return imageLarge;
   }
 
   public String getName() {
     return name;
   }
 
-  public Float getFormattedPrice() {
-    return formattedPrice;
+  public Float getMemberPrice() {
+    return memberPrice;
   }
 
 }

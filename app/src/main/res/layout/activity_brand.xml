@@ -8,6 +8,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/ivProductImage" />
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pbProductImage"
+        android:visibility="gone" /> <!-- TODO remove visibility attribute here later -->
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
