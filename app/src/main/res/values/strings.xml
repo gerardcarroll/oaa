@@ -37,6 +37,9 @@
     <string name="feed_activity">Feed Activity</string>
     <string name="action_logout">Log Out</string>
     <string name="communities_activity_title">Communities</string>
+    <string name="title_activity_your_interests">YourInterestsActivity</string>
+    <string name="nfl_link">nfl_link</string>
+    <string name="communities_link">Communities Link</string>
 
 
 </resources>
