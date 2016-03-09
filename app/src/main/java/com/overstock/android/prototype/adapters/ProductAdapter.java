@@ -21,7 +21,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
 
   private Context context;
 
-  priv
+  private String baseImageUrl = "http://ak1.ostkcdn.com/images/products/";
 
   public ProductAdapter(final Context context, final ArrayList<Product> products) {
     this.context = context;
@@ -39,9 +39,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
   @Override
   public void onBindViewHolder(ProductViewHolder holder, int position) {
     final Product product = products.get(position);
+    String imageUrl = String.format(baseImageUrl + product.getImageMedium1());
     // holder.imageView.setBackground(Drawable.createFromPath("/drawable/superbowl_nails.jpg"));
     Picasso picasso = new Picasso.Builder(context).memoryCache(new LruCache(30000)).build();
-    picasso.with(context).load("http://ak1.ostkcdn.com/images/products/" + product.getImageMedium1()).resize(500, 500)
+    picasso.with(context).load(imageUrl).resize(500, 500)
             .placeholder(R.drawable.superbowl_nails).into(holder.imageView);
 
   }
