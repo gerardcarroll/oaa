@@ -116,10 +116,13 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
 
         if (progressButton.getProgress() == ONE_HUNDRED) {
           progressButton.setEnabled(true);
-          progressButton.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down));
+
+          progressButton.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.continue_btn_bounce));
+          progressButton.setAlpha(1f);
         }
         else {
           progressButton.setEnabled(false);
+          progressButton.setAlpha(0.75f);
         }
       }
     });
@@ -131,6 +134,7 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
     ActivityOptions options = ActivityOptions.makeScaleUpAnimation(progressButton, 0, 0, progressButton.getWidth(), progressButton.getHeight());
     startActivity(intent, options.toBundle());
   }
+
 
   @Override
   public boolean onCreateOptionsMenu(final Menu menu) {
