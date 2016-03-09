@@ -1,28 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ivProductImage" />
-
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/pbProductImage"
-        android:visibility="gone" /> <!-- TODO remove visibility attribute here later -->
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/tvProductName" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/tvProductPrice" />
-</LinearLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/brand_activity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.overstock.android.prototype.BrandActivity"
+    android:orientation="vertical">
+</RelativeLayout>
