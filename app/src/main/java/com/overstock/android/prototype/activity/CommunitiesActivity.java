@@ -95,8 +95,7 @@ public class CommunitiesActivity extends AppCompatActivity {
     recyclerView.setHasFixedSize(true);
     recyclerView.setAdapter(communitiesAdapter);
     // Setting the LayoutManager for the RecyclerView. Depending on Resolution it will have 2 or 3 columns
-    recyclerView
-        .setLayoutManager(new GridLayoutManager(this, numCommunitiesColumns));
+    recyclerView.setLayoutManager(new GridLayoutManager(this, numCommunitiesColumns));
     recyclerView.stopNestedScroll();
     recyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -116,10 +115,13 @@ public class CommunitiesActivity extends AppCompatActivity {
 
         if (progressButton.getProgress() == ONE_HUNDRED) {
           progressButton.setEnabled(true);
-          progressButton.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down));
+
+          progressButton.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.continue_btn_bounce));
+          progressButton.setAlpha(1f);
         }
         else {
           progressButton.setEnabled(false);
+          progressButton.setAlpha(0.75f);
         }
       }
     });
@@ -149,7 +151,6 @@ public class CommunitiesActivity extends AppCompatActivity {
     for (int i = 0; i < imagesArray.length && i < names.length; i++) {
 
       final Community community = new Community();
-
       community.setImageId(imagesArray[i]);
       community.setName(names[i]);
 
