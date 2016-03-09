@@ -1,14 +1,18 @@
 package com.overstock.android.prototype.adapters;
 
 import java.util.ArrayList;
+import java.util.Currency;
+import java.util.Locale;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.models.Product;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
 
@@ -35,12 +39,26 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
   }
 
   @Override
-  public void onBindViewHolder(ProductViewHolder holder, int position) {
+  public void onBindViewHolder(final ProductViewHolder holder, int position) {
     final Product product = products.get(position);
-    // holder.imageView.setBackground(Drawable.createFromPath("/drawable/superbowl_nails.jpg"));
+
+    holder.productNameTxt.setText(product.getName());
+    String currencyCode = Currency.getInstance(Locale.US).getSymbol();
+    holder.productPriceTxt.setText(currencyCode + product.getMemberPrice().toString());
     Picasso picasso = new Picasso.Builder(context).memoryCache(new LruCache(45000)).build();
-    picasso.with(context).load("http://ak1.ostkcdn.com/images/products/" + product.getImageLarge())
-            .placeholder(R.drawable.superbowl_nails).into(holder.imageView);
+    holder.progressBar.setVisibility(View.VISIBLE);
+    picasso.with(context).load("http://ak1.ostkcdn.com/images/products/" + product.getImageLarge()).resize(500,500)
+        .error(R.drawable.product_placeholder).into(holder.imageView, new Callback() {
+          @Override
+          public void onSuccess() {
+            holder.progressBar.setVisibility(View.GONE);
+          }
+
+          @Override
+          public void onError() {
+            holder.progressBar.setVisibility(View.GONE);
+          }
+        });
 
   }
 

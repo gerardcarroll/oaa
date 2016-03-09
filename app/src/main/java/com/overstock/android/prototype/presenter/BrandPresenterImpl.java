@@ -22,6 +22,8 @@ import javax.inject.Inject;
  * @author LeeMeehan Created on 07-Mar-16.
  */
 public class BrandPresenterImpl implements BrandPresenter {
+  private static final String TAG = BrandPresenterImpl.class.getName();
+
   private Subscription subscription = Subscriptions.empty();
 
   private BrandView brandView;
@@ -36,7 +38,12 @@ public class BrandPresenterImpl implements BrandPresenter {
   @Override
   public void setView(final BrandView brandView) {
     this.brandView = brandView;
-    refresh();
+    if (brandView == null) {
+      subscription.unsubscribe();
+    }
+    else {
+      refresh();
+    }
   }
 
   @Override
@@ -47,19 +54,21 @@ public class BrandPresenterImpl implements BrandPresenter {
 
   public void refresh() {
 
-    productDataService.getProducts().subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Observer<ProductsResponse>() {
+    subscription = productDataService.getProducts().subscribeOn(Schedulers.newThread())
+        .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ProductsResponse>() {
           @Override
-          public void onCompleted() {}
+          public void onCompleted() {
+            Log.d(TAG, "ProductDataService.GetProduct has no more data to emit.");
+          }
 
           @Override
           public void onError(Throwable e) {
-            Log.i("HI THERE", "FAIL");
+            Log.e(TAG, "Error on subscribing to ProductDataService.GetProducts");
           }
 
           @Override
           public void onNext(ProductsResponse productsResponse) {
-            Log.i("HI THERE", "SUCCESS");
+            Log.d(TAG, "Next value on subscribing to ProductDataService.GetProducts");
             brandView.displayBestSellers((ArrayList<Product>) productsResponse.getProducts().getProductsList());
             brandView.displayNewArrivals((ArrayList<Product>) productsResponse.getProducts().getProductsList());
           }
