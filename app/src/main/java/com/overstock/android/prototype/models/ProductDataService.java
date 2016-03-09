@@ -1,5 +1,7 @@
 package com.overstock.android.prototype.models;
 
+import com.overstock.android.prototype.interfaces.ProductService;
+
 import javax.inject.Inject;
 
 import rx.Observable;
@@ -16,14 +18,23 @@ public class ProductDataService {
 
   private ProductService productService;
 
+  private String bestSellers = "Recommended";
+
+  private String newArrivals = "New Arrivals";
+
   @Inject
   public ProductDataService(final ProductService productService) {
     this.productService = productService;
   }
 
-  public Observable<ProductsResponse> getProducts() {
+  public Observable<ProductsResponse> getBestSellers() {
     Log.d(TAG, "Getting Observable ProductResponse from client.");
-    return productService.getProducts();
+    return productService.getBestSellers(bestSellers);
+  }
+
+  public Observable<ProductsResponse> getNewArrivals() {
+    Log.d(TAG, "Getting Observable ProductResponse from client.");
+    return productService.getNewArrivals(newArrivals);
   }
 
 }

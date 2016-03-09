@@ -34,13 +34,20 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
 
   private LayoutInflater inflater;
 
-  private List<Community> data;
+  private List<Community> data = new ArrayList<>();
 
-  public CommunitiesAdapter(final Context context, final List<Community> data) {
+  public CommunitiesAdapter(final Context context) {
 
     this.context = context;
-    this.data = data;
     this.inflater = inflater.from(context);
+  }
+
+  public List<Community> getData() {
+    return data;
+  }
+
+  public void setData(List<Community> data) {
+    this.data = data;
   }
 
   @Override

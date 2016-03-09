@@ -1,13 +1,13 @@
 package com.overstock.android.prototype.module;
 
-import javax.inject.Singleton;
-
 import com.overstock.android.prototype.fragment.HomeFragment;
 import com.overstock.android.prototype.interfaces.ProductService;
 import com.overstock.android.prototype.interfaces.TheOAppClient;
 import com.overstock.android.prototype.models.ProductDataService;
 import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.presenter.BrandPresenterImpl;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;

@@ -47,7 +47,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
     holder.productPriceTxt.setText(currencyCode + product.getMemberPrice().toString());
     Picasso picasso = new Picasso.Builder(context).memoryCache(new LruCache(45000)).build();
     holder.progressBar.setVisibility(View.VISIBLE);
-    picasso.with(context).load("http://ak1.ostkcdn.com/images/products/" + product.getImageLarge()).resize(500,500)
+    picasso.with(context).load("http://ak1.ostkcdn.com/images/products/" + product.getImageMedium1()).resize(500, 500)
         .error(R.drawable.product_placeholder).into(holder.imageView, new Callback() {
           @Override
           public void onSuccess() {
