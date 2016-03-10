@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import rx.Observable;
 
 /**
- * @author LeeMeehan, rayConnolly Created on 09-Mar-16.
+ * @author LeeMeehan, RayConnolly Created on 09-Mar-16.
  */
 public class ProductDataService {
 

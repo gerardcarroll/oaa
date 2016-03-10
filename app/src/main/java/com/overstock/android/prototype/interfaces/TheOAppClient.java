@@ -12,10 +12,12 @@ public class TheOAppClient {
 
   private static ProductService productService;
 
+  private static String ENDPOINT = "http://www.overstock.com/api/";
+
   public static ProductService getClient() {
     if (productService == null) {
       OkHttpClient okHttpClient = new OkHttpClient();
-      Retrofit retrofit = new Retrofit.Builder().baseUrl("http://www.overstock.com/api/").client(okHttpClient)
+      Retrofit retrofit = new Retrofit.Builder().baseUrl(ENDPOINT).client(okHttpClient)
           .addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(RxJavaCallAdapterFactory.create())
           .build();
       productService = retrofit.create(ProductService.class);

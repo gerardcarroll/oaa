@@ -41,7 +41,10 @@ public class BrandPresenterImpl implements BrandPresenter {
   @Override
   public void onDestroy() {
     brandView = null;
-    subscription.unsubscribe();
+
+    if (subscription != null && !subscription.isUnsubscribed()){
+      subscription.unsubscribe();
+    }
   }
 
   public void refresh() {
