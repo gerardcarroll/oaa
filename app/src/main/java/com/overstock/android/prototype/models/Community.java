@@ -1,18 +1,18 @@
 package com.overstock.android.prototype.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import auto.parcel.AutoParcel;
 
 /**
  * Created by rconnolly on 3/1/2016.
  */
-@AutoParcel
-public class Community {
+public class Community implements Parcelable{
 
-  int imageId;
-
-  String name;
-
-  boolean selected;
+  private int imageId;
+  private String name;
+  private boolean selected;
 
   public Community() { /* Required empty constructor */ }
 
@@ -20,6 +20,36 @@ public class Community {
     this.imageId = imageId;
     this.name = name;
   }
+
+  protected Community(Parcel in) {
+    imageId = in.readInt();
+    name = in.readString();
+    selected = in.readByte() != 0;
+  }
+
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeInt(imageId);
+    dest.writeString(name);
+    dest.writeByte((byte) (selected ? 1 : 0));
+  }
+
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  public static final Creator<Community> CREATOR = new Creator<Community>() {
+    @Override
+    public Community createFromParcel(Parcel in) {
+      return new Community(in);
+    }
+
+    @Override
+    public Community[] newArray(int size) {
+      return new Community[size];
+    }
+  };
 
   public int getImageId() {
     return imageId;

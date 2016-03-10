@@ -1,10 +1,7 @@
 package com.overstock.android.prototype.activity;
 
-import android.annotation.TargetApi;
 import android.app.ActivityOptions;
 import android.content.Intent;
-import android.content.res.TypedArray;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -22,10 +19,13 @@ import com.dd.processbutton.iml.SubmitProcessButton;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.CommunitiesAdapter;
 import com.overstock.android.prototype.models.Community;
+import com.overstock.android.prototype.presenter.CommunitiesPresenter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
+import butterknife.BindInt;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import icepick.Icepick;
@@ -34,7 +34,9 @@ import icepick.State;
 /**
  * Created by rconnolly on 2/29/2016.
  */
-public class CommunitiesActivity extends AppCompatActivity {
+public class CommunitiesActivity extends AppCompatActivity implements CommunitiesMvpView{
+
+  private static final int ONE_HUNDRED = 100;
 
   @Bind(R.id.btnCommunitySelection)
   SubmitProcessButton progressButton;
@@ -48,20 +50,39 @@ public class CommunitiesActivity extends AppCompatActivity {
   @Bind(R.id.tvToolbarMsg)
   TextView toolBarText;
 
+  @BindInt(R.integer.min_selected_communities)
+  int minSelectedCommunities;
+
+  @BindInt(R.integer.communities_columns)
+  int numCommunitiesColumns;
+
   @State
   ArrayList<Community> communities;
 
   private CommunitiesAdapter communitiesAdapter;
 
+  private CommunitiesPresenter communitiesPresenter;
+
   private CollapsingToolbarLayout collapsingToolbarLayout = null;
 
-  @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+  public CommunitiesActivity() {
+      communitiesPresenter = new CommunitiesPresenter(this);
+      communitiesPresenter.attachedView(this);
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    communitiesPresenter.attachedView(this);
+  }
+
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_communities);
     Icepick.restoreInstanceState(this, savedInstanceState);
     ButterKnife.bind(this);
+    communitiesAdapter = new CommunitiesAdapter(getApplicationContext());
 
     // Instantiate Toolbar
     setSupportActionBar(toolbar);
@@ -73,53 +94,35 @@ public class CommunitiesActivity extends AppCompatActivity {
     collapsingToolbarLayout.setTitle(getString(R.string.communities_activity_title));
     collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.transparent));
 
-    if (communities == null) {
-      communities = getData();
-    }
+    communitiesPresenter.populateAndShowCommunities();
 
     if (savedInstanceState != null) {
-      if (savedInstanceState.getInt("button") == 100) {
+      if (savedInstanceState.getInt("button") == ONE_HUNDRED) {
         progressButton.setEnabled(true);
       }
     }
 
-    // Instantiate the CommunitiesAdapter
-    communitiesAdapter = new CommunitiesAdapter(getApplicationContext(), communities);
-    // Instantiate Recycler View
-    recyclerView.setHasFixedSize(true);
-    recyclerView.setAdapter(communitiesAdapter);
-    // Setting the LayoutManager for the RecyclerView. Depending on Resolution it will have 2 or 3 columns
-    recyclerView
-        .setLayoutManager(new GridLayoutManager(this, getResources().getInteger(R.integer.communities_columns)));
-    recyclerView.stopNestedScroll();
-    recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-    // Setup the CommunitiesAdapter Data Change Listener
-    setupOnDataChangeListener();
   }
 
   private void setupOnDataChangeListener() {
     // implement the listener for the communities adapter to update the progress button
     communitiesAdapter.setOnDataChangeListener(new CommunitiesAdapter.OnDataChangeListener() {
+
       @Override
       public void onDataChanged(final int size) {
-        if (size >= 3) {
-          progressButton.setProgress(100);
-        }
-        else if (size > 0) {
-          final double progress = (size / 3.0) * 100;
-          progressButton.setProgress((int) Math.ceil(progress));
-        }
-        else {
-          progressButton.setProgress(0);
-        }
 
-        if (progressButton.getProgress() == 100) {
+        int progress = Math.min((int)Math.ceil(((double)size  /  minSelectedCommunities) * ONE_HUNDRED),ONE_HUNDRED);
+        progressButton.setProgress(progress);
+
+        if (progressButton.getProgress() == ONE_HUNDRED) {
           progressButton.setEnabled(true);
-          progressButton.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down));
+
+          progressButton.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.continue_btn_bounce));
+          progressButton.setAlpha(1f);
         }
         else {
           progressButton.setEnabled(false);
+          progressButton.setAlpha(0.75f);
         }
       }
     });
@@ -127,36 +130,11 @@ public class CommunitiesActivity extends AppCompatActivity {
 
   @OnClick(R.id.btnCommunitySelection)
   public void btnCommunitiesSelected() {
-    final Intent intent = new Intent(this, FeedActivity.class);
+    final Intent intent = new Intent(this, YourInterestsActivity.class);
     ActivityOptions options = ActivityOptions.makeScaleUpAnimation(progressButton, 0, 0, progressButton.getWidth(), progressButton.getHeight());
     startActivity(intent, options.toBundle());
   }
 
-  private ArrayList<Community> getData() {
-
-    final ArrayList<Community> communities = new ArrayList<>();
-
-    final TypedArray typedArray = getResources().obtainTypedArray(R.array.community_image_array);
-
-    final int len = typedArray.length();
-    final int[] imagesArray = new int[len];
-    for (int i = 0; i < len; i++) {
-      imagesArray[i] = typedArray.getResourceId(i, 0);
-    }
-
-    final String[] names = getResources().getStringArray(R.array.communities_array);
-
-    for (int i = 0; i < imagesArray.length && i < names.length; i++) {
-
-      final Community community = new Community();
-
-      community.setImageId(imagesArray[i]);
-      community.setName(names[i]);
-
-      communities.add(community);
-    }
-    return communities;
-  }
 
   @Override
   public boolean onCreateOptionsMenu(final Menu menu) {
@@ -183,4 +161,21 @@ public class CommunitiesActivity extends AppCompatActivity {
     outState.putInt("button", progressButton.getProgress());
     Icepick.saveInstanceState(this, outState);
   }
+
+  @Override
+  public void showCommunities(List<Community> communities){
+    // Instantiate the CommunitiesAdapter
+    // Instantiate Recycler View
+    communitiesAdapter.setData(communities);
+    recyclerView.setHasFixedSize(true);
+    recyclerView.setAdapter(communitiesAdapter);
+    // Setting the LayoutManager for the RecyclerView. Depending on Resolution it will have 2 or 3 columns
+    recyclerView.setLayoutManager(new GridLayoutManager(this, numCommunitiesColumns));
+    recyclerView.stopNestedScroll();
+    recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+    // Setup the CommunitiesAdapter Data Change Listener
+    setupOnDataChangeListener();
+  }
 }
+
