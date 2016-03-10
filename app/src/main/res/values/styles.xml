@@ -1,4 +1,25 @@
-<resources>
+<resources xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Base application theme. -->
+    <style name="OappTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Oapp , app wide color style. -->
+        <item name="colorPrimary">@color/oapp_primary_500</item>
+        <item name="colorPrimaryDark">@color/oapp_primary_dark_700</item>
+        <item name="colorAccent">@color/oapp_accent_a200</item>
+        <item name="android:buttonStyle">@style/OappButton</item>
+
+    </style>
+
+    <style name="OappTextView" >
+        <item name="android:background">@color/oapp_accent_a200</item>
+    </style>
+
+    <style name="OappButton" >
+        <item name="android:background">@drawable/oapp_button</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">5dp</item>
+    </style>
+
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">

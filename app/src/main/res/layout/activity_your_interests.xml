@@ -13,21 +13,26 @@
         android:id="@+id/your_interests_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Your Interests"
+        android:text="Your Interests , (WIP)"
+        android:textAlignment="center"
         style="@style/TextAppearance.AppCompat.Title" />
 
     <Button
         android:id="@+id/your_interests_nfl_btn"
         android:layout_width="wrap_content"
+        android:layout_margin="20dp"
         android:layout_height="wrap_content"
         android:text="@string/nfl_link"
+        android:layout_gravity="center"
         android:autoLink="all"/>
 
     <Button
         android:id="@+id/your_interests_communities_btn"
+        android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/communities_link"
-        android:autoLink="all"/>
+        android:layout_gravity="center"
+        android:autoLink="all" />
 
 </LinearLayout>

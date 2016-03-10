@@ -40,6 +40,8 @@
     <string name="title_activity_your_interests">YourInterestsActivity</string>
     <string name="nfl_link">nfl_link</string>
     <string name="communities_link">Communities Link</string>
+    <string name="home_activity">Home</string>
+    <string name="title_activity_communities">Communities</string>
 
 
 </resources>
