@@ -25,6 +25,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
 
   private Context context;
 
+  private String baseImageUrl = "http://ak1.ostkcdn.com/images/products/";
+
   public ProductAdapter(final Context context, final ArrayList<Product> products) {
     this.context = context;
     this.products = products;
