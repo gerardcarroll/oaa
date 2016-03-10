@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="2"
-    tools:context="com.overstock.android.prototype.BrandFragment">
+    tools:context=".fragment.BrandFragment">
 
 
     <android.support.design.widget.AppBarLayout

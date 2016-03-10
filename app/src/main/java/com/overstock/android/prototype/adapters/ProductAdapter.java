@@ -3,14 +3,18 @@ package com.overstock.android.prototype.adapters;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.models.Product;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Currency;
+import java.util.Locale;
 
 /**
  * @author LeeMeehan Created on 08-Mar-16.
@@ -37,14 +41,26 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
   }
 
   @Override
-  public void onBindViewHolder(ProductViewHolder holder, int position) {
+  public void onBindViewHolder(final ProductViewHolder holder, int position) {
     final Product product = products.get(position);
     String imageUrl = String.format(baseImageUrl + product.getImageMedium1());
-    // holder.imageView.setBackground(Drawable.createFromPath("/drawable/superbowl_nails.jpg"));
-    Picasso picasso = new Picasso.Builder(context).memoryCache(new LruCache(30000)).build();
+    holder.productNameTxt.setText(product.getName());
+    String currencyCode = Currency.getInstance(Locale.US).getSymbol();
+    holder.productPriceTxt.setText(currencyCode + product.getMemberPrice().toString());
+    Picasso picasso = new Picasso.Builder(context).memoryCache(new LruCache(45000)).build();
+    holder.progressBar.setVisibility(View.VISIBLE);
     picasso.with(context).load(imageUrl).resize(500, 500)
-            .placeholder(R.drawable.superbowl_nails).into(holder.imageView);
+        .error(R.drawable.product_placeholder).into(holder.imageView, new Callback() {
+          @Override
+          public void onSuccess() {
+            holder.progressBar.setVisibility(View.GONE);
+          }
 
+          @Override
+          public void onError() {
+            holder.progressBar.setVisibility(View.GONE);
+          }
+        });
   }
 
   @Override

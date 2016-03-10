@@ -3,6 +3,6 @@
     android:id="@+id/brand_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.overstock.android.prototype.BrandActivity"
+    tools:context=".activity.BrandActivity"
     android:orientation="vertical">
 </RelativeLayout>

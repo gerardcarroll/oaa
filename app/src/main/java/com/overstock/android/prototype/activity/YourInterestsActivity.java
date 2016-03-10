@@ -27,9 +27,8 @@ public class YourInterestsActivity extends AppCompatActivity {
 
     @OnClick(R.id.your_interests_nfl_btn)
     public void onNflBtnClick(){
-        //TODO: start brand activity intent
-        //Intent signInIntent = new Intent(this,BrandActivity.class);
-        //startActivity(signInIntent);
+        Intent signInIntent = new Intent(this,BrandActivity.class);
+        startActivity(signInIntent);
         Toast.makeText(getApplicationContext(), "TODO: redirect to 'Brand Activity'", Toast.LENGTH_SHORT).show();
     }
 

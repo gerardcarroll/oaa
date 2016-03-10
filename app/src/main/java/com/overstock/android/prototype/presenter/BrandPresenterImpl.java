@@ -21,6 +21,8 @@ import rx.subscriptions.Subscriptions;
  * @author LeeMeehan Created on 07-Mar-16.
  */
 public class BrandPresenterImpl implements BrandPresenter {
+  private static final String TAG = BrandPresenterImpl.class.getName();
+
   private Subscription subscription = Subscriptions.empty();
 
   private BrandView brandView;
@@ -35,7 +37,12 @@ public class BrandPresenterImpl implements BrandPresenter {
   @Override
   public void setView(final BrandView brandView) {
     this.brandView = brandView;
-    refresh();
+    if (brandView == null) {
+      subscription.unsubscribe();
+    }
+    else {
+      refresh();
+    }
   }
 
   @Override
@@ -49,21 +56,21 @@ public class BrandPresenterImpl implements BrandPresenter {
 
   public void refresh() {
 
-    productDataService.getBestSellers().subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Observer<ProductsResponse>() {
+    subscription = productDataService.getBestSellers().subscribeOn(Schedulers.newThread())
+        .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ProductsResponse>() {
           @Override
           public void onCompleted() {
-            Log.i("COMPLETED", "Finished loading Best Sellers");
+            Log.d(TAG, "ProductDataService.GetProduct has no more data to emit.");
           }
 
           @Override
           public void onError(Throwable e) {
-            Log.i("FAILURE", "Failed to load Best Sellers");
+            Log.e(TAG, "Error on subscribing to ProductDataService.GetProducts");
           }
 
           @Override
           public void onNext(ProductsResponse productsResponse) {
-            Log.i("SUCCESS", "Best Sellers successfully loaded");
+            Log.d(TAG, "Next value on subscribing to ProductDataService.GetProducts");
             brandView.displayBestSellers((ArrayList<Product>) productsResponse.getProducts().getProductsList());
           }
         });
