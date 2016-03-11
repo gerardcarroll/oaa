@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OAppPrototype</string>
+    <string name="app_name">O.com App Prototype</string>
     <string name="app_title">O.com App</string>
 
     <string name="home_page_label" translatable="false">O.com App</string>

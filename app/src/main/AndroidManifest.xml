@@ -24,7 +24,7 @@
         <activity
             android:name=".activity.CommunitiesActivity"
             android:label="Communities"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.Test" />
         <activity
             android:name=".activity.YourInterestsActivity"
             android:label="@string/title_activity_your_interests"

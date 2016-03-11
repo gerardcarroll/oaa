@@ -1,5 +1,8 @@
 package com.overstock.android.prototype.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,26 +18,24 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.Bind;
+import butterknife.BindInt;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 import com.dd.processbutton.iml.SubmitProcessButton;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.CommunitiesAdapter;
 import com.overstock.android.prototype.models.Community;
 import com.overstock.android.prototype.presenter.CommunitiesPresenter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.Bind;
-import butterknife.BindInt;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import icepick.Icepick;
 import icepick.State;
 
 /**
  * Created by rconnolly on 2/29/2016.
  */
-public class CommunitiesActivity extends AppCompatActivity implements CommunitiesMvpView{
+public class CommunitiesActivity extends AppCompatActivity implements CommunitiesMvpView {
 
   private static final int ONE_HUNDRED = 100;
 
@@ -66,8 +67,8 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
   private CollapsingToolbarLayout collapsingToolbarLayout = null;
 
   public CommunitiesActivity() {
-      communitiesPresenter = new CommunitiesPresenter(this);
-      communitiesPresenter.attachedView(this);
+    communitiesPresenter = new CommunitiesPresenter(this);
+    communitiesPresenter.attachedView(this);
   }
 
   @Override
@@ -88,7 +89,7 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
     setSupportActionBar(toolbar);
     setTitle("");
 
-    android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+    final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
 
     collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
     collapsingToolbarLayout.setTitle(getString(R.string.communities_activity_title));
@@ -111,13 +112,15 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
       @Override
       public void onDataChanged(final int size) {
 
-        int progress = Math.min((int)Math.ceil(((double)size  /  minSelectedCommunities) * ONE_HUNDRED),ONE_HUNDRED);
+        final int progress = Math.min((int) Math.ceil(((double) size / minSelectedCommunities) * ONE_HUNDRED),
+          ONE_HUNDRED);
         progressButton.setProgress(progress);
 
         if (progressButton.getProgress() == ONE_HUNDRED) {
           progressButton.setEnabled(true);
 
-          progressButton.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.continue_btn_bounce));
+          progressButton
+              .startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.continue_btn_bounce));
           progressButton.setAlpha(1f);
         }
         else {
@@ -131,10 +134,11 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
   @OnClick(R.id.btnCommunitySelection)
   public void btnCommunitiesSelected() {
     final Intent intent = new Intent(this, YourInterestsActivity.class);
-    ActivityOptions options = ActivityOptions.makeScaleUpAnimation(progressButton, 0, 0, progressButton.getWidth(), progressButton.getHeight());
-    startActivity(intent, options.toBundle());
+    final ActivityOptions options = ActivityOptions.makeScaleUpAnimation(progressButton, 0, 0,
+      progressButton.getWidth(), progressButton.getHeight());
+    //startActivity(intent, options.toBundle());
+      startActivity(intent);
   }
-
 
   @Override
   public boolean onCreateOptionsMenu(final Menu menu) {
@@ -163,7 +167,7 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
   }
 
   @Override
-  public void showCommunities(List<Community> communities){
+  public void showCommunities(final List<Community> communities) {
     // Instantiate the CommunitiesAdapter
     // Instantiate Recycler View
     communitiesAdapter.setData(communities);
@@ -178,4 +182,3 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
     setupOnDataChangeListener();
   }
 }
-
