@@ -43,7 +43,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
   @Override
   public void onBindViewHolder(final ProductViewHolder holder, int position) {
     final Product product = products.get(position);
+
     String imageUrl = String.format(baseImageUrl + product.getImageMedium1());
+
     holder.productNameTxt.setText(product.getName());
     String currencyCode = Currency.getInstance(Locale.US).getSymbol();
     holder.productPriceTxt.setText(currencyCode + product.getMemberPrice().toString());
