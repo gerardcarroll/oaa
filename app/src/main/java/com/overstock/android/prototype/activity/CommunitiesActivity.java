@@ -102,7 +102,6 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
         progressButton.setEnabled(true);
       }
     }
-
   }
 
   private void setupOnDataChangeListener() {
@@ -136,8 +135,7 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
     final Intent intent = new Intent(this, YourInterestsActivity.class);
     final ActivityOptions options = ActivityOptions.makeScaleUpAnimation(progressButton, 0, 0,
       progressButton.getWidth(), progressButton.getHeight());
-    //startActivity(intent, options.toBundle());
-      startActivity(intent);
+    startActivity(intent, options.toBundle());
   }
 
   @Override
