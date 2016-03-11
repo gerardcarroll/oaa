@@ -2,22 +2,23 @@ package com.overstock.android.prototype.main;
 
 import android.app.Application;
 
-import com.overstock.android.prototype.component.DIComponent;
-import com.overstock.android.prototype.component.DaggerDIComponent;
+import com.overstock.android.prototype.component.ApplicationComponent;
 
 /**
  * @author LeeMeehan Created on 03-Mar-16.
  */
 public class OAppPrototypeApplication extends Application {
-    DIComponent component;
+
+    ApplicationComponent component;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        component = DaggerDIComponent.builder().build();
+        //Dagger init
+        component = ApplicationComponent.Initializer.init(this);
     }
 
-    public DIComponent getComponent() {
+    public ApplicationComponent getComponent() {
         return component;
     }
 }

@@ -18,15 +18,15 @@ public class CommunitiesPresenter {
 
   private Context context;
 
-  public CommunitiesPresenter(Context context) {
+  public CommunitiesPresenter(final Context context) {
     this.context = context;
   }
 
-  public void attachedView(CommunitiesMvpView communitiesMvpView) {
+  public void attachedView(final CommunitiesMvpView communitiesMvpView) {
     this.communitiesMvpView = communitiesMvpView;
   };
 
-  public void detachView(CommunitiesMvpView communitiesMvpView) {
+  public void detachView(final CommunitiesMvpView communitiesMvpView) {
     this.communitiesMvpView = null;
   };
 
