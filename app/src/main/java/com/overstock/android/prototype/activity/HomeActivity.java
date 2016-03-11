@@ -23,5 +23,4 @@ public class HomeActivity extends AppCompatActivity {
       getSupportFragmentManager().beginTransaction().add(R.id.home_activity, homeFragment).commit();
     }
   }
-
 }

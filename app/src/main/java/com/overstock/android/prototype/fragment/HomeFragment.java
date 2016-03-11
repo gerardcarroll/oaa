@@ -3,6 +3,7 @@ package com.overstock.android.prototype.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,8 @@ import butterknife.OnClick;
  */
 public class HomeFragment extends Fragment {
 
-    @Inject GoogleFederatedIdentityFragment googleFederatedIdentityFragment;
+    @Inject
+    GoogleFederatedIdentityFragment googleFederatedIdentityFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,7 +36,7 @@ public class HomeFragment extends Fragment {
     }
 
     @OnClick(R.id.googlePlus_login_btn)
-    public void googlePlusLogin_onClick(){
+    public void googlePlusLogin_onClick() {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.home_activity, googleFederatedIdentityFragment);
         fragmentTransaction.addToBackStack(null);
@@ -43,14 +45,17 @@ public class HomeFragment extends Fragment {
     }
 
     @OnClick(R.id.facebook_login_btn)
-    public void faceBookLogin_onClick(){
-        Toast.makeText(getActivity(), "FaceBook Login Coming Soon!", Toast.LENGTH_LONG).show();
+    public void faceBookLogin_onClick() {
+        final Toast toast = Toast.makeText(getActivity(), "FaceBook Login Coming Soon!", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.BOTTOM, 0, 0);
+        toast.show();
     }
 
     @OnClick(R.id.guest_login_btn)
-    public void guestLogin_onClick(){
-        Toast.makeText(getActivity(), "Guest Login Coming Soon!", Toast.LENGTH_LONG).show();
+    public void guestLogin_onClick() {
+        final Toast toast = Toast.makeText(getActivity(), "Guest Login Coming Soon!", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.BOTTOM, 0, 0);
+        toast.show();
     }
-
 
 }

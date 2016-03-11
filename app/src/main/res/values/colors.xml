@@ -19,6 +19,11 @@
     <color name="colorPrimaryDark">#D32F2F</color>
     <color name="colorAccent">#009688</color>
 
+    <!--Finola's colors -->
+    <!--<color name="colorPrimary">#2196F3</color>-->
+    <!--<color name="colorPrimaryDark">#1976D2</color>-->
+    <!--<color name="colorAccent">#EA80FC</color>-->
+
     <color name="colorPrimaryTransparent">#BFF44336</color>
     <color name="transparent">#80000000</color>
 
@@ -31,6 +36,8 @@
     <color name="googlePlusRedPrimary">#d34836</color>
     <color name="googlePlusRedPrimaryLight">#EC6D5C</color>
     <color name="googlePlusRed_75_Percent_Transparent">#BFd34836</color>
+
+    <color name="white_Transparent">#CCFFFFFF</color>
 
     <color name="blue_grey_500">#607D8B</color>
     <color name="blue_grey_600">#546E7A</color>
