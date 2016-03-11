@@ -1,6 +1,5 @@
 package com.overstock.android.prototype;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.support.test.filters.SdkSuppress;
@@ -20,27 +19,19 @@ import static android.support.test.InstrumentationRegistry.getInstrumentation;
 /**
  * Created by finolacurran on 3/8/2016.
  */
-
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 18)
-
 public class CommunitiesOnBoardingTest {
 
     private static final String OApp_PACKAGE
             = "com.overstock.android.prototype";
-
-
     private UiDevice mDevice;
-
-
 
     private static final int TIMEOUT = 5000;
     private static final String STRING_TO_BE_TYPED = "UiAutomator";
 
-
     @Test
     public void startMainActivityFromHomeScreen(){
-
 
         // Start from the home screen
         mDevice.pressHome();
@@ -104,11 +95,9 @@ public class CommunitiesOnBoardingTest {
 
         // Launch a simple OAppPrototype app
         Context context = getInstrumentation().getContext();
-        Intent intent = context.getPackageManager()
-                .getLaunchIntentForPackage(OApp_PACKAGE);
+
+        Intent intent = context.getPackageManager() .getLaunchIntentForPackage(OApp_PACKAGE);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-       }
-
     }
-
+}

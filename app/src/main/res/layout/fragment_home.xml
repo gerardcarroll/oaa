@@ -34,6 +34,7 @@
             android:background="@color/facebookBluePrimaryDark"
             android:elevation="@dimen/button_elevation"
             android:text="@string/faceBook_connect"
+            android:contentDescription="@string/faceBook_connect"
             android:textColor="@android:color/background_light"
             android:typeface="normal"/>
 
@@ -45,6 +46,7 @@
             android:background="@color/googlePlusRedPrimary"
             android:elevation="@dimen/button_elevation"
             android:text="@string/google_connect"
+            android:contentDescription="@string/google_connect"
             android:textColor="@android:color/background_light"
             android:typeface="normal"/>
 
@@ -56,6 +58,7 @@
             android:background="@android:color/transparent"
             android:elevation="@dimen/button_elevation"
             android:text="@string/guest_connect"
+            android:contentDescription="@string/guest_connect"
             android:textColor="@android:color/background_light"
             android:typeface="normal"/>
 
