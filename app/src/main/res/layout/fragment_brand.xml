@@ -149,7 +149,8 @@
                 android:layout_gravity="left"
                 android:text="Best Sellers"
                 android:textSize="20sp"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:id="@+id/tvBestSellers" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/best_sellers"
@@ -164,7 +165,8 @@
                 android:layout_gravity="left"
                 android:text="New Arrivals"
                 android:textSize="20sp"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:id="@+id/tvNewArrivals" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/new_arrivals"

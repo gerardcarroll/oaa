@@ -1,6 +1,5 @@
 package com.overstock.android.prototype.activity;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -132,8 +131,7 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
   @OnClick(R.id.btnCommunitySelection)
   public void btnCommunitiesSelected() {
     final Intent intent = new Intent(this, YourInterestsActivity.class);
-    ActivityOptions options = ActivityOptions.makeScaleUpAnimation(progressButton, 0, 0, progressButton.getWidth(), progressButton.getHeight());
-    startActivity(intent, options.toBundle());
+    startActivity(intent);
   }
 
 
