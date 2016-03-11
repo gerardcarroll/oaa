@@ -23,6 +23,7 @@ import static android.support.test.InstrumentationRegistry.getInstrumentation;
 
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 18)
+
 public class CommunitiesOnBoardingTest {
 
     private static final String OApp_PACKAGE
@@ -44,47 +45,55 @@ public class CommunitiesOnBoardingTest {
         // Start from the home screen
         mDevice.pressHome();
 
-
+        // Click the OApp icon
         UiObject2 OAppPrototypeApp = mDevice.findObject(By.text("OAppPrototype"));
         OAppPrototypeApp.click();
 
-        // Wait till the Login buttons are on the screen
-        //mDevice.wait(Until.hasObject(By.text("Connect with G+")), 10000);
+        //Wait until the G+ Login buttons are on the screen
+        mDevice.wait(Until.hasObject(By.text("Connect with G+")), 4000);
 
-        UiObject2 ConnectWithGplus =  OAppPrototypeApp.findObject(By.res("com.overstock.android.prototype","id:googlePlus_login_btn"));
-        Assert.assertNotNull(ConnectWithGplus);
+        // Click Connect with G+
+        UiObject2 ConnectWithGplus = mDevice.findObject(By.text("Connect with G+"));
         ConnectWithGplus.click();
 
-//        UiObject ConnectWithGplus = new UiObject(new UiSelector().text("Connect with G+"));
- //       ConnectWithGplus.click();
+        //Wait until the Communities Link are on the screen on Your Interests Page
+        mDevice.wait(Until.hasObject(By.text("Communities Link")), 4000);
 
-//        mDevice.findObject(new UiSelector()
-//                .packageName(OApp_PACKAGE).text("OAppPrototype")).click();
+        // Click Communities Link
+        UiObject2 CommunitiesLink = mDevice.findObject(By.text("Communities Link"));
+        Assert.assertNotNull(CommunitiesLink);
+        CommunitiesLink.click();
 
-//        mDevice.findObject(new UiSelector()
-//                .packageName(OApp_PACKAGE).resourceId("com.overstock.android.prototype:id/googlePlus_login_btn")).click();
-//
+        //Wait until the recyclerview is on the screen.  It has TextView Men.
+        mDevice.wait(Until.hasObject(By.text("Men")), 4000);
+
+        // click community women
+        UiObject2 CommunityMen = mDevice.findObject(By.text("Men"));
+        CommunityMen.click();
+
+        // click community
+        UiObject2 CommunityWomen = mDevice.findObject(By.text("Women"));
+        CommunityWomen.click();
+
+        // click community
+        UiObject2 CommunityHomeDecor = mDevice.findObject(By.text("Home Decor"));
+        CommunityHomeDecor.click();
+        // wait until the Continue button is there
+        mDevice.wait(Until.hasObject(By.text("Continue")), 3000);
+
+        // click continue button
+        UiObject2 PressContinue = mDevice.findObject(By.text("Continue"));
+        PressContinue.click();
+
+        // wait on the onboarding communities page
+        mDevice.wait(Until.hasObject(By.res("com.overstock.android.prototype", "btnCommunities")), 3000);
+
+        CommunitiesLink = mDevice.findObject(By.text("Communities Link"));
+        
+        //Wait until the Communities Link are on the screen on Your Interests Page
+        mDevice.wait(Until.hasObject(By.text("Communities Link")), 3000);
 
 
-
-//        // Wait for launcher
-//        final String launcherPackage = mDevice.getLauncherPackageName();
-//        assertThat(launcherPackage, notNullValue());
-//        mDevice.wait(Until.hasObject(By.pkg(launcherPackage).depth(0)),
-//                LAUNCH_TIMEOUT);
-//
-//        // Launch the app
-//        Context context = InstrumentationRegistry.getContext();
-//        final Intent intent = context.getPackageManager()
-//                .getLaunchIntentForPackage(OApp_PACKAGE);
-//
-//        // Clear out any previous instances
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        context.startActivity(intent);
-//
-//        // Wait for the app to appear
-//        mDevice.wait(Until.hasObject(By.pkg(OApp_PACKAGE).depth(0)),
-//                TIMEOUT);
     }
 
     @Before
@@ -99,11 +108,7 @@ public class CommunitiesOnBoardingTest {
                 .getLaunchIntentForPackage(OApp_PACKAGE);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-        // Clear out any previous instances
-        context.startActivity(intent);
-        mDevice.wait(Until.hasObject(By.pkg(OApp_PACKAGE).depth(0)), TIMEOUT);
-    }
-
+       }
 
     }
 
