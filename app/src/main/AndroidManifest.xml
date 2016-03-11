@@ -10,28 +10,28 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/OappTheme">
+
         <activity
             android:name=".activity.HomeActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity.BrandActivity"
-            android:label="Brand"
-            android:theme="@style/AppTheme"></activity>
+            android:label="@string/title_brand_activity"></activity>
         <activity
             android:name=".activity.CommunitiesActivity"
-            android:label="Communities"
-            android:theme="@style/AppTheme"/>
+            android:label="@string/title_activity_communities" />
         <activity
             android:name=".activity.YourInterestsActivity"
-            android:label="@string/title_activity_your_interests"
-            android:theme="@style/AppTheme"></activity>
+            android:label="@string/title_activity_your_interests"/>
+
     </application>
 
 </manifest>
