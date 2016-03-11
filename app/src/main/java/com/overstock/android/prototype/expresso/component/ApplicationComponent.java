@@ -1,9 +1,7 @@
-package com.overstock.android.prototype.component;
+package com.overstock.android.prototype.expresso.component;
 
 import android.app.Application;
 
-import com.overstock.android.prototype.fragment.BrandFragment;
-import com.overstock.android.prototype.models.ProductDataService;
 import com.overstock.android.prototype.module.ApplicationModule;
 import com.overstock.android.prototype.module.scope.ApplicationScope;
 
@@ -14,11 +12,7 @@ import dagger.Component;
  */
 @ApplicationScope
 @Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
-
-    void inject(final BrandFragment brandFragment);
-
-    void inject(final ProductDataService productDataService);
+public interface ApplicationComponent extends ApplicationInject{
 
     public final static class Initializer{
         public static ApplicationComponent init(Application application){

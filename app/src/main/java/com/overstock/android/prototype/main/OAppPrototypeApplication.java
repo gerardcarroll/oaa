@@ -2,7 +2,7 @@ package com.overstock.android.prototype.main;
 
 import android.app.Application;
 
-import com.overstock.android.prototype.component.ApplicationComponent;
+import com.overstock.android.prototype.expresso.component.ApplicationComponent;
 
 /**
  * @author LeeMeehan Created on 03-Mar-16.

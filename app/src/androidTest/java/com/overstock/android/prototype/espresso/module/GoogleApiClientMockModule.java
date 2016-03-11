@@ -1,4 +1,4 @@
-package com.overstock.android.prototype.module;
+package com.overstock.android.prototype.espresso.module;
 
 import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
@@ -7,7 +7,7 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.overstock.android.prototype.activity.HomeActivity;
-import com.overstock.android.prototype.module.scope.PerActivity;
+import com.overstock.android.prototype.module.scope.ActivityScope;
 
 import dagger.Provides;
 
@@ -29,7 +29,7 @@ public class GoogleApiClientMockModule{
         mHomeActivity =  homeActivity;
     }
 
-    @PerActivity
+    @ActivityScope
     @Provides
     public GoogleSignInOptions provideGoogleSignInOptions() {
         return new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -38,7 +38,7 @@ public class GoogleApiClientMockModule{
                 .build();
     }
 
-    @PerActivity
+    @ActivityScope
     @Provides
     public GoogleApiClient providesGoogleApiClient(GoogleSignInOptions googleSignInOptions) {
         return new GoogleApiClient

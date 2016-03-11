@@ -1,4 +1,4 @@
-package com.overstock.android.prototype.component;
+package com.overstock.android.prototype.expresso.component;
 
 import com.overstock.android.prototype.activity.HomeActivity;
 import com.overstock.android.prototype.fragment.HomeFragment;
