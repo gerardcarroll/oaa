@@ -9,8 +9,6 @@ import com.overstock.android.prototype.module.scope.ApplicationScope;
 import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.presenter.BrandPresenterImpl;
 
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 
@@ -28,25 +26,21 @@ public class ApplicationModule {
   }
 
   @Provides
-  @Singleton
   Application providesApplication(){
     return application;
   }
 
   @Provides
-  @Singleton
   public BrandPresenter brandPresenter(final ProductDataService productDataService) {
     return new BrandPresenterImpl(productDataService);
   }
 
   @Provides
-  @Singleton
   public ProductDataService productDataService(final ProductService productService){
     return new ProductDataService(productService);
   }
 
   @Provides
-  @Singleton
   public ProductService productService() {
     return TheOAppClient.getClient();
   }
