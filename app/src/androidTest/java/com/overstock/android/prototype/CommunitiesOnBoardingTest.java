@@ -89,7 +89,7 @@ public class CommunitiesOnBoardingTest {
         mDevice.wait(Until.hasObject(By.res("com.overstock.android.prototype", "btnCommunities")), 3000);
 
         CommunitiesLink = mDevice.findObject(By.text("Communities Link"));
-        
+
         //Wait until the Communities Link are on the screen on Your Interests Page
         mDevice.wait(Until.hasObject(By.text("Communities Link")), 3000);
 
