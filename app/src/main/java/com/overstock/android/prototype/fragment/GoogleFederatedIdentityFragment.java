@@ -9,40 +9,46 @@ import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.activity.HomeActivity;
 import com.overstock.android.prototype.activity.YourInterestsActivity;
+import com.overstock.android.prototype.component.GoogleApiClientComponent;
+
+import javax.inject.Inject;
 
 /**
  * @author itowey
  *
  * Fragment used to allow sign-in using google login api
  */
-public class GoogleFederatedIdentityFragment extends Fragment  {
+public class GoogleFederatedIdentityFragment extends Fragment   {
 
     private static final String TAG = GoogleFederatedIdentityFragment.class.getName();
     private static final int RC_SIGN_IN = 9001;
 
     private ProgressDialog mProgressDialog;
-    private GoogleApiClient mGoogleApiClient;
+
+    @Inject GoogleApiClient mGoogleApiClient;
 
     public GoogleFederatedIdentityFragment () {
+    }
+
+    private void daggerInit(){
+
+        GoogleApiClientComponent googleApiClientComponent = GoogleApiClientComponent.Initializer.init(
+            (HomeActivity)this.getActivity()
+        );
+        googleApiClientComponent.inject(this);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .requestProfile()
-                .build();
-        mGoogleApiClient = new GoogleApiClient.Builder(this.getContext())
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
+        daggerInit();
         signIn();
     }
 

@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.component.HomeActivityComponent;
 
 import javax.inject.Inject;
 
@@ -21,18 +21,22 @@ import butterknife.OnClick;
  */
 public class HomeFragment extends Fragment {
 
+    @Inject GoogleFederatedIdentityFragment googleFederatedIdentityFragment;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, rootView);
+        //Dagger init
+        HomeActivityComponent.Initializer.init().inject(this);
         return rootView;
     }
 
     @OnClick(R.id.googlePlus_login_btn)
     public void googlePlusLogin_onClick(){
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.home_activity, new GoogleFederatedIdentityFragment());
+        fragmentTransaction.add(R.id.home_activity, googleFederatedIdentityFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
