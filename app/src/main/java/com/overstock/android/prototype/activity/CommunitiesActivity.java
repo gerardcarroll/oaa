@@ -20,6 +20,7 @@ import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.CommunitiesAdapter;
 import com.overstock.android.prototype.models.Community;
 import com.overstock.android.prototype.presenter.CommunitiesPresenter;
+import com.overstock.android.prototype.view.CommunitiesMvpView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,7 @@ import icepick.State;
 /**
  * Created by rconnolly on 2/29/2016.
  */
-public class CommunitiesActivity extends AppCompatActivity implements CommunitiesMvpView{
+public class CommunitiesActivity extends AppCompatActivity implements CommunitiesMvpView {
 
   private static final int ONE_HUNDRED = 100;
 

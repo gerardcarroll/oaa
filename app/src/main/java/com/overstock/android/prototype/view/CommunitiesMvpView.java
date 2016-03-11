@@ -1,4 +1,4 @@
-package com.overstock.android.prototype.activity;
+package com.overstock.android.prototype.view;
 
 import com.overstock.android.prototype.models.Community;
 
