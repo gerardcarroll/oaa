@@ -28,6 +28,7 @@ import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.CommunitiesAdapter;
 import com.overstock.android.prototype.models.Community;
 import com.overstock.android.prototype.presenter.CommunitiesPresenter;
+import com.overstock.android.prototype.view.CommunitiesMvpView;
 
 import icepick.Icepick;
 import icepick.State;

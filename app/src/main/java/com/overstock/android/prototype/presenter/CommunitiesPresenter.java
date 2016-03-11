@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.activity.CommunitiesMvpView;
+import com.overstock.android.prototype.view.CommunitiesMvpView;
 import com.overstock.android.prototype.models.Community;
 
 /**
