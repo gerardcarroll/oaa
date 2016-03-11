@@ -9,43 +9,53 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.component.HomeActivityComponent;
+
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import com.overstock.android.prototype.R;
 
 /**
  * @author LeeMeehan
  */
 public class HomeFragment extends Fragment {
 
-  @Override
-  public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-    final View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-    ButterKnife.bind(this, rootView);
-    return rootView;
-  }
+    @Inject
+    GoogleFederatedIdentityFragment googleFederatedIdentityFragment;
 
-  @OnClick(R.id.googlePlus_login_btn)
-  public void googlePlusLogin_onClick() {
-    final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-    fragmentTransaction.add(R.id.home_activity, new GoogleFederatedIdentityFragment());
-    fragmentTransaction.addToBackStack(null);
-    fragmentTransaction.commit();
-  }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        ButterKnife.bind(this, rootView);
+        //Dagger init
+        HomeActivityComponent.Initializer.init().inject(this);
+        return rootView;
+    }
 
-  @OnClick(R.id.facebook_login_btn)
-  public void faceBookLogin_onClick() {
-    final Toast toast = Toast.makeText(getActivity(), "FaceBook Login Coming Soon!", Toast.LENGTH_SHORT);
-    toast.setGravity(Gravity.BOTTOM, 0, 0);
-    toast.show();
-  }
+    @OnClick(R.id.googlePlus_login_btn)
+    public void googlePlusLogin_onClick() {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.home_activity, googleFederatedIdentityFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
 
-  @OnClick(R.id.guest_login_btn)
-  public void guestLogin_onClick() {
-    final Toast toast = Toast.makeText(getActivity(), "Guest Login Coming Soon!", Toast.LENGTH_SHORT);
-    toast.setGravity(Gravity.BOTTOM, 0, 0);
-    toast.show();
-  }
+    }
+
+    @OnClick(R.id.facebook_login_btn)
+    public void faceBookLogin_onClick() {
+        final Toast toast = Toast.makeText(getActivity(), "FaceBook Login Coming Soon!", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.BOTTOM, 0, 0);
+        toast.show();
+    }
+
+    @OnClick(R.id.guest_login_btn)
+    public void guestLogin_onClick() {
+        final Toast toast = Toast.makeText(getActivity(), "Guest Login Coming Soon!", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.BOTTOM, 0, 0);
+        toast.show();
+    }
 
 }
