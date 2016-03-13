@@ -2,17 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
 android {
-    signingConfigs {
-        debug {
-            keyAlias 'oappprototype'
-            keyPassword 'android'
-            storeFile file('oapp_prototype_key.keystore')
-            storePassword 'android'
-        }
-    }
-
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
     defaultConfig {
         applicationId "com.overstock.android.prototype"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -21,9 +10,40 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    lintOptions{
+        checkReleaseBuilds false // TODO remove
+        abortOnError false // TODO remove
+    }
+
+    signingConfigs {
+        release {
+            keyAlias 'oapp_proto_rel'
+            keyPassword System.getenv("KEY_PASSWORD")
+            storeFile file('oapp_prototype_release.jks')
+            storePassword System.getenv("STORE_PASSWORD")
+        }
+        debug {
+            keyAlias 'oappprototype'
+            keyPassword 'android'
+            storeFile file('oapp_prototype_key.keystore')
+            storePassword 'android'
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            // minifyEnabled true TODO uncomment
+            shrinkResources true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.debug
+            versionNameSuffix "-dev"
+            applicationIdSuffix ".debug"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -64,4 +84,4 @@ dependencies {
 }
 
 
-apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services't
