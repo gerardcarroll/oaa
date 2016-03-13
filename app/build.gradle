@@ -84,4 +84,4 @@ dependencies {
 }
 
 
-apply plugin: 'com.google.gms.google-services't
+apply plugin: 'com.google.gms.google-services'
