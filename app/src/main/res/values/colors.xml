@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Start:Oapp color palette-->
+    <color name="oapp_primary_500">#03A9F4</color>
+    <color name="oapp_primary_dark_700">#0288D1</color>
+    <color name="oapp_primary_light_300">#B3E5FC</color>
+    <color name="oapp_accent_a200">#ffd948</color>
+    <color name="oapp_accent_light_a100">#FFD57F</color>
+    <color name="oapp_accent_dark_a300">#ffd813</color>
+    <color name="oapp_primary_text">#212121</color>
+    <color name="oapp_secondary_text">#727272</color>
+    <color name="oapp_icons">#FFFFFF</color>
+    <color name="oapp_divider">#B6B6B6</color>
+
+    <!-- End:Oapp color palette-->
+
     <color name="colorPrimary">#F44336</color>
     <color name="colorPrimaryDark">#D32F2F</color>
     <color name="colorAccent">#009688</color>

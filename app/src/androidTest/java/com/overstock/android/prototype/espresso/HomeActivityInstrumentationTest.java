@@ -1,4 +1,16 @@
-package com.overstock.android.prototype;
+package com.overstock.android.prototype.espresso;
+
+import android.app.Instrumentation;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.rule.ActivityTestRule;
+
+import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.activity.HomeActivity;
+import com.overstock.android.prototype.espresso.matcher.CustomMatcher;
+
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -7,14 +19,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
-import org.junit.Rule;
-import org.junit.Test;
-
-import android.support.test.rule.ActivityTestRule;
-
-import com.overstock.android.prototype.activity.HomeActivity;
-import com.overstock.android.prototype.matcher.CustomMatcher;
-
 /**
  * @author LeeMeehan Created on 01-Mar-16.
  */
@@ -22,6 +26,11 @@ public class HomeActivityInstrumentationTest {
 
   @Rule
   public ActivityTestRule<HomeActivity> activityTestRule = new ActivityTestRule<HomeActivity>(HomeActivity.class);
+
+  @Before
+  public void setUp(){
+    Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
+  }
 
   @Test
   public void validateFaceBookLoginButtonClicked() {

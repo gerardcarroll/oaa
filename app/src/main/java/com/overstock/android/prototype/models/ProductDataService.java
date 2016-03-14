@@ -1,14 +1,12 @@
 package com.overstock.android.prototype.models;
 
+import android.util.Log;
+
 import com.overstock.android.prototype.interfaces.ProductService;
 
 import javax.inject.Inject;
 
 import rx.Observable;
-
-import android.util.Log;
-
-import com.overstock.android.prototype.interfaces.ProductService;
 
 /**
  * @author LeeMeehan, RayConnolly Created on 09-Mar-16.
