@@ -45,12 +45,11 @@ dependencies {
     testCompile 'org.robolectric:shadows-play-services:3.0'
     testCompile 'org.robolectric:shadows-maps:3.0'
     testCompile 'org.robolectric:shadows-httpclient:3.0'
-
+    
     apt 'com.google.dagger:dagger-compiler:2.0.2'
     provided 'org.glassfish:javax.annotation:10.0-b28'
     apt 'com.github.frankiesardo:auto-parcel-processor:0.3.1'
     provided 'frankiesardo:icepick-processor:3.2.0'
-
     // Dependency for Google Sign-In
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.android.support:support-v4:23.2.0'
