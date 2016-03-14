@@ -1,4 +1,4 @@
-package com.overstock.android.prototype;
+package com.overstock.android.prototype.espresso;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

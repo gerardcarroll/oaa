@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.component.HomeActivityComponent;
+import com.overstock.android.prototype.expresso.component.HomeActivityComponent;
 import com.overstock.android.prototype.fragment.HomeFragment;
 
 import javax.inject.Inject;

@@ -17,7 +17,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.HomeActivity;
 import com.overstock.android.prototype.activity.YourInterestsActivity;
-import com.overstock.android.prototype.component.GoogleApiClientComponent;
+import com.overstock.android.prototype.expresso.component.GoogleApiClientComponent;
 
 import javax.inject.Inject;
 

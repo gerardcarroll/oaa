@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.component.HomeActivityComponent;
+import com.overstock.android.prototype.expresso.component.HomeActivityComponent;
 
 import javax.inject.Inject;
 

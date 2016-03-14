@@ -1,11 +1,12 @@
-package com.overstock.android.prototype;
+package com.overstock.android.prototype.espresso;
 
 import android.app.Instrumentation;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 
+import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.HomeActivity;
-import com.overstock.android.prototype.matcher.CustomMatcher;
+import com.overstock.android.prototype.espresso.matcher.CustomMatcher;
 
 import org.junit.Before;
 import org.junit.Rule;
