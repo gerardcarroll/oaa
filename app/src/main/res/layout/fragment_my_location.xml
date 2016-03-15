@@ -1,0 +1,16 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.overstock.android.prototype.fragment.MyLocationFragment">
+
+    <TextView
+        android:id="@+id/feed_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/my_location_fragment"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"
+        style="@style/TextAppearance.AppCompat.Title" />
+
+</FrameLayout>
