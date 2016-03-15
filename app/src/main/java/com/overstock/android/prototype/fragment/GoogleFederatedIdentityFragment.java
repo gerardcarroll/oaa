@@ -15,8 +15,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.activity.FeedActivity;
 import com.overstock.android.prototype.activity.HomeActivity;
-import com.overstock.android.prototype.activity.YourInterestsActivity;
 import com.overstock.android.prototype.expresso.component.GoogleApiClientComponent;
 
 import javax.inject.Inject;
@@ -105,7 +105,7 @@ public class GoogleFederatedIdentityFragment extends Fragment {
             toast.setGravity(Gravity.BOTTOM, 0, 0);
             toast.show();
 
-            final Intent signInIntent = new Intent(getActivity(), YourInterestsActivity.class);
+            final Intent signInIntent = new Intent(getActivity(), FeedActivity.class);
             startActivity(signInIntent);
         } else {
             Toast.makeText(this.getContext(), "Not logged in", Toast.LENGTH_SHORT).show();

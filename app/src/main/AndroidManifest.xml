@@ -24,13 +24,18 @@
 
         <activity
             android:name=".activity.BrandActivity"
-            android:label="@string/title_brand_activity"></activity>
+            android:label="@string/title_brand_activity">
+        </activity>
+
         <activity
             android:name=".activity.CommunitiesActivity"
-            android:label="@string/title_activity_communities" />
+            android:label="@string/title_activity_communities" >
+        </activity>
+
         <activity
-            android:name=".activity.YourInterestsActivity"
-            android:label="@string/title_activity_your_interests"/>
+            android:name=".activity.FeedActivity"
+            android:label="@string/feed_activity">
+        </activity>
 
     </application>
 
