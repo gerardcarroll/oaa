@@ -10,9 +10,7 @@ import com.overstock.android.prototype.R;
 
 public class TrendingFragment extends Fragment {
 
-    public TrendingFragment() {
-        // Required empty public constructor
-    }
+    public TrendingFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,7 +20,6 @@ public class TrendingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_trending, container, false);
     }
 }
