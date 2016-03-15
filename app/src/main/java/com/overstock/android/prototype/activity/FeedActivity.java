@@ -1,8 +1,6 @@
 package com.overstock.android.prototype.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,7 +8,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.fragment.FeedFragment;
@@ -34,9 +31,6 @@ public class FeedActivity extends AppCompatActivity {
     @Bind(R.id.feed_tabs)
     TabLayout tabLayout;
 
-    @Bind(R.id.feed_fab)
-    FloatingActionButton fab;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,14 +44,6 @@ public class FeedActivity extends AppCompatActivity {
         setupViewPager(viewPager);
 
         tabLayout.setupWithViewPager(viewPager);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Testing out this auld fab / snackbar craic!", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     private void setupViewPager(ViewPager viewPager) {

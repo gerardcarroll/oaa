@@ -4,13 +4,28 @@
     android:layout_height="match_parent"
     tools:context="com.overstock.android.prototype.fragment.TrendingFragment">
 
-    <TextView
-        android:id="@+id/feed_title"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/trending_fragment"
-        android:textAlignment="center"
-        android:layout_marginTop="20dp"
-        style="@style/TextAppearance.AppCompat.Title" />
+        android:orientation="vertical"
+        android:layout_marginTop="40dp" >
+
+        <TextView
+            android:id="@+id/feed_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/trending_fragment"
+            android:textAlignment="center"
+            style="@style/TextAppearance.AppCompat.Title" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/trending_text"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:layout_marginTop="15dp"/>
+
+    </LinearLayout>
 
 </FrameLayout>

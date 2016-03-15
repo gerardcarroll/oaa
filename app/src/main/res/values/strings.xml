@@ -46,6 +46,9 @@
     <string name="trending_fragment">Trending Fragment</string>
     <string name="my_location_fragment">My Location Fragment</string>
 
+    <string name="my_location_text">You current location is Sligo, Ireland</string>
+    <string name="trending_text">These are the latest trending products...</string>
+
     <string name="title_brand_activity">Brand</string>
 
 
