@@ -22,9 +22,6 @@ import butterknife.OnClick;
  */
 public class HomeFragment extends Fragment {
 
-    @Inject
-    GoogleFederatedIdentityFragment googleFederatedIdentityFragment;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,7 +35,7 @@ public class HomeFragment extends Fragment {
     @OnClick(R.id.googlePlus_login_btn)
     public void googlePlusLogin_onClick() {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.home_activity, googleFederatedIdentityFragment);
+        fragmentTransaction.add(R.id.home_activity, new GoogleFederatedIdentityFragment());
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
