@@ -32,6 +32,10 @@
             android:name=".activity.YourInterestsActivity"
             android:label="@string/title_activity_your_interests"/>
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="372bb106d2b08c1397aca42017e7515e8c9afa4f" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
