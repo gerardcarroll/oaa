@@ -48,9 +48,9 @@ public class FeedActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new FeedFragment(), "MY FEED");
-        adapter.addFragment(new TrendingFragment(), "TRENDING");
-        adapter.addFragment(new MyLocationFragment(), "MY LOCATION");
+        adapter.addFragment(new FeedFragment(), getString(R.string.my_feed_tab));
+        adapter.addFragment(new TrendingFragment(), getString(R.string.trending_tab));
+        adapter.addFragment(new MyLocationFragment(), getString(R.string.my_location_tab));
 
         viewPager.setAdapter(adapter);
     }
