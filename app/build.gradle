@@ -2,17 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
 android {
-    signingConfigs {
-        debug {
-            keyAlias 'oappprototype'
-            keyPassword 'android'
-            storeFile file('oapp_prototype_key.keystore')
-            storePassword 'android'
-        }
-    }
-
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
     defaultConfig {
         applicationId "com.overstock.android.prototype"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -21,9 +10,40 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    lintOptions {
+        checkReleaseBuilds false // TODO remove
+        abortOnError false // TODO remove
+    }
+
+    signingConfigs {
+        release {
+            keyAlias 'oapp_proto_rel'
+            keyPassword System.getenv("KEY_PASSWORD")
+            storeFile file('oapp_prototype_release.jks')
+            storePassword System.getenv("STORE_PASSWORD")
+        }
+        debug {
+            keyAlias 'oappprototype'
+            keyPassword 'android'
+            storeFile file('oapp_prototype_key.keystore')
+            storePassword 'android'
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            // minifyEnabled true TODO uncomment
+            shrinkResources true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.debug
+            versionNameSuffix "-dev"
+            applicationIdSuffix ".debug"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -51,10 +71,7 @@ dependencies {
     apt 'com.github.frankiesardo:auto-parcel-processor:0.3.1'
     provided 'frankiesardo:icepick-processor:3.2.0'
     // Dependency for Google Sign-In
-    compile 'com.android.support:appcompat-v7:23.2.0'
-    compile 'com.android.support:support-v4:23.2.0'
-    compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.google.android.gms:play-services-auth:8.4.0'
+
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2') {
         // Necessary if your app targets Marshmallow (since Espresso
@@ -71,6 +88,12 @@ dependencies {
     androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
     androidTestCompile 'com.android.support:support-annotations:23.2.0'
 
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'com.android.support:appcompat-v7:23.2.0'
+    compile 'com.android.support:support-v4:23.2.0'
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.google.android.gms:play-services-auth:8.4.0'
     compile 'com.android.support:recyclerview-v7:23.2.0'
     compile 'com.android.support:cardview-v7:23.2.0'
     compile 'com.github.dmytrodanylyk.android-process-button:library:1.0.4'
@@ -81,10 +104,8 @@ dependencies {
     compile 'frankiesardo:icepick:3.2.0'
     compile 'com.android.support:design:23.2.0'
     compile 'com.android.support:palette-v7:23.2.0'
-    compile 'io.reactivex:rxandroid:1.1.0'
     compile 'com.google.code.gson:gson:2.4'
     compile 'io.reactivex:rxjava:1.1.1'
-    compile 'io.reactivex:rxandroid:1.1.0'
     compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'

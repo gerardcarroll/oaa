@@ -132,8 +132,7 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
 
   @OnClick(R.id.btnCommunitySelection)
   public void btnCommunitiesSelected() {
-    final Intent intent = new Intent(this, YourInterestsActivity.class);
-
+    final Intent intent = new Intent(this, FeedActivity.class);
     final ActivityOptions options = ActivityOptions.makeScaleUpAnimation(progressButton, 0, 0,
       progressButton.getWidth(), progressButton.getHeight());
     startActivity(intent, options.toBundle());
