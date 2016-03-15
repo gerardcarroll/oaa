@@ -1,3 +1,60 @@
 <resources>
-    <string name="app_name">OAppPrototype</string>
+    <string name="app_name">O.com App Prototype</string>
+    <string name="app_title">O.com App</string>
+
+    <string name="home_page_label" translatable="false">O.com App</string>
+    <string name="faceBook_connect">Connect with Facebook</string>
+    <string name="google_connect">Connect with G+</string>
+    <string name="guest_connect"><u>Continue As Guest</u></string>
+
+    <!-- GoogleSigninFragment string values-->
+    <string name="desc_google_icon">Google Logo</string>
+    <string name="title_text">Google Sign-In</string>
+    <string name="signed_out">Signed out</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="signed_in_fmt">Signed in as: %s</string>
+    <string name="loading">Loading…</string>
+
+    <string name="server_client_id">751274716012-ei5adcf6mg79hfj5i8s93isfimvareqt.apps.googleusercontent.com</string>
+    <string name="google_connect_failed">An unresolvable error has occurred and Google APIs (including Sign-In) will not be available.</string>
+    <string name="title_activity_category">CategoryActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="faceBook_login_toast">FaceBook Login Coming Soon!</string>
+    <string name="guest_login_toast">Guest Login Coming Soon!</string>
+
+
+    <!-- Community Activity Button -->
+    <string name="btn_community_default">Select 3 Communities</string>
+    <string name="btn_community_continue">Continue</string>
+
+    <!-- Tool Bar -->
+
+    <string name="action_refresh">Refresh</string>
+    <string name="communitiesToolbarText">Tap to add communities.</string>
+    <string name="feedToolbarText">Your Interests</string>
+    <string name="communities_activity">Communities Activity</string>
+    <string name="feed_activity">Feed Activity</string>
+    <string name="action_logout">Log Out</string>
+    <string name="communities_activity_title">Communities</string>
+    <string name="nfl_link">nfl_link</string>
+    <string name="communities_link">Communities Link</string>
+    <string name="home_activity">Home</string>
+    <string name="title_activity_communities">Communities</string>
+
+    <!-- Feed Activity Tabs -->
+    <string name="my_feed_tab">MY FEED</string>
+    <string name="trending_tab">TRENDING</string>
+    <string name="my_location_tab">MY LOCATION</string>
+
+    <!-- Feed Activity related Fragments text -->
+    <string name="feed_fragment">Feed Fragment</string>
+    <string name="trending_fragment">Trending Fragment</string>
+    <string name="trending_text">These are the latest trending products...</string>
+    <string name="my_location_fragment">My Location Fragment</string>
+    <string name="my_location_text">You current location is Sligo, Ireland</string>
+
+    <string name="title_brand_activity">Brand</string>
+
+
 </resources>

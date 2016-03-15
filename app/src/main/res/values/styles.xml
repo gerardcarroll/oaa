@@ -1,11 +1,55 @@
-<resources>
+<resources xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="OappTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Oapp , app wide color style. -->
+        <item name="colorPrimary">@color/oapp_primary_500</item>
+        <item name="colorPrimaryDark">@color/oapp_primary_dark_700</item>
+        <item name="colorAccent">@color/oapp_accent_a200</item>
+        <item name="android:buttonStyle">@style/OappButton</item>
+
+    </style>
+
+    <style name="OappTextView" >
+        <item name="android:background">@color/oapp_accent_a200</item>
+    </style>
+
+    <style name="OappButton" >
+        <item name="android:background">@drawable/oapp_button</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">5dp</item>
+    </style>
+
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <!-- Activity with no Title -->
+    <style name="ThemeOverlay.MyNoTitleActivity" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- Dark Buttons -->
+    <style name="ThemeOverlay.MyDarkButton" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="colorButtonNormal">@color/blue_grey_500</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="CheckBoxTheme" parent="Theme.AppCompat"/>
 
 </resources>
