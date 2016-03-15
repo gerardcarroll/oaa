@@ -24,14 +24,23 @@
 
         <activity
             android:name=".activity.BrandActivity"
-            android:label="@string/title_brand_activity"></activity>
+            android:label="@string/title_brand_activity">
+        </activity>
+
         <activity
             android:name=".activity.CommunitiesActivity"
-            android:label="@string/title_activity_communities" />
-        <activity
-            android:name=".activity.YourInterestsActivity"
-            android:label="@string/title_activity_your_interests"/>
+            android:label="@string/title_activity_communities" >
+        </activity>
 
+        <activity
+            android:name=".activity.FeedActivity"
+            android:label="@string/feed_activity">
+        </activity>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="372bb106d2b08c1397aca42017e7515e8c9afa4f" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

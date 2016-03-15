@@ -37,14 +37,23 @@
     <string name="feed_activity">Feed Activity</string>
     <string name="action_logout">Log Out</string>
     <string name="communities_activity_title">Communities</string>
-    <string name="title_activity_your_interests">YourInterestsActivity</string>
     <string name="nfl_link">nfl_link</string>
     <string name="communities_link">Communities Link</string>
     <string name="home_activity">Home</string>
     <string name="title_activity_communities">Communities</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Feed Activity Tabs -->
+    <string name="my_feed_tab">MY FEED</string>
+    <string name="trending_tab">TRENDING</string>
+    <string name="my_location_tab">MY LOCATION</string>
+
+    <!-- Feed Activity related Fragments text -->
+    <string name="feed_fragment">Feed Fragment</string>
+    <string name="trending_fragment">Trending Fragment</string>
+    <string name="trending_text">These are the latest trending products...</string>
+    <string name="my_location_fragment">My Location Fragment</string>
+    <string name="my_location_text">You current location is Sligo, Ireland</string>
+
     <string name="title_brand_activity">Brand</string>
 
 
