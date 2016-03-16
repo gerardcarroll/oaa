@@ -136,7 +136,7 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
   public void btnCommunitiesSelected() {
     final ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(this,
       R.transition.slide_in_vertical, R.transition.slide_out_vertical);
-    startActivity(new Intent(this, YourInterestsActivity.class), options.toBundle());
+    startActivity(new Intent(this, FeedActivity.class), options.toBundle());
   }
 
   @Override
