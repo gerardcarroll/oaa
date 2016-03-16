@@ -3,10 +3,10 @@ package com.overstock.android.prototype.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -84,6 +84,7 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
     setContentView(R.layout.activity_communities);
     Icepick.restoreInstanceState(this, savedInstanceState);
     ButterKnife.bind(this);
+
     communitiesAdapter = new CommunitiesAdapter(getApplicationContext());
 
     // Instantiate Toolbar
@@ -133,10 +134,9 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
 
   @OnClick(R.id.btnCommunitySelection)
   public void btnCommunitiesSelected() {
-    final Intent intent = new Intent(this, YourInterestsActivity.class);
-    final ActivityOptions options = ActivityOptions.makeScaleUpAnimation(progressButton, 0, 0,
-      progressButton.getWidth(), progressButton.getHeight());
-    startActivity(intent, options.toBundle());
+    final ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(this,
+      R.transition.slide_in_vertical, R.transition.slide_out_vertical);
+    startActivity(new Intent(this, YourInterestsActivity.class), options.toBundle());
   }
 
   @Override

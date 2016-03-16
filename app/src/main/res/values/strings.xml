@@ -48,4 +48,6 @@
     <string name="title_brand_activity">Brand</string>
 
 
+    <!-- Shared Element Transition Names-->
+    <string name="test_shared_element_transition">brand_element_image</string>
 </resources>

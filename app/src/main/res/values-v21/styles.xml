@@ -1,9 +1,16 @@
-<resources>>
+<resources>
+    <!-- Base application theme. -->
+    <style name="OappTheme" parent="OappTheme.Base">
+        <!-- Add v21 and above theme style values here -->
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <!-- This allows content to be transitioned -->
+        <item name="android:windowContentTransitions">true</item>
+
+        <!-- specify enter and exit transitions -->
+
+        <!-- specify shared element transitions -->
+        <item name="android:windowSharedElementEnterTransition">@transition/change_bounds_transition</item>
+        <item name="android:windowSharedElementExitTransition">@transition/change_bounds_transition</item>
     </style>
+
 </resources>

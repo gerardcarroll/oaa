@@ -29,6 +29,7 @@ import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.activity.BrandActivity;
 import com.overstock.android.prototype.adapters.ProductAdapter;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.models.Product;
@@ -111,7 +112,7 @@ public class BrandFragment extends Fragment implements BrandView {
   @Override
   public void displayBestSellers(final ArrayList<Product> products) {
     Log.d(TAG, "Passing best selling products to adapter to be displayed. List size : " + products.size());
-    ProductAdapter productAdapter = new ProductAdapter(getContext(), products);
+    ProductAdapter productAdapter = new ProductAdapter(this.getActivity(), getContext(), products);
     recyclerView_BestSellers.setHasFixedSize(false);
     recyclerView_BestSellers
         .setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false));
@@ -123,7 +124,7 @@ public class BrandFragment extends Fragment implements BrandView {
   @Override
   public void displayNewArrivals(ArrayList<Product> products) {
     Log.d(TAG, "Passing new arrivals products to adapter to be displayed. List size : " + products.size());
-    ProductAdapter productAdapter = new ProductAdapter(getContext(), products);
+    ProductAdapter productAdapter = new ProductAdapter(this.getActivity(), getContext(), products);
     recyclerView_NewArrivals.setHasFixedSize(false);
     recyclerView_NewArrivals
         .setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false));
