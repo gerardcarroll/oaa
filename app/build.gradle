@@ -119,5 +119,11 @@ dependencies {
     }
 }
 
+release {
+    git.requireBranch= ''
+    failOnUnversionedFiles = false
+    failOnCommitNeeded = false
+}
+
 
 apply plugin: 'com.google.gms.google-services'
