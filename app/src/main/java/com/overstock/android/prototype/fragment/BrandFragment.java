@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -16,14 +15,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import butterknife.Bind;
@@ -36,7 +32,7 @@ import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.models.Product;
 import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.view.BrandView;
-import com.overstock.android.prototype.widgets.EndlessRecylerOnScrollListener;
+import com.overstock.android.prototype.widgets.EndlessRecyclerOnScrollListener;
 
 /**
  * @author LeeMeehan Created on 07-03-2016
@@ -123,7 +119,7 @@ public class BrandFragment extends Fragment implements BrandView {
     recyclerView_BestSellers.setAdapter(productAdapter);
     recyclerView_BestSellers.setNestedScrollingEnabled(false);
     recyclerView_BestSellers.setItemAnimator(new DefaultItemAnimator());
-    recyclerView_BestSellers.addOnScrollListener(new EndlessRecylerOnScrollListener(linearLayoutManager) {
+    recyclerView_BestSellers.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
       @Override
       public void onLoadMore(int page, int totalItemsCount) {
         Toast.makeText(getContext(),"HI THERE",Toast.LENGTH_LONG).show();

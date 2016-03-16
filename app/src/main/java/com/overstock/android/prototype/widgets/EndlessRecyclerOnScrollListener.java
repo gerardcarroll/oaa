@@ -6,15 +6,14 @@ import android.support.v7.widget.RecyclerView;
 /**
  * @author LeeMeehan Created on 15-Mar-16.
  */
-public abstract class EndlessRecylerOnScrollListener extends RecyclerView.OnScrollListener {
-  // The minimum amount of items to have below your current scroll position
-  // before loading more.
+public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListener {
+  // The minimum amount of items to have below your current scroll position before loading more.
   private int visibleThreshold = 5;
 
   // The current offset index of data you have loaded
   private int currentPage = 0;
 
-  // The total number of items in the dataset after the last load
+  // The total number of items in the dataSet after the last load
   private int previousTotalItemCount = 0;
 
   // True if we are still waiting for the last set of data to load.
@@ -23,19 +22,19 @@ public abstract class EndlessRecylerOnScrollListener extends RecyclerView.OnScro
   // Sets the starting page index
   private int startingPageIndex = 0;
 
-  private LinearLayoutManager mLinearLayoutManager;
+  private LinearLayoutManager linearLayoutManager;
 
-  public EndlessRecylerOnScrollListener(LinearLayoutManager layoutManager) {
-    this.mLinearLayoutManager = layoutManager;
+  public EndlessRecyclerOnScrollListener(final LinearLayoutManager layoutManager) {
+    this.linearLayoutManager = layoutManager;
   }
 
   // This happens many times a second during a scroll, so be wary of the code you place here.
   // We are given a few useful parameters to help us work out if we need to load some more data,
   // but first we check if we are waiting for the previous load to finish.
   @Override
-  public void onScrolled(RecyclerView view, int dx, int dy) {
-    int lastVisibleItem = mLinearLayoutManager.findLastVisibleItemPosition();
-    int totalItemCount = mLinearLayoutManager.getItemCount();
+  public void onScrolled(final RecyclerView view, final int dx, final int dy) {
+    int lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition();
+    int totalItemCount = linearLayoutManager.getItemCount();
 
     // If the total item count is zero and the previous isn't, assume the
     // list is invalidated and should be reset back to initial state
@@ -65,6 +64,6 @@ public abstract class EndlessRecylerOnScrollListener extends RecyclerView.OnScro
   }
 
   // Defines the process for actually loading more data based on page
-  public abstract void onLoadMore(int page, int totalItemsCount);
+  public abstract void onLoadMore(final int page, final int totalItemsCount);
 
 }
