@@ -125,5 +125,8 @@ release {
     failOnCommitNeeded = false
 }
 
+afterEvaluate {
+    afterReleaseBuild.dependsOn crashlyticsUploadDistributionRelease
+}
 
 apply plugin: 'com.google.gms.google-services'
