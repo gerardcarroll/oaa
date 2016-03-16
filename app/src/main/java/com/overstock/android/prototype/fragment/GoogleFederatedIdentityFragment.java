@@ -3,6 +3,7 @@ package com.overstock.android.prototype.fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
@@ -15,6 +16,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.activity.BrandActivity;
 import com.overstock.android.prototype.activity.FeedActivity;
 import com.overstock.android.prototype.activity.HomeActivity;
 import com.overstock.android.prototype.expresso.component.GoogleApiClientComponent;
@@ -105,8 +107,9 @@ public class GoogleFederatedIdentityFragment extends Fragment {
             toast.setGravity(Gravity.BOTTOM, 0, 0);
             toast.show();
 
-            final Intent signInIntent = new Intent(getActivity(), FeedActivity.class);
-            startActivity(signInIntent);
+            final ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(getContext(),
+                    R.transition.slide_in_vertical, R.transition.slide_out_vertical);
+            startActivity(new Intent(getActivity(), FeedActivity.class), options.toBundle());
         } else {
             Toast.makeText(this.getContext(), "Not logged in", Toast.LENGTH_SHORT).show();
         }

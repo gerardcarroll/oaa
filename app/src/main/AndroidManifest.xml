@@ -29,7 +29,7 @@
 
         <activity
             android:name=".activity.CommunitiesActivity"
-            android:label="@string/title_activity_communities" >
+            android:label="@string/title_activity_communities">
         </activity>
 
         <activity
@@ -37,10 +37,15 @@
             android:label="@string/feed_activity">
         </activity>
 
+        <activity
+            android:name=".activity.SharedElementActivity"
+            android:label="@string/feed_activity">
+        </activity>
+
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="372bb106d2b08c1397aca42017e7515e8c9afa4f" />
+            android:value="372bb106d2b08c1397aca42017e7515e8c9afa4f"/>
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>
