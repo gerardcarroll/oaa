@@ -5,12 +5,6 @@
 
         <!-- This allows content to be transitioned -->
         <item name="android:windowContentTransitions">true</item>
-
-        <!-- specify enter and exit transitions -->
-
-        <!-- specify shared element transitions -->
-        <item name="android:windowSharedElementEnterTransition">@transition/change_bounds_transition</item>
-        <item name="android:windowSharedElementExitTransition">@transition/change_bounds_transition</item>
     </style>
 
 </resources>
