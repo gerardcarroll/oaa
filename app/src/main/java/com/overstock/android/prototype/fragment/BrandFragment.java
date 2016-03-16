@@ -16,6 +16,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -34,6 +36,7 @@ import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.models.Product;
 import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.view.BrandView;
+import com.overstock.android.prototype.widgets.EndlessRecylerOnScrollListener;
 
 /**
  * @author LeeMeehan Created on 07-03-2016
@@ -84,7 +87,8 @@ public class BrandFragment extends Fragment implements BrandView {
     AppBarLayout.OnOffsetChangedListener listener = new AppBarLayout.OnOffsetChangedListener() {
       @Override
       public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-        if (collapsingToolbarLayout.getHeight() + verticalOffset < 2 * ViewCompat.getMinimumHeight(collapsingToolbarLayout)) {
+        if (collapsingToolbarLayout.getHeight() + verticalOffset < 2
+          * ViewCompat.getMinimumHeight(collapsingToolbarLayout)) {
           imageView.animate().alpha(1).setDuration(600);
         }
         else {
@@ -111,13 +115,23 @@ public class BrandFragment extends Fragment implements BrandView {
   @Override
   public void displayBestSellers(final ArrayList<Product> products) {
     Log.d(TAG, "Passing best selling products to adapter to be displayed. List size : " + products.size());
-    ProductAdapter productAdapter = new ProductAdapter(getContext(), products);
+    final ProductAdapter productAdapter = new ProductAdapter(getContext(), products);
     recyclerView_BestSellers.setHasFixedSize(false);
-    recyclerView_BestSellers
-        .setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false));
+    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getActivity(),
+        LinearLayoutManager.HORIZONTAL, false);
+    recyclerView_BestSellers.setLayoutManager(linearLayoutManager);
     recyclerView_BestSellers.setAdapter(productAdapter);
     recyclerView_BestSellers.setNestedScrollingEnabled(false);
     recyclerView_BestSellers.setItemAnimator(new DefaultItemAnimator());
+    recyclerView_BestSellers.addOnScrollListener(new EndlessRecylerOnScrollListener(linearLayoutManager) {
+      @Override
+      public void onLoadMore(int page, int totalItemsCount) {
+        Toast.makeText(getContext(),"HI THERE",Toast.LENGTH_LONG).show();
+        //final Integer currentSize = productAdapter.getItemCount();
+        //Add more items. newItems
+        //productAdapter.notifyItemRangeInserted(currentSize, newItems.size() -1);
+      }
+    });
   }
 
   @Override
