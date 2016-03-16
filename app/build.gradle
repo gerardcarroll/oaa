@@ -19,7 +19,7 @@ repositories {
 
 apply plugin: 'net.researchgate.release'
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
+apply plugin: 'io.fabric' // i.e. crashlytics
 apply plugin: 'com.neenbedankt.android-apt'
 
 android {
@@ -117,12 +117,6 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
         transitive = true;
     }
-}
-
-release {
-    git.requireBranch= ''
-    failOnUnversionedFiles = false
-    failOnCommitNeeded = false
 }
 
 afterEvaluate {
