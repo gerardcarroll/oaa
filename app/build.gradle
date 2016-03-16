@@ -1,19 +1,25 @@
 buildscript {
     repositories {
         maven { url 'https://maven.fabric.io/public' }
+        maven { url 'https://plugins.gradle.org/m2/'}
     }
 
     dependencies {
         classpath 'io.fabric.tools:gradle:1.+'
+        classpath 'net.researchgate:gradle-release:2.3.4'
     }
 }
-apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
+plugins {
+    id 'net.researchgate.release' version '2.3.4'
+}
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
+apply plugin: 'net.researchgate.release'
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 apply plugin: 'com.neenbedankt.android-apt'
 
 android {
