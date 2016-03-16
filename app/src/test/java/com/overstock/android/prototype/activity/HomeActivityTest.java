@@ -1,9 +1,6 @@
 package com.overstock.android.prototype.activity;
 
-import android.os.Build;
-
-import com.overstock.android.prototype.BuildConfig;
-import com.overstock.android.prototype.fragment.HomeFragment;
+import static junit.framework.Assert.assertNotNull;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,9 +8,10 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.util.FragmentTestUtil;
 
-import static junit.framework.Assert.assertNotNull;
+import android.os.Build;
+
+import com.overstock.android.prototype.BuildConfig;
 
 /**
  * Simple Test class to test that the Home Activity was created successfully
@@ -28,6 +26,7 @@ public class HomeActivityTest {
 
     @Before
     public void setUp() {
+        //BuildActivity creates a controller that can be used to drive through the app lifecycle.
         homeActivity = Robolectric.buildActivity(HomeActivity.class).get();
     }
 
