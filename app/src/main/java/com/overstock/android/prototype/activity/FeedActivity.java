@@ -44,6 +44,7 @@ public class FeedActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
+
         setupViewPager(viewPager);
 
         tabLayout.setupWithViewPager(viewPager);

@@ -102,7 +102,7 @@ public class GoogleFederatedIdentityFragment extends Fragment {
       final GoogleSignInAccount acct = result.getSignInAccount();
       final Toast toast = Toast.makeText(this.getContext(), getString(R.string.signed_in_fmt, acct.getDisplayName()),
         Toast.LENGTH_SHORT);
-      toast.setGravity(Gravity.BOTTOM, 0, 0);
+      toast.setGravity(Gravity.BOTTOM, 0, 20);
       toast.show();
 
       final ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(getContext(),

@@ -43,9 +43,9 @@
     <string name="title_activity_communities">Communities</string>
 
     <!-- Feed Activity Tabs -->
-    <string name="my_feed_tab">MY FEED</string>
-    <string name="trending_tab">TRENDING</string>
-    <string name="my_location_tab">MY LOCATION</string>
+    <string name="my_feed_tab">My Feed</string>
+    <string name="trending_tab">Trending</string>
+    <string name="my_location_tab">My Location</string>
 
     <!-- Feed Activity related Fragments text -->
     <string name="feed_fragment">Feed Fragment</string>
@@ -56,6 +56,8 @@
     <string name="my_location_text">You current location is Sligo, Ireland</string>
 
     <string name="title_brand_activity">Brand</string>
+    <string name="top_category_title">Top Categories</string>
+    <string name="top_category_link"><u>Shop All</u></string>
 
 
     <!-- Shared Element Transition Names-->

@@ -24,7 +24,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by rconnolly on 2/29/2016.
+ * @author RayConnolly Created on 2/29/2016.
  */
 public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.CommunitiesViewHolder> {
 

@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.BrandActivity;
 import com.overstock.android.prototype.models.Feed;
+import com.vstechlab.easyfonts.EasyFonts;
 
 /**
  * Created by RayConnolly on 3/16/2016.
@@ -63,8 +64,8 @@ public class CustomFeedAdapter extends RecyclerView.Adapter<CustomFeedAdapter.Vi
 
     holder.ivCommunity.setImageResource(feed.getProductImage());
     holder.tvViewCommunity.setText(feed.getTopProductsLink());
+    holder.tvViewCommunity.setTypeface(EasyFonts.robotoBlack(context));
     holder.tvProductLink.setText(feed.getProductUrl());
-    holder.tvStats.setText(feed.getStats());
 
     holder.ivCommunity.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -89,9 +90,6 @@ public class CustomFeedAdapter extends RecyclerView.Adapter<CustomFeedAdapter.Vi
 
     @Bind(R.id.product_website_link)
     public TextView tvProductLink;
-
-    @Bind(R.id.product_stats)
-    public TextView tvStats;
 
     public ViewHolder(View itemLayoutView) {
       super(itemLayoutView);
