@@ -72,7 +72,7 @@ public class FeedFragment extends Fragment {
             recyclerView.stopNestedScroll();
             recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-            feedCommunitiesAdapter = new CustomFeedAdapter(feeds);
+            feedCommunitiesAdapter = new CustomFeedAdapter(feeds,getContext(),getActivity());
             recyclerView.setAdapter(feedCommunitiesAdapter);
 
             return rootView;
