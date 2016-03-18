@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -21,12 +20,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.ProductAdapter;
@@ -34,6 +31,9 @@ import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.models.Product;
 import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.view.BrandView;
+import com.overstock.android.prototype.widgets.EndlessRecylerOnScrollListener;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * @author LeeMeehan Created on 07-03-2016
@@ -66,25 +66,26 @@ public class BrandFragment extends Fragment implements BrandView {
   CircleImageView imageView;
 
   @Override
-  public void onCreate(Bundle savedInstanceState) {
+  public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     ((OAppPrototypeApplication) getActivity().getApplication()).getComponent().inject(this);
   }
 
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+  public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_brand, container, false);
   }
 
   @Override
-  public void onViewCreated(View view, Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     ButterKnife.bind(this, view);
     toolbar.inflateMenu(R.menu.menu_main);
-    AppBarLayout.OnOffsetChangedListener listener = new AppBarLayout.OnOffsetChangedListener() {
+    final AppBarLayout.OnOffsetChangedListener listener = new AppBarLayout.OnOffsetChangedListener() {
       @Override
-      public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-        if (collapsingToolbarLayout.getHeight() + verticalOffset < 2 * ViewCompat.getMinimumHeight(collapsingToolbarLayout)) {
+      public void onOffsetChanged(final AppBarLayout appBarLayout, final int verticalOffset) {
+        if (collapsingToolbarLayout.getHeight() + verticalOffset < 2
+          * ViewCompat.getMinimumHeight(collapsingToolbarLayout)) {
           imageView.animate().alpha(1).setDuration(600);
         }
         else {
@@ -97,7 +98,7 @@ public class BrandFragment extends Fragment implements BrandView {
   }
 
   @Override
-  public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+  public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
     inflater.inflate(R.menu.menu_main, menu);
   }
 
@@ -111,19 +112,31 @@ public class BrandFragment extends Fragment implements BrandView {
   @Override
   public void displayBestSellers(final ArrayList<Product> products) {
     Log.d(TAG, "Passing best selling products to adapter to be displayed. List size : " + products.size());
-    ProductAdapter productAdapter = new ProductAdapter(getContext(), products);
+
+    final ProductAdapter productAdapter = new ProductAdapter(this.getActivity(), getContext(), products);
+
     recyclerView_BestSellers.setHasFixedSize(false);
-    recyclerView_BestSellers
-        .setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false));
+    final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getActivity(),
+        LinearLayoutManager.HORIZONTAL, false);
+    recyclerView_BestSellers.setLayoutManager(linearLayoutManager);
     recyclerView_BestSellers.setAdapter(productAdapter);
     recyclerView_BestSellers.setNestedScrollingEnabled(false);
     recyclerView_BestSellers.setItemAnimator(new DefaultItemAnimator());
+    recyclerView_BestSellers.addOnScrollListener(new EndlessRecylerOnScrollListener(linearLayoutManager) {
+      @Override
+      public void onLoadMore(final int page, final int totalItemsCount) {
+        Toast.makeText(getContext(), "HI THERE", Toast.LENGTH_LONG).show();
+        // final Integer currentSize = productAdapter.getItemCount();
+        // Add more items. newItems
+        // productAdapter.notifyItemRangeInserted(currentSize, newItems.size() -1);
+      }
+    });
   }
 
   @Override
-  public void displayNewArrivals(ArrayList<Product> products) {
+  public void displayNewArrivals(final ArrayList<Product> products) {
     Log.d(TAG, "Passing new arrivals products to adapter to be displayed. List size : " + products.size());
-    ProductAdapter productAdapter = new ProductAdapter(getContext(), products);
+    final ProductAdapter productAdapter = new ProductAdapter(this.getActivity(), getContext(), products);
     recyclerView_NewArrivals.setHasFixedSize(false);
     recyclerView_NewArrivals
         .setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false));

@@ -1,5 +1,7 @@
 package com.overstock.android.prototype.fragment;
 
+import java.util.ArrayList;
+
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,14 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.CustomFeedAdapter;
 import com.overstock.android.prototype.models.Feed;
-
-import java.util.ArrayList;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class FeedFragment extends Fragment {
 
@@ -78,15 +78,17 @@ public class FeedFragment extends Fragment {
             return rootView;
         }
 
-//    @OnClick(R.id.product_link)
-//    public void onProductLinkClick(){
-//        Intent signInIntent = new Intent(getActivity(), BrandActivity.class);
-//    startActivity(signInIntent);
+//    @OnClick(R.id.feed_nfl_btn)
+//    public void onNflBtnClick() {
+//        final ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(getContext(),
+//                R.transition.slide_in_horizontal, R.transition.slide_out_horizontal);
+//        startActivity(new Intent(getActivity(), BrandActivity.class), options.toBundle());
 //    }
-
-//    @OnClick(R.id.feed_communities_link)
-//    public void onCommunitiesBtnClick(){
-//        Intent signInIntent = new Intent(getActivity(), CommunitiesActivity.class);
-//        startActivity(signInIntent);
+//
+//    @OnClick(R.id.feed_communities_btn)
+//    public void onCommunitiesBtnClick() {
+//        final ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(getContext(),
+//                R.transition.slide_in_vertical, R.transition.slide_out_horizontal);
+//        startActivity(new Intent(getActivity(), CommunitiesActivity.class), options.toBundle());
 //    }
 }
