@@ -1,6 +1,7 @@
 <resources>
 
-    <!-- Base application theme. -->
+    <!-- Base application theme. This theme applies styles to all of our app content
+         apart from any overridden styles in the v21 resource file-->
     <style name="OappTheme" parent="OappTheme.Base"/>
 
     <style name="OappTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
@@ -22,36 +23,21 @@
         <item name="android:padding">5dp</item>
     </style>
 
-
-    <!-- OLD THEMES, MAYBE NEED TO REMOVE-->
-
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <!-- Activity with no Title -->
-    <style name="ThemeOverlay.MyNoTitleActivity" parent="AppTheme">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <!-- Dark Buttons -->
-    <style name="ThemeOverlay.MyDarkButton" parent="ThemeOverlay.AppCompat.Dark">
-        <item name="colorButtonNormal">@color/blue_grey_500</item>
-        <item name="android:textColor">@android:color/white</item>
-    </style>
-
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
+    <!-- This theme gives our AppBarLayout the Dark action bar theme (white text)-->
+    <style name="OappActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="CheckBoxTheme" parent="Theme.AppCompat"/>
+
+    <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+    </style>
 
 </resources>

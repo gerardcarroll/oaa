@@ -36,7 +36,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
 
   private Activity activity;
 
-  private String baseImageUrl = "http://ak1.ostkcdn.com/images/products/";
+  private static final String BASE_IMAGE_URL = "http://ak1.ostkcdn.com/images/products/";
 
   public ProductAdapter(final Activity activity, final Context context, final ArrayList<Product> products) {
     this.activity = activity;
@@ -61,7 +61,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
     holder.productPriceTxt.setText(currencyCode + product.getMemberPrice().toString());
     final Picasso picasso = new Picasso.Builder(context).memoryCache(new LruCache(45000)).build();
     holder.progressBar.setVisibility(View.VISIBLE);
-    picasso.with(context).load("http://ak1.ostkcdn.com/images/products/" + product.getImageMedium1()).resize(500, 500)
+    picasso.with(context).load(BASE_IMAGE_URL + product.getImageMedium1()).resize(500, 500)
         .error(R.drawable.product_placeholder).into(holder.imageView, new Callback() {
           @Override
           public void onSuccess() {

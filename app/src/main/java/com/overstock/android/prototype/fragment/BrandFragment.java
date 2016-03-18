@@ -31,7 +31,7 @@ import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.models.Product;
 import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.view.BrandView;
-import com.overstock.android.prototype.widgets.EndlessRecylerOnScrollListener;
+import com.overstock.android.prototype.widgets.EndlessRecyclerOnScrollListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -122,7 +122,7 @@ public class BrandFragment extends Fragment implements BrandView {
     recyclerView_BestSellers.setAdapter(productAdapter);
     recyclerView_BestSellers.setNestedScrollingEnabled(false);
     recyclerView_BestSellers.setItemAnimator(new DefaultItemAnimator());
-    recyclerView_BestSellers.addOnScrollListener(new EndlessRecylerOnScrollListener(linearLayoutManager) {
+    recyclerView_BestSellers.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
       @Override
       public void onLoadMore(final int page, final int totalItemsCount) {
         Toast.makeText(getContext(), "HI THERE", Toast.LENGTH_LONG).show();

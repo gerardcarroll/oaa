@@ -15,6 +15,7 @@ plugins {
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
 }
 
 apply plugin: 'net.researchgate.release'
@@ -26,10 +27,12 @@ android {
     defaultConfig {
         applicationId "com.overstock.android.prototype"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        archivesBaseName = "OApp"
         minSdkVersion 19
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+
+        versionCode System.getenv("BUILD_NUMBER") as Integer ?: 9999
+        versionName "${version}"
     }
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
@@ -74,6 +77,9 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+    testCompile "org.robolectric:robolectric:3.1-SNAPSHOT"
+    testCompile "org.robolectric:shadows-support-v4:3.0"
+    testCompile "org.mockito:mockito-core:1.+"
     apt 'com.google.dagger:dagger-compiler:2.0.2'
     provided 'org.glassfish:javax.annotation:10.0-b28'
     apt 'com.github.frankiesardo:auto-parcel-processor:0.3.1'
@@ -114,6 +120,7 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
     compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'com.vstechlab.easyfonts:easyfonts:1.0.0'
     compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
         transitive = true;
     }
