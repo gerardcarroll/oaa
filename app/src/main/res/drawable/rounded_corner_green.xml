@@ -3,18 +3,13 @@
 
     <item>
         <shape android:shape="oval">
-            <solid android:color="#80CBC4" />
+            <solid android:color="@color/oapp_primary_500" />
         </shape>
     </item>
-    <!-- #7A7A7A-->
-
     <item>
         <shape>
-            <stroke
-                android:width=".5dp"
-                android:color="@color/white" />
 
-            <solid android:color="#80CBC4" />
+            <solid android:color="@color/oapp_primary_500" />
 
             <padding
                 android:left="5dp"

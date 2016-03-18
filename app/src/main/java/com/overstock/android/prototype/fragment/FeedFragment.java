@@ -1,6 +1,7 @@
 package com.overstock.android.prototype.fragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -55,16 +56,9 @@ public class FeedFragment extends Fragment {
 
         final String[] names = getContext().getResources().getStringArray(R.array.feed_string_array);
 
-        for (int i = 0; i < imagesArray.length && i < names.length; i++) {
-
-            final Feed feed = new Feed();
-            feed.setProductImage(imagesArray[i]);
-            feed.setTopProductsLink(names[i]);
-            feed.setProductUrl(names[i]);
-            feed.setStats(names[i]);
-
-            feeds.add(feed);
-        }
+        feeds.add(new Feed(imagesArray[0],"Top NFL Fan Products for 2016","NFL.com"));
+        feeds.add(new Feed(imagesArray[1],"Sleep like a God with These Beds","BestBeds.com"));
+        feeds.add(new Feed(imagesArray[2],"Must Have Products to get in Shape","fitness.com"));
         // TODO remove up as far as last todo
 
             recyclerView.setHasFixedSize(true);
@@ -72,18 +66,12 @@ public class FeedFragment extends Fragment {
             recyclerView.stopNestedScroll();
             recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-            feedCommunitiesAdapter = new CustomFeedAdapter(feeds);
+            feedCommunitiesAdapter = new CustomFeedAdapter(feeds,getContext(),getActivity());
             recyclerView.setAdapter(feedCommunitiesAdapter);
 
             return rootView;
         }
 
-//    @OnClick(R.id.feed_nfl_btn)
-//    public void onNflBtnClick() {
-//        final ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(getContext(),
-//                R.transition.slide_in_horizontal, R.transition.slide_out_horizontal);
-//        startActivity(new Intent(getActivity(), BrandActivity.class), options.toBundle());
-//    }
 //
 //    @OnClick(R.id.feed_communities_btn)
 //    public void onCommunitiesBtnClick() {

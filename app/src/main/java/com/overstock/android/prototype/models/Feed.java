@@ -8,15 +8,13 @@ public class Feed {
     private int productImage;
     private String topProductsLink;
     private String productUrl;
-    private String stats;
 
     public Feed() {}
 
-    public Feed(int productImage, String topProductsLink, String productUrl, String stats) {
+    public Feed(int productImage, String topProductsLink, String productUrl) {
         this.productImage = productImage;
         this.topProductsLink = topProductsLink;
         this.productUrl = productUrl;
-        this.stats = stats;
     }
 
     public int getProductImage() {
@@ -41,13 +39,5 @@ public class Feed {
 
     public void setProductUrl(String productUrl) {
         this.productUrl = productUrl;
-    }
-
-    public String getStats() {
-        return stats;
-    }
-
-    public void setStats(String stats) {
-        this.stats = stats;
     }
 }
