@@ -22,6 +22,8 @@ import butterknife.OnClick;
  */
 public class HomeFragment extends Fragment {
 
+  public static String TAG = HomeFragment.class.getName();
+
   @Inject
   GoogleFederatedIdentityFragment googleFederatedIdentityFragment;
 
@@ -37,10 +39,9 @@ public class HomeFragment extends Fragment {
   @OnClick(R.id.googlePlus_login_btn)
   public void googlePlusLogin_onClick() {
     FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-    fragmentTransaction.add(R.id.home_activity, googleFederatedIdentityFragment);
+    fragmentTransaction.add(R.id.home_activity, googleFederatedIdentityFragment, GoogleFederatedIdentityFragment.TAG);
     fragmentTransaction.addToBackStack(null);
     fragmentTransaction.commit();
-
   }
 
   @OnClick(R.id.facebook_login_btn)

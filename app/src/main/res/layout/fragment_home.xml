@@ -1,10 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@drawable/shape_scrim"
-              android:orientation="vertical"
-              tools:context=".fragment.HomeFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_scrim"
+    android:orientation="vertical"
+    tools:context=".fragment.HomeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +18,7 @@
             android:layout_height="wrap_content"
             android:text="@string/home_page_label"
             android:textColor="@color/white"
-            android:textSize="25sp"/>
+            android:textSize="25sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -32,11 +33,11 @@
             android:layout_width="200dp"
             android:layout_height="36dp"
             android:background="@color/facebookBluePrimaryDark"
+            android:contentDescription="@string/faceBook_connect"
             android:elevation="@dimen/button_elevation"
             android:text="@string/faceBook_connect"
-            android:contentDescription="@string/faceBook_connect"
             android:textColor="@android:color/background_light"
-            android:typeface="normal"/>
+            android:typeface="normal" />
 
         <Button
             android:id="@+id/googlePlus_login_btn"
@@ -44,11 +45,11 @@
             android:layout_height="36dp"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:background="@color/googlePlusRedPrimary"
+            android:contentDescription="@string/google_connect"
             android:elevation="@dimen/button_elevation"
             android:text="@string/google_connect"
-            android:contentDescription="@string/google_connect"
             android:textColor="@android:color/background_light"
-            android:typeface="normal"/>
+            android:typeface="normal" />
 
         <Button
             android:id="@+id/guest_login_btn"
@@ -56,11 +57,11 @@
             android:layout_height="36dp"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:background="@android:color/transparent"
+            android:contentDescription="@string/guest_connect"
             android:elevation="@dimen/button_elevation"
             android:text="@string/guest_connect"
-            android:contentDescription="@string/guest_connect"
             android:textColor="@android:color/background_light"
-            android:typeface="normal"/>
+            android:typeface="normal" />
 
 
     </LinearLayout>

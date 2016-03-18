@@ -27,7 +27,7 @@ import com.overstock.android.prototype.expresso.component.GoogleApiClientCompone
  */
 public class GoogleFederatedIdentityFragment extends Fragment {
 
-  private static final String TAG = GoogleFederatedIdentityFragment.class.getName();
+  public static final String TAG = GoogleFederatedIdentityFragment.class.getName();
 
   private static final int RC_SIGN_IN = 9001;
 
