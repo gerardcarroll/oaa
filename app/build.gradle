@@ -71,6 +71,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile "org.robolectric:robolectric:3.1-SNAPSHOT"
     testCompile "org.robolectric:shadows-support-v4:3.0"
+    testCompile "org.mockito:mockito-core:1.+"
     apt 'com.google.dagger:dagger-compiler:2.0.2'
     provided 'org.glassfish:javax.annotation:10.0-b28'
     apt 'com.github.frankiesardo:auto-parcel-processor:0.3.1'

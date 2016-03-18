@@ -20,7 +20,7 @@ public class HomeActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_home);
     if (savedInstanceState == null) {
-      getSupportFragmentManager().beginTransaction().add(R.id.home_activity, homeFragment).commit();
+      getSupportFragmentManager().beginTransaction().add(R.id.home_activity, homeFragment,HomeFragment.TAG).commit();
     }
   }
 }
