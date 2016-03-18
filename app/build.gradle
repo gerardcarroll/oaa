@@ -26,10 +26,12 @@ android {
     defaultConfig {
         applicationId "com.overstock.android.prototype"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        archivesBaseName = "OApp"
         minSdkVersion 19
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+
+        versionCode System.getenv("BUILD_NUMBER") as Integer ?: 9999
+        versionName "${version}"
     }
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
