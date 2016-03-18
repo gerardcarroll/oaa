@@ -49,6 +49,7 @@
 
     <!-- Feed Activity related Fragments text -->
     <string name="feed_fragment">Feed Fragment</string>
+    <string name="feed_nfl_link_text">Top NFL Fan Products for 2016</string>
     <string name="trending_fragment">Trending Fragment</string>
     <string name="trending_text">These are the latest trending products...</string>
     <string name="my_location_fragment">My Location Fragment</string>
