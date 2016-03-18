@@ -47,14 +47,14 @@ public class HomeFragment extends Fragment {
   @OnClick(R.id.facebook_login_btn)
   public void faceBookLogin_onClick() {
     final Toast toast = Toast.makeText(getActivity(), "FaceBook Login Coming Soon!", Toast.LENGTH_SHORT);
-    toast.setGravity(Gravity.BOTTOM, 0, 0);
+    toast.setGravity(Gravity.BOTTOM, 0, 20);
     toast.show();
   }
 
   @OnClick(R.id.guest_login_btn)
   public void guestLogin_onClick() {
     final Toast toast = Toast.makeText(getActivity(), "Guest Login Coming Soon!", Toast.LENGTH_SHORT);
-    toast.setGravity(Gravity.BOTTOM, 0, 0);
+    toast.setGravity(Gravity.BOTTOM, 0, 20);
     toast.show();
   }
 

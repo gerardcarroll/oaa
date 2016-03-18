@@ -6,13 +6,10 @@
             <solid android:color="#7A7A7A" />
         </shape>
     </item>
-    <!-- #7A7A7A-->
 
     <item>
         <shape>
-            <stroke
-                android:width=".5dp"
-                android:color="@color/white" />
+
 
             <solid android:color="#7A7A7A" />
 
