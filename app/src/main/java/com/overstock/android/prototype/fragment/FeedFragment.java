@@ -1,8 +1,5 @@
 package com.overstock.android.prototype.fragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,16 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.adapters.FeedAdapter;
+import com.overstock.android.prototype.models.Feed;
+
+import java.util.ArrayList;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.adapters.CustomFeedAdapter;
-import com.overstock.android.prototype.models.Feed;
-
 public class FeedFragment extends Fragment {
 
-    private CustomFeedAdapter feedCommunitiesAdapter;
+    private FeedAdapter feedCommunitiesAdapter;
 
     @Bind(R.id.rv_feed_communities)
     RecyclerView recyclerView;
@@ -66,7 +65,7 @@ public class FeedFragment extends Fragment {
             recyclerView.stopNestedScroll();
             recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-            feedCommunitiesAdapter = new CustomFeedAdapter(feeds,getContext(),getActivity());
+            feedCommunitiesAdapter = new FeedAdapter(feeds,getContext(),getActivity());
             recyclerView.setAdapter(feedCommunitiesAdapter);
 
             return rootView;
