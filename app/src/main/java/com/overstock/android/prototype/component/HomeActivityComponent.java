@@ -1,4 +1,4 @@
-package com.overstock.android.prototype.expresso.component;
+package com.overstock.android.prototype.component;
 
 import com.overstock.android.prototype.module.HomeActivityFragmentsModule;
 import com.overstock.android.prototype.module.scope.ActivityScope;
@@ -12,7 +12,7 @@ import dagger.Component;
 @Component(
         modules = {HomeActivityFragmentsModule.class}
 )
-public interface HomeActivityComponent extends HomeActivityInject{
+public interface HomeActivityComponent extends HomeActivityInject {
 
     public final static class Initializer {
         public static HomeActivityComponent init() {

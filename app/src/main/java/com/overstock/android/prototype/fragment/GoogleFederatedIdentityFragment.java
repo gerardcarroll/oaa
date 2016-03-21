@@ -8,16 +8,14 @@ import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.activity.HomeActivity;
 import com.overstock.android.prototype.activity.YourInterestsActivity;
-import com.overstock.android.prototype.expresso.component.GoogleApiClientComponent;
+import com.overstock.android.prototype.main.OAppPrototypeApplication;
+import com.overstock.android.prototype.service.OappGoogleAuthService;
 
 import javax.inject.Inject;
 
@@ -32,31 +30,22 @@ public class GoogleFederatedIdentityFragment extends Fragment {
 
     private ProgressDialog mProgressDialog;
 
-    @Inject
-    GoogleApiClient mGoogleApiClient;
+    @Inject OappGoogleAuthService oappGoogleAuthService;
 
     public GoogleFederatedIdentityFragment() {
-    }
-
-    private void daggerInit() {
-
-        GoogleApiClientComponent googleApiClientComponent = GoogleApiClientComponent.Initializer.init(
-                (HomeActivity) this.getActivity()
-        );
-        googleApiClientComponent.inject(this);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        daggerInit();
+        ((OAppPrototypeApplication) getActivity().getApplication()).getComponent().inject(this);
         signIn();
     }
 
     @Override
     public void onStop() {
-        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
-            mGoogleApiClient.disconnect();
+        if (oappGoogleAuthService.getGoogleApiClient() != null && oappGoogleAuthService.getGoogleApiClient().isConnected()) {
+            oappGoogleAuthService.getGoogleApiClient().disconnect();
         }
         super.onStop();
     }
@@ -65,11 +54,11 @@ public class GoogleFederatedIdentityFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        if (mGoogleApiClient != null) {
-            mGoogleApiClient.connect();
+        if (oappGoogleAuthService.getGoogleApiClient() != null) {
+            oappGoogleAuthService.getGoogleApiClient().connect();
         }
 
-        final OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
+        final OptionalPendingResult<GoogleSignInResult> opr = oappGoogleAuthService.silentSignInStatus();
         if (opr.isDone()) {
             Log.d(TAG, "Got cached sign-in");
             final GoogleSignInResult result = opr.get();
@@ -90,7 +79,7 @@ public class GoogleFederatedIdentityFragment extends Fragment {
     public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
-            final GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            final GoogleSignInResult result = oappGoogleAuthService.getSignInResultFromIntent(data);
             handleSignInResult(result);
         }
     }
@@ -98,7 +87,6 @@ public class GoogleFederatedIdentityFragment extends Fragment {
     private void handleSignInResult(final GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
-            // Signed in successfully, show authenticated UI.
             final GoogleSignInAccount acct = result.getSignInAccount();
             final Toast toast = Toast.makeText(this.getContext(), getString(R.string.signed_in_fmt, acct.getDisplayName()),
                     Toast.LENGTH_SHORT);
@@ -113,8 +101,10 @@ public class GoogleFederatedIdentityFragment extends Fragment {
     }
 
     private void signIn() {
-        final Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+        final Intent signInIntent = oappGoogleAuthService.signIn();
+        if(signInIntent != null) {
+            startActivityForResult(signInIntent, RC_SIGN_IN);
+        }
     }
 
     private void showProgressDialog() {
@@ -132,4 +122,11 @@ public class GoogleFederatedIdentityFragment extends Fragment {
             mProgressDialog.hide();
         }
     }
+
+    @Override
+    public String toString() {
+        return "";
+    }
+
+
 }
