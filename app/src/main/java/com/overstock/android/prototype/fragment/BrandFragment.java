@@ -1,9 +1,5 @@
 package com.overstock.android.prototype.fragment;
 
-import java.util.ArrayList;
-
-import javax.inject.Inject;
-
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -22,9 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.ProductAdapter;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
@@ -33,6 +26,12 @@ import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.view.BrandView;
 import com.overstock.android.prototype.widgets.EndlessRecyclerOnScrollListener;
 
+import java.util.ArrayList;
+
+import javax.inject.Inject;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
