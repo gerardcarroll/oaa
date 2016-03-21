@@ -38,7 +38,7 @@
         </activity>
 
         <activity
-            android:name=".activity.SharedElementActivity"
+            android:name=".activity.ProductDetailActivity"
             android:label="@string/feed_activity">
         </activity>
 

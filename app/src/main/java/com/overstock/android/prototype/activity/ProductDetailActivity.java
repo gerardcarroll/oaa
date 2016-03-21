@@ -11,16 +11,16 @@ import android.transition.TransitionManager;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.overstock.android.prototype.R;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import com.overstock.android.prototype.R;
 
 /**
  * This Activity is only for demonstration of Shared Element Transition and
  * <a href="https://developer.android.com/training/transitions/index.html">Scene Transitions</a>
  */
-public class SharedElementActivity extends AppCompatActivity {
+public class ProductDetailActivity extends AppCompatActivity {
 
   Scene firstScene;
 
@@ -31,22 +31,22 @@ public class SharedElementActivity extends AppCompatActivity {
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_shared_element);
+    setContentView(R.layout.activity_product_detail);
     ButterKnife.bind(this);
 
     final Bundle extras = getIntent().getExtras();
     final byte[] b = extras.getByteArray("image");
 
     final Bitmap bmp = BitmapFactory.decodeByteArray(b, 0, b.length);
-    final ImageView image = (ImageView) findViewById(R.id.shared_activity_image_1);
+    final ImageView image = (ImageView) findViewById(R.id.product_detail_activity_shared_image_1);
     image.setImageBitmap(bmp);
 
     // Create the scene root for the scenes in this app
     final ViewGroup mSceneRoot = (ViewGroup) findViewById(R.id.scene_root);
 
     // Create the scenes
-    firstScene = Scene.getSceneForLayout(mSceneRoot, R.layout.activity_shared_element_scene_1, this);
-    secondScene = Scene.getSceneForLayout(mSceneRoot, R.layout.activity_shared_element_scene_2, this);
+    firstScene = Scene.getSceneForLayout(mSceneRoot, R.layout.activity_product_detail_scene_1, this);
+    secondScene = Scene.getSceneForLayout(mSceneRoot, R.layout.activity_product_detail_scene_2, this);
 
     mFadeTransition = TransitionInflater.from(this).inflateTransition(R.transition.fade_transition);
   }

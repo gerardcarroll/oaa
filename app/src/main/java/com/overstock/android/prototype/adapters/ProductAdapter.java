@@ -1,10 +1,5 @@
 package com.overstock.android.prototype.adapters;
 
-import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.Currency;
-import java.util.Locale;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -19,11 +14,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.activity.SharedElementActivity;
+import com.overstock.android.prototype.activity.ProductDetailActivity;
 import com.overstock.android.prototype.models.Product;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
+
+import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.Currency;
+import java.util.Locale;
 
 /**
  * @author LeeMeehan Created on 08-Mar-16.
@@ -85,10 +85,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         final byte[] b = baos.toByteArray();
 
-        final Intent intent = new Intent(activity, SharedElementActivity.class);
+        final Intent intent = new Intent(activity, ProductDetailActivity.class);
         intent.putExtra("image", b);
         final ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat
-            .makeSceneTransitionAnimation(activity, v, context.getString(R.string.test_shared_element_transition));
+            .makeSceneTransitionAnimation(activity, v, context.getString(R.string.shared_element_transition));
         ActivityCompat.startActivity(activity, intent, transitionActivityOptions.toBundle());
       }
     });

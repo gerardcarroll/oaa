@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.overstock.android.prototype.activity.SharedElementActivity">
+    tools:context=".activity.ProductDetailActivity">
 
     <FrameLayout
         android:id="@+id/scene_root"
         android:layout_width="match_parent"
         android:layout_height="493dp">
 
-        <include layout="@layout/activity_shared_element_scene_1"/>
+        <include layout="@layout/activity_product_detail_scene_1"/>
     </FrameLayout>
 
     <Button

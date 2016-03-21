@@ -61,5 +61,5 @@
 
 
     <!-- Shared Element Transition Names-->
-    <string name="test_shared_element_transition">brand_element_image</string>
+    <string name="shared_element_transition">brand_element_image</string>
 </resources>
