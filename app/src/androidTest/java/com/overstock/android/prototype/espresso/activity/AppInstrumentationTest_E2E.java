@@ -99,13 +99,21 @@ public class AppInstrumentationTest_E2E {
         onView(withText(activityRule.getActivity().getString(R.string.my_feed_tab))).perform(click());
         onView(withId(R.id.feed_viewpager)).check(matches(isDisplayed()));
         onView(withText(activityRule.getActivity().getString(R.string.trending_tab))).perform(click());
+        onView(withText("Trending Fragment")).check(matches(isDisplayed()));
+        onView(withId(R.id.feed_viewpager)).check(matches(isDisplayed()));
         onView(withText(activityRule.getActivity().getString(R.string.my_location_tab))).perform(click());
+        onView(withText("My Location Fragment")).check(matches(isDisplayed()));
 
-//        onView(withText("Top NFL Fan Products")).check(matches(isDisplayed()));
+        onView(withText(activityRule.getActivity().getString(R.string.my_feed_tab))).perform(click());
+        onView(withText("Top NFL Fan Products for 2016")).check(matches(isDisplayed()));
+        onView(withId(R.id.rv_feed_communities)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.brand_activity)).check(matches(isDisplayed()));
 
-//        onView(withId(R.id.your_interests_nfl_btn)).check(matches(isDisplayed()));
-//        onView(withId(R.id.your_interests_nfl_btn)).perform(click());
-//        onView(withId(R.id.brand_toolbar)).check(matches(isDisplayed()));
+//        onView(isRoot()).perform(waitId(R.id.best_sellers, Sampling.SECONDS_15));
+//        onView(withId(R.id.best_sellers)).perform(RecyclerViewActions.scrollToPosition(10));
+//        onView(withId(R.id.best_sellers)).perform(RecyclerViewActions.scrollToPosition(1));
+//        onView(withId(R.id.best_sellers)).perform(RecyclerViewActions.scrollToPosition(5)).perform(click());
+//        onView(withId(R.id.shared_activity_image_1)).check(matches(isDisplayed()));
 
     }
 }
