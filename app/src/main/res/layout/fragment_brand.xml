@@ -12,7 +12,7 @@
         android:layout_height="192dp"
         android:elevation="15dp"
         android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:theme="@style/OappActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/brand_collapsing_toolbar"
@@ -41,7 +41,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:layout_scrollFlags="scroll|enterAlways"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+                app:popupTheme="@style/OappActionBar">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/brand_logo_icon"
@@ -70,6 +70,30 @@
             android:orientation="vertical"
             android:padding="6dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/top_category_title"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="@string/top_category_link" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

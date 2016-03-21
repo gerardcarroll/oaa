@@ -1,16 +1,25 @@
 package com.overstock.android.prototype.adapters;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.Locale;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.activity.SharedElementActivity;
 import com.overstock.android.prototype.models.Product;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.LruCache;
@@ -25,31 +34,34 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
 
   private Context context;
 
-  private String baseImageUrl = "http://ak1.ostkcdn.com/images/products/";
+  private Activity activity;
 
-  public ProductAdapter(final Context context, final ArrayList<Product> products) {
+  private static final String BASE_IMAGE_URL = "http://ak1.ostkcdn.com/images/products/";
+
+  public ProductAdapter(final Activity activity, final Context context, final ArrayList<Product> products) {
+    this.activity = activity;
     this.context = context;
     this.products = products;
   }
 
   @Override
-  public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-    ViewGroup mainGroup = (ViewGroup) inflater.inflate(R.layout.product_card, parent, false);
-    ProductViewHolder listHolder = new ProductViewHolder(mainGroup);
+  public ProductViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
+    final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+    final ViewGroup mainGroup = (ViewGroup) inflater.inflate(R.layout.product_card, parent, false);
+    final ProductViewHolder listHolder = new ProductViewHolder(mainGroup);
     return listHolder;
   }
 
   @Override
-  public void onBindViewHolder(final ProductViewHolder holder, int position) {
+  public void onBindViewHolder(final ProductViewHolder holder, final int position) {
     final Product product = products.get(position);
 
     holder.productNameTxt.setText(product.getName());
-    String currencyCode = Currency.getInstance(Locale.US).getSymbol();
+    final String currencyCode = Currency.getInstance(Locale.US).getSymbol();
     holder.productPriceTxt.setText(currencyCode + product.getMemberPrice().toString());
-    Picasso picasso = new Picasso.Builder(context).memoryCache(new LruCache(45000)).build();
+    final Picasso picasso = new Picasso.Builder(context).memoryCache(new LruCache(45000)).build();
     holder.progressBar.setVisibility(View.VISIBLE);
-    picasso.with(context).load("http://ak1.ostkcdn.com/images/products/" + product.getImageMedium1()).resize(500, 500)
+    picasso.with(context).load(BASE_IMAGE_URL + product.getImageMedium1()).resize(500, 500)
         .error(R.drawable.product_placeholder).into(holder.imageView, new Callback() {
           @Override
           public void onSuccess() {
@@ -62,6 +74,24 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
           }
         });
 
+    // OnClickListener on images to show Shared Element Transition example
+    holder.imageView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(final View v) {
+
+        final ImageView imageView = (ImageView) v;
+          Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        final byte[] b = baos.toByteArray();
+
+        final Intent intent = new Intent(activity, SharedElementActivity.class);
+        intent.putExtra("image", b);
+        final ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat
+            .makeSceneTransitionAnimation(activity, v, context.getString(R.string.test_shared_element_transition));
+        ActivityCompat.startActivity(activity, intent, transitionActivityOptions.toBundle());
+      }
+    });
   }
 
   @Override

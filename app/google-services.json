@@ -17,12 +17,24 @@
       },
       "oauth_client": [
         {
+          "client_id": "751274716012-f2fp90uqp3d8786u8jc1v8e9ljt5lqmo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.overstock.android.prototype",
+            "certificate_hash": "380BDA5B56A9F7802BE0D8586D07D2DE5AFF3277"
+          }
+        },
+        {
           "client_id": "751274716012-ei5adcf6mg79hfj5i8s93isfimvareqt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.overstock.android.prototype",
             "certificate_hash": "AE6BC42D8E23977FEF1DC2FCEC0052993CAF321D"
           }
+        },
+        {
+          "client_id": "751274716012-q3aoerq2umfdfdevk7q6ujf9696e0gj7.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [],

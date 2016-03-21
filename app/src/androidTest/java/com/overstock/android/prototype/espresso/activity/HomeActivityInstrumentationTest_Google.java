@@ -82,6 +82,6 @@ public class HomeActivityInstrumentationTest_Google {
     public void validateGoogleLoginButtonClicked(){
 
         onView(withId(R.id.googlePlus_login_btn)).perform(click());
-        onView(withId(R.id.your_interests_title)).check(matches(isDisplayed()));
+        onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
     }
 }

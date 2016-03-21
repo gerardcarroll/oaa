@@ -13,7 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.activity.YourInterestsActivity;
+import com.overstock.android.prototype.activity.CommunitiesActivity;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
 
@@ -24,13 +24,13 @@ import javax.inject.Inject;
  */
 public class GoogleFederatedIdentityFragment extends Fragment {
 
-    private static final String TAG = GoogleFederatedIdentityFragment.class.getName();
+    public  static final String TAG = GoogleFederatedIdentityFragment.class.getName();
 
     private static final int RC_SIGN_IN = 9001;
 
-    private ProgressDialog mProgressDialog;
-
     @Inject OappGoogleAuthService oappGoogleAuthService;
+
+    private ProgressDialog mProgressDialog;
 
     public GoogleFederatedIdentityFragment() {
     }
@@ -93,7 +93,7 @@ public class GoogleFederatedIdentityFragment extends Fragment {
             toast.setGravity(Gravity.BOTTOM, 0, 0);
             toast.show();
 
-            final Intent signInIntent = new Intent(getActivity(), YourInterestsActivity.class);
+            final Intent signInIntent = new Intent(getActivity(), CommunitiesActivity.class);
             startActivity(signInIntent);
         } else {
             Toast.makeText(this.getContext(), "Not logged in", Toast.LENGTH_SHORT).show();
@@ -102,7 +102,7 @@ public class GoogleFederatedIdentityFragment extends Fragment {
 
     private void signIn() {
         final Intent signInIntent = oappGoogleAuthService.signIn();
-        if(signInIntent != null) {
+        if (signInIntent != null) {
             startActivityForResult(signInIntent, RC_SIGN_IN);
         }
     }
@@ -127,6 +127,5 @@ public class GoogleFederatedIdentityFragment extends Fragment {
     public String toString() {
         return "";
     }
-
 
 }

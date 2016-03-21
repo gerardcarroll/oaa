@@ -29,7 +29,8 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static org.hamcrest.Matchers.not;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.core.IsNot.not;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -82,11 +83,9 @@ public class AppInstrumentationTest_E2E {
     }
 
     @Test
-    public void alreadySignedInWithGPlus(){
+    public void appTest(){
 
         onView(withId(R.id.googlePlus_login_btn)).perform(click());
-        onView(withId(R.id.your_interests_title)).check(matches(isDisplayed()));
-        onView(withId(R.id.your_interests_communities_btn)).perform(click());
         onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
         onView(withId(R.id.btnCommunitySelection)).check(matches(not(isEnabled())));
         onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
@@ -96,9 +95,17 @@ public class AppInstrumentationTest_E2E {
         onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
         onView(withId(R.id.btnCommunitySelection)).check(matches(isEnabled()));
         onView(withId(R.id.btnCommunitySelection)).perform(click());
-        onView(withId(R.id.your_interests_nfl_btn)).check(matches(isDisplayed()));
-        onView(withId(R.id.your_interests_nfl_btn)).perform(click());
-        onView(withId(R.id.brand_toolbar)).check(matches(isDisplayed()));
+        onView(withId(R.id.feed_tabs)).check(matches(isDisplayed()));
+        onView(withText(activityRule.getActivity().getString(R.string.my_feed_tab))).perform(click());
+        onView(withId(R.id.feed_viewpager)).check(matches(isDisplayed()));
+        onView(withText(activityRule.getActivity().getString(R.string.trending_tab))).perform(click());
+        onView(withText(activityRule.getActivity().getString(R.string.my_location_tab))).perform(click());
+
+//        onView(withText("Top NFL Fan Products")).check(matches(isDisplayed()));
+
+//        onView(withId(R.id.your_interests_nfl_btn)).check(matches(isDisplayed()));
+//        onView(withId(R.id.your_interests_nfl_btn)).perform(click());
+//        onView(withId(R.id.brand_toolbar)).check(matches(isDisplayed()));
 
     }
 }

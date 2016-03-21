@@ -1,29 +1,74 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+        maven { url 'https://plugins.gradle.org/m2/'}
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+        classpath 'net.researchgate:gradle-release:2.3.4'
+    }
+}
+plugins {
+    id 'net.researchgate.release' version '2.3.4'
+}
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+}
+
+apply plugin: 'net.researchgate.release'
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric' // i.e. crashlytics
 apply plugin: 'com.neenbedankt.android-apt'
 
 android {
+    defaultConfig {
+        applicationId "com.overstock.android.prototype"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        archivesBaseName = "OApp"
+        minSdkVersion 19
+        targetSdkVersion 23
+
+        versionCode System.getenv("BUILD_NUMBER") as Integer ?: 9999
+        versionName "${version}"
+    }
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    lintOptions {
+        checkReleaseBuilds false // TODO remove
+        abortOnError false // TODO remove
+    }
+
     signingConfigs {
+        release {
+            keyAlias 'oapp_proto_rel'
+            keyPassword System.getenv("KEY_PASSWORD")
+            storeFile file('oapp_prototype_release.jks')
+            storePassword System.getenv("STORE_PASSWORD")
+        }
         debug {
             keyAlias 'oappprototype'
             keyPassword 'android'
             storeFile file('oapp_prototype_key.keystore')
             storePassword 'android'
+            ext.enableCrashlytics = false
         }
     }
 
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
-    defaultConfig {
-        applicationId "com.overstock.android.prototype"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        minSdkVersion 19
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
-    }
     buildTypes {
         release {
-            minifyEnabled false
+            // minifyEnabled true TODO uncomment
+            shrinkResources true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            ext.betaDistributionReleaseNotes="First Release." // TODO externalize, define template, etc.
+            ext.betaDistributionEmails="euro-white@overstock.com" // TODO externalize
+        }
+        debug {
+            signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
@@ -33,10 +78,13 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     testCompile "org.mockito:mockito-core:1.10.19"
 
+    testCompile "org.robolectric:robolectric:3.0"
+    testCompile "org.robolectric:shadows-support-v4:3.0"
+    testCompile "org.mockito:mockito-core:1.+"
     apt 'com.google.dagger:dagger-compiler:2.0.2'
     provided 'org.glassfish:javax.annotation:10.0-b28'
     apt 'com.github.frankiesardo:auto-parcel-processor:0.3.1'
@@ -78,6 +126,8 @@ dependencies {
     androidTestCompile 'org.mockito:mockito-core:1.10.19'
     androidTestCompile 'com.github.fabioCollini:DaggerMock:0.5'
 
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'io.reactivex:rxandroid:1.1.0'
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.android.support:support-v4:23.2.0'
     compile 'com.jakewharton:butterknife:7.0.1'
@@ -92,14 +142,21 @@ dependencies {
     compile 'frankiesardo:icepick:3.2.0'
     compile 'com.android.support:design:23.2.0'
     compile 'com.android.support:palette-v7:23.2.0'
-    compile 'io.reactivex:rxandroid:1.1.0'
     compile 'com.google.code.gson:gson:2.4'
     compile 'io.reactivex:rxjava:1.1.1'
-    compile 'io.reactivex:rxandroid:1.1.0'
     compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
     compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'com.vstechlab.easyfonts:easyfonts:1.0.0'
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+        transitive = true;
+    }
+}
+
+apply plugin: 'com.google.gms.google-services'
+afterEvaluate {
+    afterReleaseBuild.dependsOn crashlyticsUploadDistributionRelease
 }
 
 apply plugin: 'com.google.gms.google-services'
