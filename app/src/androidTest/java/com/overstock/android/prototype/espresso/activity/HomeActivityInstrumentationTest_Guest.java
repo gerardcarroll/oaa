@@ -1,4 +1,4 @@
-package com.overstock.android.prototype.espresso;
+package com.overstock.android.prototype.espresso.activity;
 
 import android.app.Instrumentation;
 import android.support.test.InstrumentationRegistry;
@@ -22,7 +22,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 /**
  * @author LeeMeehan Created on 01-Mar-16.
  */
-public class HomeActivityInstrumentationTest {
+public class HomeActivityInstrumentationTest_Guest {
 
   @Rule
   public ActivityTestRule<HomeActivity> activityTestRule = new ActivityTestRule<HomeActivity>(HomeActivity.class);
@@ -30,18 +30,6 @@ public class HomeActivityInstrumentationTest {
   @Before
   public void setUp(){
     Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
-  }
-
-  @Test
-  public void validateFaceBookLoginButtonClicked() {
-    onView(withId(R.id.facebook_login_btn)).perform(click());
-    onView(withText(R.string.faceBook_login_toast)).inRoot(CustomMatcher.isToast()).check(matches(isDisplayed()));
-  }
-
-  @Test
-  public void validateGooglePlusLoginButtonClicked() {
-    onView(withId(R.id.googlePlus_login_btn)).perform(click());
-    // TODO validate that login has occurred.
   }
 
   @Test
