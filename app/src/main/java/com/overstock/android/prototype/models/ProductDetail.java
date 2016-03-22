@@ -5,6 +5,7 @@ package com.overstock.android.prototype.models;
  */
 public class ProductDetail {
 
+    private int id;
     private String name;
     private String imageMedium1;
     private String memberPrice;
@@ -12,13 +13,22 @@ public class ProductDetail {
     private int quantity;
     private String description;
 
-    public ProductDetail(String name, String image, String price, String[] options, int quantity, String description) {
+    public ProductDetail(int id, String name, String image, String price, String[] options, int quantity, String description) {
+        this.id = id;
         this.name = name;
         this.imageMedium1 = image;
         this.memberPrice = price;
         this.options = options;
         this.quantity = quantity;
         this.description = description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -33,39 +43,19 @@ public class ProductDetail {
         return imageMedium1;
     }
 
-    public void setImageMedium1(String imageMedium1) {
-        this.imageMedium1 = imageMedium1;
-    }
-
     public String getMemberPrice() {
         return memberPrice;
-    }
-
-    public void setMemberPrice(String memberPrice) {
-        this.memberPrice = memberPrice;
     }
 
     public String[] getOptions() {
         return options;
     }
 
-    public void setOptions(String[] options) {
-        this.options = options;
-    }
-
     public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }

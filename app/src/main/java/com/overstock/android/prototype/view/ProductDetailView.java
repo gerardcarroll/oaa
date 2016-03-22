@@ -5,6 +5,6 @@ package com.overstock.android.prototype.view;
  */
 public interface ProductDetailView {
 
-    void displayProductDetails(final String productDetails);
+    void displayProductDetails(final String productDetail);
 
 }

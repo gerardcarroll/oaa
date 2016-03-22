@@ -8,6 +8,8 @@ import com.overstock.android.prototype.models.ProductDataService;
 import com.overstock.android.prototype.module.scope.ApplicationScope;
 import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.presenter.BrandPresenterImpl;
+import com.overstock.android.prototype.presenter.ProductDetailPresenter;
+import com.overstock.android.prototype.presenter.ProductDetailPresenterImpl;
 
 import dagger.Module;
 import dagger.Provides;
@@ -33,6 +35,11 @@ public class ApplicationModule {
   @Provides
   public BrandPresenter brandPresenter(final ProductDataService productDataService) {
     return new BrandPresenterImpl(productDataService);
+  }
+
+  @Provides
+  public ProductDetailPresenter productDetailPresenter(final ProductDataService productDataService){
+    return new ProductDetailPresenterImpl(productDataService);
   }
 
   @Provides

@@ -56,6 +56,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
   public void onBindViewHolder(final ProductViewHolder holder, final int position) {
     final Product product = products.get(position);
 
+    final int id = product.getId();
+
     holder.productNameTxt.setText(product.getName());
     final String currencyCode = Currency.getInstance(Locale.US).getSymbol();
     holder.productPriceTxt.setText(currencyCode + product.getMemberPrice().toString());
@@ -85,11 +87,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         final byte[] b = baos.toByteArray();
 
+
         String name = holder.productNameTxt.getText().toString();
         String price = holder.productPriceTxt.getText().toString();
 
         final Intent intent = new Intent(activity, ProductDetailActivity.class);
         intent.putExtra("image", b);
+        intent.putExtra("id", id);
         intent.putExtra("name", name);
         intent.putExtra("price", price);
         final ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat

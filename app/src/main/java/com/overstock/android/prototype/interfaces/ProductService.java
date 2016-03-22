@@ -21,4 +21,7 @@ public interface ProductService {
   @GET("product.json?prod_id=8789213")
   Observable<ProductDetail> getProductDetails();
 
+//  @GET("product.json?prod_id={id}")
+//  Observable<ProductDetail> getProductDetails(@Query("id") String id);
+
 }

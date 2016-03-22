@@ -19,7 +19,7 @@ import rx.subscriptions.Subscriptions;
  */
 public class ProductDetailPresenterImpl implements ProductDetailPresenter {
 
-    private static final String TAG = BrandPresenterImpl.class.getName();
+    private static final String TAG = ProductDetailPresenterImpl.class.getName();
 
     private Subscription subscription = Subscriptions.empty();
 
@@ -64,7 +64,7 @@ public class ProductDetailPresenterImpl implements ProductDetailPresenter {
                     @Override
                     public void onNext(ProductDetail productDetail) {
                         Log.i("SUCCESS", " Product Details successfully loaded");
-                        //productDetailView.displayProductDetails((ProductDetail) productDetail.get);
+                        productDetailView.displayProductDetails(productDetail.getDescription());
                     }
                 });
     }

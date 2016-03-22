@@ -1,5 +1,6 @@
 package com.overstock.android.prototype.expresso.component;
 
+import com.overstock.android.prototype.activity.ProductDetailActivity;
 import com.overstock.android.prototype.fragment.BrandFragment;
 import com.overstock.android.prototype.models.ProductDataService;
 
@@ -9,4 +10,5 @@ import com.overstock.android.prototype.models.ProductDataService;
 public interface ApplicationInject {
     void inject(final BrandFragment brandFragment);
     void inject(final ProductDataService productDataService);
+    void inject(final ProductDetailActivity productDetailActivity);
 }

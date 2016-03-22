@@ -13,6 +13,14 @@
         android:transitionName="@string/shared_element_transition"/>
 
     <TextView
+        android:id="@+id/product_detail_product_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="12dp"/>
+
+    <TextView
         android:id="@+id/product_detail_product_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,8 +42,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp"
-        android:layout_marginTop="15dp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempor vel nisl in aliquet.
+        android:layout_marginTop="15dp" />
+    <!--android:layout_below="@+id/product_detail_product_price"
+    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempor vel nisl in aliquet.
                       Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
                       Nulla facilisi. Etiam id magna sodales ipsum tristique condimentum ut at justo. Ut posuere
                       rhoncus placerat. Donec lobortis, tellus sit amet auctor rutrum, dolor tellus pellentesque sem,
@@ -45,7 +54,6 @@
                       Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
                       Nulla facilisi. Etiam id magna sodales ipsum tristique condimentum ut at justo. Ut posuere
                       rhoncus placerat. Donec lobortis, tellus sit amet auctor rutrum, dolor tellus pellentesque sem,
-                      eget hendrerit sem velit vitae ante." />
-    <!--android:layout_below="@+id/product_detail_product_price"-->
+                      eget hendrerit sem velit vitae ante."-->
 
 </LinearLayout>
