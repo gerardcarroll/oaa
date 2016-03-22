@@ -4,8 +4,10 @@ import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
@@ -16,6 +18,7 @@ import android.widget.Button;
 
 import com.overstock.android.prototype.BuildConfig;
 import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.fragment.GoogleFederatedIdentityFragment;
 import com.overstock.android.prototype.fragment.HomeFragment;
 
 /**
@@ -26,6 +29,11 @@ import com.overstock.android.prototype.fragment.HomeFragment;
 @Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP)
 @RunWith(RobolectricGradleTestRunner.class)
 public class HomeActivityTest {
+
+  //@Rule public HomeActivityFragmentsModuleMockRule homeActivityMock = new HomeActivityFragmentsModuleMockRule();
+
+  @Mock
+  GoogleFederatedIdentityFragment googleFederatedIdentityFragment;
 
   private HomeActivity homeActivity;
 
@@ -56,10 +64,11 @@ public class HomeActivityTest {
   @Test
   public void testGooglePlusLoginButton_CLICKED() {
     Button googlePlusButton = (Button) homeFragment.getView().findViewById(R.id.googlePlus_login_btn);
-   // googlePlusButton.performClick();
-//    GoogleFederatedIdentityFragment googleFederatedIdentityFragment = (GoogleFederatedIdentityFragment) homeActivity
-//        .getSupportFragmentManager().findFragmentByTag(GoogleFederatedIdentityFragment.TAG);
-//    assertNotNull(googleFederatedIdentityFragment);
+    googlePlusButton.performClick();
+
+    GoogleFederatedIdentityFragment googleFederatedIdentityFragment = (GoogleFederatedIdentityFragment) homeActivity
+        .getSupportFragmentManager().findFragmentByTag(GoogleFederatedIdentityFragment.TAG);
+    assertNotNull(googleFederatedIdentityFragment);
   }
 
   @Test
@@ -73,6 +82,5 @@ public class HomeActivityTest {
     Button guestLogin = (Button) homeFragment.getView().findViewById(R.id.guest_login_btn);
     guestLogin.performClick();
   }
-
 
 }
