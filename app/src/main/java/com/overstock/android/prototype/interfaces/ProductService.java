@@ -1,11 +1,9 @@
 package com.overstock.android.prototype.interfaces;
 
+import com.overstock.android.prototype.models.ProductDetail;
 import com.overstock.android.prototype.models.ProductsResponse;
 
-import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.Part;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -19,5 +17,8 @@ public interface ProductService {
 
   @GET("search.json?keywords=football+jersey&count=30")
   Observable<ProductsResponse> getNewArrivals(@Query("sort") String sortValue);
+
+  @GET("product.json?prod_id=8789213")
+  Observable<ProductDetail> getProductDetails();
 
 }

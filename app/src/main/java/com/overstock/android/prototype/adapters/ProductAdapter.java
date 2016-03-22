@@ -85,8 +85,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         final byte[] b = baos.toByteArray();
 
+        String name = holder.productNameTxt.getText().toString();
+        String price = holder.productPriceTxt.getText().toString();
+
         final Intent intent = new Intent(activity, ProductDetailActivity.class);
         intent.putExtra("image", b);
+        intent.putExtra("name", name);
+        intent.putExtra("price", price);
         final ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat
             .makeSceneTransitionAnimation(activity, v, context.getString(R.string.shared_element_transition));
         ActivityCompat.startActivity(activity, intent, transitionActivityOptions.toBundle());
