@@ -1,6 +1,8 @@
 package com.overstock.android.prototype.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -93,10 +95,12 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
         if (com.isSelected()) {
           com.setSelected(false);
           holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_default);
-        }
-        else {
+          //holder.communityImage.clearColorFilter();
+          holder.cardView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.continue_btn_bounce_revert));
+        } else {
           com.setSelected(true);
           holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_green);
+          //holder.communityImage.setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
         }
 
         if (mOnDataChangeListener != null) {
