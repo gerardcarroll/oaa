@@ -53,38 +53,6 @@ public class ProductDataServiceTest {
         testQuery(OappProviderContract.ProductEntry.NEWARRIVALS, "football jersey");
     }
 
-    @Test
-    public void testQuerySortedByNewArrivalsTmp() {
-        productDataService.getNewArrivals().subscribe(new Observer<ProductsResponse>() {
-            @Override
-            public void onCompleted() {
-                Log.i(this.getClass().getName(), "Complete");
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.e(this.getClass().getName(), "ERROR");
-            }
-
-            @Override
-            public void onNext(ProductsResponse productsResponse) {
-                Assert.assertNotNull(productsResponse);
-                Assert.assertNotNull(productsResponse.getProducts());
-                Assert.assertNotNull(productsResponse.getProducts().getProductsList());
-                Assert.assertEquals(productsResponse.getProducts().getProductsList().size(), 30);
-                for (Product product : productsResponse.getProducts().getProductsList()) {
-                    Assert.assertNotNull(product);
-                    Assert.assertNotNull(product.getImageMedium1());
-                    Assert.assertTrue(product.getImageMedium1().contains(".jpg"));
-                    Assert.assertNotNull(product.getMemberPrice());
-                    Assert.assertTrue(product.getMemberPrice() > 0);
-                    Assert.assertNotNull(product.getName());
-                }
-            }
-        });
-    }
-
-
     private void testQuery(String sortOrder, String keywords){
         Observable<ProductsResponse> bestSellers = productDataService.query(Uri.parse("content://com.overstock.android.prototype/products/" + sortOrder).buildUpon()
                         .appendQueryParameter(ProductService.PRODUCT_SERVICE_QUERY_PARAM_NAME_COUNT, "30")

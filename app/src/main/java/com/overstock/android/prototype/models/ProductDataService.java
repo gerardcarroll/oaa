@@ -2,7 +2,6 @@ package com.overstock.android.prototype.models;
 
 import android.content.UriMatcher;
 import android.net.Uri;
-import android.util.Log;
 
 import com.overstock.android.prototype.interfaces.OappProvider;
 import com.overstock.android.prototype.interfaces.ProductService;
@@ -40,10 +39,10 @@ public class ProductDataService implements OappProvider<ProductsResponse> {
 //    return productService.getBestSellers(bestSellers);
 //  }
 //
-  public Observable<ProductsResponse> getNewArrivals() {
-    Log.d(TAG, "Getting Observable ProductResponse from client.");
-    return productService.getNewArrivals(newArrivals);
-  }
+//  public Observable<ProductsResponse> getNewArrivals() {
+//    Log.d(TAG, "Getting Observable ProductResponse from client.");
+//    return productService.getNewArrivals(newArrivals);
+//  }
 
   @Override
   public Observable<ProductsResponse> query(Uri uri) {
@@ -56,7 +55,6 @@ public class ProductDataService implements OappProvider<ProductsResponse> {
                 Integer.valueOf(uri.getQueryParameter(ProductService.PRODUCT_SERVICE_QUERY_PARAM_NAME_COUNT))
         );
       case ProductEntry_NEWARRIVALS:
-//        return productService.getNewArrivals(newArrivals);
         return productService.query(
                 uri.getQueryParameter(ProductService.PRODUCT_SERVICE_QUERY_PARAM_NAME_KEYWORDS),
                 newArrivals,

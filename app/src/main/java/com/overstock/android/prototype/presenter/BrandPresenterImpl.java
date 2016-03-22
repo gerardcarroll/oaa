@@ -2,7 +2,6 @@ package com.overstock.android.prototype.presenter;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.overstock.android.prototype.models.Product;
 import com.overstock.android.prototype.models.ProductDataService;
 import com.overstock.android.prototype.models.ProductsResponse;
@@ -92,8 +91,6 @@ public class BrandPresenterImpl implements BrandPresenter {
           @Override
           public void onNext(ProductsResponse productsResponse) {
             Log.i("SUCCESS", "New Arrivals successfully loaded");
-            Log.i("SUCCESS", "*******  " + new Gson().toJson(productsResponse));
-
             brandView.displayNewArrivals((ArrayList<Product>) productsResponse.getProducts().getProductsList());
           }
         });
