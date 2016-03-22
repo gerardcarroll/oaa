@@ -8,7 +8,7 @@ import retrofit2.http.Query;
 import rx.Observable;
 
 /**
- * Created by rConnolly on 3/8/2016.
+ * Created by RayConnolly on 3/8/2016.
  */
 public interface ProductService {
 
