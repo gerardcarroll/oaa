@@ -56,9 +56,6 @@ public class HomeFragment extends Fragment {
 
   @OnClick(R.id.guest_login_btn)
   public void guestLogin_onClick() {
-    // final Toast toast = Toast.makeText(getActivity(), "Guest Login Coming Soon!", Toast.LENGTH_SHORT);
-    // toast.setGravity(Gravity.BOTTOM, 0, 20);
-    // toast.show();
     final ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(getContext(),
       R.transition.slide_in_vertical, R.transition.slide_out_vertical);
     startActivity(new Intent(getActivity(), CommunitiesActivity.class), options.toBundle());

@@ -113,7 +113,6 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
     // implement the listener for the communities adapter to update the progress button
     communitiesAdapter.setOnDataChangeListener(new CommunitiesAdapter.OnDataChangeListener() {
 
-      @TargetApi(Build.VERSION_CODES.LOLLIPOP)
       @Override
       public void onDataChanged(final int size) {
 
