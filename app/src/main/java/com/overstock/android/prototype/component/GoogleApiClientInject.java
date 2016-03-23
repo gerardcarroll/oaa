@@ -1,4 +1,4 @@
-package com.overstock.android.prototype.expresso.component;
+package com.overstock.android.prototype.component;
 
 import com.overstock.android.prototype.fragment.GoogleFederatedIdentityFragment;
 

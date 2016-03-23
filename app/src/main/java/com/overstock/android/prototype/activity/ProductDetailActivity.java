@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.component.ApplicationComponent;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
 import com.overstock.android.prototype.view.ProductDetailView;
@@ -50,7 +51,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    ((OAppPrototypeApplication) this.getApplication()).getComponent().inject(this);
+    ApplicationComponent.Initializer.init(this.getApplication()).inject(this);
     setContentView(R.layout.activity_product_detail);
     ButterKnife.bind(this);
 

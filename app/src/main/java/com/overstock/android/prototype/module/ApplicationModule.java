@@ -10,6 +10,7 @@ import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.presenter.BrandPresenterImpl;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
 import com.overstock.android.prototype.presenter.ProductDetailPresenterImpl;
+import com.overstock.android.prototype.service.OappGoogleAuthService;
 
 import dagger.Module;
 import dagger.Provides;
@@ -23,17 +24,17 @@ public class ApplicationModule {
 
   Application application;
 
-  public ApplicationModule(Application application){
+  public  ApplicationModule(Application application){
     this.application = application;
   }
 
   @Provides
-  Application providesApplication(){
+  public Application providesApplication(){
     return application;
   }
 
   @Provides
-  public BrandPresenter brandPresenter(final ProductDataService productDataService) {
+  public BrandPresenter providesBrandPresenter(final ProductDataService productDataService) {
     return new BrandPresenterImpl(productDataService);
   }
 
@@ -42,14 +43,18 @@ public class ApplicationModule {
     return new ProductDetailPresenterImpl(productDataService);
   }
 
-  @Provides
-  public ProductDataService productDataService(final ProductService productService){
+  public ProductDataService providesProductDataService(final ProductService productService){
     return new ProductDataService(productService);
   }
 
   @Provides
-  public ProductService productService() {
+  public ProductService providesProductService() {
     return TheOAppClient.getClient();
+  }
+
+  @Provides
+  public OappGoogleAuthService providesOappGoogleAuthService(Application application) {
+    return new OappGoogleAuthService(application);
   }
 
 }

@@ -1,4 +1,4 @@
-package com.overstock.android.prototype.expresso.component;
+package com.overstock.android.prototype.component;
 
 import android.app.Application;
 
@@ -11,8 +11,9 @@ import dagger.Component;
  * @author LeeMeehan Created on 03-Mar-16.
  */
 @ApplicationScope
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent extends ApplicationInject{
+@Component(
+        modules = {ApplicationModule.class})
+public interface ApplicationComponent extends ApplicationInject {
 
     public final static class Initializer{
         public static ApplicationComponent init(Application application){
