@@ -3,7 +3,9 @@ package com.overstock.android.prototype.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -12,6 +14,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.AnimationUtils;
@@ -110,6 +113,7 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
     // implement the listener for the communities adapter to update the progress button
     communitiesAdapter.setOnDataChangeListener(new CommunitiesAdapter.OnDataChangeListener() {
 
+      @TargetApi(Build.VERSION_CODES.LOLLIPOP)
       @Override
       public void onDataChanged(final int size) {
 
@@ -118,15 +122,20 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
         progressButton.setProgress(progress);
 
         if (progressButton.getProgress() == ONE_HUNDRED) {
-          progressButton.setEnabled(true);
-
-          progressButton
-              .startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.continue_btn_bounce));
+          if (!progressButton.isEnabled()) {
+            progressButton
+                .startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.continue_btn_bounce));
+          }
           progressButton.setAlpha(1f);
+          progressButton.setEnabled(true);
         }
         else {
-          progressButton.setEnabled(false);
+          if (progressButton.isEnabled()) {
+            progressButton.startAnimation(
+              AnimationUtils.loadAnimation(getApplicationContext(), R.anim.continue_btn_bounce_revert));
+          }
           progressButton.setAlpha(0.75f);
+          progressButton.setEnabled(false);
         }
       }
     });
