@@ -65,7 +65,7 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
 
     holder.progressBar.setVisibility(View.VISIBLE);
 
-    Picasso.with(context).load(community.getImageId()).into(holder.communityImage, new Callback() {
+    Picasso.with(context).load(community.getImageId()).resize(500,500).into(holder.communityImage, new Callback() {
       @Override
       public void onSuccess() {
         if (holder.progressBar != null) {
