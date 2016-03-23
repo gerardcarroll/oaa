@@ -1,5 +1,7 @@
 package com.overstock.android.prototype.fragment;
 
+import javax.inject.Inject;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -11,14 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.activity.CommunitiesActivity;
-import com.overstock.android.prototype.expresso.component.HomeActivityComponent;
-
-import javax.inject.Inject;
-
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.activity.CommunitiesActivity;
+import com.overstock.android.prototype.component.HomeActivityComponent;
 
 /**
  * @author LeeMeehan
