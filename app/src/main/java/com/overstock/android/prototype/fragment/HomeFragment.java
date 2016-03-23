@@ -1,6 +1,8 @@
 package com.overstock.android.prototype.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.activity.CommunitiesActivity;
 import com.overstock.android.prototype.expresso.component.HomeActivityComponent;
 
 import javax.inject.Inject;
@@ -53,9 +56,12 @@ public class HomeFragment extends Fragment {
 
   @OnClick(R.id.guest_login_btn)
   public void guestLogin_onClick() {
-    final Toast toast = Toast.makeText(getActivity(), "Guest Login Coming Soon!", Toast.LENGTH_SHORT);
-    toast.setGravity(Gravity.BOTTOM, 0, 20);
-    toast.show();
+    // final Toast toast = Toast.makeText(getActivity(), "Guest Login Coming Soon!", Toast.LENGTH_SHORT);
+    // toast.setGravity(Gravity.BOTTOM, 0, 20);
+    // toast.show();
+    final ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(getContext(),
+      R.transition.slide_in_vertical, R.transition.slide_out_vertical);
+    startActivity(new Intent(getActivity(), CommunitiesActivity.class), options.toBundle());
   }
 
 }
