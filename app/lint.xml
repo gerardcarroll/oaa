@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+
+	<!--  Always exclude lint analysis of build folders -->
+	<issue id="ResourceType">
+        	<ignore path="build"/>
+    	</issue>
+
+	<!--  Attribute "*" is only used in API level 21 and higher (current min is 19) -->
+	<issue id="UnusedAttribute">
+        	<ignore path="src/main/res/layout/activity_shared_element_scene_1.xml"/>
+        	<ignore path="src/main/res/layout/fragment_brand.xml"/>
+        	<ignore path="src/main/res/layout/fragment_home.xml"/>
+        	<ignore path="src/main/res/layout/product_card.xml"/>
+    	</issue>
+
+	<!-- Ignore warning about Obsolete Gradle Dependency, e.g A newer version of com.android.support:support-annotations than 23.2.0 is available: 24.0.0-alpha1 -->
+	<issue id="GradleDependency">
+        	<ignore path="build.gradle"/>
+    	</issue>
+
+	<!--  The resource "*" appears to be unused, TODO :fix prior to release-->
+	<issue id="UnusedResources" severity="ignore" />
+
+	<!--	Missing contentDescription attribute on image, TODO :fix prior to release -->
+	<issue id="ContentDescription" severity="ignore" />
+	
+	<!--  Image defined in density-independent drawable folder-->
+	<issue id="IconLocation" severity="ignore" />
+
+	<!-- https://github.com/square/okhttp/issues/1346 ignoring okio/retrofit -->
+	<issue id="InvalidPackage"  >
+		<ignore regexp="okio-1.6.0.jar" />
+		<ignore regexp="retrofit-2.0.0-beta4.jar" />
+	</issue>
+
+</lint>

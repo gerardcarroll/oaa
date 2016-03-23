@@ -15,7 +15,7 @@ import dagger.Component;
         modules = {ApplicationModule.class})
 public interface ApplicationComponent extends ApplicationInject {
 
-    public final static class Initializer{
+    final class Initializer{
         public static ApplicationComponent init(Application application){
             return DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(application)).build();
         }
