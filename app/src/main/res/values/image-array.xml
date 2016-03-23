@@ -2,24 +2,24 @@
 <resources>
 
 <array name="community_image_array">
-    <item>@drawable/man</item>
-    <item>@drawable/woman</item>
-    <item>@drawable/man_and_woman</item>
-    <item>@drawable/home_decor</item>
-    <item>@drawable/games</item>
-    <item>@drawable/leisure</item>
-    <item>@drawable/family</item>
-    <item>@drawable/gadgets</item>
-    <item>@drawable/furniture</item>
+    <item>@drawable/cat_men</item>
+    <item>@drawable/cat_women</item>
+    <item>@drawable/cat_men_and_women</item>
+    <item>@drawable/cat_home_decor</item>
+    <item>@drawable/cat_games</item>
+    <item>@drawable/cat_leisure</item>
+    <item>@drawable/cat_family_two</item>
+    <item>@drawable/cat_gadgets_two</item>
+    <item>@drawable/cat_furniture</item>
     <item>@drawable/bedding</item>
-    <item>@drawable/fitness</item>
-    <item>@drawable/home_automation</item>
-    <item>@drawable/mobility</item>
-    <item>@drawable/personal_care</item>
-    <item>@drawable/shoes</item>
-    <item>@drawable/sports_shoes</item>
-    <item>@drawable/technology</item>
-    <item>@drawable/watches</item>
+    <item>@drawable/cat_fitness</item>
+    <item>@drawable/cat_home_automation</item>
+    <item>@drawable/cat_mobility</item>
+    <item>@drawable/cat_personal_care</item>
+    <item>@drawable/cat_shoes</item>
+    <item>@drawable/cat_sports_shoes_two</item>
+    <item>@drawable/cat_technology</item>
+    <item>@drawable/cat_watches</item>
 </array>
 
 </resources>

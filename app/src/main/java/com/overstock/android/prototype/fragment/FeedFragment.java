@@ -54,8 +54,6 @@ public class FeedFragment extends Fragment {
             imagesArray[i] = typedArray.getResourceId(i, 0);
         }
 
-        final String[] names = getContext().getResources().getStringArray(R.array.feed_string_array);
-
         feeds.add(new Feed(imagesArray[0],"Top NFL Fan Products for 2016","NFL.com"));
         feeds.add(new Feed(imagesArray[1],"Sleep like a God with These Beds","BestBeds.com"));
         feeds.add(new Feed(imagesArray[2],"Must Have Products to get in Shape","fitness.com"));
