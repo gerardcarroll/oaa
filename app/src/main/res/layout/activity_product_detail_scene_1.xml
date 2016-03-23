@@ -1,59 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <ImageView
         android:id="@+id/product_detail_activity_shared_image_1"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:scaleType="fitXY"
-        android:transitionName="@string/shared_element_transition"/>
+        android:src="@drawable/cat_technology"
+        android:transitionName="@string/shared_element_transition" />
 
     <TextView
-        android:id="@+id/product_detail_product_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginTop="12dp"/>
-
-    <TextView
+        android:text="Beats By Dre"
         android:id="@+id/product_detail_product_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginTop="12dp" />
-    <!--android:layout_below="@+id/product_detail_activity_shared_image_1"-->
+        android:layout_marginTop="12dp"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/product_detail_product_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:textSize="16sp"
-        android:layout_marginTop="10dp" />
-    <!--android:layout_below="@+id/product_detail_product_name"-->
+        android:text="$200.99"/>
 
     <TextView
         android:id="@+id/product_detail_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:layout_marginTop="15dp" />
-    <!--android:layout_below="@+id/product_detail_product_price"
-    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempor vel nisl in aliquet.
+        android:layout_marginTop="15dp"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempor vel nisl in aliquet.
                       Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
                       Nulla facilisi. Etiam id magna sodales ipsum tristique condimentum ut at justo. Ut posuere
                       rhoncus placerat. Donec lobortis, tellus sit amet auctor rutrum, dolor tellus pellentesque sem,
                       eget hendrerit sem velit vitae ante.
-
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempor vel nisl in aliquet.
                       Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
                       Nulla facilisi. Etiam id magna sodales ipsum tristique condimentum ut at justo. Ut posuere
                       rhoncus placerat. Donec lobortis, tellus sit amet auctor rutrum, dolor tellus pellentesque sem,
-                      eget hendrerit sem velit vitae ante."-->
+                      eget hendrerit sem velit vitae ante."
+        android:textSize="14sp" />
 
 </LinearLayout>

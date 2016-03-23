@@ -32,9 +32,6 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   @Inject
   ProductDetailPresenter presenter;
 
-  @Bind(R.id.product_detail_product_id)
-  TextView productId;
-
   @Bind(R.id.product_detail_product_name)
   TextView productName;
 
@@ -71,7 +68,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     final ImageView image = (ImageView) findViewById(R.id.product_detail_activity_shared_image_1);
     image.setImageBitmap(bmp);
 
-    productId.setText(String.valueOf(id));
+    //productId.setText(String.valueOf(id));
     productName.setText(name);
     productPrice.setText(price);
 
