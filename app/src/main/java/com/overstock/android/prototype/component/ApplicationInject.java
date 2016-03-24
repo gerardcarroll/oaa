@@ -13,11 +13,15 @@ import com.overstock.android.prototype.service.OappGoogleAuthService;
  */
 public interface ApplicationInject {
 
-    Application application();
+  Application application();
 
-    void inject(final BrandFragment brandFragment);
-    void inject(final ProductDataService productDataService);
-    void inject(final OappGoogleAuthService oappGoogleAuthService);
-    void inject(final GoogleFederatedIdentityFragment googleFederatedIdentityFragment);
-    void inject(final ProductDetailActivity productDetailActivity);
+  void inject(final BrandFragment brandFragment);
+
+  void inject(final ProductDataService productDataService);
+
+  void inject(final OappGoogleAuthService oappGoogleAuthService);
+
+  void inject(final GoogleFederatedIdentityFragment googleFederatedIdentityFragment);
+
+  void inject(final ProductDetailActivity productDetailActivity);
 }

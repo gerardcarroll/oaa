@@ -51,7 +51,7 @@
     <string name="feed_fragment">Feed Fragment</string>
     <string name="feed_nfl_link_text">Top NFL Fan Products for 2016</string>
     <string name="trending_fragment">Trending Fragment</string>
-    <string name="trending_text">These are the latest trending products...</string>
+    <string name="trending_text">These are the latest trending products&#8230;</string>
     <string name="my_location_fragment">My Location Fragment</string>
     <string name="my_location_text">You current location is Sligo, Ireland</string>
 
@@ -62,4 +62,15 @@
 
     <!-- Shared Element Transition Names-->
     <string name="shared_element_transition">brand_element_image</string>
+    <string name="test_shared_element_transition">brand_element_image</string>
+    <string name="product_price_fmt" >%1$s %2$s</string>
+    <string name="apply_transition_label">Apply Transition</string>
+    <string name="womens_assessories_label">Women\'s Accessories</string>
+    <string name="jersey_label">Jerseys</string>
+    <string name="best_sellers_label">Best Sellers</string>
+    <string name="new_arrivals_label">New Arrivals</string>
+    <string name="top_nfl_prod_label">Top NFL Fan Products for 2016</string>
+    <string name="nfl_dot_com_label">NFL.com</string>
+    <string name="raider_jersey_label">Raiders Jersey</string>
+    <string name="raider_jersey_price_label">$65</string>
 </resources>

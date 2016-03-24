@@ -37,16 +37,6 @@ public class ProductDataService implements OappProvider<ProductsResponse> {
     this.productService = productService;
   }
 
-  // public Observable<ProductsResponse> getBestSellers() {
-  // Log.d(TAG, "Getting Observable ProductResponse from client.");
-  // return productService.getBestSellers(bestSellers);
-  // }
-  //
-  // public Observable<ProductsResponse> getNewArrivals() {
-  // Log.d(TAG, "Getting Observable ProductResponse from client.");
-  // return productService.getNewArrivals(newArrivals);
-  // }
-
   @Override
   public Observable<ProductsResponse> query(Uri uri) {
 

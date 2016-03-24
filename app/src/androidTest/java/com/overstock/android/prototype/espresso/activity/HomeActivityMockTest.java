@@ -14,6 +14,7 @@ import com.overstock.android.prototype.fragment.HomeFragment;
 import junit.framework.Assert;
 
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
@@ -44,7 +45,7 @@ public class HomeActivityMockTest {
 
     @Mock HomeFragment homeFragment;
 
-    //@Test
+    @Test
     public void mockGuestClick(){
         Assert.assertNotNull(homeFragment);
 

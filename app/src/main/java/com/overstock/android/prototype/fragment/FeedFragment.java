@@ -52,6 +52,7 @@ public class FeedFragment extends Fragment {
         for (int i = 0; i < len; i++) {
             imagesArray[i] = typedArray.getResourceId(i, 0);
         }
+        typedArray.recycle();
 
         feeds.add(new Feed(imagesArray[0],"Top NFL Fan Products for 2016","NFL.com"));
         feeds.add(new Feed(imagesArray[1],"Sleep like a God with These Beds","BestBeds.com"));
