@@ -1,8 +1,5 @@
 package com.overstock.android.prototype.fragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,12 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.CustomFeedAdapter;
 import com.overstock.android.prototype.models.Feed;
+
+import java.util.ArrayList;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class FeedFragment extends Fragment {
 
@@ -53,6 +52,7 @@ public class FeedFragment extends Fragment {
         for (int i = 0; i < len; i++) {
             imagesArray[i] = typedArray.getResourceId(i, 0);
         }
+        typedArray.recycle();
 
         feeds.add(new Feed(imagesArray[0],"Top NFL Fan Products for 2016","NFL.com"));
         feeds.add(new Feed(imagesArray[1],"Sleep like a God with These Beds","BestBeds.com"));

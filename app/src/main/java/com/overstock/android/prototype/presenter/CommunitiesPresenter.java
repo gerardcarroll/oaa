@@ -1,13 +1,13 @@
 package com.overstock.android.prototype.presenter;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.view.CommunitiesMvpView;
 import com.overstock.android.prototype.models.Community;
+import com.overstock.android.prototype.view.CommunitiesMvpView;
+
+import java.util.ArrayList;
 
 /**
  * Created by itowey on 08/03/16.
@@ -42,6 +42,7 @@ public class CommunitiesPresenter {
     for (int i = 0; i < len; i++) {
       imagesArray[i] = typedArray.getResourceId(i, 0);
     }
+    typedArray.recycle();
 
     final String[] names = context.getResources().getStringArray(R.array.communities_array);
 

@@ -1,9 +1,7 @@
 package com.overstock.android.prototype.activity;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.support.v7.app.AppCompatActivity;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,11 +19,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import butterknife.Bind;
-import butterknife.BindInt;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 import com.dd.processbutton.iml.SubmitProcessButton;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.CommunitiesAdapter;
@@ -33,6 +26,13 @@ import com.overstock.android.prototype.models.Community;
 import com.overstock.android.prototype.presenter.CommunitiesPresenter;
 import com.overstock.android.prototype.view.CommunitiesMvpView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.Bind;
+import butterknife.BindInt;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import icepick.Icepick;
 import icepick.State;
 

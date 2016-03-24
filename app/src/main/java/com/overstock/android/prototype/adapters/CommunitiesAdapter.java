@@ -163,6 +163,7 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
       itemView.setOnTouchListener(new View.OnTouchListener() {
         @Override
         public boolean onTouch(final View v, final MotionEvent event) {
+          v.performClick();
           return false;
         }
       });
