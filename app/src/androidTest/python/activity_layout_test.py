@@ -1,13 +1,9 @@
 #
+#	Activity layout test for Samsung S6
 #
-#	HomeActivity layout test, compares the HomeActivity UI Image against a "baseline" HomeActivity UI Image
-#	any deviation should fail test 
+#		Device resolution : 1440x25601
+#       Device orientation : portrait
 #
-#		1. loads reference HomeActivity Ui Image
-#		2. starts device 
-#		3. Loads HomeActivity
-#		4. captures HomeActivity image
-#		5. compares images
 
 from com.android.monkeyrunner import MonkeyRunner, MonkeyDevice, MonkeyImage
 import time
