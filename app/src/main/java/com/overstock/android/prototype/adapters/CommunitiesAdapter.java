@@ -1,8 +1,9 @@
 package com.overstock.android.prototype.adapters;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,16 +15,13 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.models.Community;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * @author RayConnolly Created on 2/29/2016.
@@ -65,7 +63,7 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
 
     holder.progressBar.setVisibility(View.VISIBLE);
 
-    Picasso.with(context).load(community.getImageId()).resize(500,500).into(holder.communityImage, new Callback() {
+    Picasso.with(context).load(community.getImageId()).resize(500, 500).into(holder.communityImage, new Callback() {
       @Override
       public void onSuccess() {
         if (holder.progressBar != null) {
@@ -95,12 +93,13 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
         if (com.isSelected()) {
           com.setSelected(false);
           holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_default);
-          //holder.communityImage.clearColorFilter();
+          // holder.communityImage.clearColorFilter();
           holder.cardView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.continue_btn_bounce_revert));
-        } else {
+        }
+        else {
           com.setSelected(true);
           holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_green);
-          //holder.communityImage.setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+          // holder.communityImage.setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
         }
 
         if (mOnDataChangeListener != null) {
@@ -159,14 +158,6 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
 
       super(itemView);
       ButterKnife.bind(this, itemView);
-
-      itemView.setOnTouchListener(new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(final View v, final MotionEvent event) {
-          v.performClick();
-          return false;
-        }
-      });
     }
   }
 }
