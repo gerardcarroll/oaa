@@ -14,7 +14,7 @@ import dagger.Component;
 )
 public interface HomeActivityComponent extends HomeActivityInject {
 
-    public final static class Initializer {
+    final class Initializer {
         public static HomeActivityComponent init() {
             return DaggerHomeActivityComponent.builder()
                     .build();
