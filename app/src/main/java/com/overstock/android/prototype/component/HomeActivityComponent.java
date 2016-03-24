@@ -1,9 +1,11 @@
 package com.overstock.android.prototype.component;
 
+import com.overstock.android.prototype.activity.HomeActivity;
 import com.overstock.android.prototype.module.HomeActivityFragmentsModule;
 import com.overstock.android.prototype.module.scope.ActivityScope;
 
 import dagger.Component;
+import dagger.Provides;
 
 /**
  * Created by itowey on 11/03/16.
