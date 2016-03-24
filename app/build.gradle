@@ -154,7 +154,6 @@ dependencies {
     }
 }
 
-apply plugin: 'com.google.gms.google-services'
 afterEvaluate {
     afterReleaseBuild.dependsOn crashlyticsUploadDistributionRelease
 }
