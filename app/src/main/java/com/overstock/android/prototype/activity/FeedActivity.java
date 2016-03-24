@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
 
 public class FeedActivity extends AppCompatActivity {
 
-    @Bind(R.id.feed_toolbar)
+    @Bind(R.id.product_detail_toolbar)
     Toolbar toolbar;
 
     @Bind(R.id.feed_viewpager)
@@ -43,7 +43,6 @@ public class FeedActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
-
 
         setupViewPager(viewPager);
 

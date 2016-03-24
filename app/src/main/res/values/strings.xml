@@ -61,6 +61,7 @@
 
 
     <!-- Shared Element Transition Names-->
+    <string name="shared_element_transition">brand_element_image</string>
     <string name="test_shared_element_transition">brand_element_image</string>
     <string name="product_price_fmt" >%1$s %2$s</string>
     <string name="apply_transition_label">Apply Transition</string>

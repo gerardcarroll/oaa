@@ -25,7 +25,7 @@ import com.vstechlab.easyfonts.EasyFonts;
 /**
  * Created by RayConnolly on 3/16/2016.
  */
-public class CustomFeedAdapter extends RecyclerView.Adapter<CustomFeedAdapter.ViewHolder> {
+public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
   private Context context;
 
@@ -33,7 +33,7 @@ public class CustomFeedAdapter extends RecyclerView.Adapter<CustomFeedAdapter.Vi
 
   private List<Feed> feedItems = new ArrayList<>();
 
-  public CustomFeedAdapter(final List<Feed> items, final Context context, final Activity activity) {
+  public FeedAdapter(final List<Feed> items, final Context context, final Activity activity) {
     this.activity = activity;
     this.context = context;
     this.feedItems = items;
@@ -48,7 +48,7 @@ public class CustomFeedAdapter extends RecyclerView.Adapter<CustomFeedAdapter.Vi
   }
 
   @Override
-  public CustomFeedAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  public FeedAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
     View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_feed_card, parent, false);
 
@@ -58,7 +58,7 @@ public class CustomFeedAdapter extends RecyclerView.Adapter<CustomFeedAdapter.Vi
   }
 
   @Override
-  public void onBindViewHolder(CustomFeedAdapter.ViewHolder holder, int position) {
+  public void onBindViewHolder(FeedAdapter.ViewHolder holder, int position) {
 
     Feed feed = feedItems.get(position);
 

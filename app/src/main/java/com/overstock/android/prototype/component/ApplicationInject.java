@@ -2,10 +2,9 @@ package com.overstock.android.prototype.component;
 
 import android.app.Application;
 
-import com.overstock.android.prototype.activity.HomeActivity;
+import com.overstock.android.prototype.activity.ProductDetailActivity;
 import com.overstock.android.prototype.fragment.BrandFragment;
 import com.overstock.android.prototype.fragment.GoogleFederatedIdentityFragment;
-import com.overstock.android.prototype.fragment.HomeFragment;
 import com.overstock.android.prototype.models.ProductDataService;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
 
@@ -23,4 +22,6 @@ public interface ApplicationInject {
   void inject(final OappGoogleAuthService oappGoogleAuthService);
 
   void inject(final GoogleFederatedIdentityFragment googleFederatedIdentityFragment);
+
+  void inject(final ProductDetailActivity productDetailActivity);
 }

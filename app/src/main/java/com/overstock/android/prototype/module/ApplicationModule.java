@@ -11,6 +11,8 @@ import com.overstock.android.prototype.module.scope.ActivityScope;
 import com.overstock.android.prototype.module.scope.ApplicationScope;
 import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.presenter.BrandPresenterImpl;
+import com.overstock.android.prototype.presenter.ProductDetailPresenter;
+import com.overstock.android.prototype.presenter.ProductDetailPresenterImpl;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
 
 import dagger.Module;
@@ -42,6 +44,10 @@ public class ApplicationModule {
   }
 
   @Provides
+  public ProductDetailPresenter productDetailPresenter(final ProductDataService productDataService){
+    return new ProductDetailPresenterImpl(productDataService);
+  }
+
   public ProductDataService providesProductDataService(final ProductService productService){
     return new ProductDataService(productService);
   }
