@@ -95,42 +95,5 @@ public class BrandPresenterImpl implements BrandPresenter {
           }
         });
 
-//    subscription = productDataService .getBestSellers().subscribeOn(Schedulers.newThread())
-//        .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ProductsResponse>() {
-//          @Override
-//          public void onCompleted() {
-//            Log.d(TAG, "ProductDataService.GetProduct has no more data to emit.");
-//          }
-//
-//          @Override
-//          public void onError(Throwable e) {
-//            Log.e(TAG, "Error on subscribing to ProductDataService.GetProducts");
-//          }
-//
-//          @Override
-//          public void onNext(ProductsResponse productsResponse) {
-//            Log.d(TAG, "Next value on subscribing to ProductDataService.GetProducts");
-//            brandView.displayBestSellers((ArrayList<Product>) productsResponse.getProducts().getProductsList());
-//          }
-//        });
-//
-//    productDataService.getNewArrivals().subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-//        .subscribe(new Observer<ProductsResponse>() {
-//          @Override
-//          public void onCompleted() {
-//            Log.i("COMPLETED", "Finished loading New Arrivals");
-//          }
-//
-//          @Override
-//          public void onError(Throwable e) {
-//            Log.i("FAILURE", "Failed to load New Arrivals");
-//          }
-//
-//          @Override
-//          public void onNext(ProductsResponse productsResponse) {
-//            Log.i("SUCCESS", "New Arrivals successfully loaded");
-//            brandView.displayNewArrivals((ArrayList<Product>) productsResponse.getProducts().getProductsList());
-//          }
-//        });
   }
 }

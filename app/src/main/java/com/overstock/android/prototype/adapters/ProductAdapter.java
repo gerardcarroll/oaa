@@ -1,10 +1,5 @@
 package com.overstock.android.prototype.adapters;
 
-import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.Currency;
-import java.util.Locale;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +19,11 @@ import com.overstock.android.prototype.models.Product;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
+
+import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.Currency;
+import java.util.Locale;
 
 /**
  * @author LeeMeehan Created on 08-Mar-16.
@@ -58,7 +58,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
 
     holder.productNameTxt.setText(product.getName());
     final String currencyCode = Currency.getInstance(Locale.US).getSymbol();
-    holder.productPriceTxt.setText(currencyCode + product.getMemberPrice().toString());
+    holder.productPriceTxt.setText(context.getString(R.string.product_price_fmt, currencyCode ,product.getMemberPrice().toString()));
     final Picasso picasso = new Picasso.Builder(context).memoryCache(new LruCache(45000)).build();
     holder.progressBar.setVisibility(View.VISIBLE);
     picasso.with(context).load(BASE_IMAGE_URL + product.getImageMedium1()).resize(500, 500)

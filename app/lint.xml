@@ -14,11 +14,6 @@
         	<ignore path="src/main/res/layout/product_card.xml"/>
     	</issue>
 
-	<!-- Ignore warning about Obsolete Gradle Dependency, e.g A newer version of com.android.support:support-annotations than 23.2.0 is available: 24.0.0-alpha1 -->
-	<issue id="GradleDependency">
-        	<ignore path="build.gradle"/>
-    	</issue>
-
 	<!--  The resource "*" appears to be unused, TODO :fix prior to release-->
 	<issue id="UnusedResources" severity="ignore" />
 
