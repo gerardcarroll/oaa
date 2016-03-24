@@ -9,5 +9,7 @@ public interface ProductDetailPresenter {
 
   void setView(final ProductDetailView productDetailView);
 
+  void retrieveProductDetails(final Integer productId);
+
   void onDestroy();
 }

@@ -1,49 +1,132 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/product_detail_activity_shared_image_1"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/cat_technology"
-        android:transitionName="@string/shared_element_transition" />
-
-    <TextView
-        android:text="Beats By Dre"
-        android:id="@+id/product_detail_product_name"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/brand_appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:elevation="15dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/OappActionBar">
 
-    <TextView
-        android:id="@+id/product_detail_product_price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textSize="16sp"
-        android:text="$200.99"/>
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/brand_collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:expandedTitleMarginBottom="32dp"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:layout_scrollFlags="scroll|snap|enterAlwaysCollapsed|enterAlways">
 
-    <TextView
-        android:id="@+id/product_detail_content"
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_collapseMode="parallax">
+
+                <ImageView
+                    android:id="@+id/product_detail_activity_shared_image_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:scaleType="fitXY" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="bottom|start"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_share_24dp" />
+
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="90dp"
+                    android:src="@drawable/ic_thumb_up_24dp" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="50dp"
+                    android:src="@drawable/ic_thumb_down_24dp" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_love_it_24dp" />
+
+            </FrameLayout>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempor vel nisl in aliquet.
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <TextView
+                android:id="@+id/product_detail_product_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Beats By Dre"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/product_detail_product_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="$200.99"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/product_detail_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempor vel nisl in aliquet.
                       Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
                       Nulla facilisi. Etiam id magna sodales ipsum tristique condimentum ut at justo. Ut posuere
-                      rhoncus placerat. Donec lobortis, tellus sit amet auctor rutrum, dolor tellus pellentesque sem,
-                      eget hendrerit sem velit vitae ante.
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempor vel nisl in aliquet.
-                      Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
-                      Nulla facilisi. Etiam id magna sodales ipsum tristique condimentum ut at justo. Ut posuere
-                      rhoncus placerat. Donec lobortis, tellus sit amet auctor rutrum, dolor tellus pellentesque sem,
-                      eget hendrerit sem velit vitae ante."
-        android:textSize="14sp" />
+                      rhoncus placerat. Donec lobortis, tellus sit amet auctor rutrum, dolor tellus pellentesque sem"
+                android:textSize="14sp" />
 
-</LinearLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_corner_green"
+                android:elevation="4dp"
+                android:padding="10dp"
+                android:text="Buy"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

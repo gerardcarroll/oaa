@@ -1,17 +1,14 @@
 package com.overstock.android.prototype.models;
 
 /**
- * Created by rconnolly on 3/7/2016.
+ * @author RayConnolly on 3/7/2016.
  */
 public class Product {
 
-  int id;
-
-  String imageMedium1;
-
-  String name;
-
-  Float memberPrice;
+  private Integer id;
+  private String imageMedium1;
+  private String name;
+  private Float memberPrice;
 
   public Product() {}
 
@@ -22,7 +19,9 @@ public class Product {
     this.memberPrice = memberPrice;
   }
 
-  public int getId() { return id; }
+  public int getId() {
+    return id;
+  }
 
   public String getImageMedium1() {
     return imageMedium1;

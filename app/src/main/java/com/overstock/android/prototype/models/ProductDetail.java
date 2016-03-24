@@ -1,61 +1,60 @@
 package com.overstock.android.prototype.models;
 
 /**
- * Created by rconnolly on 3/21/2016.
+ * @author Rayconnolly Created on 3/21/2016.
  */
 public class ProductDetail {
 
-    private int id;
-    private String name;
-    private String imageMedium1;
-    private String memberPrice;
-    private String[] options;
-    private int quantity;
-    private String description;
+  private int id;
 
-    public ProductDetail(int id, String name, String image, String price, String[] options, int quantity, String description) {
-        this.id = id;
-        this.name = name;
-        this.imageMedium1 = image;
-        this.memberPrice = price;
-        this.options = options;
-        this.quantity = quantity;
-        this.description = description;
-    }
+  private String name;
 
-    public int getId() {
-        return id;
-    }
+  private String imageMedium1;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  private String memberPrice;
 
-    public String getName() {
-        return name;
-    }
+  private Integer quantity;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  private String description;
 
-    public String getImageMedium1() {
-        return imageMedium1;
-    }
+  public ProductDetail(int id, String name, String image, String price, int quantity, String description) {
+    this.id = id;
+    this.name = name;
+    this.imageMedium1 = image;
+    this.memberPrice = price;
+    this.quantity = quantity;
+    this.description = description;
+  }
 
-    public String getMemberPrice() {
-        return memberPrice;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public String[] getOptions() {
-        return options;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public int getQuantity() {
-        return quantity;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getImageMedium1() {
+    return imageMedium1;
+  }
+
+  public String getMemberPrice() {
+    return memberPrice;
+  }
+
+  public int getQuantity() {
+    return quantity;
+  }
+
+  public String getDescription() {
+    return description;
+  }
 }

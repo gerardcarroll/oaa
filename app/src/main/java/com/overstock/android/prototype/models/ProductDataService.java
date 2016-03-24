@@ -1,17 +1,16 @@
 package com.overstock.android.prototype.models;
 
-import android.util.Log;
+import javax.inject.Inject;
+
+import rx.Observable;
 
 import android.content.UriMatcher;
 import android.net.Uri;
+import android.util.Log;
 
 import com.overstock.android.prototype.interfaces.OappProvider;
 import com.overstock.android.prototype.interfaces.ProductService;
 import com.overstock.android.prototype.provider.OappProviderContract;
-
-import javax.inject.Inject;
-
-import rx.Observable;
 
 /**
  * @author LeeMeehan, rayConnolly Created on 09-Mar-16.
@@ -77,9 +76,9 @@ public class ProductDataService implements OappProvider<ProductsResponse> {
     return matcher;
   }
 
-  public Observable<ProductDetail> getProductDetails() {
+  public Observable<ProductDetail> getProductDetails(final Integer productId) {
     Log.d(TAG, "Getting Observable ProductDetail from client");
-    return productService.getProductDetails();
+    return productService.getProductDetails(productId);
   }
 
 }

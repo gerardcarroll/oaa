@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,35 +46,39 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   @Bind(R.id.product_detail_toolbar)
   Toolbar toolbar;
 
-  private int id;
-
-
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     ApplicationComponent.Initializer.init(this.getApplication()).inject(this);
     setContentView(R.layout.activity_product_detail);
     ButterKnife.bind(this);
-
     setSupportActionBar(toolbar);
     getSupportActionBar().setTitle("");
 
+    // TODO Send product as a package.
     final Bundle extras = getIntent().getExtras();
     final byte[] b = extras.getByteArray("image");
-    id = extras.getInt("id");
+    final Integer product_Id = extras.getInt("id");
     final String name = extras.getString("name");
     final String price = extras.getString("price");
 
-    // TODO optomize image load using Picasso
+    // TODO optimize image load using Picasso
     final Bitmap bmp = BitmapFactory.decodeByteArray(b, 0, b.length);
     final ImageView image = (ImageView) findViewById(R.id.product_detail_activity_shared_image_1);
     image.setImageBitmap(bmp);
 
-    //productId.setText(String.valueOf(id));
     productName.setText(name);
     productPrice.setText(price);
 
     presenter.setView(this);
+    presenter.retrieveProductDetails(product_Id);
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    ButterKnife.unbind(this);
+    presenter.onDestroy();
   }
 
   @Override
@@ -98,6 +103,6 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   @Override
   public void displayProductDetails(String description) {
     Log.d(TAG, "Product Details description" + description.toString());
-    productDescription.setText(description.toString());
+    productDescription.setText(Html.fromHtml(description.toString()));
   }
 }
