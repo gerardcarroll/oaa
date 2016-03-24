@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         maven { url 'https://maven.fabric.io/public' }
-        maven { url 'https://plugins.gradle.org/m2/'}
+        maven { url 'https://plugins.gradle.org/m2/' }
     }
 
     dependencies {
@@ -24,6 +24,8 @@ apply plugin: 'io.fabric' // i.e. crashlytics
 apply plugin: 'com.neenbedankt.android-apt'
 
 android {
+    // For Robolectric known issue this can be removed once 3.1 is released.
+    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.overstock.android.prototype"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -64,8 +66,9 @@ android {
             shrinkResources true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            ext.betaDistributionReleaseNotes="First Release." // TODO externalize, define template, etc.
-            ext.betaDistributionEmails="euro-white@overstock.com" // TODO externalize
+            ext.betaDistributionReleaseNotes = "First Release."
+            // TODO externalize, define template, etc.
+            ext.betaDistributionEmails = "euro-white@overstock.com" // TODO externalize
         }
         debug {
             signingConfig signingConfigs.debug
@@ -94,7 +97,7 @@ dependencies {
     testCompile 'com.google.dagger:dagger-compiler:2.0.2'
     androidTestApt 'com.google.dagger:dagger-compiler:2.0.2'
 
-    androidTestCompile ('com.android.support.test.espresso:espresso-contrib:2.2'){
+    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2') {
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -116,7 +119,7 @@ dependencies {
     androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
     androidTestCompile 'com.android.support:support-annotations:23.2.0'
 
-    androidTestCompile ('com.android.support.test.espresso:espresso-intents:2.2.1'){
+    androidTestCompile('com.android.support.test.espresso:espresso-intents:2.2.1') {
         exclude module: 'espresso-core'
     }
 

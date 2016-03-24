@@ -2,8 +2,10 @@ package com.overstock.android.prototype.component;
 
 import android.app.Application;
 
+import com.overstock.android.prototype.activity.HomeActivity;
 import com.overstock.android.prototype.fragment.BrandFragment;
 import com.overstock.android.prototype.fragment.GoogleFederatedIdentityFragment;
+import com.overstock.android.prototype.fragment.HomeFragment;
 import com.overstock.android.prototype.models.ProductDataService;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
 
@@ -12,10 +14,13 @@ import com.overstock.android.prototype.service.OappGoogleAuthService;
  */
 public interface ApplicationInject {
 
-    Application application();
+  Application application();
 
-    void inject(final BrandFragment brandFragment);
-    void inject(final ProductDataService productDataService);
-    void inject(final OappGoogleAuthService oappGoogleAuthService);
-    void inject(final GoogleFederatedIdentityFragment googleFederatedIdentityFragment);
+  void inject(final BrandFragment brandFragment);
+
+  void inject(final ProductDataService productDataService);
+
+  void inject(final OappGoogleAuthService oappGoogleAuthService);
+
+  void inject(final GoogleFederatedIdentityFragment googleFederatedIdentityFragment);
 }
