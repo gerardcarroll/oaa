@@ -7,6 +7,7 @@ import android.support.test.runner.AndroidJUnit4;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.HomeActivity;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,10 +31,19 @@ public class CommunitiesActivityTest {
     @Rule
     public ActivityTestRule<HomeActivity> activityRule = new ActivityTestRule<>(HomeActivity.class);
 
-    @Test
-    public void testGridColumnLayout(){
+    @Before
+    public void setUp(){
 
         onView(withId(R.id.guest_login_btn)).perform(click());
+    }
+
+    @Test
+    public void testRendering() {
+        onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testGridColumnLayout(){
 
         onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
 
