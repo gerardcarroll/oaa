@@ -1,4 +1,4 @@
-package com.overstock.android.prototype.espresso;
+package com.overstock.android.prototype.espresso.activity;
 
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
@@ -6,6 +6,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.HomeActivity;
+import com.overstock.android.prototype.espresso.utils.EspressoTestSetup;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -32,25 +33,21 @@ public class ProductDetailActivityTest {
     @Before
     public void setUp(){
 
-        // Login to app as guest
-        onView(withId(R.id.guest_login_btn)).perform(click());
+        // Login as guest
+        EspressoTestSetup.loginAsGuest();
 
         // Navigate through communities activity process
-        onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
-        onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-        onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
-        onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
-        onView(withId(R.id.btnCommunitySelection)).perform(click());
+        EspressoTestSetup.chooseCommunities();
 
         // Check Feed tabs are displayed before clicking on Feed tab
         onView(withId(R.id.feed_tabs)).check(matches(isDisplayed()));
         onView(withText(activityRule.getActivity().getString(R.string.my_feed_tab))).perform(click());
 
         // Check Feed recycler view is displayed
-        onView(withId(R.id.rv_feed_communities)).check(matches(isDisplayed()));
+        onView(withId(R.id.rv_feed)).check(matches(isDisplayed()));
 
         // Click on 1st Feed item in list
-        onView(withId(R.id.rv_feed_communities)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.rv_feed)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
         // After checking the Best Sellers recycler view is displayed, click on the 1st item in view
         onView(withId(R.id.best_sellers)).check(matches(isDisplayed()));

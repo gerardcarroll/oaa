@@ -1,4 +1,4 @@
-package com.overstock.android.prototype.espresso;
+package com.overstock.android.prototype.espresso.activity;
 
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
@@ -6,6 +6,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.HomeActivity;
+import com.overstock.android.prototype.espresso.utils.EspressoTestSetup;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -32,22 +33,18 @@ public class FeedActivityTest {
     @Before
     public void setUp(){
 
-        // Login to app as guest
-        onView(withId(R.id.guest_login_btn)).perform(click());
+        // Login as guest
+        EspressoTestSetup.loginAsGuest();
 
         // Navigate through communities activity process
-        onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
-        onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-        onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
-        onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
-        onView(withId(R.id.btnCommunitySelection)).perform(click());
+        EspressoTestSetup.chooseCommunities();
     }
 
     @Test
     public void testFeedRendering() {
 
         // Check Feed recycler view is displayed
-        onView(withId(R.id.rv_feed_communities)).check(matches(isDisplayed()));
+        onView(withId(R.id.rv_feed)).check(matches(isDisplayed()));
     }
 
     @Test
@@ -57,10 +54,13 @@ public class FeedActivityTest {
         onView(withId(R.id.feed_tabs)).check(matches(isDisplayed()));
         onView(withText(activityRule.getActivity().getString(R.string.my_feed_tab))).perform(click());
 
+        // Check Feed Communities recycler view is displayed
+        onView(withId(R.id.rv_feed)).check(matches(isDisplayed()));
+
         // Perform scroll actions on feed recycler view
-        onView(withId(R.id.rv_feed_communities)).perform(RecyclerViewActions.scrollToPosition(2));
-        onView(withId(R.id.rv_feed_communities)).perform(RecyclerViewActions.scrollToPosition(0));
-        onView(withId(R.id.rv_feed_communities)).perform(RecyclerViewActions.scrollToPosition(2));
+        onView(withId(R.id.rv_feed)).perform(RecyclerViewActions.scrollToPosition(2));
+        onView(withId(R.id.rv_feed)).perform(RecyclerViewActions.scrollToPosition(0));
+        onView(withId(R.id.rv_feed)).perform(RecyclerViewActions.scrollToPosition(2));
     }
 
     @Test
@@ -71,7 +71,7 @@ public class FeedActivityTest {
         onView(withText(activityRule.getActivity().getString(R.string.my_feed_tab))).perform(click());
 
         // Click on 1st Feed item in list
-        onView(withId(R.id.rv_feed_communities)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.rv_feed)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
         // Check Brand activity is now displayed
         onView(withId(R.id.best_sellers)).check(matches(isDisplayed()));

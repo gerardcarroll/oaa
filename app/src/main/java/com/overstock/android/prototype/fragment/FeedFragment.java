@@ -23,7 +23,7 @@ public class FeedFragment extends Fragment {
 
     private FeedAdapter feedCommunitiesAdapter;
 
-    @Bind(R.id.rv_feed_communities)
+    @Bind(R.id.rv_feed)
     RecyclerView recyclerView;
 
     public FeedFragment() {

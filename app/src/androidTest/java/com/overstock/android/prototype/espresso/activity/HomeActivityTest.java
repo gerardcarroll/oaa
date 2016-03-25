@@ -1,4 +1,4 @@
-package com.overstock.android.prototype.espresso;
+package com.overstock.android.prototype.espresso.activity;
 
 import android.support.test.runner.AndroidJUnit4;
 
