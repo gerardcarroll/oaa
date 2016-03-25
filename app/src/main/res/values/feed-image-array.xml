@@ -3,7 +3,8 @@
 
     <array name="feed_image_array">
         <item>@drawable/nfl_logo_inverted</item>
-        <item>@drawable/bedding</item>
+        <item>@drawable/cat_technology</item>
+        <item>@drawable/cat_personal_care</item>
         <item>@drawable/cat_fitness</item>
     </array>
 
