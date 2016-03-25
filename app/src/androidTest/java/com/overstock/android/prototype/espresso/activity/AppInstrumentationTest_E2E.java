@@ -57,12 +57,7 @@ public class AppInstrumentationTest_E2E {
             @Override public boolean isDone() {
                 return true;
             }
-            @Override public GoogleSignInResult get() {//        onView(isRoot()).perform(waitId(R.id.best_sellers, Sampling.SECONDS_15));
-//        onView(withId(R.id.best_sellers)).perform(RecyclerViewActions.scrollToPosition(10));
-//        onView(withId(R.id.best_sellers)).perform(RecyclerViewActions.scrollToPosition(1));
-//        onView(withId(R.id.best_sellers)).perform(RecyclerViewActions.scrollToPosition(5)).perform(click());
-//        onView(withId(R.id.shared_activity_image_1)).check(matches(isDisplayed()));
-
+            @Override public GoogleSignInResult get() {
                 GoogleSignInResult mockGoogleSignInResult = mock(GoogleSignInResult.class);
                 when(mockGoogleSignInResult.getStatus()).thenReturn(Status.zzagC);
                 when(mockGoogleSignInResult.isSuccess()).thenReturn(true);
