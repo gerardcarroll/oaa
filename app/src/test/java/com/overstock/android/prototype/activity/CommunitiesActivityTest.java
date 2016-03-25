@@ -15,7 +15,6 @@ import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
-import org.robolectric.shadows.ShadowViewGroup;
 
 import android.content.Intent;
 import android.os.Build;
