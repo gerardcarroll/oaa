@@ -6,7 +6,6 @@ import android.support.test.rule.ActivityTestRule;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.HomeActivity;
-import com.overstock.android.prototype.espresso.matcher.CustomMatcher;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -17,7 +16,6 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
  * @author LeeMeehan Created on 01-Mar-16.
@@ -35,7 +33,7 @@ public class HomeActivityInstrumentationTest_Guest {
   @Test
   public void validateGuestLoginButtonClicked() {
     onView(withId(R.id.guest_login_btn)).perform(click());
-    onView(withText(R.string.guest_login_toast)).inRoot(CustomMatcher.isToast()).check(matches(isDisplayed()));
+    onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
   }
 
 }

@@ -67,16 +67,16 @@ android {
             shrinkResources true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            ext.betaDistributionReleaseNotes = "First Release."
-            // TODO externalize, define template, etc.
-            ext.betaDistributionEmails = "euro-white@overstock.com" // TODO externalize
+            ext.betaDistributionReleaseNotes="https://confluence.overstock.com/x/3IR9Aw"
+            ext.betaDistributionGroupAliases="oapp_beta_testers"
+            ext.betaDistributionNotifications=true
         }
         debug {
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            testCoverageEnabled = true
+            testCoverageEnabled true
         }
     }
 }
@@ -165,3 +165,4 @@ afterEvaluate {
 apply plugin: 'com.google.gms.google-services'
 
 apply from: '../jacoco.gradle'
+apply from: '../sonar.gradle'

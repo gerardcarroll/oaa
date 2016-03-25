@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -33,7 +34,7 @@ import icepick.Icepick;
 import icepick.State;
 
 /**
- * Created by rconnolly on 2/29/2016.
+ * @author RayConnolly Created on 2/29/2016.
  */
 public class CommunitiesActivity extends AppCompatActivity implements CommunitiesMvpView {
 
@@ -64,8 +65,6 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
 
   private CommunitiesPresenter communitiesPresenter;
 
-  private CollapsingToolbarLayout collapsingToolbarLayout = null;
-
   public CommunitiesActivity() {
     communitiesPresenter = new CommunitiesPresenter(this);
     communitiesPresenter.attachedView(this);
@@ -74,7 +73,7 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    communitiesPresenter.attachedView(this);
+    communitiesPresenter.detachView(this);
   }
 
   @Override
@@ -90,11 +89,10 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
     setSupportActionBar(toolbar);
     setTitle("");
 
-    final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-
-    collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+    final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(
+      R.id.collapsing_toolbar);
     collapsingToolbarLayout.setTitle(getString(R.string.communities_activity_title));
-    collapsingToolbarLayout.setContentScrimColor(getResources().getColor(R.color.transparent));
+    collapsingToolbarLayout.setContentScrimColor(ContextCompat.getColor(this, R.color.transparent));
 
     communitiesPresenter.populateAndShowCommunities();
 

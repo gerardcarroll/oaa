@@ -55,8 +55,9 @@ public class FeedFragment extends Fragment {
         typedArray.recycle();
 
         feeds.add(new Feed(imagesArray[0],"Top NFL Fan Products for 2016","NFL.com"));
-        feeds.add(new Feed(imagesArray[1],"Sleep like a God with These Beds","BestBeds.com"));
-        feeds.add(new Feed(imagesArray[2],"Must Have Products to get in Shape","fitness.com"));
+        feeds.add(new Feed(imagesArray[1],"Get Your Beat on!, with Beats by dre","DreBeats.com"));
+        feeds.add(new Feed(imagesArray[2],"Treat yourself. Top skin care products of this month.","Relax.com"));
+        feeds.add(new Feed(imagesArray[3],"Must Have Products to get in Shape.","GetFit.com"));
         // TODO remove up as far as last todo
 
             recyclerView.setHasFixedSize(true);
