@@ -71,7 +71,7 @@ public class FeedActivityTest {
         onView(withText(activityRule.getActivity().getString(R.string.my_feed_tab))).perform(click());
 
         // Click on 1st Feed item in list
-        onView(withId(R.id.rv_feed_communities)).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+        onView(withId(R.id.rv_feed_communities)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
         // Check Brand activity is now displayed
         onView(withId(R.id.best_sellers)).check(matches(isDisplayed()));
