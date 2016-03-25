@@ -1,0 +1,40 @@
+package com.overstock.android.prototype.model;
+
+import com.overstock.android.prototype.models.Feed;
+
+import junit.framework.Assert;
+
+import org.junit.Test;
+
+import static org.mockito.Matchers.any;
+
+/**
+ * Created by itowey on 25/03/16.
+ */
+public class FeedTest {
+
+    @Test
+    public void noArgConstructorTest(){
+        Feed feed = new Feed();
+        Assert.assertNotNull(feed);
+    }
+
+    @Test
+    public void argConstructorTest(){
+        Feed feed = new Feed(any(Integer.class),any(String.class),any(String.class));
+        Assert.assertNotNull(feed);
+    }
+
+    @Test
+    public void feedGetterSetterTest(){
+        Feed feed = new Feed();
+        Assert.assertNotNull(feed);
+        feed.setProductImage(1);
+        Assert.assertEquals(feed.getProductImage(), 1);
+        feed.setProductUrl("img.ostk.com");
+        Assert.assertEquals(feed.getProductUrl(), "img.ostk.com");
+        feed.setTopProductsLink("img.ostk.com/prods");
+        Assert.assertEquals(feed.getTopProductsLink(),"img.ostk.com/prods");
+    }
+
+}
