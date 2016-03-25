@@ -174,7 +174,7 @@ public class HomeActivityTest {
     ShadowActivity shadowActivity = Shadows.shadowOf(homeActivity);
     Intent startedIntent = shadowActivity.getNextStartedActivity();
     assertNotNull("The started intent is null. No Activity has started.", startedIntent);
-    assertNotNull("The intent is a empty.", startedIntent.getComponent());
+    assertNotNull("The intent is empty.", startedIntent.getComponent());
     assertThat("The started Activity is not the activity that is expected", startedIntent.getComponent().getClassName(),
       equalTo(CommunitiesActivity.class.getName()));
   }

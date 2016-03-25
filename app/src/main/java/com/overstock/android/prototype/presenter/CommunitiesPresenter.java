@@ -24,25 +24,24 @@ public class CommunitiesPresenter {
 
   public void attachedView(final CommunitiesMvpView communitiesMvpView) {
     this.communitiesMvpView = communitiesMvpView;
-  };
+  }
 
   public void detachView(final CommunitiesMvpView communitiesMvpView) {
     this.communitiesMvpView = null;
-  };
+  }
 
   public void populateAndShowCommunities() {
 
     // start TODO: below block to be replaced by data service call
     final ArrayList<Community> communities = new ArrayList<>();
 
-    final TypedArray typedArray = context.getResources().obtainTypedArray(R.array.community_image_array);
+    final String[] stringArray = context.getResources().getStringArray(R.array.community_image_array);
 
-    final int len = typedArray.length();
+    final int len = stringArray.length;
     final int[] imagesArray = new int[len];
     for (int i = 0; i < len; i++) {
-      imagesArray[i] = typedArray.getResourceId(i, 0);
+      imagesArray[i] = context.getResources().getIdentifier(stringArray[i],"drawable",context.getPackageName());
     }
-    typedArray.recycle();
 
     final String[] names = context.getResources().getStringArray(R.array.communities_array);
 
