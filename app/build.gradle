@@ -76,7 +76,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            testCoverageEnabled = true
+            testCoverageEnabled true
         }
     }
 }
@@ -165,3 +165,4 @@ afterEvaluate {
 apply plugin: 'com.google.gms.google-services'
 
 apply from: '../jacoco.gradle'
+apply from: '../sonar.gradle'
