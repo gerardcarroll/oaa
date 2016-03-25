@@ -16,9 +16,11 @@ import org.junit.runner.RunWith;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.hasSibling;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.allOf;
 
 /**
  * Created by rconnolly on 3/24/2016.
@@ -45,6 +47,18 @@ public class FeedActivityTest {
 
         // Check Feed recycler view is displayed
         onView(withId(R.id.rv_feed)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testTabItemsDisplayed(){
+
+        // Check Feed tabs are displayed
+        onView(withId(R.id.feed_tabs)).check(matches(isDisplayed()));
+
+        // TODO Check Feed tab items are displayed
+        onView(allOf(withId(R.id.feed_tabs), hasSibling(withText("MY FEED"))));
+        onView(allOf(withId(R.id.feed_tabs), hasSibling(withText("TRENDING"))));
+        onView(allOf(withId(R.id.feed_tabs), hasSibling(withText("MY LOCATION"))));
     }
 
     @Test
