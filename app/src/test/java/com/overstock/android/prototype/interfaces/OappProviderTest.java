@@ -40,8 +40,8 @@ public class OappProviderTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mockOappProvider.query(uri)).thenReturn(Observable.just(new ProductsResponse(new Products(new ArrayList<Product>() {{
-            add(new Product("http://nfl.product.image.ostk.com", "nfl.product_image.png", 3.99F));
-            add(new Product("http://nhl.product.image.ostk.com", "nhl.product_image.png", 2.01F));
+            add(new Product(1,"http://nfl.product.image.ostk.com", "nfl.product_image.png", 3.99F));
+            add(new Product(2,"http://nhl.product.image.ostk.com", "nhl.product_image.png", 2.01F));
         }}))));
 
     }
