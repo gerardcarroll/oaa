@@ -163,3 +163,5 @@ afterEvaluate {
 }
 
 apply plugin: 'com.google.gms.google-services'
+
+apply from: '../jacoco.gradle'
