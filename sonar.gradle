@@ -1,0 +1,9 @@
+apply plugin: 'org.sonarqube'
+
+sonarqube {
+    properties {
+        property "sonar.jacoco.reportPath", "${project.buildDir}/sonar/jacoco-overall.exec"
+    }
+}
+
+

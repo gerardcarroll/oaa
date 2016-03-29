@@ -38,18 +38,17 @@ public class ProductServiceTest {
     public void setUp() {
 
         when(mockProductService.getBestSellers(any(String.class))).thenReturn(Observable.just(new ProductsResponse(new Products(new ArrayList<Product>() {{
-            add(new Product("http://nfl.product.image.ostk.com", "nfl.product_image.png", 123.99F));
-            add(new Product("http://nhl.product.image.ostk.com", "nhl.product_image.png", 25.01F));
+            add(new Product(1,"http://nfl.product.image.ostk.com", "nfl.product_image.png", 123.99F));
+            add(new Product(2,"http://nhl.product.image.ostk.com", "nhl.product_image.png", 25.01F));
         }}))));
         when(mockProductService.getNewArrivals(any(String.class))).thenReturn(Observable.just(new ProductsResponse(new Products(new ArrayList<Product>() {{
-            add(new Product("http://nfl.product.image.ostk.com", "new.nfl.product_image.png", 13.99F));
-            add(new Product("http://nhl.product.image.ostk.com", "new.nhl.product_image.png", 15.01F));
+            add(new Product(3,"http://nfl.product.image.ostk.com", "new.nfl.product_image.png", 13.99F));
+            add(new Product(4,"http://nhl.product.image.ostk.com", "new.nhl.product_image.png", 15.01F));
         }}))));
         when(mockProductService.query(any(String.class), any(String.class), any(Integer.class))).thenReturn(Observable.just(new ProductsResponse(new Products(new ArrayList<Product>() {{
-            add(new Product("http://nfl.product.image.ostk.com", "nfl.product_image.png", 3.99F));
-            add(new Product("http://nhl.product.image.ostk.com", "nhl.product_image.png", 2.01F));
+            add(new Product(5,"http://nfl.product.image.ostk.com", "nfl.product_image.png", 3.99F));
+            add(new Product(6,"http://nhl.product.image.ostk.com", "nhl.product_image.png", 2.01F));
         }}))));
-
     }
 
     @Test
@@ -75,6 +74,7 @@ public class ProductServiceTest {
                                    Assert.assertEquals(productsResponse.getProducts().getProductsList().size(), 2);
                                    for (Product product : productsResponse.getProducts().getProductsList()) {
                                        Assert.assertNotNull(product);
+                                       Assert.assertTrue(product.getId() > 0);
                                        Assert.assertNotNull(product.getImageMedium1());
                                        Assert.assertTrue(product.getImageMedium1().contains("image.ostk"));
                                        Assert.assertNotNull(product.getMemberPrice());

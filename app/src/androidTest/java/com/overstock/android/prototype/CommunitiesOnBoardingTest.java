@@ -10,6 +10,7 @@ import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.Until;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -29,6 +30,7 @@ public class CommunitiesOnBoardingTest {
     private static final int TIMEOUT = 5000;
     private static final String STRING_TO_BE_TYPED = "UiAutomator";
 
+    @Ignore
     @Test
     public void startMainActivityFromHomeScreen(){
 
