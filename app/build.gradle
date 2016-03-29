@@ -26,7 +26,7 @@ apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     // For Robolectric known issue this can be removed once 3.1 is released.
-    useLibrary 'org.apache.http.legacy'
+   // useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.overstock.android.prototype"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
