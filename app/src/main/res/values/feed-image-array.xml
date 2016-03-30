@@ -1,11 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <array name="feed_image_array">
-        <item>@drawable/nfl_logo_inverted</item>
-        <item>@drawable/cat_technology</item>
-        <item>@drawable/cat_personal_care</item>
-        <item>@drawable/cat_fitness</item>
-    </array>
-
+    <string-array name="feed_image_array">
+        <item>nfl_logo_inverted</item>
+        <item>cat_technology</item>
+        <item>cat_personal_care</item>
+        <item>cat_fitness</item>
+    </string-array>
 </resources>
