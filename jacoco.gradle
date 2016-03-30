@@ -1,7 +1,8 @@
 apply plugin: 'jacoco'
 
-jacoco {  
-    toolVersion = "0.7.5.201505241946"
+jacoco {
+//    toolVersion = "0.7.5.201505241946"
+    toolVersion = "0.7.0.201403182114"
 }
 
 project.afterEvaluate {  
@@ -34,6 +35,7 @@ project.afterEvaluate {
                                    '**/R$*.class',
                                    '**/*$Icepick.class',
                                    '**/*$ViewInjector*.*',
+                                   '**/*Module_*.*',
                                    '**/*$ViewBinder*.*',
                                    '**/BuildConfig.*',
                                    '**/Manifest*.*']
@@ -46,15 +48,17 @@ project.afterEvaluate {
                 ]
                 additionalSourceDirs = files(coverageSourceDirs)
                 sourceDirectories = files(coverageSourceDirs)
-                executionData = files("${project.buildDir}/jacoco/${testTaskName}.exec")
+                executionData = files([
+                            "${project.buildDir}/jacoco/${testTaskName}.exec"
+//                            ,"${project.buildDir}/outputs/code-coverage/connected/coverage.ec"
+                ])
 
                 reports {
                     xml.enabled = true
                     html.enabled = true
+                    html.destination "${project.buildDir}/jacoco/jacoco-all.html"
                 }
             }
-
-
         }
     }
 }
