@@ -5,10 +5,8 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.activity.HomeActivity;
-import com.overstock.android.prototype.espresso.utils.EspressoTestSetup;
+import com.overstock.android.prototype.activity.FeedActivity;
 
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,18 +26,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 public class FeedActivityTest {
 
     @Rule
-    public ActivityTestRule<HomeActivity> activityRule = new ActivityTestRule<>(HomeActivity.class);
-
-    @Before
-    public void setUp(){
-
-        // Login as guest
-        EspressoTestSetup.loginAsGuest();
-
-        // Navigate through communities activity process
-        EspressoTestSetup.chooseCommunities();
-    }
-
+    public ActivityTestRule<FeedActivity> activityRule = new ActivityTestRule<>(FeedActivity.class);
+    
     @Test
     public void testFeedRendering() {
 
