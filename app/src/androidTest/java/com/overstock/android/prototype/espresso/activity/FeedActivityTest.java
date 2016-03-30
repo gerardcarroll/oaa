@@ -16,11 +16,9 @@ import org.junit.runner.RunWith;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.hasSibling;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.allOf;
 
 /**
  * Created by rconnolly on 3/24/2016.
@@ -55,10 +53,22 @@ public class FeedActivityTest {
         // Check Feed tabs are displayed
         onView(withId(R.id.feed_tabs)).check(matches(isDisplayed()));
 
-        // TODO Check Feed tab items are displayed
-        onView(allOf(withId(R.id.feed_tabs), hasSibling(withText("MY FEED"))));
-        onView(allOf(withId(R.id.feed_tabs), hasSibling(withText("TRENDING"))));
-        onView(allOf(withId(R.id.feed_tabs), hasSibling(withText("MY LOCATION"))));
+        // Check tabs are displayed
+        onView(withText(R.string.my_feed_tab)).check(matches(isDisplayed()));
+        onView(withText(R.string.trending_tab)).check(matches(isDisplayed()));
+        onView(withText(R.string.my_location_tab)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testTabsClick(){
+
+        // Check Feed tabs are displayed before clicking on Feed tab
+        onView(withId(R.id.feed_tabs)).check(matches(isDisplayed()));
+
+        // Check click on tabs
+        onView(withText(R.string.my_feed_tab)).perform(click());
+        onView(withText(R.string.trending_tab)).perform(click());
+        onView(withText(R.string.my_location_tab)).perform(click());
     }
 
     @Test
@@ -79,7 +89,6 @@ public class FeedActivityTest {
 
     @Test
     public void testFeedItemClick(){
-
         // Check Feed tabs are displayed before clicking on Feed tab
         onView(withId(R.id.feed_tabs)).check(matches(isDisplayed()));
         onView(withText(activityRule.getActivity().getString(R.string.my_feed_tab))).perform(click());
