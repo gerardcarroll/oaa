@@ -20,8 +20,8 @@ import com.dd.processbutton.iml.SubmitProcessButton;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.CommunitiesAdapter;
 import com.overstock.android.prototype.models.Community;
-import com.overstock.android.prototype.presenter.CommunitiesPresenter;
-import com.overstock.android.prototype.view.CommunitiesMvpView;
+import com.overstock.android.prototype.presenter.CommunitiesPresenterImpl;
+import com.overstock.android.prototype.view.CommunitiesView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ import icepick.State;
 /**
  * @author RayConnolly Created on 2/29/2016.
  */
-public class CommunitiesActivity extends AppCompatActivity implements CommunitiesMvpView {
+public class CommunitiesActivity extends AppCompatActivity implements CommunitiesView {
 
   private static final int ONE_HUNDRED = 100;
 
@@ -63,17 +63,17 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
 
   private CommunitiesAdapter communitiesAdapter;
 
-  private CommunitiesPresenter communitiesPresenter;
+  private CommunitiesPresenterImpl communitiesPresenterImpl;
 
   public CommunitiesActivity() {
-    communitiesPresenter = new CommunitiesPresenter(this);
-    communitiesPresenter.attachedView(this);
+    communitiesPresenterImpl = new CommunitiesPresenterImpl(this);
+    communitiesPresenterImpl.attachedView(this);
   }
 
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    communitiesPresenter.detachView(this);
+    communitiesPresenterImpl.detachView();
   }
 
   @Override
@@ -94,7 +94,7 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
     collapsingToolbarLayout.setTitle(getString(R.string.communities_activity_title));
     collapsingToolbarLayout.setContentScrimColor(ContextCompat.getColor(this, R.color.transparent));
 
-    communitiesPresenter.populateAndShowCommunities();
+    communitiesPresenterImpl.populateAndShowCommunities();
 
     if (savedInstanceState != null) {
       if (savedInstanceState.getInt("button") == ONE_HUNDRED) {
