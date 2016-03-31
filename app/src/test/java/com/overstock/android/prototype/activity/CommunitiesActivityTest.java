@@ -1,11 +1,12 @@
 package com.overstock.android.prototype.activity;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import android.content.Intent;
+import android.os.Build;
+import android.support.v7.widget.RecyclerView;
+
+import com.dd.processbutton.iml.SubmitProcessButton;
+import com.overstock.android.prototype.BuildConfig;
+import com.overstock.android.prototype.R;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,13 +17,12 @@ import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 
-import android.content.Intent;
-import android.os.Build;
-import android.support.v7.widget.RecyclerView;
-
-import com.dd.processbutton.iml.SubmitProcessButton;
-import com.overstock.android.prototype.BuildConfig;
-import com.overstock.android.prototype.R;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author LeeMeehan Created on 25-Mar-16.
@@ -54,7 +54,7 @@ public class CommunitiesActivityTest {
   }
 
   /**
-   * Simple Test chase to test that the Communities Activity was created successfully and the communities grid has been
+   * Simple test case to test that the Communities Activity was created successfully and the communities grid has been
    * populated.
    */
   @Test
@@ -68,7 +68,7 @@ public class CommunitiesActivityTest {
   }
 
   /**
-   * This test asserts that when items on the community grid are selected the progress button response accordingly. It
+   * This test asserts that when items on the community grid are selected the progress button responds accordingly. It
    * then asserts that once the progress button reaches 100% and is clicked that the FeedActivity is started.
    */
   @Test
