@@ -1,4 +1,4 @@
-package com.overstock.android.prototype;
+package com.overstock.android.prototype.uiautomator;
 
 import android.content.Context;
 import android.content.Intent;

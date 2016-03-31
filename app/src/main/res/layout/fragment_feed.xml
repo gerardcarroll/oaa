@@ -16,7 +16,7 @@
     tools:context="com.overstock.android.prototype.activity.FeedActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_feed_communities"
+        android:id="@+id/rv_feed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/grey"
