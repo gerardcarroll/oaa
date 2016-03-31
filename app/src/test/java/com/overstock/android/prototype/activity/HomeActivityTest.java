@@ -39,7 +39,7 @@ import com.overstock.android.prototype.fragment.GoogleFederatedIdentityFragment;
 import com.overstock.android.prototype.fragment.HomeFragment;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.module.ApplicationModule;
-import com.overstock.android.prototype.service.OappGoogleAuthService;
+import com.overstock.android.prototype.service1.OappGoogleAuthService;
 
 import it.cosenonjaviste.daggermock.DaggerMockRule;
 

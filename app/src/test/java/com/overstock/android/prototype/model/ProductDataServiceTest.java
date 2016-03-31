@@ -3,8 +3,8 @@ package com.overstock.android.prototype.model;
 import android.net.Uri;
 import android.util.Log;
 
-import com.overstock.android.prototype.interfaces.ProductService;
-import com.overstock.android.prototype.interfaces.TheOAppClient;
+import com.overstock.android.prototype.service.ProductService;
+import com.overstock.android.prototype.client.TheOAppClient;
 import com.overstock.android.prototype.models.Product;
 import com.overstock.android.prototype.models.ProductDataService;
 import com.overstock.android.prototype.models.ProductsResponse;

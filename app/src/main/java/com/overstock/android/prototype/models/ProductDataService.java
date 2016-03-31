@@ -9,7 +9,7 @@ import android.net.Uri;
 import android.util.Log;
 
 import com.overstock.android.prototype.interfaces.OappProvider;
-import com.overstock.android.prototype.interfaces.ProductService;
+import com.overstock.android.prototype.service.ProductService;
 import com.overstock.android.prototype.provider.OappProviderContract;
 
 /**

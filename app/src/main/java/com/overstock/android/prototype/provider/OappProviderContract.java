@@ -3,7 +3,7 @@ package com.overstock.android.prototype.provider;
 import android.content.ContentResolver;
 import android.net.Uri;
 
-import com.overstock.android.prototype.interfaces.ProductService;
+import com.overstock.android.prototype.service.ProductService;
 
 import javax.inject.Inject;
 

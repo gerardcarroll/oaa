@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.overstock.android.prototype.activity.ProductDetailActivity;
 import com.overstock.android.prototype.fragment.BrandFragment;
+import com.overstock.android.prototype.fragment.FeedFragment;
 import com.overstock.android.prototype.fragment.GoogleFederatedIdentityFragment;
 import com.overstock.android.prototype.models.ProductDataService;
 import com.overstock.android.prototype.service.OappGoogleAuthService;

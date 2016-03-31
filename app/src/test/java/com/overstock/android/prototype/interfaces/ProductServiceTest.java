@@ -5,6 +5,7 @@ import android.util.Log;
 import com.overstock.android.prototype.models.Product;
 import com.overstock.android.prototype.models.Products;
 import com.overstock.android.prototype.models.ProductsResponse;
+import com.overstock.android.prototype.service.ProductService;
 
 import junit.framework.Assert;
 
