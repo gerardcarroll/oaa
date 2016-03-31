@@ -74,8 +74,6 @@ android {
         debug {
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        debug {
             testCoverageEnabled true
         }
     }
@@ -97,25 +95,25 @@ dependencies {
     testCompile 'com.google.dagger:dagger-compiler:2.0.2'
     androidTestApt 'com.google.dagger:dagger-compiler:2.0.2'
 
-    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2') {
+    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2.1') {
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude module: 'recyclerview-v7'
     }
 
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2') {
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.1') {
         // Necessary if your app targets Marshmallow (since Espresso
         // hasn't moved to Marshmallow yet)
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    androidTestCompile('com.android.support.test:runner:0.3') {
+    androidTestCompile('com.android.support.test:runner:0.4.1') {
         // Necessary if your app targets Marshmallow (since the test runner
         // hasn't moved to Marshmallow yet)
         exclude group: 'com.android.support', module: 'support-annotations'
     }
     //added for UI Automation
-    androidTestCompile 'com.android.support.test:rules:0.2'
+    androidTestCompile 'com.android.support.test:rules:0.4.1'
     androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
     androidTestCompile 'com.android.support:support-annotations:23.2.0'
 

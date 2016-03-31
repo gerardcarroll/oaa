@@ -4,7 +4,7 @@
  * Created by finolacurran on 3/30/2016.
  */
 
-        package com.overstock.android.prototype;
+        package com.overstock.android.prototype.uiautomator;
 
 import android.content.Context;
 import android.content.Intent;

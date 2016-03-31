@@ -43,7 +43,7 @@ public class CommunitiesPresenterImpl implements CommunitiesPresenter {
     final int[] imagesResourceArray = new int[len];
     for (int i = 0; i < len; i++) {
       imagesResourceArray[i] = context.getResources().getIdentifier(imageReferenceArray[i], "drawable",
-        context.getPackageName());
+              context.getPackageName());
     }
 
     final String[] names = context.getResources().getStringArray(R.array.communities_array);
