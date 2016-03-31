@@ -1,7 +1,5 @@
 package com.overstock.android.prototype.espresso.activity;
 
-//import org.mockito.Mock;
-
 import android.support.annotation.NonNull;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
@@ -86,7 +84,7 @@ public class AppInstrumentationTest_E2E {
 
     @Test
     public void appTest(){
-        onView(withId(R.id.guest_login_btn)).perform(click());
+        onView(withId(R.id.googlePlus_login_btn)).perform(click());
         onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
         onView(withId(R.id.btnCommunitySelection)).check(matches(not(isEnabled())));
         onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
