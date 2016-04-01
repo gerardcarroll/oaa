@@ -25,6 +25,8 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 /**
+ * Robolectric tests to check the general functionality of the Communities activity.
+ *
  * @author LeeMeehan Created on 25-Mar-16.
  */
 @Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP)

@@ -6,7 +6,6 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -34,11 +33,17 @@ import icepick.Icepick;
 import icepick.State;
 
 /**
+ * Activity class to display data via the communities recycler view,
+ * presented to it through the {@link CommunitiesPresenterImpl} class.
+ *
  * @author RayConnolly Created on 2/29/2016.
  */
 public class CommunitiesActivity extends AppCompatActivity implements CommunitiesView {
 
   private static final int ONE_HUNDRED = 100;
+
+  @Bind(R.id.collapsing_toolbar)
+  CollapsingToolbarLayout collapsingToolbarLayout;
 
   @Bind(R.id.btnCommunitySelection)
   SubmitProcessButton progressButton;
@@ -89,11 +94,10 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
     setSupportActionBar(toolbar);
     setTitle("");
 
-    final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(
-      R.id.collapsing_toolbar);
     collapsingToolbarLayout.setTitle(getString(R.string.communities_activity_title));
     collapsingToolbarLayout.setContentScrimColor(ContextCompat.getColor(this, R.color.transparent));
 
+    // Populate communities via presenter class
     communitiesPresenterImpl.populateAndShowCommunities();
 
     if (savedInstanceState != null) {
@@ -103,29 +107,47 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
     }
   }
 
+  @Override
+  public void showCommunities(final List<Community> communities) {
+    // Instantiate the CommunitiesAdapter
+    communitiesAdapter.setData(communities);
+
+    // Set recycler view settings
+    recyclerView.setHasFixedSize(true);
+    recyclerView.setAdapter(communitiesAdapter);
+    // Setting a GridLayoutManager for the RecyclerView, which dependent on screen resolution will have 2 or 3 columns
+    recyclerView.setLayoutManager(new GridLayoutManager(this, numCommunitiesColumns));
+    recyclerView.stopNestedScroll();
+
+    // Setup the CommunitiesAdapter Data Change Listener
+    setupOnDataChangeListener();
+  }
+
+  /**
+   * Method to implement progress and animation functionality for the Progress Button
+   */
   private void setupOnDataChangeListener() {
-    // implement the listener for the communities adapter to update the progress button
+    // Implement the listener for the communities adapter to update the progress button
     communitiesAdapter.setOnDataChangeListener(new CommunitiesAdapter.OnDataChangeListener() {
 
       @Override
       public void onDataChanged(final int size) {
 
         final int progress = Math.min((int) Math.ceil(((double) size / minSelectedCommunities) * ONE_HUNDRED),
-          ONE_HUNDRED);
+                ONE_HUNDRED);
         progressButton.setProgress(progress);
 
         if (progressButton.getProgress() == ONE_HUNDRED) {
           if (!progressButton.isEnabled()) {
             progressButton
-                .startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.continue_btn_bounce));
+                    .startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.continue_btn_bounce));
           }
           progressButton.setAlpha(1f);
           progressButton.setEnabled(true);
-        }
-        else {
+        } else {
           if (progressButton.isEnabled()) {
             progressButton.startAnimation(
-              AnimationUtils.loadAnimation(getApplicationContext(), R.anim.continue_btn_bounce_revert));
+                    AnimationUtils.loadAnimation(getApplicationContext(), R.anim.continue_btn_bounce_revert));
           }
           progressButton.setAlpha(0.75f);
           progressButton.setEnabled(false);
@@ -134,10 +156,13 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
     });
   }
 
+  /**
+   * Method to allow navigation to Feed activity (using a slide transition) when Progress button is enabled and pressed.
+   */
   @OnClick(R.id.btnCommunitySelection)
   public void btnCommunitiesSelected() {
     final ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(this,
-      R.transition.slide_in_vertical, R.transition.slide_out_vertical);
+            R.transition.slide_in_vertical, R.transition.slide_out_vertical);
     startActivity(new Intent(this, FeedActivity.class), options.toBundle());
   }
 
@@ -145,6 +170,13 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
   public boolean onCreateOptionsMenu(final Menu menu) {
     getMenuInflater().inflate(R.menu.menu_main, menu);
     return true;
+  }
+
+  @Override
+  public void onSaveInstanceState(final Bundle outState) {
+    super.onSaveInstanceState(outState);
+    outState.putInt("button", progressButton.getProgress());
+    Icepick.saveInstanceState(this, outState);
   }
 
   @Override
@@ -158,28 +190,5 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
     }
 
     return super.onOptionsItemSelected(item);
-  }
-
-  @Override
-  public void onSaveInstanceState(final Bundle outState) {
-    super.onSaveInstanceState(outState);
-    outState.putInt("button", progressButton.getProgress());
-    Icepick.saveInstanceState(this, outState);
-  }
-
-  @Override
-  public void showCommunities(final List<Community> communities) {
-    // Instantiate the CommunitiesAdapter
-    // Instantiate Recycler View
-    communitiesAdapter.setData(communities);
-    recyclerView.setHasFixedSize(true);
-    recyclerView.setAdapter(communitiesAdapter);
-    // Setting the LayoutManager for the RecyclerView. Depending on Resolution it will have 2 or 3 columns
-    recyclerView.setLayoutManager(new GridLayoutManager(this, numCommunitiesColumns));
-    recyclerView.stopNestedScroll();
-    recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-    // Setup the CommunitiesAdapter Data Change Listener
-    setupOnDataChangeListener();
   }
 }

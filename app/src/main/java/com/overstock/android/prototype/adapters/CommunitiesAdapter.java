@@ -23,6 +23,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
+ * Adapter class to allow for functionality to populate Communities Activity with underlying data.
+ *
  * @author RayConnolly Created on 2/29/2016.
  */
 public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.CommunitiesViewHolder> {
@@ -62,7 +64,7 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
 
     holder.progressBar.setVisibility(View.VISIBLE);
 
-    Picasso.with(context).load(community.getImageId()).resize(500, 500).into(holder.communityImage, new Callback() {
+    Picasso.with(context).load(community.getImageId()).resize(250, 250).onlyScaleDown().into(holder.communityImage, new Callback() {
       @Override
       public void onSuccess() {
         if (holder.progressBar != null) {
@@ -80,7 +82,7 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
       holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_default);
     }
     else {
-      holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_green);
+      holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_highlighted);
     }
     holder.cardView.setTag(community);
 
@@ -97,7 +99,7 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
         }
         else {
           com.setSelected(true);
-          holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_green);
+          holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_highlighted);
           // holder.communityImage.setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
         }
 

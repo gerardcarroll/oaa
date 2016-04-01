@@ -24,7 +24,7 @@ import static org.hamcrest.Matchers.not;
 /**
  * Espresso tests to check the general functionality of the Communities activity.
  *
- * Created by rconnolly on 3/24/2016.
+ * @author rconnolly Created on 3/24/2016.
  */
 
 @RunWith(AndroidJUnit4.class)
