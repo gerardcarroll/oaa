@@ -4,10 +4,11 @@
  * Created by finolacurran on 3/30/2016.
  */
 
-        package com.overstock.android.prototype.uiautomator;
+package com.overstock.android.prototype.uiautomator;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.RemoteException;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
@@ -19,6 +20,7 @@ import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,18 +41,22 @@ public class GuestLoginEndToEnd {
     private static final String STRING_TO_BE_TYPED = "UiAutomator";
 
     @Test
-    public void startMainActivityFromHomeScreen(){
+    public void startMainActivityFromHomeScreen() throws RemoteException {
 
         // Start from the home screen
         mDevice.pressHome();
 
-        // Click the Apps icon
+         // Click the Apps icon
          UiObject2 AppsIcon = mDevice.findObject(By.res("com.sec.android.app.launcher", "home_allAppsIcon"));
          AppsIcon.click();
 
         // Click the OApp icon
-        mDevice.wait(Until.hasObject(By.pkg("com.sec.android.app.launcher").depth(0)), TIMEOUT);
+        mDevice.wait(Until.hasObject(By.text("O.com App Prototype")), TIMEOUT);
+
         UiObject2 OAppPrototypeApp = mDevice.findObject(By.text("O.com App Prototype"));
+
+        Assert.assertNotNull(OAppPrototypeApp);
+
         OAppPrototypeApp.click();
 
         // Login as Guest
@@ -61,12 +67,12 @@ public class GuestLoginEndToEnd {
         // wait until the recycler view for the communities is on the screen
         mDevice.wait(Until.hasObject(By.res("com.overstock.android.prototype", "ivCommunities")), TIMEOUT);
 
-        // select communities
-        UiObject recyclerView = mDevice.findObject(new UiSelector().className("android.support.v7.widget.RecyclerView"));
+        // select communities in the Communities recyclerview
+        UiObject CommunitiesrecyclerView = mDevice.findObject(new UiSelector().className("android.support.v7.widget.RecyclerView"));
         try {
-            recyclerView.getChild(new UiSelector().index(0)).click();
-            recyclerView.getChild(new UiSelector().index(2)).click();
-            recyclerView.getChild(new UiSelector().index(3)).click();
+            CommunitiesrecyclerView.getChild(new UiSelector().index(0)).click();
+            CommunitiesrecyclerView.getChild(new UiSelector().index(2)).click();
+            CommunitiesrecyclerView.getChild(new UiSelector().index(3)).click();
         } catch (UiObjectNotFoundException e) {
             e.printStackTrace();
         }
@@ -81,8 +87,7 @@ public class GuestLoginEndToEnd {
         }
 
         // click continue button
-        mDevice.wait(Until.hasObject(By.text("Continue")), TIMEOUT);
-        // UiObject2 ContinueButton = mDevice.findObject(By.text("Continue ✓"));
+        mDevice.wait(Until.hasObject(By.res(OApp_PACKAGE, "btnCommunitySelection")), TIMEOUT);
         UiObject2 ContinueButton = mDevice.findObject(By.res(OApp_PACKAGE, "btnCommunitySelection"));
         ContinueButton.click();
 
@@ -92,6 +97,7 @@ public class GuestLoginEndToEnd {
 
         //Click on Trending tab on feed page
         UiObject2 TrendingTab = mDevice.findObject(By.text("Trending"));
+        mDevice.wait(Until.hasObject(By.res(OApp_PACKAGE, "feed_img")), TIMEOUT);
         TrendingTab.click();
 
         /* Click on My Location tab on feed page */
@@ -111,19 +117,6 @@ public class GuestLoginEndToEnd {
             e.printStackTrace();
         }
 
-        //scroll on the my feed page and then click on it
-        //UiScrollable FeedPageScroll = new UiScrollable(new UiSelector().className("android.support.v7.widget.RecyclerView"));
-        //UiScrollable FeedPageScroll = new UiScrollable(new UiSelector().className("android.support.v7.widget.RecyclerView"));
-        //UiScrollable FeedPageScroll = new UiScrollable(new UiSelector().scrollable(true));
-        //FeedPageScroll.scrollForward();
-        //FeedPageImage.click();
-
-        //MyFeedPage = mDevice.findObject(By.res("com.overstock.android.prototype","feed_img"));
-
-        //MyFeedPage.click();
-
-        //scrollForward();
-
         //Click on feed page
         mDevice.wait(Until.hasObject(By.res(OApp_PACKAGE, "feed_img")), TIMEOUT);
         UiObject2 FeedPageImage = mDevice.findObject(By.res(OApp_PACKAGE,"feed_img"));
@@ -133,15 +126,51 @@ public class GuestLoginEndToEnd {
         //wait until the user is on Brand page and Click on header on Brand page
         mDevice.wait(Until.hasObject(By.res(OApp_PACKAGE,"header")), TIMEOUT);
         UiObject2 BrandPageHeader = mDevice.findObject(By.res(OApp_PACKAGE,"header"));
-        // mDevice.wait(Until.hasObject(By.res(OApp_PACKAGE,"header")), TIMEOUT);
         BrandPageHeader.click();
 
+        //scroll on Brand page
+        UiScrollable BrandPageScroll = new UiScrollable(new UiSelector().className("android.widget.FrameLayout"));
+        try {
+            BrandPageScroll.scrollForward();
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+        // Horizontal scroll on the BestSellersList on the Brand Page
+        UiScrollable BestSellersScrollList = new UiScrollable(new UiSelector().resourceId("com.overstock.android.prototype:id/best_sellers"));
+
+        BestSellersScrollList.setAsHorizontalList();
+        try {
+            BestSellersScrollList.scrollForward();
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        // Horizontal scroll on the NewArrivalsList on the Brand Page
+        UiScrollable NewArrivalsScrollList = new UiScrollable(new UiSelector().resourceId("com.overstock.android.prototype:id/new_arrivals"));
+
+        NewArrivalsScrollList.setAsHorizontalList();
+        try {
+            NewArrivalsScrollList.scrollForward();
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
+
         //Click a product image on Brand page
+        mDevice.wait(Until.hasObject(By.res(OApp_PACKAGE, "product_card_img")), TIMEOUT);
         UiObject2 BrandProduct = mDevice.findObject(By.res(OApp_PACKAGE,"product_card_img"));
         BrandProduct.click();
 
-
-        mDevice.pressHome();
+        //scroll on Product page
+        mDevice.wait(Until.hasObject(By.res(OApp_PACKAGE, "product_detail_activity_shared_image_1")), TIMEOUT);
+        UiScrollable ProductPageScroll = new UiScrollable(new UiSelector().className("android.widget.FrameLayout"));
+        try {
+            ProductPageScroll.scrollForward();
+            //ProductPageScroll.scrollBackward();
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
 
     }
 
