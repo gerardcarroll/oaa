@@ -17,15 +17,15 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.FeedAdapter;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.model.Feed;
 import com.overstock.android.prototype.presenter.FeedPresenter;
 import com.overstock.android.prototype.view.FeedView;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * @author RayConnolly, LeeMeehan
@@ -36,7 +36,7 @@ public class FeedFragment extends Fragment implements FeedView {
   @Inject
   FeedPresenter feedPresenter;
 
-  @Bind(R.id.rv_feed_communities)
+  @Bind(R.id.rv_feed)
   RecyclerView recyclerView;
 
   @Bind(R.id.feed_progressLoader)

@@ -30,11 +30,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.Matchers.not;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-//import org.mockito.Mock;
 
 /**
  * Created by itowey on 14/03/16.
@@ -44,11 +42,13 @@ public class AppInstrumentationTest_E2E {
 
     public static final String USERNAME = "johnsmith@gmail.com";
 
-    @Rule public ActivityTestRule<HomeActivity> activityRule = new ActivityTestRule<>(HomeActivity.class);
+    @Rule
+    public ActivityTestRule<HomeActivity> activityRule = new ActivityTestRule<>(HomeActivity.class);
 
     @Rule public OAppPrototypeApplicationMockRule oAppPrototypeApplicationMockRule = new OAppPrototypeApplicationMockRule();
 
-    @Mock OappGoogleAuthService oappGoogleAuthService;
+    @Mock
+    OappGoogleAuthService oappGoogleAuthService;
 
     @Before
     public void setUp(){
@@ -84,7 +84,6 @@ public class AppInstrumentationTest_E2E {
 
     @Test
     public void appTest(){
-
         onView(withId(R.id.googlePlus_login_btn)).perform(click());
         onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
         onView(withId(R.id.btnCommunitySelection)).check(matches(not(isEnabled())));
@@ -106,7 +105,7 @@ public class AppInstrumentationTest_E2E {
 
         onView(withText(activityRule.getActivity().getString(R.string.my_feed_tab))).perform(click());
         onView(withText("Top NFL Fan Products for 2016")).check(matches(isDisplayed()));
-        onView(withId(R.id.rv_feed_communities)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.rv_feed)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         onView(withId(R.id.brand_activity)).check(matches(isDisplayed()));
 
 //        onView(isRoot()).perform(waitId(R.id.best_sellers, Sampling.SECONDS_15));
