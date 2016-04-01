@@ -37,7 +37,7 @@ public class GuestLoginEndToEnd {
             = "com.overstock.android.prototype";
     private UiDevice mDevice;
 
-    private static final int TIMEOUT = 5000;
+    private static final int TIMEOUT = 6000;
     private static final String STRING_TO_BE_TYPED = "UiAutomator";
 
     @Test
