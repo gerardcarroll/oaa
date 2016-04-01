@@ -9,7 +9,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.Matchers.not;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -127,19 +127,21 @@ public class AppInstrumentationTest_E2E {
 
     onView(withText(activityRule.getActivity().getString(R.string.my_feed_tab))).perform(click());
     onView(withText("Top NFL Fan Products for 2016")).check(matches(isDisplayed()));
-    onView(withId(R.id.rv_feed_communities)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+    onView(withId(R.id.rv_feed)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
     onView(withId(R.id.brand_activity)).check(matches(isDisplayed()));
 
-    /*Back stack Navigation*/
+    /* Back stack Navigation */
     pressBack();
     onView(withText("Top NFL Fan Products for 2016")).check(matches(isDisplayed()));
     onView(withId(R.id.feed_viewpager)).check(matches(isDisplayed()));
     onView(withId(R.id.feed_tabs)).check(matches(isDisplayed()));
     pressBack();
     onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
-    onView(withId(R.id.btnCommunitySelection)).check(matches(isEnabled())); //Asserting Community Selections have not been lost.
+    onView(withId(R.id.btnCommunitySelection)).check(matches(isEnabled())); // Asserting Community Selections have not
+                                                                            // been lost.
     pressBack();
-    onView(withId(R.id.guest_login_btn)).check(doesNotExist()); //Assert that we have not rooted to the login page.
-    onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));//Assert that we have not rooted from the Communities Page.
+    onView(withId(R.id.guest_login_btn)).check(doesNotExist()); // Assert that we have not rooted to the login page.
+    onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));// Assert that we have not rooted from the
+                                                                     // Communities Page.
   }
 }

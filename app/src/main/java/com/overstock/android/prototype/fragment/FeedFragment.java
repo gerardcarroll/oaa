@@ -1,7 +1,5 @@
 package com.overstock.android.prototype.fragment;
 
-import java.util.ArrayList;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -11,17 +9,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.FeedAdapter;
 import com.overstock.android.prototype.models.Feed;
 
+import java.util.ArrayList;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class FeedFragment extends Fragment {
 
-  @Bind(R.id.rv_feed_communities)
-  RecyclerView recyclerView;
+    private FeedAdapter feedCommunitiesAdapter;
+
+    @Bind(R.id.rv_feed)
+    RecyclerView recyclerView;
 
   public FeedFragment() {}
 
@@ -51,7 +53,7 @@ public class FeedFragment extends Fragment {
     feeds.add(new Feed(imagesArray[1], "Get Your Beat on!, with Beats by dre", "DreBeats.com"));
     feeds.add(new Feed(imagesArray[2], "Treat yourself. Top skin care products of this month.", "Relax.com"));
     feeds.add(new Feed(imagesArray[3], "Must Have Products to get in Shape.", "GetFit.com"));
-    // TODO remove up as far as last todo
+    // TODO remove as far as here
 
     recyclerView.setHasFixedSize(true);
     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
