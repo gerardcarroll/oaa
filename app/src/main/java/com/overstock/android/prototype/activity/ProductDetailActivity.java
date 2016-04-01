@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.transition.Transition;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -22,6 +24,7 @@ import com.overstock.android.prototype.component.ApplicationComponent;
 import com.overstock.android.prototype.model.ProductDetail;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
 import com.overstock.android.prototype.view.ProductDetailView;
+import com.squareup.picasso.Picasso;
 
 /**
  * @author RayConnolly Created on 21-03-2016
@@ -44,6 +47,9 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   @Bind(R.id.product_detail_content)
   TextView productDescription;
 
+  @Bind(R.id.product_detail_activity_shared_image_1)
+  ImageView productImage;
+
   @Bind(R.id.product_detail_toolbar)
   Toolbar toolbar;
 
@@ -53,8 +59,6 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     ApplicationComponent.Initializer.init(this.getApplication()).inject(this);
     setContentView(R.layout.activity_product_detail);
     ButterKnife.bind(this);
-    setSupportActionBar(toolbar);
-    getSupportActionBar().setTitle("");
 
     // TODO Send product as a package.
     final Bundle extras = getIntent().getExtras();
@@ -65,8 +69,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     // TODO optimize image load using Picasso
     final Bitmap bmp = BitmapFactory.decodeByteArray(b, 0, b.length);
-    final ImageView image = (ImageView) findViewById(R.id.product_detail_activity_shared_image_1);
-    image.setImageBitmap(bmp);
+    productImage.setImageBitmap(bmp);
 
     productName.setText(name);
     productPrice.setText(price);
@@ -102,12 +105,11 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   }
 
   @Override
-  public void displayProductDetails(ProductDetail productDetail) {
-    //Log.d(TAG, "Product Details description" + description.toString());
+  public void displayProductDetails(final ProductDetail productDetail) {
+    Log.d(TAG, "Displaying Product Details." + productDetail.toString());
     productDescription.setText(Html.fromHtml(productDetail.getDescription()));
-//    final ImageView image = (ImageView) findViewById(R.id.product_detail_activity_shared_image_1);
-//    Picasso.with(this).load(BASE_IMAGE_URL + productDetail.getImageMedium1())
-//            .error(R.drawable.product_placeholder).into(image);
-
+    // Maybe add a Transaction listener to load in a better image once the transaction has complete.
+    // Picasso.with(this).load(BASE_IMAGE_URL + productDetail.getImageLarge()).error(R.drawable.product_placeholder)
+    // .into(productImage);
   }
 }

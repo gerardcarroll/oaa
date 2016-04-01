@@ -14,15 +14,21 @@ import android.view.ViewGroup;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.BrandActivity;
+import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.model.Feed;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
 import com.vstechlab.easyfonts.EasyFonts;
 
+import javax.inject.Inject;
+
 /**
  * @author RayConnolly, LeeMeehan Created on 3/16/2016.
  */
 public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder> {
+
+  @Inject
+  Picasso picasso;
 
   private Context context;
 
@@ -34,6 +40,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder> {
     this.activity = activity;
     this.context = context;
     this.feedItems = items;
+    ((OAppPrototypeApplication) context.getApplicationContext()).getComponent().inject(this);
   }
 
   public List<Feed> getData() {
@@ -53,11 +60,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder> {
   @Override
   public void onBindViewHolder(FeedViewHolder holder, int position) {
 
-    //TODO inject picasso.
+    // TODO inject picasso.
     final Feed feed = feedItems.get(position);
-    final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
-    final int cacheSize = maxMemory / 8;
-    final Picasso picasso = new Picasso.Builder(context).memoryCache(new LruCache(cacheSize)).build();
     picasso.with(context).load(feed.getProductImage()).error(R.drawable.product_placeholder).into(holder.feedImg);
 
     holder.productLinkTxt.setText(feed.getTopProductsLink());

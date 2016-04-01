@@ -9,6 +9,8 @@ public class ProductDetail {
 
   private String name;
 
+  private String imageLarge;
+
   private String imageMedium1;
 
   private String memberPrice;
@@ -17,9 +19,11 @@ public class ProductDetail {
 
   private String description;
 
-  public ProductDetail(int id, String name, String image, String price, int quantity, String description) {
+  public ProductDetail(int id, String name, String imageLarge, String image, String price, int quantity,
+      String description) {
     this.id = id;
     this.name = name;
+    this.imageLarge = imageLarge;
     this.imageMedium1 = image;
     this.memberPrice = price;
     this.quantity = quantity;
@@ -56,5 +60,9 @@ public class ProductDetail {
 
   public String getDescription() {
     return description;
+  }
+
+  public String getImageLarge() {
+    return imageLarge;
   }
 }

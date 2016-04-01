@@ -13,6 +13,8 @@ import com.overstock.android.prototype.presenter.ProductDetailPresenter;
 import com.overstock.android.prototype.presenter.impl.ProductDetailPresenterImpl;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
 import com.overstock.android.prototype.service.ProductService;
+import com.squareup.picasso.LruCache;
+import com.squareup.picasso.Picasso;
 
 import dagger.Module;
 import dagger.Provides;
@@ -62,6 +64,14 @@ public class ApplicationModule {
   @Provides
   public OappGoogleAuthService providesOappGoogleAuthService(Application application) {
     return new OappGoogleAuthService(application);
+  }
+
+  @Provides
+  public Picasso providesPicasso(){
+    final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+    final int cacheSize = maxMemory / 8;
+    final Picasso picasso = new Picasso.Builder(application.getBaseContext()).memoryCache(new LruCache(cacheSize)).build();
+    return picasso;
   }
 
 }
