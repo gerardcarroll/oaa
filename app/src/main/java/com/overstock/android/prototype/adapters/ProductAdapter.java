@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
@@ -15,10 +16,11 @@ import android.widget.ImageView;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.ProductDetailActivity;
-import com.overstock.android.prototype.models.Product;
+import com.overstock.android.prototype.model.Product;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -48,8 +50,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
   public ProductViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
     final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
     final ViewGroup mainGroup = (ViewGroup) inflater.inflate(R.layout.product_card, parent, false);
-    final ProductViewHolder listHolder = new ProductViewHolder(mainGroup);
-    return listHolder;
+    return new ProductViewHolder(mainGroup);
   }
 
   @Override
@@ -61,20 +62,24 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
     holder.productNameTxt.setText(product.getName());
     final String currencyCode = Currency.getInstance(Locale.US).getSymbol();
     holder.productPriceTxt.setText(context.getString(R.string.product_price_fmt, currencyCode ,product.getMemberPrice().toString()));
-    final Picasso picasso = new Picasso.Builder(context).memoryCache(new LruCache(45000)).build();
-    holder.progressBar.setVisibility(View.VISIBLE);
-    picasso.with(context).load(BASE_IMAGE_URL + product.getImageMedium1()).resize(500, 500)
-        .error(R.drawable.product_placeholder).into(holder.imageView, new Callback() {
-          @Override
-          public void onSuccess() {
-            holder.progressBar.setVisibility(View.GONE);
-          }
 
-          @Override
-          public void onError() {
-            holder.progressBar.setVisibility(View.GONE);
-          }
-        });
+    //TODO inject picasso.
+    final int maxMemory = (int) (Runtime.getRuntime().maxMemory()/ 1024);
+    final int cacheSize = maxMemory /8;
+    final Picasso picasso = new Picasso.Builder(context).memoryCache(new LruCache(cacheSize)).build();
+    holder.progressBar.setVisibility(View.VISIBLE);
+    picasso.with(context).load(BASE_IMAGE_URL + product.getImageMedium1()).resize(300, 300)
+        .error(R.drawable.product_placeholder).into(holder.imageView, new Callback() {
+      @Override
+      public void onSuccess() {
+        holder.progressBar.setVisibility(View.GONE);
+      }
+
+      @Override
+      public void onError() {
+        holder.progressBar.setVisibility(View.GONE);
+      }
+    });
 
     // OnClickListener on images to show Shared Element Transition example
     holder.imageView.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +87,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
       public void onClick(final View v) {
 
         final ImageView imageView = (ImageView) v;
-          Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         final byte[] b = baos.toByteArray();
@@ -97,7 +102,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
         intent.putExtra("name", name);
         intent.putExtra("price", price);
         final ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat
-            .makeSceneTransitionAnimation(activity, v, context.getString(R.string.shared_element_transition));
+                .makeSceneTransitionAnimation(activity, v, context.getString(R.string.shared_element_transition));
         ActivityCompat.startActivity(activity, intent, transitionActivityOptions.toBundle());
       }
     });

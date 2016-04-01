@@ -1,11 +1,12 @@
-package com.overstock.android.prototype.presenter;
+package com.overstock.android.prototype.presenter.impl;
 
 import java.util.ArrayList;
 
 import android.content.Context;
 
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.models.Community;
+import com.overstock.android.prototype.model.Community;
+import com.overstock.android.prototype.presenter.CommunitiesPresenter;
 import com.overstock.android.prototype.view.CommunitiesView;
 
 /**

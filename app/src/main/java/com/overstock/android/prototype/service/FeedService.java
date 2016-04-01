@@ -1,6 +1,6 @@
 package com.overstock.android.prototype.service;
 
-import com.overstock.android.prototype.models.Feed;
+import com.overstock.android.prototype.model.Feed;
 
 import java.util.List;
 

@@ -2,17 +2,17 @@ package com.overstock.android.prototype.module;
 
 import android.app.Application;
 
-import com.overstock.android.prototype.client.FeedClient;
-import com.overstock.android.prototype.service.FeedService;
-import com.overstock.android.prototype.service.ProductService;
 import com.overstock.android.prototype.client.TheOAppClient;
-import com.overstock.android.prototype.models.ProductDataService;
+import com.overstock.android.prototype.model.ProductDataService;
 import com.overstock.android.prototype.module.scope.ApplicationScope;
 import com.overstock.android.prototype.presenter.BrandPresenter;
-import com.overstock.android.prototype.presenter.BrandPresenterImpl;
+import com.overstock.android.prototype.presenter.impl.BrandPresenterImpl;
+import com.overstock.android.prototype.presenter.FeedPresenter;
+import com.overstock.android.prototype.presenter.impl.FeedPresenterImpl;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
-import com.overstock.android.prototype.presenter.ProductDetailPresenterImpl;
+import com.overstock.android.prototype.presenter.impl.ProductDetailPresenterImpl;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
+import com.overstock.android.prototype.service.ProductService;
 
 import dagger.Module;
 import dagger.Provides;
@@ -26,12 +26,12 @@ public class ApplicationModule {
 
   Application application;
 
-  public  ApplicationModule(Application application){
+  public ApplicationModule(Application application) {
     this.application = application;
   }
 
   @Provides
-  public Application providesApplication(){
+  public Application providesApplication() {
     return application;
   }
 
@@ -41,11 +41,16 @@ public class ApplicationModule {
   }
 
   @Provides
-  public ProductDetailPresenter productDetailPresenter(final ProductDataService productDataService){
+  public ProductDetailPresenter productDetailPresenter(final ProductDataService productDataService) {
     return new ProductDetailPresenterImpl(productDataService);
   }
 
-  public ProductDataService providesProductDataService(final ProductService productService){
+  @Provides
+  public FeedPresenter feedPresenter() {
+    return new FeedPresenterImpl();
+  }
+
+  public ProductDataService providesProductDataService(final ProductService productService) {
     return new ProductDataService(productService);
   }
 

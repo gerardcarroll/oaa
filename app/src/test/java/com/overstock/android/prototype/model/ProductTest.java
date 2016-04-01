@@ -1,7 +1,5 @@
 package com.overstock.android.prototype.model;
 
-import com.overstock.android.prototype.models.Product;
-
 import junit.framework.Assert;
 
 import org.junit.Test;

@@ -27,8 +27,8 @@ import butterknife.OnClick;
 import com.dd.processbutton.iml.SubmitProcessButton;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.CommunitiesAdapter;
-import com.overstock.android.prototype.models.Community;
-import com.overstock.android.prototype.presenter.CommunitiesPresenterImpl;
+import com.overstock.android.prototype.model.Community;
+import com.overstock.android.prototype.presenter.impl.CommunitiesPresenterImpl;
 import com.overstock.android.prototype.view.CommunitiesView;
 
 import icepick.Icepick;

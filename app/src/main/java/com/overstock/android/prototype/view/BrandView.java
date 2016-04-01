@@ -1,6 +1,6 @@
 package com.overstock.android.prototype.view;
 
-import com.overstock.android.prototype.models.Product;
+import com.overstock.android.prototype.model.Product;
 
 import java.util.ArrayList;
 

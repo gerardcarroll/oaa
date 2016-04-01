@@ -16,15 +16,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.ProductAdapter;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
-import com.overstock.android.prototype.models.Product;
+import com.overstock.android.prototype.model.Product;
 import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.view.BrandView;
-import com.overstock.android.prototype.widgets.EndlessRecyclerOnScrollListener;
 
 import java.util.ArrayList;
 
@@ -121,15 +119,6 @@ public class BrandFragment extends Fragment implements BrandView {
     recyclerView_BestSellers.setAdapter(productAdapter);
     recyclerView_BestSellers.setNestedScrollingEnabled(false);
     recyclerView_BestSellers.setItemAnimator(new DefaultItemAnimator());
-    recyclerView_BestSellers.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
-      @Override
-      public void onLoadMore(final int page, final int totalItemsCount) {
-        Toast.makeText(getContext(), "HI THERE", Toast.LENGTH_LONG).show();
-        // final Integer currentSize = productAdapter.getItemCount();
-        // Add more items. newItems
-        // productAdapter.notifyItemRangeInserted(currentSize, newItems.size() -1);
-      }
-    });
   }
 
   @Override
