@@ -1,10 +1,10 @@
-package com.overstock.android.prototype.presenter;
+package com.overstock.android.prototype.presenter.impl;
 
 import android.util.Log;
 
-import com.overstock.android.prototype.models.Product;
-import com.overstock.android.prototype.models.ProductDataService;
-import com.overstock.android.prototype.models.ProductDetail;
+import com.overstock.android.prototype.model.ProductDataService;
+import com.overstock.android.prototype.model.ProductDetail;
+import com.overstock.android.prototype.presenter.ProductDetailPresenter;
 import com.overstock.android.prototype.view.ProductDetailView;
 
 import javax.inject.Inject;
@@ -70,7 +70,7 @@ public class ProductDetailPresenterImpl implements ProductDetailPresenter {
           @Override
           public void onNext(ProductDetail productDetail) {
             Log.d("SUCCESS", "SUCCESS, Product Details successfully loaded");
-            productDetailView.displayProductDetails(productDetail.getDescription());
+            productDetailView.displayProductDetails(productDetail);
           }
         });
   }

@@ -31,7 +31,7 @@ android {
         applicationId "com.overstock.android.prototype"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         archivesBaseName = "OApp"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 23
 
         versionCode System.getenv("BUILD_NUMBER") as Integer ?: 9999

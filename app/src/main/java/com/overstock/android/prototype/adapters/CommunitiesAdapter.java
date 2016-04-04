@@ -12,7 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.models.Community;
+import com.overstock.android.prototype.model.Community;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 

@@ -1,4 +1,4 @@
-package com.overstock.android.prototype.models;
+package com.overstock.android.prototype.model;
 
 import javax.inject.Inject;
 
@@ -9,7 +9,7 @@ import android.net.Uri;
 import android.util.Log;
 
 import com.overstock.android.prototype.interfaces.OappProvider;
-import com.overstock.android.prototype.interfaces.ProductService;
+import com.overstock.android.prototype.service.ProductService;
 import com.overstock.android.prototype.provider.OappProviderContract;
 
 /**
@@ -17,20 +17,20 @@ import com.overstock.android.prototype.provider.OappProviderContract;
  */
 public class ProductDataService implements OappProvider<ProductsResponse> {
 
+  private static final String TAG = ProductDataService.class.getName();
+
   public static final int ProductEntry_BESTSELLERS = 100;
 
   public static final int ProductEntry_NEWARRIVALS = 101;
 
-  private static final String TAG = ProductDataService.class.getName();
+  private static final String BEST_SELLERS = "recommended";
+
+  private static final String NEW_ARRIVALS = "New+Arrivals";
 
   // The URI Matcher used by this content provider.
   private static final UriMatcher sUriMatcher = buildUriMatcher();
 
   private ProductService productService;
-
-  private String bestSellers = "recommended";
-
-  private String newArrivals = "New+Arrivals";
 
   @Inject
   public ProductDataService(final ProductService productService) {
@@ -43,10 +43,10 @@ public class ProductDataService implements OappProvider<ProductsResponse> {
     switch (sUriMatcher.match(uri)) {
       case ProductEntry_BESTSELLERS:
         return productService.query(uri.getQueryParameter(ProductService.PRODUCT_SERVICE_QUERY_PARAM_NAME_KEYWORDS),
-          bestSellers, Integer.valueOf(uri.getQueryParameter(ProductService.PRODUCT_SERVICE_QUERY_PARAM_NAME_COUNT)));
+          BEST_SELLERS, Integer.valueOf(uri.getQueryParameter(ProductService.PRODUCT_SERVICE_QUERY_PARAM_NAME_COUNT)));
       case ProductEntry_NEWARRIVALS:
         return productService.query(uri.getQueryParameter(ProductService.PRODUCT_SERVICE_QUERY_PARAM_NAME_KEYWORDS),
-          newArrivals, Integer.valueOf(uri.getQueryParameter(ProductService.PRODUCT_SERVICE_QUERY_PARAM_NAME_COUNT)));
+          NEW_ARRIVALS, Integer.valueOf(uri.getQueryParameter(ProductService.PRODUCT_SERVICE_QUERY_PARAM_NAME_COUNT)));
       default:
         throw new UnsupportedOperationException("Unknown uri: " + uri);
     }
@@ -58,9 +58,9 @@ public class ProductDataService implements OappProvider<ProductsResponse> {
     final String authority = OappProviderContract.CONTENT_AUTHORITY;
 
     // add all endpoints that will be serviced
-    matcher.addURI(authority, OappProviderContract.PRODUCTS_PATH + "/" + OappProviderContract.ProductEntry.BESTSELLERS,
+    matcher.addURI(authority, OappProviderContract.PRODUCTS_PATH + "/" + OappProviderContract.ProductEntry.BEST_SELLERS,
       ProductEntry_BESTSELLERS);
-    matcher.addURI(authority, OappProviderContract.PRODUCTS_PATH + "/" + OappProviderContract.ProductEntry.NEWARRIVALS,
+    matcher.addURI(authority, OappProviderContract.PRODUCTS_PATH + "/" + OappProviderContract.ProductEntry.NEW_ARRIVALS,
       ProductEntry_NEWARRIVALS);
 
     return matcher;

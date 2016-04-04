@@ -32,4 +32,5 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
     super(view);
     ButterKnife.bind(this, view);
   }
+
 }
