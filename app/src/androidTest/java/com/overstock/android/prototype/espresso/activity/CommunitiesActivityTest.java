@@ -30,79 +30,79 @@ import static org.hamcrest.Matchers.not;
 @RunWith(AndroidJUnit4.class)
 public class CommunitiesActivityTest {
 
-    @Rule
-    public ActivityTestRule<CommunitiesActivity> activityRule = new ActivityTestRule<>(CommunitiesActivity.class);
+  @Rule
+  public ActivityTestRule<CommunitiesActivity> activityRule = new ActivityTestRule<>(CommunitiesActivity.class);
 
-    @Test
-    public void testCommunitiesRendering() {
+  @Test
+  public void testCommunitiesRendering() {
 
-        // Check Communities recycler view is displayed
-        onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
-    }
+    // Check Communities recycler view is displayed
+    onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
+  }
 
-    @Test
-    public void testRecyclerViewScroll(){
+  @Test
+  public void testRecyclerViewScroll() {
 
-        // Check Communities recycler view is scrollable
-        onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.scrollToPosition(11));
-    }
+    // Check Communities recycler view is scrollable
+    onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.scrollToPosition(11));
+  }
 
-    @Test
-    public void testCommunityFirstItemIsDisplayed(){
+  @Test
+  public void testCommunityFirstItemIsDisplayed() {
 
-        // Click on 1st item in recycler view before checking for Men item
-        onView(withId(R.id.rvCommunities)).check(matches(hasDescendant(withText("Men"))));
-    }
+    // Click on 1st item in recycler view before checking for Men item
+    onView(withId(R.id.rvCommunities)).check(matches(hasDescendant(withText("Men"))));
+  }
 
-    @Test
-    public void testCommunityLastItemIsDisplayed(){
+  @Test
+  public void testCommunityLastItemIsDisplayed() {
 
-        // Scroll to bottom of Communities recycler view before checking for Watches item
-        onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.scrollToPosition(17));
-        onView(withId(R.id.rvCommunities)).check(matches(hasDescendant(withText("Watches"))));
-    }
+    // Scroll to bottom of Communities recycler view before checking for Watches item
+    onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.scrollToPosition(17));
+    onView(withId(R.id.rvCommunities)).check(matches(hasDescendant(withText("Watches"))));
+  }
 
-    @Test
-    public void testProgressButtonIsDisplayed(){
+  @Test
+  public void testProgressButtonIsDisplayed() {
 
-        // Check progress button is displayed
-        onView(withId(R.id.btnCommunitySelection)).check(matches(isDisplayed()));
-    }
+    // Check progress button is displayed
+    onView(withId(R.id.btnCommunitySelection)).check(matches(isDisplayed()));
+  }
 
-    @Test
-    public void testProgressButton(){
+  @Test
+  public void testProgressButtonFunctionality() {
 
-        // Check Communities recycler view is displayed
-        onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
+    // Check Communities recycler view is displayed
+    onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
 
-        // Check progress button is displayed
-        onView(withId(R.id.btnCommunitySelection)).check(matches(isDisplayed()));
+    // Check progress button is displayed
+    onView(withId(R.id.btnCommunitySelection)).check(matches(isDisplayed()));
 
-        // Check progress button is not yet enabled
-        onView(withId(R.id.btnCommunitySelection)).check(matches(not(isEnabled())));
+    // Check progress button is not yet enabled
+    onView(withId(R.id.btnCommunitySelection)).check(matches(not(isEnabled())));
 
-        // Check 1st item in recycler view
-        onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+    // Check 1st item in recycler view
+    onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
-        // Check progress button is not yet enabled
-        onView(withId(R.id.btnCommunitySelection)).check(matches(not(isEnabled())));
+    // Check progress button is not yet enabled
+    onView(withId(R.id.btnCommunitySelection)).check(matches(not(isEnabled())));
 
-        // Check 2nd item in recycler view
-        onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+    // Check 2nd item in recycler view
+    onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
 
-        // Check progress button is not yet enabled
-        onView(withId(R.id.btnCommunitySelection)).check(matches(not(isEnabled())));
+    // Check progress button is not yet enabled
+    onView(withId(R.id.btnCommunitySelection)).check(matches(not(isEnabled())));
 
-        // Check 3rd item in recycler view
-        onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
+    // Check 3rd item in recycler view
+    onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
 
-        // Check progress button is now enabled
-        onView(withId(R.id.btnCommunitySelection)).check(matches(isEnabled()));
+    // Check progress button is now enabled
+    onView(withId(R.id.btnCommunitySelection)).check(matches(isEnabled()));
 
-        // Click on now enabled progress button
-        onView(withId(R.id.btnCommunitySelection)).perform(click());
+    // Click on now enabled progress button
+    onView(withId(R.id.btnCommunitySelection)).perform(click());
 
-        // Check Feed Activity is now displayed
-        onView(withId(R.id.feed_tabs)).check(matches(isDisplayed()));
-    }
+    // Check Feed Activity is now displayed
+    onView(withId(R.id.feed_tabs)).check(matches(isDisplayed()));
+  }
 }

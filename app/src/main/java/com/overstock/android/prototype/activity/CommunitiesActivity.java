@@ -72,13 +72,13 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
 
   public CommunitiesActivity() {
     communitiesPresenterImpl = new CommunitiesPresenterImpl(this);
-    communitiesPresenterImpl.attachedView(this);
+    communitiesPresenterImpl.setView(this, getApplicationContext());
   }
 
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    communitiesPresenterImpl.detachView();
+    communitiesPresenterImpl.destroyView();
   }
 
   @Override
@@ -167,16 +167,16 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
   }
 
   @Override
-  public boolean onCreateOptionsMenu(final Menu menu) {
-    getMenuInflater().inflate(R.menu.menu_main, menu);
-    return true;
-  }
-
-  @Override
   public void onSaveInstanceState(final Bundle outState) {
     super.onSaveInstanceState(outState);
     outState.putInt("button", progressButton.getProgress());
     Icepick.saveInstanceState(this, outState);
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(final Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_main, menu);
+    return true;
   }
 
   @Override

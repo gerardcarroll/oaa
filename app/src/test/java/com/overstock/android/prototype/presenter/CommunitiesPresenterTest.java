@@ -39,7 +39,7 @@ public class CommunitiesPresenterTest {
   public void setUp() {
     MockitoAnnotations.initMocks(this);
     communitiesPresenter = new CommunitiesPresenterImpl(context);
-    communitiesPresenter.attachedView(communitiesView);
+    communitiesPresenter.setView(communitiesView);
   }
 
   @Test
@@ -54,7 +54,7 @@ public class CommunitiesPresenterTest {
   @Test(expected = NullPointerException.class)
   public void testPopulateAndShowCommunities_View_Null() {
     assertNotNull("CommunitiesPresenter is null. check that it has been initialized.", communitiesPresenter);
-    communitiesPresenter.detachView();
+    communitiesPresenter.destroyView();
     when(context.getResources()).thenReturn(resources);
     when(resources.getStringArray(isA(Integer.class))).thenReturn(MOCK_IMAGE_ARRAY);
     communitiesPresenter.populateAndShowCommunities();

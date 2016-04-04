@@ -1,5 +1,23 @@
 package com.overstock.android.prototype.espresso.activity;
 
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.util.concurrent.TimeUnit;
+
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+
 import android.support.annotation.NonNull;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -14,46 +32,34 @@ import com.overstock.android.prototype.activity.HomeActivity;
 import com.overstock.android.prototype.espresso.dagger.rules.OAppPrototypeApplicationMockRule;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-
-import java.util.concurrent.TimeUnit;
-
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-//import org.mockito.Mock;
 
 /**
- * Created by itowey on 14/03/16.
+ * @author itowey Created on 14/03/16.
  */
 @RunWith(AndroidJUnit4.class)
 public class HomeActivityInstrumentationTest_Google {
 
     public static final String USERNAME = "johnsmith@gmail.com";
 
-    @Rule public ActivityTestRule<HomeActivity> activityRule = new ActivityTestRule<>(HomeActivity.class);
+    @Rule
+    public ActivityTestRule<HomeActivity> activityRule = new ActivityTestRule<>(HomeActivity.class);
 
-    @Rule public OAppPrototypeApplicationMockRule oAppPrototypeApplicationMockRule = new OAppPrototypeApplicationMockRule();
+    @Rule
+    public OAppPrototypeApplicationMockRule oAppPrototypeApplicationMockRule = new OAppPrototypeApplicationMockRule();
 
-    @Mock OappGoogleAuthService oappGoogleAuthService;
+    @Mock
+    OappGoogleAuthService oappGoogleAuthService;
 
     @Before
-    public void setUp(){
-
+    public void setUp() {
         when(oappGoogleAuthService.silentSignInStatus()).thenReturn(new OptionalPendingResult<GoogleSignInResult>() {
-            @Override public boolean isDone() {
+            @Override
+            public boolean isDone() {
                 return true;
             }
-            @Override public GoogleSignInResult get() {
+
+            @Override
+            public GoogleSignInResult get() {
                 GoogleSignInResult mockGoogleSignInResult = mock(GoogleSignInResult.class);
                 when(mockGoogleSignInResult.getStatus()).thenReturn(Status.zzagC);
                 when(mockGoogleSignInResult.isSuccess()).thenReturn(true);
@@ -63,25 +69,45 @@ public class HomeActivityInstrumentationTest_Google {
 
                 return mockGoogleSignInResult;
             }
+
             @NonNull
-            @Override public GoogleSignInResult await() {
+            @Override
+            public GoogleSignInResult await() {
                 return null;
             }
-            @NonNull @Override public GoogleSignInResult await(long l, TimeUnit timeUnit) { return null; }
-            @Override public void cancel() {            }
-            @Override public boolean isCanceled() {
+
+            @NonNull
+            @Override
+            public GoogleSignInResult await(long l, TimeUnit timeUnit) {
+                return null;
+            }
+
+            @Override
+            public void cancel() {
+            }
+
+            @Override
+            public boolean isCanceled() {
                 return false;
             }
-            @Override public void setResultCallback(ResultCallback<? super GoogleSignInResult> resultCallback) {}
-            @Override public void setResultCallback(ResultCallback<? super GoogleSignInResult> resultCallback, long l, TimeUnit timeUnit) {
+
+            @Override
+            public void setResultCallback(ResultCallback<? super GoogleSignInResult> resultCallback) {
+            }
+
+            @Override
+            public void setResultCallback(ResultCallback<? super GoogleSignInResult> resultCallback, long l,
+                                          TimeUnit timeUnit) {
             }
         });
     }
 
     @Test
-    public void validateGoogleLoginButtonClicked(){
-
+    public void validateGoogleLoginButtonClicked() {
         onView(withId(R.id.googlePlus_login_btn)).perform(click());
         onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
+        pressBack(); //Press Back key.
+        onView(withId(R.id.guest_login_btn)).check(doesNotExist()); //Assert that we have not rooted to the login page.
+        onView(withId(R.id.rvCommunities)).check(matches(isDisplayed())); //Assert that we have not rooted from the Communities Page.
     }
 }

@@ -1,5 +1,7 @@
 package com.overstock.android.prototype.presenter;
 
+import android.content.Context;
+
 import com.overstock.android.prototype.view.CommunitiesView;
 
 /**
@@ -7,9 +9,9 @@ import com.overstock.android.prototype.view.CommunitiesView;
  */
 public interface CommunitiesPresenter {
 
-  void attachedView(final CommunitiesView communitiesView);
+  void setView(final CommunitiesView communitiesView, final Context context);
 
-  void detachView();
+  void destroyView();
 
   void populateAndShowCommunities();
 }
