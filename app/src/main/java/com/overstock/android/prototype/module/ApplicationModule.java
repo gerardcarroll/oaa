@@ -2,15 +2,14 @@ package com.overstock.android.prototype.module;
 
 import android.app.Application;
 
-import com.overstock.android.prototype.fragment.GoogleFederatedIdentityFragment;
-import com.overstock.android.prototype.fragment.HomeFragment;
 import com.overstock.android.prototype.interfaces.ProductService;
 import com.overstock.android.prototype.interfaces.TheOAppClient;
 import com.overstock.android.prototype.models.ProductDataService;
-import com.overstock.android.prototype.module.scope.ActivityScope;
 import com.overstock.android.prototype.module.scope.ApplicationScope;
 import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.presenter.BrandPresenterImpl;
+import com.overstock.android.prototype.presenter.CommunitiesPresenter;
+import com.overstock.android.prototype.presenter.CommunitiesPresenterImpl;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
 import com.overstock.android.prototype.presenter.ProductDetailPresenterImpl;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
@@ -31,8 +30,6 @@ public class ApplicationModule {
     this.application = application;
   }
 
-
-
   @Provides
   public Application providesApplication(){
     return application;
@@ -50,6 +47,11 @@ public class ApplicationModule {
 
   public ProductDataService providesProductDataService(final ProductService productService){
     return new ProductDataService(productService);
+  }
+
+  @Provides
+  public CommunitiesPresenter communitiesPresenter(){
+    return new CommunitiesPresenterImpl();
   }
 
   @Provides

@@ -13,7 +13,7 @@ import rx.Observable;
 import rx.functions.Func0;
 
 /**
- * Created by rconnolly on 4/1/2016.
+ * @author RayConnolly Created on 2/29/2016.
  */
 public class CommunityClient {
 

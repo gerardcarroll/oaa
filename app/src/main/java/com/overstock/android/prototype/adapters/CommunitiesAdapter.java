@@ -23,7 +23,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Adapter class to allow for functionality to populate Communities Activity with underlying data.
+ * Adapter class to aid communication between Communities Activity and underlying data.
  *
  * @author RayConnolly Created on 2/29/2016.
  */
