@@ -93,7 +93,7 @@ public class CommunitiesActivityTest {
     assertTrue("ProcessButton is Disabled. Expected to be Enabled", processButton.isEnabled());
     processButton.performClick();
     ShadowActivity shadowActivity = Shadows.shadowOf(communitiesActivity);
-    Intent startedIntent = shadowActivity.getNextStartedActivity();
+    Intent startedIntent = shadowActivity.peekNextStartedActivity();
     assertNotNull("The started intent is null. No Activity has started.", startedIntent);
     assertNotNull("The intent is empty.", startedIntent.getComponent());
     assertThat("The started Activity is not the activity that is expected", startedIntent.getComponent().getClassName(),
