@@ -33,14 +33,11 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
 
   OnDataChangeListener mOnDataChangeListener;
 
-  private LayoutInflater inflater;
-
   private List<Community> data = new ArrayList<>();
 
   public CommunitiesAdapter(final Context context) {
 
     this.context = context;
-    this.inflater = inflater.from(context);
   }
 
   public List<Community> getData() {
@@ -53,7 +50,7 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
 
   @Override
   public CommunitiesViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
-    final View view = inflater.inflate(R.layout.activity_communities_card, parent, false);
+    final View view = LayoutInflater.from(context).inflate(R.layout.activity_communities_card, parent, false);
     return new CommunitiesViewHolder(view);
   }
 
@@ -94,13 +91,11 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
         if (com.isSelected()) {
           com.setSelected(false);
           holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_default);
-          // holder.communityImage.clearColorFilter();
           holder.cardView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.continue_btn_bounce_revert));
         }
         else {
           com.setSelected(true);
           holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_highlighted);
-          // holder.communityImage.setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
         }
 
         if (mOnDataChangeListener != null) {
@@ -141,6 +136,7 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
     void onDataChanged(int size);
   }
 
+  //TODO Extract to own class?
   public class CommunitiesViewHolder extends RecyclerView.ViewHolder {
 
     @Bind(R.id.cvCommunities)

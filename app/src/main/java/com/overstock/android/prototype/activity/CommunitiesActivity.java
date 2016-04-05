@@ -24,7 +24,6 @@ import com.overstock.android.prototype.presenter.CommunitiesPresenter;
 import com.overstock.android.prototype.presenter.CommunitiesPresenterImpl;
 import com.overstock.android.prototype.view.CommunitiesView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -34,7 +33,6 @@ import butterknife.BindInt;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import icepick.Icepick;
-import icepick.State;
 
 /**
  * Activity class to display data via the communities recycler view, presented to it through the
@@ -67,9 +65,6 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
   @BindInt(R.integer.communities_columns)
   int numCommunitiesColumns;
 
-  @State
-  ArrayList<Community> communities;
-
   private CommunitiesAdapter communitiesAdapter;
 
   @Inject
@@ -83,6 +78,7 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
     ((OAppPrototypeApplication) this.getApplication()).getComponent().inject(this);
 
     Icepick.restoreInstanceState(this, savedInstanceState);
+
     ButterKnife.bind(this);
 
     communitiesAdapter = new CommunitiesAdapter(getApplicationContext());
@@ -94,9 +90,11 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
     collapsingToolbarLayout.setContentScrimColor(ContextCompat.getColor(this, R.color.transparent));
 
     // Populate communities via presenter class
-    communitiesPresenter.setView(this, this);
+    communitiesPresenter.setView(this);
     communitiesPresenter.populateAndShowCommunities();
 
+    //TODO Fix save state issue on orientation change
+    //TODO Look at extracting state changes to a private method
     if (savedInstanceState != null) {
       if (savedInstanceState.getInt("button") == ONE_HUNDRED) {
         progressButton.setEnabled(true);
@@ -134,21 +132,20 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
       public void onDataChanged(final int size) {
 
         final int progress = Math.min((int) Math.ceil(((double) size / minSelectedCommunities) * ONE_HUNDRED),
-          ONE_HUNDRED);
+                ONE_HUNDRED);
         progressButton.setProgress(progress);
 
         if (progressButton.getProgress() == ONE_HUNDRED) {
           if (!progressButton.isEnabled()) {
             progressButton
-                .startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.continue_btn_bounce));
+                    .startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.continue_btn_bounce));
           }
           progressButton.setAlpha(1f);
           progressButton.setEnabled(true);
-        }
-        else {
+        } else {
           if (progressButton.isEnabled()) {
             progressButton.startAnimation(
-              AnimationUtils.loadAnimation(getApplicationContext(), R.anim.continue_btn_bounce_revert));
+                    AnimationUtils.loadAnimation(getApplicationContext(), R.anim.continue_btn_bounce_revert));
           }
           progressButton.setAlpha(0.75f);
           progressButton.setEnabled(false);
@@ -170,8 +167,14 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
   @Override
   public void onSaveInstanceState(final Bundle outState) {
     super.onSaveInstanceState(outState);
-    outState.putInt("button", progressButton.getProgress());
+    //outState.putInt("button", progressButton.getProgress());
     Icepick.saveInstanceState(this, outState);
+  }
+
+  @Override
+  protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    super.onRestoreInstanceState(savedInstanceState);
+    Icepick.restoreInstanceState(this, savedInstanceState);
   }
 
   @Override

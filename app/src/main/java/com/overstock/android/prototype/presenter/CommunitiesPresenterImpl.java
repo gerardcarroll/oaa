@@ -1,13 +1,14 @@
 package com.overstock.android.prototype.presenter;
 
-import android.content.Context;
 import android.util.Log;
 
-import com.overstock.android.prototype.interfaces.CommunityClient;
 import com.overstock.android.prototype.models.Community;
+import com.overstock.android.prototype.service.CommunityService;
 import com.overstock.android.prototype.view.CommunitiesView;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import rx.Observer;
 import rx.Subscription;
@@ -23,14 +24,18 @@ public class CommunitiesPresenterImpl implements CommunitiesPresenter {
 
   private CommunitiesView communitiesView;
 
-  private Context context;
-
   private Subscription subscription = Subscriptions.empty();
 
+  private CommunityService communityService;
+
+  @Inject
+  public CommunitiesPresenterImpl(final CommunityService communityService){
+    this.communityService = communityService;
+  }
+
   @Override
-  public void setView(final CommunitiesView communitiesView, final Context context) {
+  public void setView(final CommunitiesView communitiesView) {
     this.communitiesView = communitiesView;
-    this.context = context;
     if (communitiesView == null) {
       subscription.unsubscribe();
     }
@@ -42,14 +47,13 @@ public class CommunitiesPresenterImpl implements CommunitiesPresenter {
   @Override
   public void destroyView() {
     this.communitiesView = null;
-    this.context = null;
     subscription.unsubscribe();
   }
 
   @Override
   public void populateAndShowCommunities() {
 
-    subscription = CommunityClient.getClient(context).getCommunities().subscribeOn(Schedulers.io())
+    subscription = communityService.getCommunities().subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<Community>>() {
           @Override
           public void onCompleted() {

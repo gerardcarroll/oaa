@@ -7,7 +7,7 @@ import java.util.List;
 import rx.Observable;
 
 /**
- * Created by rconnolly on 4/1/2016.
+ * @author RayConnolly Created on 4/1/2016.
  */
 public interface CommunityService {
 

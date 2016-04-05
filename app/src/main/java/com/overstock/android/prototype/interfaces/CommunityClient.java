@@ -9,6 +9,8 @@ import com.overstock.android.prototype.service.CommunityService;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import rx.Observable;
 import rx.functions.Func0;
 
@@ -17,7 +19,16 @@ import rx.functions.Func0;
  */
 public class CommunityClient {
 
-    public static CommunityService getClient(final Context context){
+    private Context context;
+
+    @Inject
+    public CommunityClient(Context context){
+        this.context = context;
+    }
+
+     //TODO don't pass in context here
+    // TODO Extract into separate class
+    public CommunityService getClient(){
 
         return new CommunityService() {
             @Override
