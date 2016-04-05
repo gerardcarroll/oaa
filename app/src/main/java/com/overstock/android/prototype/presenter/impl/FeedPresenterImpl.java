@@ -9,12 +9,11 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
 
-import android.content.Context;
 import android.util.Log;
 
-import com.overstock.android.prototype.client.FeedClient;
 import com.overstock.android.prototype.model.Feed;
 import com.overstock.android.prototype.presenter.FeedPresenter;
+import com.overstock.android.prototype.service.FeedService;
 import com.overstock.android.prototype.view.FeedView;
 
 /**
@@ -27,12 +26,15 @@ public class FeedPresenterImpl implements FeedPresenter {
 
   private FeedView feedView;
 
-  private Context context;
+  private FeedService feedService;
+
+  public FeedPresenterImpl(final FeedService feedService) {
+    this.feedService = feedService;
+  }
 
   @Override
-  public void setView(final FeedView feedView, final Context context) {
+  public void setView(final FeedView feedView) {
     this.feedView = feedView;
-    this.context = context;
     if (feedView == null) {
       subscription.unsubscribe();
     }
@@ -44,15 +46,14 @@ public class FeedPresenterImpl implements FeedPresenter {
   @Override
   public void onDestroy() {
     feedView = null;
-    context = null;
     subscription.unsubscribe();
   }
 
   @Override
   public void refreshFeed() {
 
-    subscription = FeedClient.getClient(context).getFeed().subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<Feed>>() {
+    subscription = feedService.getFeed().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Observer<List<Feed>>() {
           @Override
           public void onCompleted() {
             Log.d(TAG, "FeedService.GetFeed has no more data to emit.");

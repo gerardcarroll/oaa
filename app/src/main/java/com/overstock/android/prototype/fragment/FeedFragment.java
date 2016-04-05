@@ -57,7 +57,7 @@ public class FeedFragment extends Fragment implements FeedView {
   public void onViewCreated(View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     ButterKnife.bind(this, view);
-    feedPresenter.setView(this, getContext());
+    feedPresenter.setView(this);
   }
 
   @Override

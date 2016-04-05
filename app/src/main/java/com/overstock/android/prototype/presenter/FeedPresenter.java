@@ -1,7 +1,5 @@
 package com.overstock.android.prototype.presenter;
 
-import android.content.Context;
-
 import com.overstock.android.prototype.view.FeedView;
 
 /**
@@ -9,7 +7,7 @@ import com.overstock.android.prototype.view.FeedView;
  */
 public interface FeedPresenter {
 
-  void setView(final FeedView feedView, final Context context);
+  void setView(final FeedView feedView);
 
   void refreshFeed();
 

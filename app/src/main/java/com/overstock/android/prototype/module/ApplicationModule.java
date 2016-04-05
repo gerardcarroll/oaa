@@ -2,6 +2,7 @@ package com.overstock.android.prototype.module;
 
 import android.app.Application;
 
+import com.overstock.android.prototype.client.FeedClient;
 import com.overstock.android.prototype.client.TheOAppClient;
 import com.overstock.android.prototype.model.ProductDataService;
 import com.overstock.android.prototype.module.scope.ApplicationScope;
@@ -11,6 +12,7 @@ import com.overstock.android.prototype.presenter.FeedPresenter;
 import com.overstock.android.prototype.presenter.impl.FeedPresenterImpl;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
 import com.overstock.android.prototype.presenter.impl.ProductDetailPresenterImpl;
+import com.overstock.android.prototype.service.FeedService;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
 import com.overstock.android.prototype.service.ProductService;
 import com.squareup.picasso.LruCache;
@@ -48,8 +50,18 @@ public class ApplicationModule {
   }
 
   @Provides
-  public FeedPresenter feedPresenter() {
-    return new FeedPresenterImpl();
+  public FeedPresenter feedPresenter(final FeedService feedService) {
+    return new FeedPresenterImpl(feedService);
+  }
+
+  @Provides
+  public FeedClient feedClient(final Application application) {
+    return new FeedClient(application);
+  }
+
+  @Provides
+  public FeedService feedService(final FeedClient feedClient) {
+    return feedClient.getClient();
   }
 
   public ProductDataService providesProductDataService(final ProductService productService) {
@@ -67,10 +79,11 @@ public class ApplicationModule {
   }
 
   @Provides
-  public Picasso providesPicasso(){
+  public Picasso providesPicasso() {
     final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
     final int cacheSize = maxMemory / 8;
-    final Picasso picasso = new Picasso.Builder(application.getBaseContext()).memoryCache(new LruCache(cacheSize)).build();
+    final Picasso picasso = new Picasso.Builder(application.getBaseContext()).memoryCache(new LruCache(cacheSize))
+        .build();
     return picasso;
   }
 
