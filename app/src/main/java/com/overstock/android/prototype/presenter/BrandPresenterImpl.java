@@ -5,6 +5,7 @@ import android.util.Log;
 import com.overstock.android.prototype.models.Product;
 import com.overstock.android.prototype.models.ProductDataService;
 import com.overstock.android.prototype.models.ProductsResponse;
+import com.overstock.android.prototype.provider.OappProviderContract;
 import com.overstock.android.prototype.view.BrandView;
 
 import java.util.ArrayList;
@@ -53,7 +54,8 @@ public class BrandPresenterImpl implements BrandPresenter {
 
   public void refresh() {
 
-    subscription = productDataService.getBestSellers().subscribeOn(Schedulers.newThread())
+    subscription = productDataService.query(OappProviderContract.ProductEntry.buildProductBestsellerUri())
+            .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ProductsResponse>() {
           @Override
           public void onCompleted() {
@@ -72,7 +74,9 @@ public class BrandPresenterImpl implements BrandPresenter {
           }
         });
 
-    productDataService.getNewArrivals().subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+    productDataService.query(OappProviderContract.ProductEntry.buildProductNewArrivalsUri())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new Observer<ProductsResponse>() {
           @Override
           public void onCompleted() {
@@ -90,5 +94,6 @@ public class BrandPresenterImpl implements BrandPresenter {
             brandView.displayNewArrivals((ArrayList<Product>) productsResponse.getProducts().getProductsList());
           }
         });
+
   }
 }

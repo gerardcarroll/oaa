@@ -21,14 +21,12 @@
                 android:minHeight="100dp"
                 android:minWidth="100dp"
                 android:scaleType="fitXY"
-                android:transitionName="@string/test_shared_element_transition"/>
+                android:transitionName="@string/shared_element_transition"/>
 
             <ProgressBar
                 android:id="@+id/product_loader"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:visibility="gone" />
 
@@ -44,7 +42,7 @@
             android:maxWidth="100dp"
             android:layout_weight="1"
             android:padding="4dp"
-            android:text="Raiders Jersey" />
+            android:text="@string/raider_jersey_label" />
 
         <TextView
             android:id="@+id/product_card_price_txt"
@@ -52,8 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="4dp"
-            android:text="$65" />
-
+            android:text="@string/raider_jersey_price_label" />
 
     </LinearLayout>
 

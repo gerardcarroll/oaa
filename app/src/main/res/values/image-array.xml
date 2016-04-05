@@ -1,25 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-<array name="community_image_array">
-    <item>@drawable/man</item>
-    <item>@drawable/woman</item>
-    <item>@drawable/man_and_woman</item>
-    <item>@drawable/home_decor</item>
-    <item>@drawable/games</item>
-    <item>@drawable/leisure</item>
-    <item>@drawable/family</item>
-    <item>@drawable/gadgets</item>
-    <item>@drawable/furniture</item>
-    <item>@drawable/bedding</item>
-    <item>@drawable/fitness</item>
-    <item>@drawable/home_automation</item>
-    <item>@drawable/mobility</item>
-    <item>@drawable/personal_care</item>
-    <item>@drawable/shoes</item>
-    <item>@drawable/sports_shoes</item>
-    <item>@drawable/technology</item>
-    <item>@drawable/watches</item>
-</array>
+<string-array name="community_image_array">
+    <item>cat_men</item>
+    <item>cat_women</item>
+    <item>cat_men_and_women</item>
+    <item>cat_home_decor</item>
+    <item>cat_games</item>
+    <item>cat_leisure</item>
+    <item>cat_family_two</item>
+    <item>cat_gadgets_two</item>
+    <item>cat_furniture</item>
+    <item>bedding</item>
+    <item>cat_fitness</item>
+    <item>cat_home_automation</item>
+    <item>cat_mobility</item>
+    <item>cat_personal_care</item>
+    <item>cat_shoes</item>
+    <item>cat_sports_shoes_two</item>
+    <item>cat_technology</item>
+    <item>cat_watches</item>
+</string-array>
 
 </resources>
