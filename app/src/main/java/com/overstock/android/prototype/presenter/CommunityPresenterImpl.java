@@ -53,9 +53,7 @@ public class CommunityPresenterImpl implements CommunityPresenter {
   @Override
   public void populateAndShowCommunities() {
 
-    if (communityView.getCommunities() != null) {
-      communityView.showCommunities(communityView.getCommunities());
-    } else {
+    if (communityView.getCommunities() == null) {
       subscription = communityService.getCommunities().subscribeOn(Schedulers.io())
               .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<Community>>() {
                 @Override
@@ -74,6 +72,8 @@ public class CommunityPresenterImpl implements CommunityPresenter {
                   communityView.showCommunities(communities);
                 }
               });
+    } else {
+      communityView.showCommunities(communityView.getCommunities());
     }
   }
 }

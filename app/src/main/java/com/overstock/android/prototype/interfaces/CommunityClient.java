@@ -26,7 +26,6 @@ public class CommunityClient {
         this.context = context;
     }
 
-    // TODO Extract into separate class
     public CommunityService getClient(){
 
         return new CommunityService() {

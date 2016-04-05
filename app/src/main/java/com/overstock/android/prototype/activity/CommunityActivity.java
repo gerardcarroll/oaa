@@ -98,8 +98,8 @@ public class CommunityActivity extends AppCompatActivity implements CommunityVie
 
     if (savedInstanceState != null) {
       if (savedInstanceState.getInt("button") == ONE_HUNDRED) {
-        progressButton.setEnabled(true);
         progressButton.setAlpha(1f);
+        progressButton.setEnabled(true);
       }
     }
   }

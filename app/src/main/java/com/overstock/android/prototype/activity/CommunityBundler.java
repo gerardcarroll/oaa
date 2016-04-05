@@ -7,7 +7,7 @@ import icepick.Bundler;
 /**
  * Class to allow IcePick handle save instance state, while providing custom serialisation and deserialisation of types
  *
- * Created by rconnolly on 4/5/2016.
+ * Created by itowey, rconnolly on 4/5/2016.
  */
 public class CommunityBundler implements Bundler<Object> {
     @Override
