@@ -7,9 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.models.Community;
@@ -19,15 +16,12 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 /**
  * Adapter class to aid communication between Communities Activity and underlying data.
  *
  * @author RayConnolly Created on 2/29/2016.
  */
-public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.CommunitiesViewHolder> {
+public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesViewHolder> {
 
   private final Context context;
 
@@ -50,8 +44,10 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
 
   @Override
   public CommunitiesViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
-    final View view = LayoutInflater.from(context).inflate(R.layout.activity_communities_card, parent, false);
-    return new CommunitiesViewHolder(view);
+    final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+    final View view = inflater.inflate(R.layout.activity_communities_card, parent, false);
+    final CommunitiesViewHolder viewHolder = new CommunitiesViewHolder(view);
+    return viewHolder;
   }
 
   @Override
@@ -61,6 +57,7 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
 
     holder.progressBar.setVisibility(View.VISIBLE);
 
+    //TODO refactor this to use Picasso service
     Picasso.with(context).load(community.getImageId()).resize(250, 250).onlyScaleDown().into(holder.communityImage, new Callback() {
       @Override
       public void onSuccess() {
@@ -134,27 +131,5 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
 
   public interface OnDataChangeListener {
     void onDataChanged(int size);
-  }
-
-  //TODO Extract to own class?
-  public class CommunitiesViewHolder extends RecyclerView.ViewHolder {
-
-    @Bind(R.id.cvCommunities)
-    CardView cardView;
-
-    @Bind(R.id.ivCommunities)
-    ImageView communityImage;
-
-    @Bind(R.id.tvCommunities)
-    TextView communityTitle;
-
-    @Bind(R.id.pbCommunities)
-    ProgressBar progressBar;
-
-    public CommunitiesViewHolder(final View itemView) {
-
-      super(itemView);
-      ButterKnife.bind(this, itemView);
-    }
   }
 }
