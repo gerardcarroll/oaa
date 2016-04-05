@@ -67,9 +67,9 @@ android {
             shrinkResources true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            ext.betaDistributionReleaseNotes="https://confluence.overstock.com/x/3IR9Aw"
-            ext.betaDistributionGroupAliases="oapp_beta_testers"
-            ext.betaDistributionNotifications=true
+            ext.betaDistributionReleaseNotes = "https://confluence.overstock.com/x/3IR9Aw"
+            ext.betaDistributionGroupAliases = "oapp_beta_testers"
+            ext.betaDistributionNotifications = true
         }
         debug {
             signingConfig signingConfigs.debug
