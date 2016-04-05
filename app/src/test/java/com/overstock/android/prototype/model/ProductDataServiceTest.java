@@ -42,12 +42,12 @@ public class ProductDataServiceTest {
 
     @Test
     public void testQuerySortedByBestSellers() {
-        testQuery(OappProviderContract.ProductEntry.BESTSELLERS, "nfl");
+        testQuery(OappProviderContract.ProductEntry.BEST_SELLERS, "nfl");
     }
 
     @Test
     public void testQuerySortedByNewArrivals() {
-        testQuery(OappProviderContract.ProductEntry.NEWARRIVALS, "football jersey");
+        testQuery(OappProviderContract.ProductEntry.NEW_ARRIVALS, "football jersey");
     }
 
     private void testQuery(String sortOrder, String keywords){

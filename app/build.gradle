@@ -26,7 +26,7 @@ apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     // For Robolectric known issue this can be removed once 3.1 is released.
-   // useLibrary 'org.apache.http.legacy'
+    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.overstock.android.prototype"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -67,9 +67,9 @@ android {
             shrinkResources true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            ext.betaDistributionReleaseNotes="https://confluence.overstock.com/x/3IR9Aw"
-            ext.betaDistributionGroupAliases="oapp_beta_testers"
-            ext.betaDistributionNotifications=true
+            ext.betaDistributionReleaseNotes = "https://confluence.overstock.com/x/3IR9Aw"
+            ext.betaDistributionGroupAliases = "oapp_beta_testers"
+            ext.betaDistributionNotifications = true
         }
         debug {
             signingConfig signingConfigs.debug
@@ -151,6 +151,8 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.vstechlab.easyfonts:easyfonts:1.0.0'
+    compile 'org.parceler:parceler-api:1.0.4'
+    apt 'org.parceler:parceler:1.0.4'
     compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
         transitive = true;
     }

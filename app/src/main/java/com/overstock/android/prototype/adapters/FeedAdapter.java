@@ -3,6 +3,8 @@ package com.overstock.android.prototype.adapters;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,11 +18,8 @@ import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.BrandActivity;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.model.Feed;
-import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
 import com.vstechlab.easyfonts.EasyFonts;
-
-import javax.inject.Inject;
 
 /**
  * @author RayConnolly, LeeMeehan Created on 3/16/2016.
@@ -60,9 +59,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder> {
   @Override
   public void onBindViewHolder(FeedViewHolder holder, int position) {
 
-    // TODO inject picasso.
     final Feed feed = feedItems.get(position);
-    picasso.with(context).load(feed.getProductImage()).error(R.drawable.product_placeholder).into(holder.feedImg);
+    picasso.load(feed.getProductImage()).error(R.drawable.product_placeholder).into(holder.feedImg);
 
     holder.productLinkTxt.setText(feed.getTopProductsLink());
     holder.productLinkTxt.setTypeface(EasyFonts.robotoBlack(context));
