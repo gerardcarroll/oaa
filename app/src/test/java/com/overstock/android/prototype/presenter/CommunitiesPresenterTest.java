@@ -4,7 +4,8 @@ import android.content.Context;
 import android.content.res.Resources;
 
 import com.overstock.android.prototype.models.Community;
-import com.overstock.android.prototype.view.CommunitiesView;
+import com.overstock.android.prototype.service.CommunityService;
+import com.overstock.android.prototype.view.CommunityView;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,13 +25,16 @@ public class CommunitiesPresenterTest {
 
   private static String[] MOCK_IMAGE_ARRAY = { "cat_men", "cat_games" };
 
-  private CommunityPresenter communitiesPresenter;
+  private CommunityPresenter communityPresenter;
+
+  @Mock
+  private CommunityService communityService;
 
   @Mock
   private Context context;
 
   @Mock
-  private CommunitiesView communitiesView;
+  private CommunityView communityView;
 
   @Mock
   private Resources resources;
@@ -38,26 +42,26 @@ public class CommunitiesPresenterTest {
   @Before
   public void setUp() {
     MockitoAnnotations.initMocks(this);
-    communitiesPresenter = new CommunitiesPresenterImpl();
-    communitiesPresenter.setView(communitiesView, context);
+    communityPresenter = new CommunityPresenterImpl(communityService);
+    communityPresenter.setView(communityView);
   }
 
   @Test
   public void testPopulateAndShowCommunities() {
-    assertNotNull("CommunityPresenter is null. check that it has been initialized.", communitiesPresenter);
+    assertNotNull("CommunityPresenter is null, check that it has been initialized.", communityPresenter);
     when(context.getResources()).thenReturn(resources);
     when(resources.getStringArray(isA(Integer.class))).thenReturn(MOCK_IMAGE_ARRAY);
-    communitiesPresenter.populateAndShowCommunities();
-    verify(communitiesView).showCommunities(anyListOf(Community.class));
+    communityPresenter.populateAndShowCommunities();
+    verify(communityView).showCommunities(anyListOf(Community.class));
   }
 
   @Test(expected = NullPointerException.class)
   public void testPopulateAndShowCommunities_View_Null() {
-    assertNotNull("CommunityPresenter is null. check that it has been initialized.", communitiesPresenter);
-    communitiesPresenter.destroyView();
+    assertNotNull("CommunityPresenter is null, check that it has been initialized.", communityPresenter);
+    communityPresenter.destroyView();
     when(context.getResources()).thenReturn(resources);
     when(resources.getStringArray(isA(Integer.class))).thenReturn(MOCK_IMAGE_ARRAY);
-    communitiesPresenter.populateAndShowCommunities();
+    communityPresenter.populateAndShowCommunities();
   }
 
 }

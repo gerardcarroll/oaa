@@ -22,9 +22,8 @@ import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.models.Community;
 import com.overstock.android.prototype.presenter.CommunityPresenter;
 import com.overstock.android.prototype.presenter.CommunityPresenterImpl;
-import com.overstock.android.prototype.view.CommunitiesView;
+import com.overstock.android.prototype.view.CommunityView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -42,7 +41,7 @@ import icepick.State;
  *
  * @author RayConnolly Created on 2/29/2016.
  */
-public class CommunityActivity extends AppCompatActivity implements CommunitiesView {
+public class CommunityActivity extends AppCompatActivity implements CommunityView {
 
   private static final int ONE_HUNDRED = 100;
 
@@ -67,8 +66,8 @@ public class CommunityActivity extends AppCompatActivity implements CommunitiesV
   @BindInt(R.integer.communities_columns)
   int numCommunitiesColumns;
 
-  @State
-  ArrayList<Community> communities;
+  @State(CommunityBundler.class)
+  List<Community> communities;
 
   private CommunityAdapter communityAdapter;
 
@@ -94,17 +93,15 @@ public class CommunityActivity extends AppCompatActivity implements CommunitiesV
     collapsingToolbarLayout.setTitle(getString(R.string.communities_activity_title));
     collapsingToolbarLayout.setContentScrimColor(ContextCompat.getColor(this, R.color.transparent));
 
-    // Populate communities via presenter class
     communityPresenter.setView(this);
     communityPresenter.populateAndShowCommunities();
 
-    //TODO Fix save state issue on orientation change
-    //TODO Look at extracting state changes to a private method
-//    if (savedInstanceState != null) {
-//      if (savedInstanceState.getInt("button") == ONE_HUNDRED) {
-//        progressButton.setEnabled(true);
-//      }
-//    }
+    if (savedInstanceState != null) {
+      if (savedInstanceState.getInt("button") == ONE_HUNDRED) {
+        progressButton.setEnabled(true);
+        progressButton.setAlpha(1f);
+      }
+    }
   }
 
   @Override
@@ -115,15 +112,21 @@ public class CommunityActivity extends AppCompatActivity implements CommunitiesV
 
   @Override
   public void showCommunities(final List<Community> communities) {
+    this.communities = communities;
     communityAdapter.setData(communities);
-    // Set recycler view settings
+
     recyclerView.setHasFixedSize(true);
     recyclerView.setAdapter(communityAdapter);
-    // Setting a GridLayoutManager for the RecyclerView, which dependent on screen resolution will have 2 or 3 columns
+    // GridLayoutManager will display either 2 or 3 columns in RecyclerView dependent on screen resolution
     recyclerView.setLayoutManager(new GridLayoutManager(this, numCommunitiesColumns));
     recyclerView.stopNestedScroll();
-    // Setup the CommunityAdapter Data Change Listener
+
     setupOnDataChangeListener();
+  }
+
+  @Override
+  public List<Community> getCommunities() {
+    return this.communities;
   }
 
   /**
@@ -172,7 +175,7 @@ public class CommunityActivity extends AppCompatActivity implements CommunitiesV
   @Override
   public void onSaveInstanceState(final Bundle outState) {
     super.onSaveInstanceState(outState);
-    //outState.putInt("button", progressButton.getProgress());
+    outState.putInt("button", progressButton.getProgress());
     Icepick.saveInstanceState(this, outState);
   }
 

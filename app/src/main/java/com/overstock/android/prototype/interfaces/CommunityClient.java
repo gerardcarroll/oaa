@@ -26,7 +26,6 @@ public class CommunityClient {
         this.context = context;
     }
 
-     //TODO don't pass in context here
     // TODO Extract into separate class
     public CommunityService getClient(){
 

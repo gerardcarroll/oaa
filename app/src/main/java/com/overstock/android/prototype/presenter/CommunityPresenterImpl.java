@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.overstock.android.prototype.models.Community;
 import com.overstock.android.prototype.service.CommunityService;
-import com.overstock.android.prototype.view.CommunitiesView;
+import com.overstock.android.prototype.view.CommunityView;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ import rx.subscriptions.Subscriptions;
 public class CommunityPresenterImpl implements CommunityPresenter {
   private static final String TAG = CommunityPresenterImpl.class.getName();
 
-  private CommunitiesView communitiesView;
+  private CommunityView communityView;
 
   private Subscription subscription = Subscriptions.empty();
 
@@ -34,9 +34,9 @@ public class CommunityPresenterImpl implements CommunityPresenter {
   }
 
   @Override
-  public void setView(final CommunitiesView communitiesView) {
-    this.communitiesView = communitiesView;
-    if (communitiesView == null) {
+  public void setView(final CommunityView communityView) {
+    this.communityView = communityView;
+    if (communityView == null) {
       subscription.unsubscribe();
     }
     else {
@@ -46,31 +46,34 @@ public class CommunityPresenterImpl implements CommunityPresenter {
 
   @Override
   public void destroyView() {
-    this.communitiesView = null;
+    this.communityView = null;
     subscription.unsubscribe();
   }
 
   @Override
   public void populateAndShowCommunities() {
 
-    subscription = communityService.getCommunities().subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<Community>>() {
-          @Override
-          public void onCompleted() {
-            Log.d(TAG, "COMPLETED, Finished loading Communities");
-          }
+    if (communityView.getCommunities() != null) {
+      communityView.showCommunities(communityView.getCommunities());
+    } else {
+      subscription = communityService.getCommunities().subscribeOn(Schedulers.io())
+              .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<Community>>() {
+                @Override
+                public void onCompleted() {
+                  Log.d(TAG, "COMPLETED, Finished loading Communities");
+                }
 
-          @Override
-          public void onError(Throwable e) {
-            Log.d(TAG, "ERROR, Unable to load Communities");
-          }
+                @Override
+                public void onError(Throwable e) {
+                  Log.d(TAG, "ERROR, Unable to load Communities");
+                }
 
-          @Override
-          public void onNext(List<Community> communities) {
-            Log.d(TAG, "SUCCESS, Community loaded successfully");
-            communitiesView.showCommunities(communities);
-          }
-        });
-
+                @Override
+                public void onNext(List<Community> communities) {
+                  Log.d(TAG, "SUCCESS, Community loaded successfully");
+                  communityView.showCommunities(communities);
+                }
+              });
+    }
   }
 }
