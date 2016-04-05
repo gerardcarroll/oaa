@@ -21,7 +21,7 @@ import java.util.List;
  *
  * @author RayConnolly Created on 2/29/2016.
  */
-public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesViewHolder> {
+public class CommunityAdapter extends RecyclerView.Adapter<CommunityViewHolder> {
 
   private final Context context;
 
@@ -29,7 +29,7 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesViewHold
 
   private List<Community> data = new ArrayList<>();
 
-  public CommunitiesAdapter(final Context context) {
+  public CommunityAdapter(final Context context) {
 
     this.context = context;
   }
@@ -43,15 +43,15 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesViewHold
   }
 
   @Override
-  public CommunitiesViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
+  public CommunityViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
     final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-    final View view = inflater.inflate(R.layout.activity_communities_card, parent, false);
-    final CommunitiesViewHolder viewHolder = new CommunitiesViewHolder(view);
+    final View view = inflater.inflate(R.layout.activity_community_card, parent, false);
+    final CommunityViewHolder viewHolder = new CommunityViewHolder(view);
     return viewHolder;
   }
 
   @Override
-  public void onBindViewHolder(final CommunitiesViewHolder holder, final int position) {
+  public void onBindViewHolder(final CommunityViewHolder holder, final int position) {
 
     final Community community = data.get(position);
 

@@ -17,11 +17,11 @@ import android.widget.Toast;
 
 import com.dd.processbutton.iml.SubmitProcessButton;
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.adapters.CommunitiesAdapter;
+import com.overstock.android.prototype.adapters.CommunityAdapter;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.models.Community;
-import com.overstock.android.prototype.presenter.CommunitiesPresenter;
-import com.overstock.android.prototype.presenter.CommunitiesPresenterImpl;
+import com.overstock.android.prototype.presenter.CommunityPresenter;
+import com.overstock.android.prototype.presenter.CommunityPresenterImpl;
 import com.overstock.android.prototype.view.CommunitiesView;
 
 import java.util.ArrayList;
@@ -38,11 +38,11 @@ import icepick.State;
 
 /**
  * Activity class to display data via the communities recycler view, presented to it through the
- * {@link CommunitiesPresenterImpl} class.
+ * {@link CommunityPresenterImpl} class.
  *
  * @author RayConnolly Created on 2/29/2016.
  */
-public class CommunitiesActivity extends AppCompatActivity implements CommunitiesView {
+public class CommunityActivity extends AppCompatActivity implements CommunitiesView {
 
   private static final int ONE_HUNDRED = 100;
 
@@ -70,15 +70,15 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
   @State
   ArrayList<Community> communities;
 
-  private CommunitiesAdapter communitiesAdapter;
+  private CommunityAdapter communityAdapter;
 
   @Inject
-  CommunitiesPresenter communitiesPresenter;
+  CommunityPresenter communityPresenter;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_communities);
+    setContentView(R.layout.activity_community);
 
     ((OAppPrototypeApplication) this.getApplication()).getComponent().inject(this);
 
@@ -86,7 +86,7 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
 
     ButterKnife.bind(this);
 
-    communitiesAdapter = new CommunitiesAdapter(getApplicationContext());
+    communityAdapter = new CommunityAdapter(getApplicationContext());
 
     setSupportActionBar(toolbar);
     setTitle("");
@@ -95,8 +95,8 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
     collapsingToolbarLayout.setContentScrimColor(ContextCompat.getColor(this, R.color.transparent));
 
     // Populate communities via presenter class
-    communitiesPresenter.setView(this);
-    communitiesPresenter.populateAndShowCommunities();
+    communityPresenter.setView(this);
+    communityPresenter.populateAndShowCommunities();
 
     //TODO Fix save state issue on orientation change
     //TODO Look at extracting state changes to a private method
@@ -110,19 +110,19 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    communitiesPresenter.destroyView();
+    communityPresenter.destroyView();
   }
 
   @Override
   public void showCommunities(final List<Community> communities) {
-    communitiesAdapter.setData(communities);
+    communityAdapter.setData(communities);
     // Set recycler view settings
     recyclerView.setHasFixedSize(true);
-    recyclerView.setAdapter(communitiesAdapter);
+    recyclerView.setAdapter(communityAdapter);
     // Setting a GridLayoutManager for the RecyclerView, which dependent on screen resolution will have 2 or 3 columns
     recyclerView.setLayoutManager(new GridLayoutManager(this, numCommunitiesColumns));
     recyclerView.stopNestedScroll();
-    // Setup the CommunitiesAdapter Data Change Listener
+    // Setup the CommunityAdapter Data Change Listener
     setupOnDataChangeListener();
   }
 
@@ -131,7 +131,7 @@ public class CommunitiesActivity extends AppCompatActivity implements Communitie
    */
   private void setupOnDataChangeListener() {
     // Implement the listener for the communities adapter to update the progress button
-    communitiesAdapter.setOnDataChangeListener(new CommunitiesAdapter.OnDataChangeListener() {
+    communityAdapter.setOnDataChangeListener(new CommunityAdapter.OnDataChangeListener() {
 
       @Override
       public void onDataChanged(final int size) {

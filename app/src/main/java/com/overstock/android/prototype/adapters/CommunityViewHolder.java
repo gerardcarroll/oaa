@@ -13,9 +13,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by rconnolly on 4/5/2016.
+ * @author RayConnolly Created on 4/5/2016.
  */
-public class CommunitiesViewHolder extends RecyclerView.ViewHolder {
+public class CommunityViewHolder extends RecyclerView.ViewHolder {
 
     @Bind(R.id.cvCommunities)
     CardView cardView;
@@ -29,7 +29,7 @@ public class CommunitiesViewHolder extends RecyclerView.ViewHolder {
     @Bind(R.id.pbCommunities)
     ProgressBar progressBar;
 
-    public CommunitiesViewHolder(final View itemView) {
+    public CommunityViewHolder(final View itemView) {
 
         super(itemView);
         ButterKnife.bind(this, itemView);

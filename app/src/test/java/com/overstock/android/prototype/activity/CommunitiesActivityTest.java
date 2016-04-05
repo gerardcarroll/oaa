@@ -41,7 +41,7 @@ public class CommunitiesActivityTest {
 
   private static final int EXPECTED_PERCENTAGE_THREE_ITEMS_SELECTED = 100;
 
-  private CommunitiesActivity communitiesActivity;
+  private CommunityActivity communitiesActivity;
 
   private SubmitProcessButton processButton;
 
@@ -49,7 +49,7 @@ public class CommunitiesActivityTest {
 
   @Before
   public void setUp() {
-    communitiesActivity = Robolectric.buildActivity(CommunitiesActivity.class).create().start().resume().visible()
+    communitiesActivity = Robolectric.buildActivity(CommunityActivity.class).create().start().resume().visible()
         .get();
     processButton = (SubmitProcessButton) communitiesActivity.findViewById(R.id.btnCommunitySelection);
     communitiesView = (RecyclerView) communitiesActivity.findViewById(R.id.rvCommunities);
@@ -61,7 +61,7 @@ public class CommunitiesActivityTest {
    */
   @Test
   public void testCommunitiesActivity_Creation() {
-    assertNotNull("CommunitiesActivity is null it was not Created.", communitiesActivity);
+    assertNotNull("CommunityActivity is null it was not Created.", communitiesActivity);
     assertNotNull("ProcessButton dose not exist received null.", processButton);
     assertEquals("Progress is not at 0 when activity is first created.", 0, processButton.getProgress());
     assertNotNull("The communitiesView is null when the activity is first created.", communitiesView);

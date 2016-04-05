@@ -9,8 +9,8 @@ import com.overstock.android.prototype.models.ProductDataService;
 import com.overstock.android.prototype.module.scope.ApplicationScope;
 import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.presenter.BrandPresenterImpl;
-import com.overstock.android.prototype.presenter.CommunitiesPresenter;
-import com.overstock.android.prototype.presenter.CommunitiesPresenterImpl;
+import com.overstock.android.prototype.presenter.CommunityPresenter;
+import com.overstock.android.prototype.presenter.CommunityPresenterImpl;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
 import com.overstock.android.prototype.presenter.ProductDetailPresenterImpl;
 import com.overstock.android.prototype.service.CommunityService;
@@ -52,8 +52,8 @@ public class ApplicationModule {
   }
 
   @Provides
-  public CommunitiesPresenter communitiesPresenter(CommunityService communityService){
-    return new CommunitiesPresenterImpl(communityService);
+  public CommunityPresenter communitiesPresenter(CommunityService communityService){
+    return new CommunityPresenterImpl(communityService);
   }
 
   @Provides

@@ -5,7 +5,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.activity.CommunitiesActivity;
+import com.overstock.android.prototype.activity.CommunityActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,7 +31,7 @@ import static org.hamcrest.Matchers.not;
 public class CommunitiesActivityTest {
 
   @Rule
-  public ActivityTestRule<CommunitiesActivity> activityRule = new ActivityTestRule<>(CommunitiesActivity.class);
+  public ActivityTestRule<CommunityActivity> activityRule = new ActivityTestRule<>(CommunityActivity.class);
 
   @Test
   public void testCommunitiesRendering() {

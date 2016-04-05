@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.activity.CommunitiesActivity;
+import com.overstock.android.prototype.activity.CommunityActivity;
 import com.overstock.android.prototype.component.HomeActivityComponent;
 
 /**
@@ -58,7 +58,7 @@ public class HomeFragment extends Fragment {
   public void guestLogin_onClick() {
     final ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(getContext(),
       R.transition.slide_in_vertical, R.transition.slide_out_vertical);
-    startActivity(new Intent(getActivity(), CommunitiesActivity.class), options.toBundle());
+    startActivity(new Intent(getActivity(), CommunityActivity.class), options.toBundle());
   }
 
 }

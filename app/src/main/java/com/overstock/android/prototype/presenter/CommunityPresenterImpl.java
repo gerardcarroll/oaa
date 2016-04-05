@@ -19,8 +19,8 @@ import rx.subscriptions.Subscriptions;
 /**
  * @author itowey Created on 08/03/16.
  */
-public class CommunitiesPresenterImpl implements CommunitiesPresenter {
-  private static final String TAG = CommunitiesPresenterImpl.class.getName();
+public class CommunityPresenterImpl implements CommunityPresenter {
+  private static final String TAG = CommunityPresenterImpl.class.getName();
 
   private CommunitiesView communitiesView;
 
@@ -29,7 +29,7 @@ public class CommunitiesPresenterImpl implements CommunitiesPresenter {
   private CommunityService communityService;
 
   @Inject
-  public CommunitiesPresenterImpl(final CommunityService communityService){
+  public CommunityPresenterImpl(final CommunityService communityService){
     this.communityService = communityService;
   }
 

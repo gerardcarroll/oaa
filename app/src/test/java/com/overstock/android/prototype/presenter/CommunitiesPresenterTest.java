@@ -24,7 +24,7 @@ public class CommunitiesPresenterTest {
 
   private static String[] MOCK_IMAGE_ARRAY = { "cat_men", "cat_games" };
 
-  private CommunitiesPresenter communitiesPresenter;
+  private CommunityPresenter communitiesPresenter;
 
   @Mock
   private Context context;
@@ -44,7 +44,7 @@ public class CommunitiesPresenterTest {
 
   @Test
   public void testPopulateAndShowCommunities() {
-    assertNotNull("CommunitiesPresenter is null. check that it has been initialized.", communitiesPresenter);
+    assertNotNull("CommunityPresenter is null. check that it has been initialized.", communitiesPresenter);
     when(context.getResources()).thenReturn(resources);
     when(resources.getStringArray(isA(Integer.class))).thenReturn(MOCK_IMAGE_ARRAY);
     communitiesPresenter.populateAndShowCommunities();
@@ -53,7 +53,7 @@ public class CommunitiesPresenterTest {
 
   @Test(expected = NullPointerException.class)
   public void testPopulateAndShowCommunities_View_Null() {
-    assertNotNull("CommunitiesPresenter is null. check that it has been initialized.", communitiesPresenter);
+    assertNotNull("CommunityPresenter is null. check that it has been initialized.", communitiesPresenter);
     communitiesPresenter.destroyView();
     when(context.getResources()).thenReturn(resources);
     when(resources.getStringArray(isA(Integer.class))).thenReturn(MOCK_IMAGE_ARRAY);

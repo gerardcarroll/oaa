@@ -5,7 +5,7 @@ import com.overstock.android.prototype.view.CommunitiesView;
 /**
  * @author LeeMeehan Created on 25-Mar-16.
  */
-public interface CommunitiesPresenter {
+public interface CommunityPresenter {
 
   void setView(final CommunitiesView communitiesView);
 
