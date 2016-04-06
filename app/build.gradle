@@ -151,6 +151,8 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.vstechlab.easyfonts:easyfonts:1.0.0'
+    compile 'org.parceler:parceler-api:1.0.4'
+    apt 'org.parceler:parceler:1.0.4'
     compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
         transitive = true;
     }

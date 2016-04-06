@@ -1,19 +1,29 @@
 package com.overstock.android.prototype.model;
 
+import org.parceler.Parcel;
+
 /**
  * @author RayConnolly on 3/7/2016.
  */
+@Parcel
 public class Product {
 
   private Integer id;
+
+  private String imageLarge;
+
   private String imageMedium1;
+
   private String name;
+
   private Float memberPrice;
 
   public Product() {}
 
-  public Product(int id, String imageMedium, String name, Float memberPrice) {
+  public Product(final int id, final String imageLarge, final String imageMedium, final String name,
+      final Float memberPrice) {
     this.id = id;
+    this.imageLarge = imageLarge;
     this.imageMedium1 = imageMedium;
     this.name = name;
     this.memberPrice = memberPrice;
@@ -35,4 +45,7 @@ public class Product {
     return memberPrice;
   }
 
+  public String getImageLarge() {
+    return imageLarge;
+  }
 }

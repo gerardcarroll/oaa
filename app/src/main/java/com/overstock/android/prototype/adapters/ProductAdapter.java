@@ -1,11 +1,12 @@
 package com.overstock.android.prototype.adapters;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.Locale;
 
 import javax.inject.Inject;
+
+import org.parceler.Parcels;
 
 import android.app.Activity;
 import android.content.Context;
@@ -50,8 +51,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
     ((OAppPrototypeApplication) context.getApplicationContext()).getComponent().inject(this);
   }
 
-
-
   @Override
   public ProductViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
     final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -63,16 +62,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
   public void onBindViewHolder(final ProductViewHolder holder, final int position) {
     final Product product = products.get(position);
 
-    final int id = product.getId();
-
     holder.productNameTxt.setText(product.getName());
     final String currencyCode = Currency.getInstance(Locale.US).getSymbol();
     holder.productPriceTxt
         .setText(context.getString(R.string.product_price_fmt, currencyCode, product.getMemberPrice().toString()));
 
     holder.progressBar.setVisibility(View.VISIBLE);
-    picasso.with(context).load(BASE_IMAGE_URL + product.getImageMedium1()).resize(300, 300)
-        .error(R.drawable.product_placeholder).into(holder.imageView, new Callback() {
+    picasso.load(BASE_IMAGE_URL + product.getImageMedium1()).resize(300, 300).error(R.drawable.product_placeholder)
+        .into(holder.imageView, new Callback() {
           @Override
           public void onSuccess() {
             holder.progressBar.setVisibility(View.GONE);
@@ -87,21 +84,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
     holder.imageView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(final View v) {
-
         final ImageView imageView = (ImageView) v;
         Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        final byte[] b = baos.toByteArray();
-
-        String name = holder.productNameTxt.getText().toString();
-        String price = holder.productPriceTxt.getText().toString();
 
         final Intent intent = new Intent(activity, ProductDetailActivity.class);
-        intent.putExtra("image", b);
-        intent.putExtra("id", id);
-        intent.putExtra("name", name);
-        intent.putExtra("price", price);
+        intent.putExtra("image", bitmap);
+        intent.putExtra("parcel", Parcels.wrap(product));
+
         final ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat
             .makeSceneTransitionAnimation(activity, v, context.getString(R.string.shared_element_transition));
         ActivityCompat.startActivity(activity, intent, transitionActivityOptions.toBundle());
