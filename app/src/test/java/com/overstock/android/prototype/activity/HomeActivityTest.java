@@ -157,7 +157,7 @@ public class HomeActivityTest {
     assertNotNull("The started intent is null. No Activity has started.", startedIntent);
     assertNotNull("The intent is a empty.", startedIntent.getComponent());
     assertThat("The started Activity is not the activity that is expected", startedIntent.getComponent().getClassName(),
-      equalTo(CommunitiesActivity.class.getName()));
+      equalTo(CommunityActivity.class.getName()));
   }
 
   @Test
@@ -179,7 +179,7 @@ public class HomeActivityTest {
     assertNotNull("The started intent is null. No Activity has started.", startedIntent);
     assertNotNull("The intent is empty.", startedIntent.getComponent());
     assertThat("The started Activity is not the activity that is expected", startedIntent.getComponent().getClassName(),
-      equalTo(CommunitiesActivity.class.getName()));
+      equalTo(CommunityActivity.class.getName()));
   }
 
 }

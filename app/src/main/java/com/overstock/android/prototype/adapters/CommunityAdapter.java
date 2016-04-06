@@ -7,9 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.models.Community;
@@ -19,26 +16,22 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 /**
+ * Adapter class to aid communication between Communities Activity and underlying data.
+ *
  * @author RayConnolly Created on 2/29/2016.
  */
-public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.CommunitiesViewHolder> {
+public class CommunityAdapter extends RecyclerView.Adapter<CommunityViewHolder> {
 
   private final Context context;
 
   OnDataChangeListener mOnDataChangeListener;
 
-  private LayoutInflater inflater;
-
   private List<Community> data = new ArrayList<>();
 
-  public CommunitiesAdapter(final Context context) {
+  public CommunityAdapter(final Context context) {
 
     this.context = context;
-    this.inflater = inflater.from(context);
   }
 
   public List<Community> getData() {
@@ -50,19 +43,22 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
   }
 
   @Override
-  public CommunitiesViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
-    final View view = inflater.inflate(R.layout.activity_communities_card, parent, false);
-    return new CommunitiesViewHolder(view);
+  public CommunityViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
+    final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+    final View view = inflater.inflate(R.layout.activity_community_card, parent, false);
+    final CommunityViewHolder viewHolder = new CommunityViewHolder(view);
+    return viewHolder;
   }
 
   @Override
-  public void onBindViewHolder(final CommunitiesViewHolder holder, final int position) {
+  public void onBindViewHolder(final CommunityViewHolder holder, final int position) {
 
     final Community community = data.get(position);
 
     holder.progressBar.setVisibility(View.VISIBLE);
 
-    Picasso.with(context).load(community.getImageId()).resize(500, 500).into(holder.communityImage, new Callback() {
+    //TODO refactor this to use Picasso service
+    Picasso.with(context).load(community.getImageId()).resize(250, 250).onlyScaleDown().into(holder.communityImage, new Callback() {
       @Override
       public void onSuccess() {
         if (holder.progressBar != null) {
@@ -80,7 +76,7 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
       holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_default);
     }
     else {
-      holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_green);
+      holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_highlighted);
     }
     holder.cardView.setTag(community);
 
@@ -92,13 +88,11 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
         if (com.isSelected()) {
           com.setSelected(false);
           holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_default);
-          // holder.communityImage.clearColorFilter();
           holder.cardView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.continue_btn_bounce_revert));
         }
         else {
           com.setSelected(true);
-          holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_green);
-          // holder.communityImage.setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+          holder.communityTitle.setBackgroundResource(R.drawable.rounded_corner_highlighted);
         }
 
         if (mOnDataChangeListener != null) {
@@ -137,26 +131,5 @@ public class CommunitiesAdapter extends RecyclerView.Adapter<CommunitiesAdapter.
 
   public interface OnDataChangeListener {
     void onDataChanged(int size);
-  }
-
-  public class CommunitiesViewHolder extends RecyclerView.ViewHolder {
-
-    @Bind(R.id.cvCommunities)
-    CardView cardView;
-
-    @Bind(R.id.ivCommunities)
-    ImageView communityImage;
-
-    @Bind(R.id.tvCommunities)
-    TextView communityTitle;
-
-    @Bind(R.id.pbCommunities)
-    ProgressBar progressBar;
-
-    public CommunitiesViewHolder(final View itemView) {
-
-      super(itemView);
-      ButterKnife.bind(this, itemView);
-    }
   }
 }

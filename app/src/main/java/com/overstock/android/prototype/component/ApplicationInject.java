@@ -2,6 +2,7 @@ package com.overstock.android.prototype.component;
 
 import android.app.Application;
 
+import com.overstock.android.prototype.activity.CommunityActivity;
 import com.overstock.android.prototype.activity.ProductDetailActivity;
 import com.overstock.android.prototype.fragment.BrandFragment;
 import com.overstock.android.prototype.fragment.GoogleFederatedIdentityFragment;
@@ -24,4 +25,6 @@ public interface ApplicationInject {
   void inject(final GoogleFederatedIdentityFragment googleFederatedIdentityFragment);
 
   void inject(final ProductDetailActivity productDetailActivity);
+
+  void inject(final CommunityActivity communitiesActivity);
 }
