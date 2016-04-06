@@ -3,9 +3,9 @@ package com.overstock.android.prototype.interfaces;
 import android.net.Uri;
 import android.util.Log;
 
-import com.overstock.android.prototype.models.Product;
-import com.overstock.android.prototype.models.Products;
-import com.overstock.android.prototype.models.ProductsResponse;
+import com.overstock.android.prototype.model.Product;
+import com.overstock.android.prototype.model.Products;
+import com.overstock.android.prototype.model.ProductsResponse;
 
 import junit.framework.Assert;
 

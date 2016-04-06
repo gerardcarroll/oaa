@@ -1,5 +1,9 @@
 package com.overstock.android.prototype.fragment;
 
+import java.util.ArrayList;
+
+import javax.inject.Inject;
+
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -16,22 +20,17 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.ProductAdapter;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
-import com.overstock.android.prototype.models.Product;
+import com.overstock.android.prototype.model.Product;
 import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.view.BrandView;
-import com.overstock.android.prototype.widgets.EndlessRecyclerOnScrollListener;
 
-import java.util.ArrayList;
-
-import javax.inject.Inject;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -80,15 +79,16 @@ public class BrandFragment extends Fragment implements BrandView {
     super.onViewCreated(view, savedInstanceState);
     ButterKnife.bind(this, view);
     toolbar.inflateMenu(R.menu.menu_main);
+
     final AppBarLayout.OnOffsetChangedListener listener = new AppBarLayout.OnOffsetChangedListener() {
       @Override
       public void onOffsetChanged(final AppBarLayout appBarLayout, final int verticalOffset) {
         if (collapsingToolbarLayout.getHeight() + verticalOffset < 2
           * ViewCompat.getMinimumHeight(collapsingToolbarLayout)) {
-          imageView.animate().alpha(1).setDuration(600);
+          imageView.animate().alpha(1).rotation(-360).setDuration(600);
         }
         else {
-          imageView.animate().alpha(0).setDuration(600);
+          imageView.animate().alpha(0).rotation(360).setDuration(600);
         }
       }
     };
@@ -121,15 +121,6 @@ public class BrandFragment extends Fragment implements BrandView {
     recyclerView_BestSellers.setAdapter(productAdapter);
     recyclerView_BestSellers.setNestedScrollingEnabled(false);
     recyclerView_BestSellers.setItemAnimator(new DefaultItemAnimator());
-    recyclerView_BestSellers.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
-      @Override
-      public void onLoadMore(final int page, final int totalItemsCount) {
-        Toast.makeText(getContext(), "HI THERE", Toast.LENGTH_LONG).show();
-        // final Integer currentSize = productAdapter.getItemCount();
-        // Add more items. newItems
-        // productAdapter.notifyItemRangeInserted(currentSize, newItems.size() -1);
-      }
-    });
   }
 
   @Override

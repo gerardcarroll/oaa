@@ -1,11 +1,12 @@
-package com.overstock.android.prototype.presenter;
+package com.overstock.android.prototype.presenter.impl;
 
 import java.util.ArrayList;
 
 import android.content.Context;
 
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.models.Community;
+import com.overstock.android.prototype.model.Community;
+import com.overstock.android.prototype.presenter.CommunitiesPresenter;
 import com.overstock.android.prototype.view.CommunitiesView;
 
 /**
@@ -34,7 +35,7 @@ public class CommunitiesPresenterImpl implements CommunitiesPresenter {
   @Override
   public void populateAndShowCommunities() {
 
-    // TODO: Replace the below block of code with service call. Start of Block
+    // TODO: Replace the below block of code with service1 call. Start of Block
     final ArrayList<Community> communities = new ArrayList<>();
 
     final String[] imageReferenceArray = context.getResources().getStringArray(R.array.community_image_array);

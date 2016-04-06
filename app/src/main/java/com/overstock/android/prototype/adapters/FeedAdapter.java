@@ -11,21 +11,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.BrandActivity;
-import com.overstock.android.prototype.models.Feed;
+import com.overstock.android.prototype.main.OAppPrototypeApplication;
+import com.overstock.android.prototype.model.Feed;
+import com.squareup.picasso.LruCache;
+import com.squareup.picasso.Picasso;
 import com.vstechlab.easyfonts.EasyFonts;
 
+import javax.inject.Inject;
+
 /**
- * Created by RayConnolly on 3/16/2016.
+ * @author RayConnolly, LeeMeehan Created on 3/16/2016.
  */
-public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
+public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder> {
+
+  @Inject
+  Picasso picasso;
 
   private Context context;
 
@@ -37,6 +40,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
     this.activity = activity;
     this.context = context;
     this.feedItems = items;
+    ((OAppPrototypeApplication) context.getApplicationContext()).getComponent().inject(this);
   }
 
   public List<Feed> getData() {
@@ -48,26 +52,23 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
   }
 
   @Override
-  public FeedAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
+  public FeedViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_feed_card, parent, false);
-
-    ViewHolder viewHolder = new ViewHolder(itemLayoutView);
-
-    return viewHolder;
+    return new FeedViewHolder(itemLayoutView);
   }
 
   @Override
-  public void onBindViewHolder(FeedAdapter.ViewHolder holder, int position) {
+  public void onBindViewHolder(FeedViewHolder holder, int position) {
 
-    Feed feed = feedItems.get(position);
+    // TODO inject picasso.
+    final Feed feed = feedItems.get(position);
+    picasso.with(context).load(feed.getProductImage()).error(R.drawable.product_placeholder).into(holder.feedImg);
 
-    holder.ivCommunity.setImageResource(feed.getProductImage());
-    holder.tvViewCommunity.setText(feed.getTopProductsLink());
-    holder.tvViewCommunity.setTypeface(EasyFonts.robotoBlack(context));
-    holder.tvProductLink.setText(feed.getProductUrl());
+    holder.productLinkTxt.setText(feed.getTopProductsLink());
+    holder.productLinkTxt.setTypeface(EasyFonts.robotoBlack(context));
+    holder.tvWebsiteLinkTxt.setText(feed.getProductUrl());
 
-    holder.ivCommunity.setOnClickListener(new View.OnClickListener() {
+    holder.feedImg.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         final ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(context,
@@ -76,28 +77,14 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         context.startActivity(new Intent(activity, BrandActivity.class), options.toBundle());
       }
     });
+    animate(holder.view, position);
   }
 
-  public static class ViewHolder extends RecyclerView.ViewHolder {
-
-    View view;
-
-    @Bind(R.id.feed_img)
-    public ImageView ivCommunity;
-
-    @Bind(R.id.product_link)
-    public TextView tvViewCommunity;
-
-    @Bind(R.id.product_website_link)
-    public TextView tvProductLink;
-
-    public ViewHolder(View itemLayoutView) {
-      super(itemLayoutView);
-
-      this.view = itemLayoutView;
-
-      ButterKnife.bind(this, itemLayoutView);
-    }
+  private void animate(final View view, final int position) {
+    view.animate().cancel();
+    view.setTranslationY(100);
+    view.setAlpha(0);
+    view.animate().alpha(1.0f).translationY(0).setDuration(300).setStartDelay(position * 100);
   }
 
   @Override

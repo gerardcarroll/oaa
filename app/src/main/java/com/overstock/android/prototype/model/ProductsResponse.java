@@ -1,4 +1,4 @@
-package com.overstock.android.prototype.models;
+package com.overstock.android.prototype.model;
 
 /**
  * Created by rconnolly on 3/8/2016.

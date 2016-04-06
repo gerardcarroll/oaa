@@ -1,5 +1,12 @@
 package com.overstock.android.prototype.adapters;
 
+import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.Currency;
+import java.util.Locale;
+
+import javax.inject.Inject;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -15,20 +22,18 @@ import android.widget.ImageView;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.ProductDetailActivity;
-import com.overstock.android.prototype.models.Product;
+import com.overstock.android.prototype.main.OAppPrototypeApplication;
+import com.overstock.android.prototype.model.Product;
 import com.squareup.picasso.Callback;
-import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
-
-import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.Currency;
-import java.util.Locale;
 
 /**
  * @author LeeMeehan Created on 08-Mar-16.
  */
 public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
+
+  @Inject
+  Picasso picasso;
 
   private ArrayList<Product> products;
 
@@ -42,14 +47,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
     this.activity = activity;
     this.context = context;
     this.products = products;
+    ((OAppPrototypeApplication) context.getApplicationContext()).getComponent().inject(this);
   }
+
+
 
   @Override
   public ProductViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
     final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
     final ViewGroup mainGroup = (ViewGroup) inflater.inflate(R.layout.product_card, parent, false);
-    final ProductViewHolder listHolder = new ProductViewHolder(mainGroup);
-    return listHolder;
+    return new ProductViewHolder(mainGroup);
   }
 
   @Override
@@ -60,10 +67,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
 
     holder.productNameTxt.setText(product.getName());
     final String currencyCode = Currency.getInstance(Locale.US).getSymbol();
-    holder.productPriceTxt.setText(context.getString(R.string.product_price_fmt, currencyCode ,product.getMemberPrice().toString()));
-    final Picasso picasso = new Picasso.Builder(context).memoryCache(new LruCache(45000)).build();
+    holder.productPriceTxt
+        .setText(context.getString(R.string.product_price_fmt, currencyCode, product.getMemberPrice().toString()));
+
     holder.progressBar.setVisibility(View.VISIBLE);
-    picasso.with(context).load(BASE_IMAGE_URL + product.getImageMedium1()).resize(500, 500)
+    picasso.with(context).load(BASE_IMAGE_URL + product.getImageMedium1()).resize(300, 300)
         .error(R.drawable.product_placeholder).into(holder.imageView, new Callback() {
           @Override
           public void onSuccess() {
@@ -76,17 +84,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
           }
         });
 
-    // OnClickListener on images to show Shared Element Transition example
     holder.imageView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(final View v) {
 
         final ImageView imageView = (ImageView) v;
-          Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         final byte[] b = baos.toByteArray();
-
 
         String name = holder.productNameTxt.getText().toString();
         String price = holder.productPriceTxt.getText().toString();

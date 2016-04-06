@@ -14,7 +14,8 @@ import org.mockito.MockitoAnnotations;
 import android.content.Context;
 import android.content.res.Resources;
 
-import com.overstock.android.prototype.models.Community;
+import com.overstock.android.prototype.model.Community;
+import com.overstock.android.prototype.presenter.impl.CommunitiesPresenterImpl;
 import com.overstock.android.prototype.view.CommunitiesView;
 
 /**
