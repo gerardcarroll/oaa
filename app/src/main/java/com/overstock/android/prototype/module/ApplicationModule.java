@@ -4,14 +4,18 @@ import android.app.Application;
 
 import com.overstock.android.prototype.client.FeedClient;
 import com.overstock.android.prototype.client.TheOAppClient;
+import com.overstock.android.prototype.interfaces.CommunityClient;
 import com.overstock.android.prototype.model.ProductDataService;
 import com.overstock.android.prototype.module.scope.ApplicationScope;
 import com.overstock.android.prototype.presenter.BrandPresenter;
-import com.overstock.android.prototype.presenter.impl.BrandPresenterImpl;
+import com.overstock.android.prototype.presenter.CommunityPresenter;
+import com.overstock.android.prototype.presenter.impl.CommunityPresenterImpl;
 import com.overstock.android.prototype.presenter.FeedPresenter;
-import com.overstock.android.prototype.presenter.impl.FeedPresenterImpl;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
+import com.overstock.android.prototype.presenter.impl.BrandPresenterImpl;
+import com.overstock.android.prototype.presenter.impl.FeedPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.ProductDetailPresenterImpl;
+import com.overstock.android.prototype.service.CommunityService;
 import com.overstock.android.prototype.service.FeedService;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
 import com.overstock.android.prototype.service.ProductService;
@@ -66,6 +70,21 @@ public class ApplicationModule {
 
   public ProductDataService providesProductDataService(final ProductService productService) {
     return new ProductDataService(productService);
+  }
+
+  @Provides
+  public CommunityPresenter communitiesPresenter(CommunityService communityService) {
+    return new CommunityPresenterImpl(communityService);
+  }
+
+  @Provides
+  public CommunityClient providesCommunityClient(Application application) {
+    return new CommunityClient(application.getApplicationContext());
+  }
+
+  @Provides
+  public CommunityService providesCommunityService(final CommunityClient communityClient) {
+    return communityClient.getClient();
   }
 
   @Provides

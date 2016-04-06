@@ -35,7 +35,7 @@
             android:label="@string/title_brand_activity" />
 
         <activity
-            android:name=".activity.CommunitiesActivity"
+            android:name=".activity.CommunityActivity"
             android:label="@string/title_activity_communities" />
 
         <activity
