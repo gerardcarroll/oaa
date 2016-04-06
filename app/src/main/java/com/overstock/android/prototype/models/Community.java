@@ -3,8 +3,6 @@ package com.overstock.android.prototype.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import auto.parcel.AutoParcel;
-
 /**
  * Created by rconnolly on 3/1/2016.
  */
