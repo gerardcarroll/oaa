@@ -51,15 +51,6 @@
             android:name=".activity.ProductDetailActivity"
             android:label="@string/feed_activity" />
 
-        <activity android:name=".activity.ArcMenuActivity"
-            android:label="Arc Menu Example" >
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
-
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="372bb106d2b08c1397aca42017e7515e8c9afa4f" />

@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.ogaclejapan.arclayout.ArcLayout;
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.activity.ArcMenuActivity;
 import com.overstock.android.prototype.animatorutils.AnimatorUtils;
 
 import java.util.ArrayList;
@@ -26,12 +25,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by rconnolly on 4/6/2016.
+ * Fragment class to display Arc Menu.
+ *
+ * @author RayConnolly Created on 4/6/2016.
  */
 public class ArcMenuFragment extends Fragment implements View.OnClickListener {
 
-    // ARC MENU
-    private static final String KEY_DEMO = "demo";
     Toast toast = null;
 
     @Bind(R.id.fab)
@@ -43,32 +42,25 @@ public class ArcMenuFragment extends Fragment implements View.OnClickListener {
     @Bind(R.id.arc_layout)
     ArcLayout arcLayout;
 
-    ArcMenuActivity arcMenuActivity = new ArcMenuActivity();
-    //END ARC MENU
-
     public ArcMenuFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.arc_menu, container, false);
+        View view = inflater.inflate(R.layout.fragment_arc_menu, container, false);
 
         ButterKnife.bind(this, view);
 
-        // ARC MENU
         for (int i = 0, size = arcLayout.getChildCount(); i < size; i++) {
             arcLayout.getChildAt(i).setOnClickListener(this);
         }
 
         fab.setOnClickListener(this);
-        //END ARC MENU
 
         return view;
     }
@@ -188,5 +180,4 @@ public class ArcMenuFragment extends Fragment implements View.OnClickListener {
 
         return anim;
     }
-    //END ARC MENU
 }

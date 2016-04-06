@@ -64,8 +64,7 @@
     <!-- Community Card View -->
     <color name="silver">#C0C0C0</color>
 
-    <!-- TODO refactor later -->
-    <!-- Path colors arc menu -->
+    <!-- Arc menu colors -->
     <color name="path_primary">#E62F17</color>
     <color name="path_orange">#FF9500</color>
     <color name="path_blue">#1774E6</color>

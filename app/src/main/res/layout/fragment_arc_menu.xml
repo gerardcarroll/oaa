@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginBottom="15dp">
 
     <FrameLayout
         android:id="@+id/menu_layout"
@@ -72,7 +73,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/path_fab"
+        android:background="@drawable/arc_menu_fab"
         android:text="+"
         android:textColor="@color/white"
         android:textSize="24sp"
