@@ -5,11 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnticipateInterpolator;
@@ -19,64 +15,63 @@ import android.widget.Toast;
 
 import com.ogaclejapan.arclayout.ArcLayout;
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.adapters.FeedPagerAdapter;
 import com.overstock.android.prototype.animatorutils.AnimatorUtils;
-import com.overstock.android.prototype.fragment.FeedFragment;
-import com.overstock.android.prototype.fragment.MyLocationFragment;
-import com.overstock.android.prototype.fragment.TrendingFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+/**
+ * Created by rconnolly on 4/6/2016.
+ */
+public class ArcMenuActivity  extends AppCompatActivity implements View.OnClickListener {
 
-public class FeedActivity extends AppCompatActivity implements View.OnClickListener {
-
-    // ARC MENU
     private static final String KEY_DEMO = "demo";
     Toast toast = null;
-
-    @Bind(R.id.fab)
     View fab;
-
-    @Bind(R.id.menu_layout)
     View menuLayout;
-
-    @Bind(R.id.arc_layout)
     ArcLayout arcLayout;
 
-    ArcMenuActivity arcMenuActivity = new ArcMenuActivity();
-    //END ARC MENU
-
-    @Bind(R.id.product_detail_toolbar)
-    Toolbar toolbar;
-
-    @Bind(R.id.feed_viewpager)
-    ViewPager viewPager;
-
-    @Bind(R.id.feed_tabs)
-    TabLayout tabLayout;
+//    public static void startActivity(Context context, Demo demo) {
+//        Intent intent = new Intent(context, DemoLikePathActivity.class);
+//        intent.putExtra(KEY_DEMO, demo.name());
+//        context.startActivity(intent);
+//    }
+//
+//    private static Demo getDemo(Intent intent) {
+//        return Demo.valueOf(intent.getStringExtra(KEY_DEMO));
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feed);
-        ButterKnife.bind(this);
-        setupViewPager(viewPager);
-        tabLayout.setupWithViewPager(viewPager);
+        setContentView(R.layout.arc_menu);
 
-        // ARC MENU
+//        Demo demo = getDemo(getIntent());
+//
+//        ActionBar bar = getSupportActionBar();
+//        bar.setTitle(demo.titleResId);
+//        bar.setDisplayHomeAsUpEnabled(true);
+
+        fab = findViewById(R.id.fab);
+        menuLayout = findViewById(R.id.menu_layout);
+        arcLayout = (ArcLayout) findViewById(R.id.arc_layout);
+
         for (int i = 0, size = arcLayout.getChildCount(); i < size; i++) {
             arcLayout.getChildAt(i).setOnClickListener(this);
         }
 
         fab.setOnClickListener(this);
-        //END ARC MENU
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
-    // ARC MENU
     @Override
     public void onClick(View v) {
 
@@ -191,37 +186,5 @@ public class FeedActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         return anim;
-    }
-    //END ARC MENU
-
-
-
-
-
-    private void setupViewPager(ViewPager viewPager) {
-        FeedPagerAdapter adapter = new FeedPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new FeedFragment(), getString(R.string.my_feed_tab));
-        adapter.addFragment(new TrendingFragment(), getString(R.string.trending_tab));
-        adapter.addFragment(new MyLocationFragment(), getString(R.string.my_location_tab));
-        viewPager.setAdapter(adapter);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
-
-        final int id = item.getItemId();
-
-        if (id == R.id.action_settings || id == R.id.action_refresh || id == R.id.action_logout) {
-            Toast.makeText(this, "You clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

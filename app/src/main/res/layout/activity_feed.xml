@@ -52,4 +52,7 @@
 
     <include layout="@layout/content_feed" />
 
+    <!-- ARC MENU -->
+    <include layout="@layout/arc_menu" />
+
 </android.support.design.widget.CoordinatorLayout>
