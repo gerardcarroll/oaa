@@ -1,5 +1,9 @@
 package com.overstock.android.prototype.activity;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -12,26 +16,22 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.AnimationUtils;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.dd.processbutton.iml.SubmitProcessButton;
-import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.adapters.CommunityAdapter;
-import com.overstock.android.prototype.main.OAppPrototypeApplication;
-import com.overstock.android.prototype.models.Community;
-import com.overstock.android.prototype.presenter.CommunityPresenter;
-import com.overstock.android.prototype.presenter.CommunityPresenterImpl;
-import com.overstock.android.prototype.view.CommunityView;
-
-import java.util.List;
-
-import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.BindInt;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import com.dd.processbutton.iml.SubmitProcessButton;
+import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.adapters.CommunityAdapter;
+import com.overstock.android.prototype.main.OAppPrototypeApplication;
+import com.overstock.android.prototype.model.Community;
+import com.overstock.android.prototype.presenter.CommunityPresenter;
+import com.overstock.android.prototype.presenter.impl.CommunityPresenterImpl;
+import com.overstock.android.prototype.view.CommunityView;
+
 import icepick.Icepick;
 import icepick.State;
 
@@ -56,9 +56,6 @@ public class CommunityActivity extends AppCompatActivity implements CommunityVie
 
   @Bind(R.id.oap_toolbar)
   Toolbar toolbar;
-
-  @Bind(R.id.tvToolbarMsg)
-  TextView toolBarText;
 
   @BindInt(R.integer.min_selected_communities)
   int minSelectedCommunities;
@@ -140,20 +137,21 @@ public class CommunityActivity extends AppCompatActivity implements CommunityVie
       public void onDataChanged(final int size) {
 
         final int progress = Math.min((int) Math.ceil(((double) size / minSelectedCommunities) * ONE_HUNDRED),
-                ONE_HUNDRED);
+          ONE_HUNDRED);
         progressButton.setProgress(progress);
 
         if (progressButton.getProgress() == ONE_HUNDRED) {
           if (!progressButton.isEnabled()) {
             progressButton
-                    .startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.continue_btn_bounce));
+                .startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.continue_btn_bounce));
           }
           progressButton.setAlpha(1f);
           progressButton.setEnabled(true);
-        } else {
+        }
+        else {
           if (progressButton.isEnabled()) {
             progressButton.startAnimation(
-                    AnimationUtils.loadAnimation(getApplicationContext(), R.anim.continue_btn_bounce_revert));
+              AnimationUtils.loadAnimation(getApplicationContext(), R.anim.continue_btn_bounce_revert));
           }
           progressButton.setAlpha(0.75f);
           progressButton.setEnabled(false);

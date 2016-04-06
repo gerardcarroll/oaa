@@ -1,5 +1,8 @@
 package com.overstock.android.prototype.adapters;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -9,12 +12,9 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.models.Community;
+import com.overstock.android.prototype.model.Community;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Adapter class to aid communication between Communities Activity and underlying data.
@@ -46,8 +46,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityViewHolder> 
   public CommunityViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
     final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
     final View view = inflater.inflate(R.layout.activity_community_card, parent, false);
-    final CommunityViewHolder viewHolder = new CommunityViewHolder(view);
-    return viewHolder;
+    return new CommunityViewHolder(view);
   }
 
   @Override
@@ -57,18 +56,18 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityViewHolder> 
 
     holder.progressBar.setVisibility(View.VISIBLE);
 
-    //TODO refactor this to use Picasso service
-    Picasso.with(context).load(community.getImageId()).resize(250, 250).onlyScaleDown().into(holder.communityImage, new Callback() {
-      @Override
-      public void onSuccess() {
-        if (holder.progressBar != null) {
-          holder.progressBar.setVisibility(View.GONE);
+    Picasso.with(context).load(community.getImageId()).resize(250, 250).onlyScaleDown().into(holder.communityImage,
+      new Callback() {
+        @Override
+        public void onSuccess() {
+          if (holder.progressBar != null) {
+            holder.progressBar.setVisibility(View.GONE);
+          }
         }
-      }
 
-      @Override
-      public void onError() {}
-    });
+        @Override
+        public void onError() {}
+      });
 
     holder.communityTitle.setText(community.getName());
     // If the Community isSelected (true) change color on title label

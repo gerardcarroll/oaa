@@ -1,4 +1,4 @@
-package com.overstock.android.prototype.models;
+package com.overstock.android.prototype.model;
 
 import java.util.List;
 

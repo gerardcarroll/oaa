@@ -1,11 +1,5 @@
 package com.overstock.android.prototype.interfaces;
 
-import android.content.Context;
-
-import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.models.Community;
-import com.overstock.android.prototype.service.CommunityService;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,53 +8,59 @@ import javax.inject.Inject;
 import rx.Observable;
 import rx.functions.Func0;
 
+import android.content.Context;
+
+import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.model.Community;
+import com.overstock.android.prototype.service.CommunityService;
+
 /**
  * @author RayConnolly Created on 2/29/2016.
  */
 public class CommunityClient {
 
-    private Context context;
+  private Context context;
 
-    @Inject
-    public CommunityClient(Context context){
-        this.context = context;
-    }
+  @Inject
+  public CommunityClient(Context context) {
+    this.context = context;
+  }
 
-    public CommunityService getClient(){
+  public CommunityService getClient() {
 
-        return new CommunityService() {
-            @Override
-            public Observable<List<Community>> getCommunities() {
+    return new CommunityService() {
+      @Override
+      public Observable<List<Community>> getCommunities() {
 
-                final List<Community> communities = new ArrayList<>();
+        final List<Community> communities = new ArrayList<>();
 
-                final String[] imageReferenceArray = context.getResources().getStringArray(R.array.community_image_array);
+        final String[] imageReferenceArray = context.getResources().getStringArray(R.array.community_image_array);
 
-                final int len = imageReferenceArray.length;
-                final int[] imagesResourceArray = new int[len];
-                for (int i = 0; i < len; i++) {
-                    imagesResourceArray[i] = context.getResources().getIdentifier(imageReferenceArray[i], "drawable",
-                            context.getPackageName());
-                }
+        final int len = imageReferenceArray.length;
+        final int[] imagesResourceArray = new int[len];
+        for (int i = 0; i < len; i++) {
+          imagesResourceArray[i] = context.getResources().getIdentifier(imageReferenceArray[i], "drawable",
+            context.getPackageName());
+        }
 
-                final String[] names = context.getResources().getStringArray(R.array.communities_array);
+        final String[] names = context.getResources().getStringArray(R.array.communities_array);
 
-                for (int i = 0; i < imagesResourceArray.length && i < names.length; i++) {
+        for (int i = 0; i < imagesResourceArray.length && i < names.length; i++) {
 
-                    final Community community = new Community();
-                    community.setImageId(imagesResourceArray[i]);
-                    community.setName(names[i]);
+          final Community community = new Community();
+          community.setImageId(imagesResourceArray[i]);
+          community.setName(names[i]);
 
-                    communities.add(community);
-                }
+          communities.add(community);
+        }
 
-                return Observable.defer(new Func0<Observable<List<Community>>>() {
-                    @Override
-                    public Observable<List<Community>> call() {
-                        return Observable.just(communities);
-                    }
-                });
-            }
-        };
-    }
+        return Observable.defer(new Func0<Observable<List<Community>>>() {
+          @Override
+          public Observable<List<Community>> call() {
+            return Observable.just(communities);
+          }
+        });
+      }
+    };
+  }
 }

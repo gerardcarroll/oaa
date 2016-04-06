@@ -30,6 +30,7 @@
         </activity>
 
         <activity
+            android:parentActivityName=".activity.FeedActivity"
             android:name=".activity.BrandActivity"
             android:label="@string/title_brand_activity" />
 
@@ -42,6 +43,7 @@
             android:label="@string/feed_activity" />
 
         <activity
+            android:parentActivityName=".activity.BrandActivity"
             android:name=".activity.ProductDetailActivity"
             android:label="@string/feed_activity" />
 

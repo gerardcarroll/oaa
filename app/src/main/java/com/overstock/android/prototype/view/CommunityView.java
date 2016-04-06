@@ -1,6 +1,6 @@
 package com.overstock.android.prototype.view;
 
-import com.overstock.android.prototype.models.Community;
+import com.overstock.android.prototype.model.Community;
 
 import java.util.List;
 

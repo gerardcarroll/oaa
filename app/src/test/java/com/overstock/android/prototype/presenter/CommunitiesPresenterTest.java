@@ -1,22 +1,23 @@
 package com.overstock.android.prototype.presenter;
 
-import android.content.Context;
-import android.content.res.Resources;
-
-import com.overstock.android.prototype.models.Community;
-import com.overstock.android.prototype.service.CommunityService;
-import com.overstock.android.prototype.view.CommunityView;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Matchers.anyListOf;
+import static org.mockito.Matchers.isA;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.anyListOf;
-import static org.mockito.Matchers.isA;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import android.content.Context;
+import android.content.res.Resources;
+
+import com.overstock.android.prototype.model.Community;
+import com.overstock.android.prototype.presenter.impl.CommunityPresenterImpl;
+import com.overstock.android.prototype.service.CommunityService;
+import com.overstock.android.prototype.view.CommunityView;
 
 /**
  * @author LeeMeehan Created on 25-Mar-16.

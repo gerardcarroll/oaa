@@ -20,48 +20,26 @@ import com.overstock.android.prototype.fragment.TrendingFragment;
 
 public class FeedActivity extends AppCompatActivity {
 
-    @Bind(R.id.product_detail_toolbar)
-    Toolbar toolbar;
+  @Bind(R.id.feed_viewpager)
+  ViewPager viewPager;
 
-    @Bind(R.id.feed_viewpager)
-    ViewPager viewPager;
+  @Bind(R.id.feed_tabs)
+  TabLayout tabLayout;
 
-    @Bind(R.id.feed_tabs)
-    TabLayout tabLayout;
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_feed);
+    ButterKnife.bind(this);
+    setupViewPager(viewPager);
+    tabLayout.setupWithViewPager(viewPager);
+  }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feed);
-        ButterKnife.bind(this);
-        setupViewPager(viewPager);
-        tabLayout.setupWithViewPager(viewPager);
-    }
-
-    private void setupViewPager(ViewPager viewPager) {
-        FeedPagerAdapter adapter = new FeedPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new FeedFragment(), getString(R.string.my_feed_tab));
-        adapter.addFragment(new TrendingFragment(), getString(R.string.trending_tab));
-        adapter.addFragment(new MyLocationFragment(), getString(R.string.my_location_tab));
-        viewPager.setAdapter(adapter);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
-
-        final int id = item.getItemId();
-
-        if (id == R.id.action_settings || id == R.id.action_refresh || id == R.id.action_logout) {
-            Toast.makeText(this, "You clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+  private void setupViewPager(ViewPager viewPager) {
+    FeedPagerAdapter adapter = new FeedPagerAdapter(getSupportFragmentManager());
+    adapter.addFragment(new FeedFragment(), getString(R.string.my_feed_tab));
+    adapter.addFragment(new TrendingFragment(), getString(R.string.trending_tab));
+    adapter.addFragment(new MyLocationFragment(), getString(R.string.my_location_tab));
+    viewPager.setAdapter(adapter);
+  }
 }

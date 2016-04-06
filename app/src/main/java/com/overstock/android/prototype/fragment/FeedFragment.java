@@ -1,68 +1,102 @@
 package com.overstock.android.prototype.fragment;
 
+import java.util.ArrayList;
+
+import javax.inject.Inject;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ProgressBar;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.FeedAdapter;
-import com.overstock.android.prototype.models.Feed;
-
-import java.util.ArrayList;
+import com.overstock.android.prototype.main.OAppPrototypeApplication;
+import com.overstock.android.prototype.model.Feed;
+import com.overstock.android.prototype.presenter.FeedPresenter;
+import com.overstock.android.prototype.view.FeedView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class FeedFragment extends Fragment {
+/**
+ * @author RayConnolly, LeeMeehan
+ */
+public class FeedFragment extends Fragment implements FeedView {
+  private static final String TAG = FeedFragment.class.getName();
 
-    private FeedAdapter feedCommunitiesAdapter;
+  @Inject
+  FeedPresenter feedPresenter;
 
-    @Bind(R.id.rv_feed)
-    RecyclerView recyclerView;
+  @Bind(R.id.rv_feed)
+  RecyclerView recyclerView;
 
-  public FeedFragment() {}
+  @Bind(R.id.feed_progressLoader)
+  ProgressBar progressBar;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    ((OAppPrototypeApplication) getActivity().getApplication()).getComponent().inject(this);
   }
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    View rootView = inflater.inflate(R.layout.fragment_feed, container, false);
-    ButterKnife.bind(this, rootView);
-    final ArrayList<Feed> feeds = new ArrayList<>();
+    return inflater.inflate(R.layout.fragment_feed, container, false);
+  }
 
-    // TODO only using this for now to populate recycler view
-    // TODO set up feed specific data and implement using presenter class
-    final String[] imageReferenceArray = getContext().getResources().getStringArray(R.array.feed_image_array);
+  @Override
+  public void onViewCreated(View view, Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    ButterKnife.bind(this, view);
+    feedPresenter.setView(this);
+  }
 
-    final int len = imageReferenceArray.length;
-    final int[] imagesArray = new int[len];
-    for (int i = 0; i < len; i++) {
-      imagesArray[i] = getContext().getResources().getIdentifier(imageReferenceArray[i], "drawable",
-        getContext().getPackageName());
-    }
+  @Override
+  public void onDestroyView() {
+    super.onDestroyView();
+    ButterKnife.unbind(this);
+    feedPresenter.onDestroy();
+  }
 
-    feeds.add(new Feed(imagesArray[0], "Top NFL Fan Products for 2016", "NFL.com"));
-    feeds.add(new Feed(imagesArray[1], "Get Your Beat on!, with Beats by dre", "DreBeats.com"));
-    feeds.add(new Feed(imagesArray[2], "Treat yourself. Top skin care products of this month.", "Relax.com"));
-    feeds.add(new Feed(imagesArray[3], "Must Have Products to get in Shape.", "GetFit.com"));
-    // TODO remove as far as here
-
+  @Override
+  public void updateFeed(final ArrayList<Feed> feed) {
     recyclerView.setHasFixedSize(true);
     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     recyclerView.stopNestedScroll();
     recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-    final FeedAdapter feedCommunitiesAdapter = new FeedAdapter(feeds, getContext(), getActivity());
+    recyclerView.setItemAnimator(new DefaultItemAnimator());
+    Log.d(TAG, "Setting initial feed");
+    final FeedAdapter feedCommunitiesAdapter = new FeedAdapter(feed, getContext(), getActivity());
     recyclerView.setAdapter(feedCommunitiesAdapter);
+    Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.slide_up);
+    animation.setAnimationListener(new Animation.AnimationListener() {
+      @Override
+      public void onAnimationStart(Animation animation) {
 
-    return rootView;
+      }
+
+      @Override
+      public void onAnimationEnd(Animation animation) {
+        Animation animationFade = AnimationUtils.loadAnimation(getContext(), R.anim.slide_up);
+        progressBar.startAnimation(animationFade);
+        progressBar.setVisibility(View.GONE);
+      }
+
+      @Override
+      public void onAnimationRepeat(Animation animation) {
+
+      }
+    });
+    progressBar.startAnimation(animation);
   }
+
 }
