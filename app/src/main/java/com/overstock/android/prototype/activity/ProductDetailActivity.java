@@ -2,8 +2,9 @@ package com.overstock.android.prototype.activity;
 
 import javax.inject.Inject;
 
+import org.parceler.Parcels;
+
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,10 +22,15 @@ import butterknife.ButterKnife;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.component.ApplicationComponent;
+import com.overstock.android.prototype.listener.TransitionListener;
+import com.overstock.android.prototype.model.Product;
 import com.overstock.android.prototype.model.ProductDetail;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
 import com.overstock.android.prototype.view.ProductDetailView;
 import com.squareup.picasso.Picasso;
+
+import java.util.Currency;
+import java.util.Locale;
 
 /**
  * @author RayConnolly Created on 21-03-2016
@@ -37,6 +43,9 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
   @Inject
   ProductDetailPresenter presenter;
+
+  @Inject
+  Picasso picasso;
 
   @Bind(R.id.product_detail_product_name)
   TextView productName;
@@ -60,22 +69,26 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     setContentView(R.layout.activity_product_detail);
     ButterKnife.bind(this);
 
-    // TODO Send product as a package.
     final Bundle extras = getIntent().getExtras();
-    final byte[] b = extras.getByteArray("image");
-    final Integer product_Id = extras.getInt("id");
-    final String name = extras.getString("name");
-    final String price = extras.getString("price");
+    final Product product = Parcels.unwrap(extras.getParcelable("parcel"));
+    final Bitmap receivedImage = extras.getParcelable("image");
+    productImage.setImageBitmap(receivedImage);
 
-    // TODO optimize image load using Picasso
-    final Bitmap bmp = BitmapFactory.decodeByteArray(b, 0, b.length);
-    productImage.setImageBitmap(bmp);
+    this.getWindow().getSharedElementEnterTransition().addListener(new TransitionListener() {
+      @Override
+      public void onTransitionEnd(Transition transition) {
+        Log.d(TAG, "Updating Image.");
+        picasso.load(BASE_IMAGE_URL + product.getImageLarge()).fit().error(R.drawable.product_placeholder)
+            .noPlaceholder().into(productImage);
+      }
+    });
 
-    productName.setText(name);
-    productPrice.setText(price);
+    productName.setText(product.getName());
+    final String currencyCode = Currency.getInstance(Locale.US).getSymbol();
+    productPrice.setText(this.getString(R.string.product_price_fmt, currencyCode, product.getMemberPrice().toString()));
 
     presenter.setView(this);
-    presenter.retrieveProductDetails(product_Id);
+    presenter.retrieveProductDetails(product.getId());
   }
 
   @Override
@@ -93,14 +106,11 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
   @Override
   public boolean onOptionsItemSelected(final MenuItem item) {
-
     final int id = item.getItemId();
-
     if (id == R.id.action_settings || id == R.id.action_refresh || id == R.id.action_logout) {
       Toast.makeText(this, "You clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();
       return true;
     }
-
     return super.onOptionsItemSelected(item);
   }
 
@@ -108,8 +118,5 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   public void displayProductDetails(final ProductDetail productDetail) {
     Log.d(TAG, "Displaying Product Details." + productDetail.toString());
     productDescription.setText(Html.fromHtml(productDetail.getDescription()));
-    // Maybe add a Transaction listener to load in a better image once the transaction has complete.
-    // Picasso.with(this).load(BASE_IMAGE_URL + productDetail.getImageLarge()).error(R.drawable.product_placeholder)
-    // .into(productImage);
   }
 }
