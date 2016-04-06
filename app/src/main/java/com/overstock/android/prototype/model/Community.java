@@ -4,8 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by rconnolly on 3/1/2016.
+ * @author rconnolly on 3/1/2016.
  */
+@org.parceler.Parcel
 public class Community implements Parcelable{
 
   private int imageId;

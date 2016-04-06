@@ -7,7 +7,8 @@ import java.util.List;
 /**
  * Created by itowey on 09/03/16.
  */
-public interface CommunitiesView {
+public interface CommunityView {
     void showCommunities(List<Community> communities);
+    List<Community> getCommunities();
 
 }
