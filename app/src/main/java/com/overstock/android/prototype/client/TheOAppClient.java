@@ -1,4 +1,6 @@
-package com.overstock.android.prototype.interfaces;
+package com.overstock.android.prototype.client;
+
+import com.overstock.android.prototype.service.ProductService;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;

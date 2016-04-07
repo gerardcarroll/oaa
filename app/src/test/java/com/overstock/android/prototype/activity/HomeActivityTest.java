@@ -20,11 +20,11 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
+import org.robolectric.shadows.ShadowToast;
 
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.view.View;
 import android.widget.Button;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -136,9 +136,9 @@ public class HomeActivityTest {
     Button googlePlusButton = (Button) homeFragment.getView().findViewById(R.id.googlePlus_login_btn);
     Button guestLogin = (Button) homeFragment.getView().findViewById(R.id.guest_login_btn);
 
-    assertEquals(View.VISIBLE, faceBookButton.getVisibility());
-    assertEquals(View.VISIBLE, googlePlusButton.getVisibility());
-    assertEquals(View.VISIBLE, guestLogin.getVisibility());
+    assertNotNull(faceBookButton);
+    assertNotNull(googlePlusButton);
+    assertNotNull(guestLogin);
   }
 
   @Test
@@ -152,11 +152,12 @@ public class HomeActivityTest {
       googleFederatedIdentityFragment);
 
     ShadowActivity shadowActivity = Shadows.shadowOf(homeActivity);
-    Intent startedIntent = shadowActivity.getNextStartedActivity();
+    // peekNextStartedActivity dose not consume intent.
+    Intent startedIntent = shadowActivity.peekNextStartedActivity();
     assertNotNull("The started intent is null. No Activity has started.", startedIntent);
     assertNotNull("The intent is a empty.", startedIntent.getComponent());
     assertThat("The started Activity is not the activity that is expected", startedIntent.getComponent().getClassName(),
-      equalTo(CommunitiesActivity.class.getName()));
+      equalTo(CommunityActivity.class.getName()));
   }
 
   @Test
@@ -164,6 +165,7 @@ public class HomeActivityTest {
     Button faceBookButton = (Button) homeFragment.getView().findViewById(R.id.facebook_login_btn);
     assertNotNull(faceBookButton);
     faceBookButton.performClick();
+    assertEquals("FaceBook Login Coming Soon!", ShadowToast.getTextOfLatestToast());
   }
 
   @Test
@@ -172,11 +174,12 @@ public class HomeActivityTest {
     assertNotNull(guestLogin);
     guestLogin.performClick();
     ShadowActivity shadowActivity = Shadows.shadowOf(homeActivity);
-    Intent startedIntent = shadowActivity.getNextStartedActivity();
+    // peekNextStartedActivity dose not consume intent.
+    Intent startedIntent = shadowActivity.peekNextStartedActivity();
     assertNotNull("The started intent is null. No Activity has started.", startedIntent);
     assertNotNull("The intent is empty.", startedIntent.getComponent());
     assertThat("The started Activity is not the activity that is expected", startedIntent.getComponent().getClassName(),
-      equalTo(CommunitiesActivity.class.getName()));
+      equalTo(CommunityActivity.class.getName()));
   }
 
 }

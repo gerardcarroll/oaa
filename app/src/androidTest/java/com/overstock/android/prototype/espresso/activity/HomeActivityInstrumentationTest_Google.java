@@ -30,7 +30,7 @@ import com.google.android.gms.common.api.Status;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.HomeActivity;
 import com.overstock.android.prototype.espresso.dagger.rules.OAppPrototypeApplicationMockRule;
-import com.overstock.android.prototype.service.OappGoogleAuthService;
+import com.overstock.android.prototype.service1.OappGoogleAuthService;
 
 
 /**

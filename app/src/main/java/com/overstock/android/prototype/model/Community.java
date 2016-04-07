@@ -1,13 +1,12 @@
-package com.overstock.android.prototype.models;
+package com.overstock.android.prototype.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import auto.parcel.AutoParcel;
-
 /**
- * Created by rconnolly on 3/1/2016.
+ * @author rconnolly on 3/1/2016.
  */
+@org.parceler.Parcel
 public class Community implements Parcelable{
 
   private int imageId;

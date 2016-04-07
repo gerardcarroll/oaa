@@ -47,7 +47,6 @@ public class FeedActivity extends AppCompatActivity {
     @State(NavDrawerModelBundler.class)
     NavDrawerModel navDrawerModel;
 
-
     private ActionBarDrawerToggle mDrawerToggle;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
