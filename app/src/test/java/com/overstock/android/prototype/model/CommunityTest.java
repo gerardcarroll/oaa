@@ -1,6 +1,5 @@
 package com.overstock.android.prototype.model;
 
-import com.overstock.android.prototype.models.Community;
 
 import junit.framework.Assert;
 
