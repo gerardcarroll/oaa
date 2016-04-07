@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="nav_drawer_background">#ffffff</color>
+
+  <color name="nav_item_selected_text_color">#0272a2</color>
+  <color name="browse_item_divider">#e8e8e8</color>
+  <color name="browse_item_top_level">#FFFFFF</color>
+  <color name="nav_item_icon_selected_tint">#CA041D</color>
+  <color name="ostk_icons">#AF444444</color>
+  <color name="accent_ostk_red">#C7202C</color>
+  <color name="accent_ostk_100">#E30010</color>
+  <color name="accent_ostk_red_disabled">#42C7202C</color>
+  <color name="button_pressed_blue">#65a2c6</color>
+  <color name="accent_action">#0272A2</color>
+  <color name="button_disabled_fill_blue">#7D0272a2</color>
+  <color name="dividers">#EEEEEE</color>
+  <color name="app_background">#FAFAFA</color>
+  <color name="ostk_primary_text">#444444</color>
+</resources>

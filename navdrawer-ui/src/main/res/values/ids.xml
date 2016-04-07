@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <item name="cover_nav_item" type="id"/>
+  <item name="home_nav_item" type="id"/>
+  <item name="departments_nav_item" type="id"/>
+  <item name="my_lists_nav_item" type="id"/>
+  <item name="my_account_nav_item" type="id"/>
+  <item name="my_reviews_nav_item" type="id"/>
+  <item name="sign_in_nav_item" type="id" />
+  <item name="flash_deals_nav_item" type="id"/>
+  <item name="gift_cards_nav_item" type="id" />
+  <item name="e_gift_cards_nav_item" type="id" />
+  <item name="physical_gift_cards_nav_item" type="id" />
+
+  <item name="club_o_nav_item" type="id" />
+  <item name="contact_us_nav_item" type="id"/>
+  <item name="help_nav_item" type="id"/>
+  <item name="menu_nav_item" type="id"/>
+  <item name="settings_nav_item" type="id"/>
+  <item name="app_feedback_nav_item" type="id"/>
+  <item name="message_center_nav_item" type="id"/>
+  <item name="chat_nav_item" type="id"/>
+  <item name="call_nav_item" type="id"/>
+
+  <item name="view_my_lists_item" type="id"/>
+  <item name="find_a_list_item" type="id"></item>
+
+</resources>

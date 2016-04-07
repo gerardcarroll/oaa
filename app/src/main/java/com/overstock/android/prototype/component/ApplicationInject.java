@@ -24,4 +24,5 @@ public interface ApplicationInject {
   void inject(final GoogleFederatedIdentityFragment googleFederatedIdentityFragment);
 
   void inject(final ProductDetailActivity productDetailActivity);
+
 }

@@ -2,12 +2,9 @@ package com.overstock.android.prototype.module;
 
 import android.app.Application;
 
-import com.overstock.android.prototype.fragment.GoogleFederatedIdentityFragment;
-import com.overstock.android.prototype.fragment.HomeFragment;
 import com.overstock.android.prototype.interfaces.ProductService;
 import com.overstock.android.prototype.interfaces.TheOAppClient;
 import com.overstock.android.prototype.models.ProductDataService;
-import com.overstock.android.prototype.module.scope.ActivityScope;
 import com.overstock.android.prototype.module.scope.ApplicationScope;
 import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.presenter.BrandPresenterImpl;
