@@ -4,18 +4,22 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnticipateInterpolator;
 import android.view.animation.OvershootInterpolator;
-import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ImageButton;
 
 import com.ogaclejapan.arclayout.ArcLayout;
 import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.activity.BrandActivity;
+import com.overstock.android.prototype.activity.CommunitiesActivity;
+import com.overstock.android.prototype.activity.FeedActivity;
 import com.overstock.android.prototype.animatorutils.AnimatorUtils;
 
 import java.util.ArrayList;
@@ -31,10 +35,17 @@ import butterknife.ButterKnife;
  */
 public class ArcMenuFragment extends Fragment implements View.OnClickListener {
 
-    Toast toast = null;
-
     @Bind(R.id.fab)
-    View fab;
+    ImageButton fab;
+
+    @Bind(R.id.arcMenuBtn1)
+    ImageButton imgBtnOne;
+
+    @Bind(R.id.arcMenuBtn2)
+    ImageButton imgBtnTwo;
+
+    @Bind(R.id.arcMenuBtn3)
+    ImageButton imgBtnThree;
 
     @Bind(R.id.menu_layout)
     View menuLayout;
@@ -73,27 +84,30 @@ public class ArcMenuFragment extends Fragment implements View.OnClickListener {
             return;
         }
 
-        if (v instanceof Button) {
-            showToast((Button) v);
+        if (v instanceof ImageButton) {
+
+            final ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(getContext(),
+                    R.transition.slide_in_vertical, R.transition.slide_out_vertical);
+
+            if (v.equals(imgBtnOne)){
+                startActivity(new Intent(getActivity(), FeedActivity.class), options.toBundle());
+            }
+            else if (v.equals(imgBtnTwo)){
+                startActivity(new Intent(getActivity(), CommunitiesActivity.class), options.toBundle());
+            }
+            else if (v.equals(imgBtnThree)) {
+                startActivity(new Intent(getActivity(), BrandActivity.class), options.toBundle());
+            }
         }
-    }
-
-    private void showToast(Button btn) {
-        if (toast != null) {
-            toast.cancel();
-        }
-
-        String text = "Clicked: " + btn.getText();
-        toast = Toast.makeText(this.getActivity(), text, Toast.LENGTH_SHORT);
-        toast.show();
-
     }
 
     private void onFabClick(View v) {
         if (v.isSelected()) {
             hideMenu();
+            fab.setImageResource(R.drawable.ic_add);
         } else {
             showMenu();
+            fab.setImageResource(R.drawable.ic_clear);
         }
         v.setSelected(!v.isSelected());
     }
