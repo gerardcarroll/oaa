@@ -41,6 +41,7 @@
     <string name="communities_link">Communities Link</string>
     <string name="home_activity">Home</string>
     <string name="title_activity_communities">Communities</string>
+    <string name="product_detail_activity">Product Details</string>
 
     <!-- Feed Activity Tabs -->
     <string name="my_feed_tab">My Feed</string>
