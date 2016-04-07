@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <integer name="nav_drawer_item">0</integer>
+  <integer name="nav_drawer_item_top_border">1</integer>
+  <integer name="nav_drawer_my_account_item_signed_in">2</integer>
+</resources>

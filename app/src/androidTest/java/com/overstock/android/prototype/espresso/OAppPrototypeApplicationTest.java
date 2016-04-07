@@ -16,7 +16,7 @@ import com.overstock.android.prototype.model.ProductDataService;
 import com.overstock.android.prototype.model.Products;
 import com.overstock.android.prototype.model.ProductsResponse;
 import com.overstock.android.prototype.presenter.BrandPresenter;
-import com.overstock.android.prototype.service1.OappGoogleAuthService;
+import com.overstock.android.prototype.service.OappGoogleAuthService;
 
 import junit.framework.Assert;
 
@@ -77,8 +77,8 @@ public class OAppPrototypeApplicationTest {
     @Test
     public void productServiceMockTest(){
         when(productService.getBestSellers(any(String.class))).thenReturn(Observable.just(new ProductsResponse(new Products(new ArrayList<Product>() {{
-            add(new Product(1,"http://nfl.product.image.ostk.com", "nfl.product_image.png", 123.99F));
-            add(new Product(2, "http://nhl.product.image.ostk.com", "nhl.product_image.png", 25.01F));
+            add(new Product(1,"http://nfl.product.image.ostk.com", "nfl.product_image.png", "",123.99F));
+            add(new Product(2, "http://nhl.product.image.ostk.com", "nhl.product_image.png", "",25.01F));
         }}))));
 
         productService.getBestSellers("dummy").subscribe(new Observer<ProductsResponse>() {

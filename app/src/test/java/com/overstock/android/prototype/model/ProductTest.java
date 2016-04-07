@@ -19,13 +19,13 @@ public class ProductTest {
 
     @Test
     public void argConstructorTest(){
-        Product product = new Product(any(Integer.class),any(String.class),any(String.class),any(Float.class));
+        Product product = new Product(any(Integer.class),any(String.class),any(String.class),any(String.class),any(Float.class));
         Assert.assertNotNull(product);
     }
 
     @Test
     public void productGetterTest(){
-        Product product = new Product(1,"s1","s2",0.1F);
+        Product product = new Product(1,"s3","s1","s2",0.1F);
         Assert.assertNotNull(product);
         Assert.assertEquals(product.getId(), 1);
         Assert.assertEquals(product.getImageMedium1(), "s1");

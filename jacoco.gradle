@@ -35,6 +35,8 @@ project.afterEvaluate {
                                    '**/R$*.class',
                                    '**/*$Icepick.class',
                                    '**/*$ViewInjector*.*',
+                                   '**/*$Parcelable*.class',
+                                   '**/*$Parcels*.class',
                                    '**/*Module_*.*',
                                    '**/*$ViewBinder*.*',
                                    '**/BuildConfig.*',

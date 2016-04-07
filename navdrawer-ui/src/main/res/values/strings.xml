@@ -1,0 +1,29 @@
+<resources>
+  <string name="app_name">Nav Drawer-Ui</string>
+  <string name="home_nav_item">Home</string>
+  <string name="departments_nav_item">Departments</string>
+  <string name="my_lists_nav_item">My Lists</string>
+  <string name="my_account_nav_item">My Account</string>
+  <string name="my_reviews_nav_item">My Reviews</string>
+  <string name="flash_deals_nav_item">Flash Deals</string>
+  <string name="club_o_nav_item">Club O Rewards</string>
+  <string name="club_o_nav_item_silver">My Club O Silver</string>
+  <string name="club_o_nav_item_gold">My Club O Gold</string>
+  <string name="club_o_nav_item_rewards_point">My Club O: %s</string>
+  <string name="gift_cards_nav_item">Gift Cards</string>
+  <string name="contact_us_nav_item">Contact Us</string>
+  <string name="help_nav_item">Help</string>
+  <string name="settings_nav_item">Settings</string>
+  <string name="e_gift_cards_nav_item">E-Gift Cards</string>
+  <string name="physical_gift_cards_nav_item">Physical Gift Cards</string>
+  <string name="app_feedback_nav_item">Feedback</string>
+  <string name="chat_nav_item">Chat</string>
+  <string name="call_nav_item">Call</string>
+  <string name="username_with_greeting">Hi, %1$s</string>
+
+  <string name="view_my_lists_item">All My Lists</string>
+  <string name="find_a_list_item">Find a List</string>
+
+
+
+</resources>
