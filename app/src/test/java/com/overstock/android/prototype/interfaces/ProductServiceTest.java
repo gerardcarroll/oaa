@@ -92,33 +92,33 @@ public class ProductServiceTest {
     public void testNewArrivals() {
         mockProductService.getNewArrivals("dummy")
                 .subscribe(new Observer<ProductsResponse>() {
-                               @Override
-                               public void onCompleted() {
-                                   Log.i(TAG, "Complete");
-                               }
+                           @Override
+                           public void onCompleted() {
+                               Log.i(TAG, "Complete");
+                           }
 
-                               @Override
-                               public void onError(Throwable e) {
-                                   Log.e(TAG, "ERROR");
-                               }
+                           @Override
+                           public void onError(Throwable e) {
+                               Log.e(TAG, "ERROR");
+                           }
 
-                               @Override
-                               public void onNext(ProductsResponse productsResponse) {
-                                   Assert.assertNotNull(productsResponse);
-                                   Assert.assertNotNull(productsResponse.getProducts());
-                                   Assert.assertNotNull(productsResponse.getProducts().getProductsList());
-                                   Assert.assertEquals(productsResponse.getProducts().getProductsList().size(), 2);
-                                   for (Product product : productsResponse.getProducts().getProductsList()) {
-                                       Assert.assertNotNull(product);
-                                       Assert.assertNotNull(product.getImageMedium1());
-                                       Assert.assertTrue(product.getImageMedium1().contains("image.ostk"));
-                                       Assert.assertNotNull(product.getMemberPrice());
-                                       Assert.assertTrue(product.getMemberPrice() > 0);
-                                       Assert.assertNotNull(product.getName());
-                                       Assert.assertTrue(product.getName().contains("product_image"));
-                                   }
+                           @Override
+                           public void onNext(ProductsResponse productsResponse) {
+                               Assert.assertNotNull(productsResponse);
+                               Assert.assertNotNull(productsResponse.getProducts());
+                               Assert.assertNotNull(productsResponse.getProducts().getProductsList());
+                               Assert.assertEquals(productsResponse.getProducts().getProductsList().size(), 2);
+                               for (Product product : productsResponse.getProducts().getProductsList()) {
+                                   Assert.assertNotNull(product);
+                                   Assert.assertNotNull(product.getImageMedium1());
+                                   Assert.assertTrue(product.getImageMedium1().contains("image.ostk"));
+                                   Assert.assertNotNull(product.getMemberPrice());
+                                   Assert.assertTrue(product.getMemberPrice() > 0);
+                                   Assert.assertNotNull(product.getName());
+                                   Assert.assertTrue(product.getName().contains("product_image"));
                                }
                            }
+                       }
                 );
     }
 
