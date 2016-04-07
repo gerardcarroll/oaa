@@ -60,7 +60,6 @@
     <string name="top_category_title">Top Categories</string>
     <string name="top_category_link"><u>Shop All</u></string>
 
-
     <!-- Shared Element Transition Names-->
     <string name="shared_element_transition">brand_element_image</string>
     <string name="test_shared_element_transition">brand_element_image</string>
@@ -74,5 +73,8 @@
     <string name="nfl_dot_com_label">NFL.com</string>
     <string name="raider_jersey_label">Raiders Jersey</string>
     <string name="raider_jersey_price_label">$65</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 
 </resources>

@@ -13,7 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.activity.CommunitiesActivity;
+import com.overstock.android.prototype.activity.CommunityActivity;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
 
@@ -59,6 +59,7 @@ public class GoogleFederatedIdentityFragment extends Fragment {
         }
 
         final OptionalPendingResult<GoogleSignInResult> opr = oappGoogleAuthService.silentSignInStatus();
+
         if (opr.isDone()) {
             Log.d(TAG, "Got cached sign-in");
             final GoogleSignInResult result = opr.get();
@@ -93,7 +94,7 @@ public class GoogleFederatedIdentityFragment extends Fragment {
             toast.setGravity(Gravity.BOTTOM, 0, 20);
             toast.show();
 
-            final Intent signInIntent = new Intent(getActivity(), CommunitiesActivity.class);
+            final Intent signInIntent = new Intent(getActivity(), CommunityActivity.class);
             startActivity(signInIntent);
         } else {
             Toast.makeText(this.getContext(), "Not logged in", Toast.LENGTH_SHORT).show();

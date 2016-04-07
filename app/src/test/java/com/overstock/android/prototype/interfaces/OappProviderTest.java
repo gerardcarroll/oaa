@@ -3,9 +3,9 @@ package com.overstock.android.prototype.interfaces;
 import android.net.Uri;
 import android.util.Log;
 
-import com.overstock.android.prototype.models.Product;
-import com.overstock.android.prototype.models.Products;
-import com.overstock.android.prototype.models.ProductsResponse;
+import com.overstock.android.prototype.model.Product;
+import com.overstock.android.prototype.model.Products;
+import com.overstock.android.prototype.model.ProductsResponse;
 
 import junit.framework.Assert;
 
@@ -40,8 +40,8 @@ public class OappProviderTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mockOappProvider.query(uri)).thenReturn(Observable.just(new ProductsResponse(new Products(new ArrayList<Product>() {{
-            add(new Product(1,"http://nfl.product.image.ostk.com", "nfl.product_image.png", 3.99F));
-            add(new Product(2,"http://nhl.product.image.ostk.com", "nhl.product_image.png", 2.01F));
+            add(new Product(1,"http://nfl.product.image.ostk.com/large","http://nfl.product.image.ostk.com", "nfl.product_image.png", 3.99F));
+            add(new Product(2,"http://nhl.product.image.ostk.com/large","http://nhl.product.image.ostk.com", "nhl.product_image.png", 2.01F));
         }}))));
 
     }

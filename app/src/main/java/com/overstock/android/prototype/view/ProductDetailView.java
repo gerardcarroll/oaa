@@ -1,10 +1,12 @@
 package com.overstock.android.prototype.view;
 
+import com.overstock.android.prototype.model.ProductDetail;
+
 /**
- * Created by rconnolly on 3/21/2016.
+ * @author rconnolly Created on 3/21/2016.
  */
 public interface ProductDetailView {
 
-    void displayProductDetails(final String productDetail);
+  void displayProductDetails(final ProductDetail productDetail);
 
 }

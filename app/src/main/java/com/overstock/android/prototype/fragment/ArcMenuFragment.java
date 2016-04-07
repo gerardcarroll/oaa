@@ -18,7 +18,7 @@ import android.widget.ImageButton;
 import com.ogaclejapan.arclayout.ArcLayout;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.BrandActivity;
-import com.overstock.android.prototype.activity.CommunitiesActivity;
+import com.overstock.android.prototype.activity.CommunityActivity;
 import com.overstock.android.prototype.activity.FeedActivity;
 import com.overstock.android.prototype.animatorutils.AnimatorUtils;
 
@@ -93,7 +93,7 @@ public class ArcMenuFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(), FeedActivity.class), options.toBundle());
             }
             else if (v.equals(imgBtnTwo)){
-                startActivity(new Intent(getActivity(), CommunitiesActivity.class), options.toBundle());
+                startActivity(new Intent(getActivity(), CommunityActivity.class), options.toBundle());
             }
             else if (v.equals(imgBtnThree)) {
                 startActivity(new Intent(getActivity(), BrandActivity.class), options.toBundle());

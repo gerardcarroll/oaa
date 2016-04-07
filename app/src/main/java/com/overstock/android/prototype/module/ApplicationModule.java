@@ -2,18 +2,25 @@ package com.overstock.android.prototype.module;
 
 import android.app.Application;
 
-import com.overstock.android.prototype.fragment.GoogleFederatedIdentityFragment;
-import com.overstock.android.prototype.fragment.HomeFragment;
-import com.overstock.android.prototype.interfaces.ProductService;
-import com.overstock.android.prototype.interfaces.TheOAppClient;
-import com.overstock.android.prototype.models.ProductDataService;
-import com.overstock.android.prototype.module.scope.ActivityScope;
+import com.overstock.android.prototype.client.FeedClient;
+import com.overstock.android.prototype.client.TheOAppClient;
+import com.overstock.android.prototype.interfaces.CommunityClient;
+import com.overstock.android.prototype.model.ProductDataService;
 import com.overstock.android.prototype.module.scope.ApplicationScope;
 import com.overstock.android.prototype.presenter.BrandPresenter;
-import com.overstock.android.prototype.presenter.BrandPresenterImpl;
+import com.overstock.android.prototype.presenter.CommunityPresenter;
+import com.overstock.android.prototype.presenter.impl.CommunityPresenterImpl;
+import com.overstock.android.prototype.presenter.FeedPresenter;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
-import com.overstock.android.prototype.presenter.ProductDetailPresenterImpl;
+import com.overstock.android.prototype.presenter.impl.BrandPresenterImpl;
+import com.overstock.android.prototype.presenter.impl.FeedPresenterImpl;
+import com.overstock.android.prototype.presenter.impl.ProductDetailPresenterImpl;
+import com.overstock.android.prototype.service.CommunityService;
+import com.overstock.android.prototype.service.FeedService;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
+import com.overstock.android.prototype.service.ProductService;
+import com.squareup.picasso.LruCache;
+import com.squareup.picasso.Picasso;
 
 import dagger.Module;
 import dagger.Provides;
@@ -27,14 +34,12 @@ public class ApplicationModule {
 
   Application application;
 
-  public  ApplicationModule(Application application){
+  public ApplicationModule(Application application) {
     this.application = application;
   }
 
-
-
   @Provides
-  public Application providesApplication(){
+  public Application providesApplication() {
     return application;
   }
 
@@ -44,12 +49,42 @@ public class ApplicationModule {
   }
 
   @Provides
-  public ProductDetailPresenter productDetailPresenter(final ProductDataService productDataService){
+  public ProductDetailPresenter productDetailPresenter(final ProductDataService productDataService) {
     return new ProductDetailPresenterImpl(productDataService);
   }
 
-  public ProductDataService providesProductDataService(final ProductService productService){
+  @Provides
+  public FeedPresenter feedPresenter(final FeedService feedService) {
+    return new FeedPresenterImpl(feedService);
+  }
+
+  @Provides
+  public FeedClient feedClient(final Application application) {
+    return new FeedClient(application);
+  }
+
+  @Provides
+  public FeedService feedService(final FeedClient feedClient) {
+    return feedClient.getClient();
+  }
+
+  public ProductDataService providesProductDataService(final ProductService productService) {
     return new ProductDataService(productService);
+  }
+
+  @Provides
+  public CommunityPresenter communitiesPresenter(CommunityService communityService) {
+    return new CommunityPresenterImpl(communityService);
+  }
+
+  @Provides
+  public CommunityClient providesCommunityClient(Application application) {
+    return new CommunityClient(application.getApplicationContext());
+  }
+
+  @Provides
+  public CommunityService providesCommunityService(final CommunityClient communityClient) {
+    return communityClient.getClient();
   }
 
   @Provides
@@ -60,6 +95,15 @@ public class ApplicationModule {
   @Provides
   public OappGoogleAuthService providesOappGoogleAuthService(Application application) {
     return new OappGoogleAuthService(application);
+  }
+
+  @Provides
+  public Picasso providesPicasso() {
+    final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+    final int cacheSize = maxMemory / 8;
+    final Picasso picasso = new Picasso.Builder(application.getBaseContext()).memoryCache(new LruCache(cacheSize))
+        .build();
+    return picasso;
   }
 
 }
