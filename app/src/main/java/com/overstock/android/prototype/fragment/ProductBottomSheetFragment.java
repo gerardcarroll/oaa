@@ -58,6 +58,7 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment {
     CoordinatorLayout.Behavior behavior = params.getBehavior();
 
     if (behavior != null && behavior instanceof BottomSheetBehavior) {
+      ((BottomSheetBehavior) behavior).setPeekHeight(600);
       ((BottomSheetBehavior) behavior).setBottomSheetCallback(bottomSheetCallback);
     }
   }
