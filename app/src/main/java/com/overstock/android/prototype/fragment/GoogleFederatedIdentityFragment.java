@@ -59,6 +59,7 @@ public class GoogleFederatedIdentityFragment extends Fragment {
         }
 
         final OptionalPendingResult<GoogleSignInResult> opr = oappGoogleAuthService.silentSignInStatus();
+
         if (opr.isDone()) {
             Log.d(TAG, "Got cached sign-in");
             final GoogleSignInResult result = opr.get();

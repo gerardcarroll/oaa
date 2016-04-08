@@ -11,27 +11,27 @@ import org.junit.Test;
  */
 public class CommunityTest {
 
-    @Test
-    public void noArgConstructorTest(){
-        Community community = new Community();
-        Assert.assertNotNull(community);
-    }
+  @Test
+  public void noArgConstructorTest() {
+    Community community = new Community();
+    Assert.assertNotNull(community);
+  }
 
-    @Test
-    public void argConstructorTest(){
-        Community community = new Community(any(Integer.class),any(String.class));
-        Assert.assertNotNull(community);
-    }
+  @Test
+  public void argConstructorTest() {
+    Community community = new Community(any(Integer.class), any(String.class));
+    Assert.assertNotNull(community);
+  }
 
-    @Test
-    public void communityGetterSetterTest(){
-        Community community = new Community();
-        Assert.assertNotNull(community);
-        community.setImageId(1);
-        Assert.assertEquals(community.getImageId(), 1);
-        community.setName("Watches");
-        Assert.assertEquals(community.getName(), "Watches");
-        community.setSelected(true);
-        Assert.assertEquals(community.isSelected(), true);
-    }
+  @Test
+  public void communityGetterSetterTest() {
+    Community community = new Community();
+    Assert.assertNotNull(community);
+    community.setImageId(1);
+    Assert.assertEquals(community.getImageId(), 1);
+    community.setName("Watches");
+    Assert.assertEquals(community.getName(), "Watches");
+    community.setSelected(true);
+    Assert.assertEquals(community.isSelected(), true);
+  }
 }

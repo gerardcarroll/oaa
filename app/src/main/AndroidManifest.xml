@@ -36,7 +36,7 @@
             android:label="@string/feed_activity" />
         <activity
             android:name=".activity.ProductDetailActivity"
-            android:label="@string/feed_activity"
+            android:label="@string/product_detail_activity"
             android:parentActivityName=".activity.BrandActivity" />
 
         <meta-data

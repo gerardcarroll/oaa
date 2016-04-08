@@ -6,7 +6,7 @@ import android.support.test.InstrumentationRegistry;
 import com.overstock.android.prototype.component.ApplicationComponent;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.module.ApplicationModule;
-import com.overstock.android.prototype.service1.OappGoogleAuthService;
+import com.overstock.android.prototype.service.OappGoogleAuthService;
 
 import it.cosenonjaviste.daggermock.DaggerMockRule;
 

@@ -1,10 +1,10 @@
 package com.overstock.android.prototype.model;
 
+import static org.mockito.Matchers.any;
+
 import junit.framework.Assert;
 
 import org.junit.Test;
-
-import static org.mockito.Matchers.any;
 
 /**
  * @author itowey on 25/03/16.
