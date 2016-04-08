@@ -90,7 +90,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="Beats By Dre"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -99,7 +98,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="$200.99"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
 
@@ -110,24 +108,19 @@
                 android:layout_marginTop="15dp"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempor vel nisl in aliquet.
-                      Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
-                      Nulla facilisi. Etiam id magna sodales ipsum tristique condimentum ut at justo. Ut posuere
-                      rhoncus placerat. Donec lobortis, tellus sit amet auctor rutrum, dolor tellus pellentesque sem"
                 android:textSize="14sp" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/rounded_corner_highlighted"
-                android:elevation="4dp"
-                android:padding="10dp"
-                android:text="Buy"
-                android:textColor="@color/white" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_buy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        app:backgroundTint="@color/success_green_dark"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_add_shopping_cart_24dp"
+        />
 
 </android.support.design.widget.CoordinatorLayout>

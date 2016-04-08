@@ -14,6 +14,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.FeedPagerAdapter;
 import com.overstock.android.prototype.fragment.ArcMenuFragment;
@@ -24,126 +27,128 @@ import com.overstock.android.prototype.ui.adapter.NavDrawerRecyclerViewAdapter;
 import com.overstock.android.prototype.ui.model.NavDrawerModel;
 import com.overstock.android.prototype.ui.service.JsonFileLoader;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import icepick.State;
 
 public class FeedActivity extends AppCompatActivity {
 
-    @Bind(R.id.product_detail_toolbar)
-    Toolbar toolbar;
+  @Bind(R.id.product_detail_toolbar)
+  Toolbar toolbar;
 
-    @Bind(R.id.feed_viewpager)
-    ViewPager viewPager;
+  @Bind(R.id.feed_viewpager)
+  ViewPager viewPager;
 
-    @Bind(R.id.feed_tabs)
-    TabLayout tabLayout;
+  @Bind(R.id.feed_tabs)
+  TabLayout tabLayout;
 
-    private ArcMenuFragment fragment = null;
-    private android.support.v4.app.FragmentManager manager = null;
-    private android.support.v4.app.FragmentTransaction ft;
+  private ArcMenuFragment fragment = null;
 
-    @Bind(R.id.drawer_layout)
-    DrawerLayout mDrawerLayout;
+  private android.support.v4.app.FragmentManager manager = null;
 
-    @Bind(R.id.navRecyclerView)
-    RecyclerView mRecyclerView;
+  private android.support.v4.app.FragmentTransaction ft;
 
-    @State(NavDrawerModelBundler.class)
-    NavDrawerModel navDrawerModel;
+  @Bind(R.id.drawer_layout)
+  DrawerLayout mDrawerLayout;
 
-    private ActionBarDrawerToggle mDrawerToggle;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+  @Bind(R.id.navRecyclerView)
+  RecyclerView mRecyclerView;
 
+  @State(NavDrawerModelBundler.class)
+  NavDrawerModel navDrawerModel;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feed);
+  private ActionBarDrawerToggle mDrawerToggle;
 
-        ButterKnife.bind(this);
+  private RecyclerView.Adapter mAdapter;
 
-        setupViewPager(viewPager);
-        tabLayout.setupWithViewPager(viewPager);
+  private RecyclerView.LayoutManager mLayoutManager;
 
-        // Add Arc Menu fragment
-        if (manager == null) manager = getSupportFragmentManager();
-        if(manager.findFragmentById(R.id.arc_menu_fragment_container) == null) {
-            fragment = new ArcMenuFragment();
-            ft = manager.beginTransaction();
-            ft.add(R.id.arc_menu_fragment_container, fragment).commit();
-        }
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_feed);
 
-        mRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        addDrawerItems();
+    ButterKnife.bind(this);
 
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setTitle("");
-        setupDrawer();
-        mDrawerToggle.syncState();
+    setupViewPager(viewPager);
+    tabLayout.setupWithViewPager(viewPager);
+
+    // Add Arc Menu fragment
+    if (manager == null)
+      manager = getSupportFragmentManager();
+    if (manager.findFragmentById(R.id.arc_menu_fragment_container) == null) {
+      fragment = new ArcMenuFragment();
+      ft = manager.beginTransaction();
+      ft.add(R.id.arc_menu_fragment_container, fragment).commit();
     }
 
-    private void setupViewPager(ViewPager viewPager) {
-        FeedPagerAdapter adapter = new FeedPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new FeedFragment(), getString(R.string.my_feed_tab));
-        adapter.addFragment(new TrendingFragment(), getString(R.string.trending_tab));
-        adapter.addFragment(new MyLocationFragment(), getString(R.string.my_location_tab));
-        viewPager.setAdapter(adapter);
+    mRecyclerView.setHasFixedSize(true); // Letting the system know that the list objects are of fixed size
+    mLayoutManager = new LinearLayoutManager(this);
+    mRecyclerView.setLayoutManager(mLayoutManager);
+    addDrawerItems();
+
+    setSupportActionBar(toolbar);
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    getSupportActionBar().setHomeButtonEnabled(true);
+    getSupportActionBar().setTitle("");
+    setupDrawer();
+    mDrawerToggle.syncState();
+  }
+
+  private void setupViewPager(ViewPager viewPager) {
+    FeedPagerAdapter adapter = new FeedPagerAdapter(getSupportFragmentManager());
+    adapter.addFragment(new FeedFragment(), getString(R.string.my_feed_tab));
+    adapter.addFragment(new TrendingFragment(), getString(R.string.trending_tab));
+    adapter.addFragment(new MyLocationFragment(), getString(R.string.my_location_tab));
+    viewPager.setAdapter(adapter);
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(final Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_main, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(final MenuItem item) {
+
+    final int id = item.getItemId();
+
+    if (id == R.id.action_settings || id == R.id.action_refresh || id == R.id.action_logout) {
+      Toast.makeText(this, "You clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();
+      return true;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    if (mDrawerToggle.onOptionsItemSelected(item)) {
+      return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
+    return super.onOptionsItemSelected(item);
+  }
 
-        final int id = item.getItemId();
-
-        if (id == R.id.action_settings || id == R.id.action_refresh || id == R.id.action_logout) {
-            Toast.makeText(this, "You clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();
-            return true;
-        }
-
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+  private void addDrawerItems() {
+    if (navDrawerModel == null) {
+      navDrawerModel = new NavDrawerModel(this, new JsonFileLoader());
     }
 
-    private void addDrawerItems() {
-        if (navDrawerModel == null){
-            navDrawerModel = new NavDrawerModel(this, new JsonFileLoader());
-        }
+    mAdapter = new NavDrawerRecyclerViewAdapter(this, navDrawerModel.getNavDrawerItems());
+    mRecyclerView.setAdapter(mAdapter);
+  }
 
-        mAdapter = new NavDrawerRecyclerViewAdapter(this, navDrawerModel.getNavDrawerItems());
-        mRecyclerView.setAdapter(mAdapter);
-    }
+  private void setupDrawer() {
+    mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
 
-    private void setupDrawer() {
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                R.string.drawer_open, R.string.drawer_close) {
+      public void onDrawerOpened(View drawerView) {
+        super.onDrawerOpened(drawerView);
+        invalidateOptionsMenu();
+      }
 
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                invalidateOptionsMenu();
-            }
-            public void onDrawerClosed(View view) {
-                super.onDrawerClosed(view);
-                invalidateOptionsMenu();
-            }
-        };
+      public void onDrawerClosed(View view) {
+        super.onDrawerClosed(view);
+        invalidateOptionsMenu();
+      }
+    };
 
-        mDrawerToggle.setDrawerIndicatorEnabled(true);
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-    }
+    mDrawerToggle.setDrawerIndicatorEnabled(true);
+    mDrawerLayout.setDrawerListener(mDrawerToggle);
+  }
 
 }

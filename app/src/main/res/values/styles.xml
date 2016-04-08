@@ -2,7 +2,7 @@
 
     <!-- Base application theme. This theme applies styles to all of our app content
          apart from any overridden styles in the v21 resource file-->
-    <style name="OappTheme" parent="OappTheme.Base"/>
+    <style name="OappTheme" parent="OappTheme.Base" />
 
     <style name="OappTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Oapp , app wide color style. -->
@@ -24,13 +24,13 @@
     </style>
 
     <!-- This theme gives our AppBarLayout the Dark action bar theme (white text)-->
-    <style name="OappActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="OappActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="CheckBoxTheme" parent="Theme.AppCompat"/>
+    <style name="CheckBoxTheme" parent="Theme.AppCompat" />
 
     <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
@@ -40,6 +40,9 @@
         <item name="textAllCaps">false</item>
     </style>
 
+    <style name="OappTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="OappTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <!-- Arc menu style -->
     <style name="itemPath">
         <item name="android:layout_width">@dimen/item_circle_size_path</item>
