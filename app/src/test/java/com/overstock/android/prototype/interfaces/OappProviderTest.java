@@ -27,7 +27,6 @@ import static org.mockito.Mockito.when;
  * Created by itowey on 22/03/16.
  */
 @RunWith(RobolectricTestRunner.class)
-//@RunWith(MockitoJUnitRunner.class)
 public class OappProviderTest {
     private static final String TAG = OappProviderTest.class.getName();
 
@@ -40,8 +39,8 @@ public class OappProviderTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mockOappProvider.query(uri)).thenReturn(Observable.just(new ProductsResponse(new Products(new ArrayList<Product>() {{
-            add(new Product(1,"http://nfl.product.image.ostk.com", "nfl.product_image.png", 3.99F));
-            add(new Product(2,"http://nhl.product.image.ostk.com", "nhl.product_image.png", 2.01F));
+            add(new Product(1,"http://nfl.product.image.ostk.com","http://nfl.product.image2.ostk.com", "nfl.product_image.png", 3.99F));
+            add(new Product(2,"http://nhl.product.image.ostk.com","http://nfl.product.image2.ostk.com", "nhl.product_image.png", 2.01F));
         }}))));
 
     }

@@ -1,11 +1,15 @@
 package com.overstock.android.prototype.activity;
 
+import java.util.Currency;
+import java.util.Locale;
+
 import javax.inject.Inject;
 
 import org.parceler.Parcels;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -19,9 +23,11 @@ import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.component.ApplicationComponent;
+import com.overstock.android.prototype.fragment.ProductBottomSheetFragment;
 import com.overstock.android.prototype.listener.TransitionListener;
 import com.overstock.android.prototype.model.Product;
 import com.overstock.android.prototype.model.ProductDetail;
@@ -29,11 +35,8 @@ import com.overstock.android.prototype.presenter.ProductDetailPresenter;
 import com.overstock.android.prototype.view.ProductDetailView;
 import com.squareup.picasso.Picasso;
 
-import java.util.Currency;
-import java.util.Locale;
-
 /**
- * @author RayConnolly Created on 21-03-2016
+ * @author RayConnolly, LeeMeehan Created on 21-03-2016
  */
 public class ProductDetailActivity extends AppCompatActivity implements ProductDetailView {
 
@@ -62,6 +65,9 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   @Bind(R.id.product_detail_toolbar)
   Toolbar toolbar;
 
+  @Bind(R.id.btn_buy)
+  FloatingActionButton btn_buy;
+
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -89,6 +95,12 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     presenter.setView(this);
     presenter.retrieveProductDetails(product.getId());
+  }
+
+  @OnClick(R.id.btn_buy)
+  public void expandBottom_sheet() {
+    ProductBottomSheetFragment productBottomSheetFragment = new ProductBottomSheetFragment();
+    productBottomSheetFragment.show(getSupportFragmentManager(), productBottomSheetFragment.getTag());
   }
 
   @Override
