@@ -41,6 +41,7 @@
     <string name="communities_link">Communities Link</string>
     <string name="home_activity">Home</string>
     <string name="title_activity_communities">Communities</string>
+    <string name="product_detail_activity">Product Details</string>
 
     <!-- Feed Activity Tabs -->
     <string name="my_feed_tab">My Feed</string>
@@ -59,7 +60,6 @@
     <string name="top_category_title">Top Categories</string>
     <string name="top_category_link"><u>Shop All</u></string>
 
-
     <!-- Shared Element Transition Names-->
     <string name="shared_element_transition">brand_element_image</string>
     <string name="test_shared_element_transition">brand_element_image</string>
@@ -76,4 +76,5 @@
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+
 </resources>

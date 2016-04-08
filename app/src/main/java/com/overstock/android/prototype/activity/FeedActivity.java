@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.FeedPagerAdapter;
+import com.overstock.android.prototype.fragment.ArcMenuFragment;
 import com.overstock.android.prototype.fragment.FeedFragment;
 import com.overstock.android.prototype.fragment.MyLocationFragment;
 import com.overstock.android.prototype.fragment.TrendingFragment;
@@ -38,6 +39,10 @@ public class FeedActivity extends AppCompatActivity {
     @Bind(R.id.feed_tabs)
     TabLayout tabLayout;
 
+    private ArcMenuFragment fragment = null;
+    private android.support.v4.app.FragmentManager manager = null;
+    private android.support.v4.app.FragmentTransaction ft;
+
     @Bind(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
 
@@ -51,6 +56,7 @@ public class FeedActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +66,15 @@ public class FeedActivity extends AppCompatActivity {
 
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
+
+        // Add Arc Menu fragment
+        if (manager == null) manager = getSupportFragmentManager();
+        if(manager.findFragmentById(R.id.arc_menu_fragment_container) == null) {
+            fragment = new ArcMenuFragment();
+            ft = manager.beginTransaction();
+            ft.add(R.id.arc_menu_fragment_container, fragment).commit();
+        }
+
         mRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);

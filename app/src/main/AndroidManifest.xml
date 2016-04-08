@@ -45,7 +45,7 @@
         <activity
             android:parentActivityName=".activity.BrandActivity"
             android:name=".activity.ProductDetailActivity"
-            android:label="@string/feed_activity" />
+            android:label="@string/product_detail_activity" />
 
         <meta-data
             android:name="io.fabric.ApiKey"

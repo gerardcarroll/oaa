@@ -162,6 +162,8 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
         transitive = true;
     }
+    // Arc Menu dependency
+    compile 'com.ogaclejapan.arclayout:library:1.0.1@aar'
 }
 
 afterEvaluate {

@@ -40,4 +40,12 @@
         <item name="textAllCaps">false</item>
     </style>
 
+    <!-- Arc menu style -->
+    <style name="itemPath">
+        <item name="android:layout_width">@dimen/item_circle_size_path</item>
+        <item name="android:layout_height">@dimen/item_circle_size_path</item>
+        <item name="android:textSize">@dimen/item_font_size_path</item>
+        <item name="android:background">@drawable/arc_menu_white_oval</item>
+    </style>
+
 </resources>
