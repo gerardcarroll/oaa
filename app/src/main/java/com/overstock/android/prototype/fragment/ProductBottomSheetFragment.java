@@ -3,15 +3,19 @@ package com.overstock.android.prototype.fragment;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.CoordinatorLayout;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import com.overstock.android.prototype.R;
 
@@ -26,11 +30,24 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment {
   @Bind(R.id.quantity_remove)
   ImageView imageViewRemove;
 
+  @Bind(R.id.quantity_indicator)
+  TextView txtIndicator;
+
+  @Bind(R.id.rewards_amount_txt)
+  TextView rewardsAmount;
+
+  @Bind(R.id.totalPrice_txt)
+  TextView totalAmount;
+
+  private Float startingPrice;
+
+  @Nullable
   @Override
-  public void onViewCreated(View view, Bundle savedInstanceState) {
-    super.onViewCreated(view, savedInstanceState);
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    View view = inflater.inflate(R.layout.product_details_bottom_sheet, container, false);
     ButterKnife.bind(this, view);
-    Log.i("HERE","Hi Lee");
+    startingPrice = Float.parseFloat(totalAmount.getText().toString().substring(1));
+    return view;
   }
 
   private BottomSheetBehavior.BottomSheetCallback bottomSheetCallback = new BottomSheetBehavior.BottomSheetCallback() {
@@ -46,6 +63,38 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment {
 
     }
   };
+
+  @OnClick(R.id.quantity_add)
+  public void addQuantity() {
+    String existingQuantity = txtIndicator.getText().toString();
+    Integer newQuantity = Integer.parseInt(existingQuantity) + 1;
+    txtIndicator.setText(newQuantity.toString());
+    setFinalAmount(newQuantity);
+  }
+
+  @OnClick(R.id.quantity_remove)
+  public void removeQuantity() {
+    String existingQuantity = txtIndicator.getText().toString();
+    if (Integer.parseInt(existingQuantity) > 1) {
+      Integer newQuantity = Integer.parseInt(existingQuantity) - 1;
+      txtIndicator.setText(newQuantity.toString());
+      setFinalAmount(newQuantity);
+    }
+  }
+
+  private void setFinalAmount(Integer quantity) {
+    Float newPrice = startingPrice * quantity;
+    totalAmount.setText(String.format("$%.2f", newPrice));
+  }
+
+  @OnClick(R.id.rewards_btn_apply)
+  public void applyDiscount() {
+    String totalPrice = totalAmount.getText().toString().substring(1);
+    String discount = rewardsAmount.getText().toString().substring(1);
+    rewardsAmount.setText("$0.00");
+    Float finalPrice = (Float.parseFloat(totalPrice) - Float.parseFloat(discount));
+    totalAmount.setText(String.format("$%.2f", finalPrice));
+  }
 
   @Override
   public void setupDialog(Dialog dialog, int style) {

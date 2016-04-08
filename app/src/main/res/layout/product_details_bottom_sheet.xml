@@ -29,6 +29,7 @@
                 android:textSize="26sp" />
 
             <TextView
+                android:id="@+id/totalPrice_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
@@ -112,16 +113,18 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/rewards_amount_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="16dp"
-                android:text="$ 12.57"
+                android:text="$12.57"
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/rewards_btn_apply"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
