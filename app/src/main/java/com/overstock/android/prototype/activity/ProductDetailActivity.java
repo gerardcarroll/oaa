@@ -1,9 +1,5 @@
 package com.overstock.android.prototype.activity;
 
-import javax.inject.Inject;
-
-import org.parceler.Parcels;
-
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,9 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.component.ApplicationComponent;
 import com.overstock.android.prototype.listener.TransitionListener;
@@ -29,8 +22,15 @@ import com.overstock.android.prototype.presenter.ProductDetailPresenter;
 import com.overstock.android.prototype.view.ProductDetailView;
 import com.squareup.picasso.Picasso;
 
+import org.parceler.Parcels;
+
 import java.util.Currency;
 import java.util.Locale;
+
+import javax.inject.Inject;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * @author RayConnolly Created on 21-03-2016
@@ -85,7 +85,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     productName.setText(product.getName());
     final String currencyCode = Currency.getInstance(Locale.US).getSymbol();
-    productPrice.setText(this.getString(R.string.product_price_fmt, currencyCode, product.getMemberPrice().toString()));
+    productPrice.setText(this.getString(R.string.product_price_fmt, currencyCode, String.valueOf(product.getMemberPrice())));
 
     presenter.setView(this);
     presenter.retrieveProductDetails(product.getId());

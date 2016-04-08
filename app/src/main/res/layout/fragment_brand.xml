@@ -169,35 +169,10 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:text="@string/best_sellers_label"
-                android:textSize="20sp"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            <include layout="@layout/fragment_horizontial_scroll" android:id="@+id/best_sellers_hrv" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/best_sellers"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="horizontal"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            <include layout="@layout/fragment_horizontial_scroll" android:id="@+id/new_arrivals_hrv" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:text="@string/new_arrivals_label"
-                android:textSize="20sp"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/new_arrivals"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="horizontal"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

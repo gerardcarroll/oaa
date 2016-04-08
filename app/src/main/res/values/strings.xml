@@ -63,7 +63,7 @@
     <!-- Shared Element Transition Names-->
     <string name="shared_element_transition">brand_element_image</string>
     <string name="test_shared_element_transition">brand_element_image</string>
-    <string name="product_price_fmt" >%1$s %2$s</string>
+    <string name="product_price_fmt">%1$s %2$s</string>
     <string name="apply_transition_label">Apply Transition</string>
     <string name="womens_assessories_label">Women\'s Accessories</string>
     <string name="jersey_label">Jerseys</string>
@@ -76,4 +76,7 @@
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

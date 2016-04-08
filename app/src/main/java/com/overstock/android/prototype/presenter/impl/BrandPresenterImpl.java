@@ -2,6 +2,7 @@ package com.overstock.android.prototype.presenter.impl;
 
 import android.util.Log;
 
+import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.model.Product;
 import com.overstock.android.prototype.model.ProductDataService;
 import com.overstock.android.prototype.model.ProductsResponse;
@@ -70,8 +71,9 @@ public class BrandPresenterImpl implements BrandPresenter {
 
           @Override
           public void onNext(ProductsResponse productsResponse) {
-            Log.d(TAG, "Next value on subscribing to ProductDataService.GetProducts");
-            brandView.displayBestSellers((ArrayList<Product>) productsResponse.getProducts().getProductsList());
+            Log.d(TAG, "Next value on subscribing to ProductDataService.GetProducts " + productsResponse.getProducts().getProductsList().size());
+            brandView.addHorizontialRecyclerView(R.id.best_sellers_hrv, (ArrayList<Product>) productsResponse.getProducts().getProductsList(), "Best Sellers");
+//            brandView.displayBestSellers((ArrayList<Product>) productsResponse.getProducts().getProductsList());
           }
         });
 
@@ -91,8 +93,9 @@ public class BrandPresenterImpl implements BrandPresenter {
 
           @Override
           public void onNext(ProductsResponse productsResponse) {
-            Log.i("SUCCESS", "New Arrivals successfully loaded");
-            brandView.displayNewArrivals((ArrayList<Product>) productsResponse.getProducts().getProductsList());
+            Log.i("SUCCESS", "New Arrivals successfully loaded " + productsResponse.getProducts().getProductsList().size());
+            brandView.addHorizontialRecyclerView(R.id.best_sellers_hrv,(ArrayList<Product>) productsResponse.getProducts().getProductsList(), "New Arrivals");
+//            brandView.displayNewArrivals((ArrayList<Product>) productsResponse.getProducts().getProductsList());
           }
         });
 

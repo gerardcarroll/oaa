@@ -72,6 +72,7 @@ public class NavDrawerRecyclerViewAdapter extends RecyclerView.Adapter<NavDrawer
         if (holder.Holderid == TYPE_ITEM) {
             int pos = position - 1;
             holder.textView.setText(navDrawerItems.get(pos).getTitle());
+
             if (navDrawerItems.get(pos).getIcon() != "") {
                 holder.imageView.setImageResource(context.getResources().getIdentifier(navDrawerItems.get(pos).getIcon(), "drawable", context.getPackageName()));
             }
