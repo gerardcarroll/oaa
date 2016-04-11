@@ -58,7 +58,6 @@ public class HorizontialScrollFragment extends Fragment {
      * @param parcelables Parameter 1.
      * @return A new instance of fragment HorizontialScrollFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static HorizontialScrollFragment newInstance(ArrayList<Product> parcelables, String labelText) {
         HorizontialScrollFragment fragment = new HorizontialScrollFragment();
         Bundle args = new Bundle();
@@ -102,7 +101,6 @@ public class HorizontialScrollFragment extends Fragment {
         rvHorizontalScrollFrag.setVisibility(View.VISIBLE);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -112,12 +110,6 @@ public class HorizontialScrollFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
     }
 
     @Override
