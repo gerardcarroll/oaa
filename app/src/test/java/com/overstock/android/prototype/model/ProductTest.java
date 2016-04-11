@@ -1,13 +1,13 @@
 package com.overstock.android.prototype.model;
 
+import static org.mockito.Matchers.any;
+
 import junit.framework.Assert;
 
 import org.junit.Test;
 
-import static org.mockito.Matchers.any;
-
 /**
- * Created by itowey on 25/03/16.
+ * @author itowey on 25/03/16.
  */
 public class ProductTest {
 
@@ -25,10 +25,11 @@ public class ProductTest {
 
     @Test
     public void productGetterTest(){
-        Product product = new Product(1,"s3","s1","s2",0.1F);
+        Product product = new Product(1,"s1","imageLarge","s2",0.1F);
         Assert.assertNotNull(product);
         Assert.assertEquals(product.getId(), 1);
         Assert.assertEquals(product.getImageMedium1(), "s1");
+        Assert.assertEquals(product.getImageLarge(), "imageLarge");
         Assert.assertEquals(product.getName(), "s2");
         Assert.assertEquals(product.getMemberPrice(), 0.1F);
     }

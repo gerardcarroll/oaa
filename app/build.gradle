@@ -157,6 +157,11 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.vstechlab.easyfonts:easyfonts:1.0.0'
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+        transitive = true;
+    }
+    // Arc Menu dependency
+    compile 'com.ogaclejapan.arclayout:library:1.0.1@aar'
 }
 
 afterEvaluate {

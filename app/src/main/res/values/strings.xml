@@ -7,7 +7,7 @@
     <string name="google_connect">Connect with G+</string>
     <string name="guest_connect"><u>Continue As Guest</u></string>
 
-    <!-- GoogleSigninFragment string values-->
+    <!-- GoogleSignInFragment string values-->
     <string name="desc_google_icon">Google Logo</string>
     <string name="title_text">Google Sign-In</string>
     <string name="signed_out">Signed out</string>
@@ -41,6 +41,7 @@
     <string name="communities_link">Communities Link</string>
     <string name="home_activity">Home</string>
     <string name="title_activity_communities">Communities</string>
+    <string name="product_detail_activity">Product Details</string>
 
     <!-- Feed Activity Tabs -->
     <string name="my_feed_tab">My Feed</string>
@@ -59,7 +60,6 @@
     <string name="top_category_title">Top Categories</string>
     <string name="top_category_link"><u>Shop All</u></string>
 
-
     <!-- Shared Element Transition Names-->
     <string name="shared_element_transition">brand_element_image</string>
     <string name="test_shared_element_transition">brand_element_image</string>
@@ -73,10 +73,8 @@
     <string name="nfl_dot_com_label">NFL.com</string>
     <string name="raider_jersey_label">Raiders Jersey</string>
     <string name="raider_jersey_price_label">$65</string>
-
+    <string name="title_activity_test">TestActivity</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
