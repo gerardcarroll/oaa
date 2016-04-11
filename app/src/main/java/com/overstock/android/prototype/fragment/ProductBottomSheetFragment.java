@@ -7,11 +7,13 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.CoordinatorLayout;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -66,6 +68,7 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment {
 
   @OnClick(R.id.quantity_add)
   public void addQuantity() {
+    // TODO Replace placeholder logic
     String existingQuantity = txtIndicator.getText().toString();
     Integer newQuantity = Integer.parseInt(existingQuantity) + 1;
     txtIndicator.setText(newQuantity.toString());
@@ -74,6 +77,7 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment {
 
   @OnClick(R.id.quantity_remove)
   public void removeQuantity() {
+    // TODO Replace placeholder logic
     String existingQuantity = txtIndicator.getText().toString();
     if (Integer.parseInt(existingQuantity) > 1) {
       Integer newQuantity = Integer.parseInt(existingQuantity) - 1;
@@ -89,11 +93,29 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment {
 
   @OnClick(R.id.rewards_btn_apply)
   public void applyDiscount() {
+    // TODO Replace placeholder logic
     String totalPrice = totalAmount.getText().toString().substring(1);
     String discount = rewardsAmount.getText().toString().substring(1);
     rewardsAmount.setText("$0.00");
     Float finalPrice = (Float.parseFloat(totalPrice) - Float.parseFloat(discount));
+    startingPrice = finalPrice;
     totalAmount.setText(String.format("$%.2f", finalPrice));
+  }
+
+  @OnClick(R.id.btn_pay_google_wallet)
+  public void payWithGoogleWallet(){
+    final Toast toast = Toast.makeText(getActivity(), "Google Wallet Payment coming soon!", Toast.LENGTH_SHORT);
+    toast.setGravity(Gravity.BOTTOM, 0, 20);
+    toast.show();
+    dismiss();
+  }
+
+  @OnClick(R.id.btn_pay_credit_card)
+  public void payWithCreditCard(){
+    final Toast toast = Toast.makeText(getActivity(), "Credit Card Payment coming soon!", Toast.LENGTH_SHORT);
+    toast.setGravity(Gravity.BOTTOM, 0, 20);
+    toast.show();
+    dismiss();
   }
 
   @Override

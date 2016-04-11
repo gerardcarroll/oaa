@@ -144,6 +144,7 @@
             android:orientation="vertical">
 
             <Button
+                android:id="@+id/btn_pay_google_wallet"
                 android:drawableLeft="@drawable/ic_account_balance_wallet_24dp"
                 android:padding="10dp"
                 android:layout_width="match_parent"
@@ -157,6 +158,7 @@
                 android:textColor="@color/oapp_primary_text" />
 
             <Button
+                android:id="@+id/btn_pay_credit_card"
                 android:drawableLeft="@drawable/ic_payment_24dp"
                 android:padding="10dp"
                 android:layout_width="match_parent"
