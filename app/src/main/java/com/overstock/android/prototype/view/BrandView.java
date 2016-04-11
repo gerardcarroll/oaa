@@ -13,6 +13,6 @@ public interface BrandView {
 
   void displayNewArrivals(final ArrayList<Product> products);*/
 
-  void addHorizontialRecyclerView(final int layoutResourceId,final ArrayList<Product> products, final String displayText);
+  void addHorizontialRecyclerView(final int layoutResourceId,final ArrayList<Product> parcelables, final String displayText);
 
 }

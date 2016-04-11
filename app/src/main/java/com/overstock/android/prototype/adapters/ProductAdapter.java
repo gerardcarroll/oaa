@@ -1,5 +1,6 @@
 package com.overstock.android.prototype.adapters;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -31,20 +32,19 @@ import javax.inject.Inject;
 /**
  * @author LeeMeehan Created on 08-Mar-16.
  */
+@SuppressLint("ParcelCreator")
 public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
 
   @Inject
   Picasso picasso;
 
   private ArrayList<Product> products;
-
   private Context context;
-
   private Activity activity;
 
   private static final String BASE_IMAGE_URL = "http://ak1.ostkcdn.com/images/products/";
 
-  public ProductAdapter(final Activity activity, final Context context, final ArrayList<Product> products) {
+  public ProductAdapter(Activity activity, Context context, ArrayList<Product> products) {
     this.activity = activity;
     this.context = context;
     this.products = products;

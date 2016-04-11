@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.overstock.android.prototype.R;
@@ -32,7 +31,7 @@ import butterknife.ButterKnife;
  */
 public class HorizontialScrollFragment extends Fragment {
 
-    private static final String PRODUCTS = "PRODUCTS";
+    private static final String PARCELABLES = "PARCELABLES";
     private static final String DISPLAY_TEXT = "DISPLAY_TEXT";
 
 
@@ -42,11 +41,8 @@ public class HorizontialScrollFragment extends Fragment {
     @Bind(R.id.tv_horizontal_scroll_frag)
     TextView tvHorizontalScrollFrag;
 
-    @Bind(R.id.pb_horizontal_scroll_frag)
-    ProgressBar pbHorizontalScrollFrag;
-
     // fragment parameters
-    private ArrayList<Product> products ;
+    private ArrayList<Product> products;
     private String displayText;
     private ProductAdapter productAdapter;
     private OnFragmentInteractionListener mListener;
@@ -59,14 +55,14 @@ public class HorizontialScrollFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param products Parameter 1.
+     * @param parcelables Parameter 1.
      * @return A new instance of fragment HorizontialScrollFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static HorizontialScrollFragment newInstance(ArrayList<Product> products, String labelText) {
+    public static HorizontialScrollFragment newInstance(ArrayList<Product> parcelables, String labelText) {
         HorizontialScrollFragment fragment = new HorizontialScrollFragment();
         Bundle args = new Bundle();
-        args.putParcelableArrayList(PRODUCTS, products);
+        args.putParcelableArrayList(PARCELABLES, parcelables);
         args.putString(DISPLAY_TEXT, labelText);
         fragment.setArguments(args);
         return fragment;
@@ -76,10 +72,10 @@ public class HorizontialScrollFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            products = getArguments().getParcelableArrayList(PRODUCTS);
+            products = getArguments().getParcelableArrayList(PARCELABLES);
             displayText = getArguments().getString(DISPLAY_TEXT);
         }
-         productAdapter = new ProductAdapter(this.getActivity(), getContext(), products);
+        productAdapter = new ProductAdapter(this.getActivity(), getContext(), products);
     }
 
     @Override
@@ -102,7 +98,6 @@ public class HorizontialScrollFragment extends Fragment {
         rvHorizontalScrollFrag.setAdapter(productAdapter);
         rvHorizontalScrollFrag.setNestedScrollingEnabled(false);
         rvHorizontalScrollFrag.setItemAnimator(new DefaultItemAnimator());
-        pbHorizontalScrollFrag.setVisibility(View.GONE);
         tvHorizontalScrollFrag.setVisibility(View.VISIBLE);
         rvHorizontalScrollFrag.setVisibility(View.VISIBLE);
     }

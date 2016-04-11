@@ -9,13 +9,6 @@
     tools:context=".fragment.HorizontialScrollFragment"
     >
 
-    <ProgressBar
-        android:id="@+id/pb_horizontal_scroll_frag"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible"
-        android:indeterminate="true" />
-
     <TextView
         android:id="@+id/tv_horizontal_scroll_frag"
         android:layout_width="wrap_content"
