@@ -9,8 +9,6 @@ import java.util.ArrayList;
  */
 public interface BrandView {
 
-  void displayBestSellers(final ArrayList<Product> products);
-
-  void displayNewArrivals(final ArrayList<Product> products);
+  void addHorizontialRecyclerView(final int layoutResourceId,final ArrayList<Product> parcelables, final String displayText);
 
 }
