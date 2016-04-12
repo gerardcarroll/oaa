@@ -1,11 +1,9 @@
 package com.overstock.android.prototype.presenter;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.overstock.android.prototype.model.Feed;
+import com.overstock.android.prototype.presenter.impl.FeedPresenterImpl;
+import com.overstock.android.prototype.service.FeedService;
+import com.overstock.android.prototype.view.FeedView;
 
 import org.junit.After;
 import org.junit.Before;
@@ -15,16 +13,18 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import rx.Observable;
 import rx.Scheduler;
 import rx.android.plugins.RxAndroidPlugins;
 import rx.android.plugins.RxAndroidSchedulersHook;
 import rx.schedulers.Schedulers;
 
-import com.overstock.android.prototype.model.Feed;
-import com.overstock.android.prototype.presenter.impl.FeedPresenterImpl;
-import com.overstock.android.prototype.service.FeedService;
-import com.overstock.android.prototype.view.FeedView;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.when;
 
 /**
  * @author LeeMeehan Created on 06-Apr-16.
@@ -100,4 +100,6 @@ public class FeedPresenterTest extends RxAndroidSchedulersHook {
      */
     RxAndroidPlugins.getInstance().reset();
   }
+
+
 }

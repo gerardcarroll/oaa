@@ -1,21 +1,5 @@
 package com.overstock.android.prototype.interfaces;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-
-import junit.framework.Assert;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.robolectric.RobolectricTestRunner;
-
-import rx.Observable;
-import rx.Observer;
-
 import android.util.Log;
 
 import com.overstock.android.prototype.model.Product;
@@ -23,10 +7,26 @@ import com.overstock.android.prototype.model.Products;
 import com.overstock.android.prototype.model.ProductsResponse;
 import com.overstock.android.prototype.service.ProductService;
 
+import junit.framework.Assert;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import java.util.ArrayList;
+
+import rx.Observable;
+import rx.Observer;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.when;
+
 /**
  * @author itowey Created on 22/03/16.
  */
-@RunWith(RobolectricTestRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class ProductServiceTest {
 
   private static final String TAG = ProductServiceTest.class.getName();
