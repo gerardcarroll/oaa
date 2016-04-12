@@ -77,5 +77,6 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="product_img_base_url">http://ak1.ostkcdn.com/images/products/</string>
+    <string name="ostk_base_rest_url">http://www.overstock.com/api/</string>
 
 </resources>

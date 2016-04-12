@@ -1,5 +1,8 @@
 package com.overstock.android.prototype.client;
 
+import android.content.Context;
+
+import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.service.ProductService;
 
 import okhttp3.OkHttpClient;
@@ -12,16 +15,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class TheOAppClient {
 
-  private static ProductService productService;
+    private ProductService productService;
 
-  public static ProductService getClient() {
-    if (productService == null) {
-      OkHttpClient okHttpClient = new OkHttpClient();
-      Retrofit retrofit = new Retrofit.Builder().baseUrl("http://www.overstock.com/api/").client(okHttpClient)
-          .addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-          .build();
-      productService = retrofit.create(ProductService.class);
+    public TheOAppClient(Context context) {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(context.getString(R.string.ostk_base_rest_url)).client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        productService = retrofit.create(ProductService.class);
+
     }
-    return productService;
-  }
+
+    public ProductService getClient() {
+        return productService;
+    }
 }
