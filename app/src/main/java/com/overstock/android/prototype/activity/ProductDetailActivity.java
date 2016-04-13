@@ -42,8 +42,6 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
   private static final String TAG = ProductDetailActivity.class.getName();
 
-  private static final String BASE_IMAGE_URL = "http://ak1.ostkcdn.com/images/products/";
-
   @Inject
   ProductDetailPresenter presenter;
 
@@ -84,7 +82,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
       @Override
       public void onTransitionEnd(Transition transition) {
         Log.d(TAG, "Updating Image.");
-        picasso.load(BASE_IMAGE_URL + product.getImageLarge()).fit().error(R.drawable.product_placeholder)
+        picasso.load(getString(R.string.product_img_base_url) + product.getImageLarge()).fit().error(R.drawable.product_placeholder)
             .noPlaceholder().into(productImage);
       }
     });

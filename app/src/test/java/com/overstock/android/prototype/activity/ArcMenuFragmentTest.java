@@ -35,6 +35,7 @@ public class ArcMenuFragmentTest {
     public void setUp() {
         arcMenuFragment = new ArcMenuFragment();
         startFragment(arcMenuFragment);
+
     }
 
     @Test

@@ -14,7 +14,7 @@ public class Product implements Parcelable{
 
   private String imageLarge;
 
-  private String imageMedium1;
+  private String imageMedium;
 
   private String name;
 
@@ -26,14 +26,14 @@ public class Product implements Parcelable{
       final float memberPrice) {
     this.id = id;
     this.imageLarge = imageLarge;
-    this.imageMedium1 = imageMedium;
+    this.imageMedium = imageMedium;
     this.name = name;
     this.memberPrice = memberPrice;
   }
 
   protected Product(android.os.Parcel in) {
     imageLarge = in.readString();
-    imageMedium1 = in.readString();
+    imageMedium = in.readString();
     name = in.readString();
   }
 
@@ -54,7 +54,7 @@ public class Product implements Parcelable{
   }
 
   public String getImageMedium1() {
-    return imageMedium1;
+    return imageMedium;
   }
 
   public String getName() {
@@ -77,7 +77,7 @@ public class Product implements Parcelable{
   @Override
   public void writeToParcel(android.os.Parcel dest, int flags) {
     dest.writeString(imageLarge);
-    dest.writeString(imageMedium1);
+    dest.writeString(imageMedium);
     dest.writeString(name);
   }
 }

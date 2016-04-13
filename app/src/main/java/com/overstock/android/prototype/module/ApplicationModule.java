@@ -83,13 +83,19 @@ public class ApplicationModule {
   }
 
   @Provides
+  public TheOAppClient providesTheOAppClient(Application application) {
+    return new TheOAppClient(application.getApplicationContext());
+  }
+
+
+  @Provides
   public CommunityService providesCommunityService(final CommunityClient communityClient) {
     return communityClient.getClient();
   }
 
   @Provides
-  public ProductService providesProductService() {
-    return TheOAppClient.getClient();
+  public ProductService providesProductService(final TheOAppClient theOAppClient) {
+    return theOAppClient.getClient();
   }
 
   @Provides
