@@ -1,27 +1,5 @@
 package com.overstock.android.prototype.activity;
 
-import static junit.framework.Assert.assertNotNull;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import java.util.concurrent.TimeUnit;
-
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.robolectric.Robolectric;
-import org.robolectric.RobolectricGradleTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowActivity;
-import org.robolectric.shadows.ShadowToast;
-
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -41,7 +19,30 @@ import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.module.ApplicationModule;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowActivity;
+import org.robolectric.shadows.ShadowToast;
+
+import java.util.concurrent.TimeUnit;
+
 import it.cosenonjaviste.daggermock.DaggerMockRule;
+
+import static junit.framework.Assert.assertNotNull;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Simple Test class to test that the Home Activity was created successfully
@@ -124,6 +125,12 @@ public class HomeActivityTest {
     // BuildActivity creates a controller that can be used to drive through the app lifecycle.
     homeActivity = Robolectric.buildActivity(HomeActivity.class).create().start().resume().visible().get();
     homeFragment = (HomeFragment) homeActivity.getSupportFragmentManager().findFragmentByTag(HomeFragment.TAG);
+
+  }
+
+  @After
+  public void tearDown(){
+    Robolectric.reset();
   }
 
   @Test
