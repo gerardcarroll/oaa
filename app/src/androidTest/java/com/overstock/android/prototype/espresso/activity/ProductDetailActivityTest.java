@@ -1,22 +1,30 @@
 package com.overstock.android.prototype.espresso.activity;
 
-import android.support.test.espresso.contrib.RecyclerViewActions;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.activity.HomeActivity;
-import com.overstock.android.prototype.espresso.utils.EspressoTestSetup;
+import com.overstock.android.prototype.activity.ProductDetailActivity;
+import com.overstock.android.prototype.model.Product;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.parceler.Parcels;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
@@ -28,36 +36,33 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 public class ProductDetailActivityTest {
 
     @Rule
-    public ActivityTestRule<HomeActivity> activityRule = new ActivityTestRule<>(HomeActivity.class);
+    public ActivityTestRule<ProductDetailActivity> activityRule = new ActivityTestRule<>(ProductDetailActivity.class, true, false);
 
     @Before
-    public void setUp(){
+    public void setUp() throws Exception {
 
-        // Login as guest
-        EspressoTestSetup.loginAsGuest();
+        final Context context = InstrumentationRegistry.getInstrumentation().getTargetContext().getApplicationContext();
 
-        // Navigate through communities activity process
-        EspressoTestSetup.chooseCommunities();
+        URL url = new URL("https://images-common.test.overstock.com/images/products/T13729834.jpg");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setDoInput(true);
+        connection.setRequestProperty("connection", "close");
+        connection.connect();
+        InputStream input = connection.getInputStream();
+        Bitmap bitmapExtra = BitmapFactory.decodeStream(input);
+        connection.disconnect();
+        final Intent intent = new Intent(context, ProductDetailActivity.class);
+        intent.putExtra("image", bitmapExtra);
+        intent.putExtra("parcel", Parcels.wrap(new Product(6053246, "L13729834.jpg", "P13729834.jpg", "Latte iPearl S Pink 4 GB 1.8-inch LCD MP4 Player", 26.26f)));
 
-        // Check Feed tabs are displayed before clicking on Feed tab
-        onView(withId(R.id.feed_tabs)).check(matches(isDisplayed()));
-        onView(withText(activityRule.getActivity().getString(R.string.my_feed_tab))).perform(click());
+        activityRule.launchActivity(intent);
 
-        // Check Feed recycler view is displayed
-        onView(withId(R.id.rv_feed)).check(matches(isDisplayed()));
-
-        // Click on 1st Feed item in list
-        onView(withId(R.id.rv_feed)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-
-        // After checking the Best Sellers recycler view is displayed, click on the 1st item in view
-        onView(withId(R.id.best_sellers)).check(matches(isDisplayed()));
-        onView(withId(R.id.best_sellers)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
     }
-
     @Test
     public void testProductDetailRendering(){
 
         // Check Product Detail activity is displayed
-        onView(withId(R.id.product_detail_product_name)).check(matches(isDisplayed()));
+        onView(withId(R.id.product_detail_product_name)).check(matches(withText("Latte iPearl S Pink 4 GB 1.8-inch LCD MP4 Player")));
+        Log.i("","");
     }
 }

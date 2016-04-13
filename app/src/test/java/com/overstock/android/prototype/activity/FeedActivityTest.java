@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import com.overstock.android.prototype.BuildConfig;
 import com.overstock.android.prototype.R;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +30,11 @@ public class FeedActivityTest {
   @Before
   public void setUp() {
     feedActivity = Robolectric.buildActivity(FeedActivity.class).create().start().resume().visible().get();
+  }
+
+  @After
+  public void tearDown(){
+    Robolectric.reset();
   }
 
   @Test

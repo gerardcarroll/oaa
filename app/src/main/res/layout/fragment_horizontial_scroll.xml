@@ -14,14 +14,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:visibility="gone"
+        android:visibility="visible"
         android:textSize="20sp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_horizontal_scroll_frag"
         android:layout_width="match_parent"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_height="wrap_content"
         android:scrollbars="horizontal"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />

@@ -48,16 +48,8 @@ public class FeedPresenterTest extends RxAndroidSchedulersHook {
 
   @Before
   public void setUp() {
-    /*
-     * Note that i am overriding the MainThreadScheduler. The subscription methods will not be executed unless this is
-     * done. Mocking this is not do.
-     */
-    RxAndroidPlugins.getInstance().registerSchedulersHook(new RxAndroidSchedulersHook() {
-      @Override
-      public Scheduler getMainThreadScheduler() {
-        return Schedulers.immediate();
-      }
-    });
+
+    RxAndroidPlugins.getInstance().registerSchedulersHook(this);
 
     MockitoAnnotations.initMocks(this);
     feedPresenter = new FeedPresenterImpl(feedService);
@@ -101,5 +93,9 @@ public class FeedPresenterTest extends RxAndroidSchedulersHook {
     RxAndroidPlugins.getInstance().reset();
   }
 
+  @Override
+  public Scheduler getMainThreadScheduler() {
+    return Schedulers.immediate();
+  }
 
 }
