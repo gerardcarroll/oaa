@@ -24,49 +24,62 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="200dp"
                 app:layout_collapseMode="parallax">
 
-                <ImageView
-                    android:id="@+id/product_detail_activity_shared_image_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:scaleType="fitXY"
-                    android:transitionName="@string/shared_element_transition"/>
+                <include layout="@layout/fragment_image_slider" />
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="bottom|start"
-                    android:padding="5dp"
-                    android:src="@drawable/ic_share_24dp" />
+                <!--<ImageView-->
+                    <!--android:id="@+id/product_detail_activity_shared_image_1"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="300dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:transitionName="@string/shared_element_transition"/>-->
+
+                <!--<ImageView-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:layout_gravity="bottom|start"-->
+                    <!--android:padding="5dp"-->
+                    <!--android:src="@drawable/ic_share_24dp" />-->
 
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="bottom|end"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginRight="90dp"
-                    android:src="@drawable/ic_thumb_up_24dp" />
+                <!--<ImageView-->
+                    <!--android:layout_width="30dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_gravity="bottom|end"-->
+                    <!--android:layout_marginBottom="5dp"-->
+                    <!--android:layout_marginRight="90dp"-->
+                    <!--android:src="@drawable/ic_thumb_up_24dp" />-->
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="bottom|end"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginRight="50dp"
-                    android:src="@drawable/ic_thumb_down_24dp" />
+                <!--<ImageView-->
+                    <!--android:layout_width="30dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_gravity="bottom|end"-->
+                    <!--android:layout_marginBottom="5dp"-->
+                    <!--android:layout_marginRight="50dp"-->
+                    <!--android:src="@drawable/ic_thumb_down_24dp" />-->
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="bottom|end"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_love_it_24dp" />
+                <!--<ImageView-->
+                    <!--android:layout_width="30dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_gravity="bottom|end"-->
+                    <!--android:layout_marginBottom="5dp"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:src="@drawable/ic_love_it_24dp" />-->
 
             </FrameLayout>
+
+            <!-- Image Slider container -->
+            <!--<LinearLayout-->
+                <!--android:id="@+id/image_slider_fragment_container"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical" >-->
+            <!--</LinearLayout>-->
+
+            <!--<include layout="@layout/fragment_image_slider" />-->
+
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
