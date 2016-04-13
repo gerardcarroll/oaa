@@ -82,8 +82,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
       @Override
       public void onTransitionEnd(Transition transition) {
         Log.d(TAG, "Updating Image.");
-        String s = getString(R.string.product_img_base_url) + product.getImageLarge();
-        picasso.load(s).fit().error(R.drawable.product_placeholder)
+        picasso.load(getString(R.string.product_img_base_url) + product.getImageLarge()).fit().error(R.drawable.product_placeholder)
             .noPlaceholder().into(productImage);
       }
     });
