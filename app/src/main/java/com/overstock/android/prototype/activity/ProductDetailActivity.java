@@ -130,5 +130,6 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   public void displayProductDetails(final ProductDetail productDetail) {
     Log.d(TAG, "Displaying Product Details." + productDetail.toString());
     productDescription.setText(Html.fromHtml(productDetail.getDescription()));
+    // productDescription.setText(productDetail.getOptions().get(0).getDescription());
   }
 }

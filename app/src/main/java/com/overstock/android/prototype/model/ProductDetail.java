@@ -1,5 +1,7 @@
 package com.overstock.android.prototype.model;
 
+import java.util.List;
+
 /**
  * @author Rayconnolly Created on 3/21/2016.
  */
@@ -19,8 +21,10 @@ public class ProductDetail {
 
   private String description;
 
+  private List<Options> options;
+
   public ProductDetail(int id, String name, String imageLarge, String image, String price, int quantity,
-      String description) {
+      String description, List<Options> options) {
     this.id = id;
     this.name = name;
     this.imageLarge = imageLarge;
@@ -28,6 +32,7 @@ public class ProductDetail {
     this.memberPrice = price;
     this.quantity = quantity;
     this.description = description;
+    this.options = options;
   }
 
   public int getId() {
@@ -64,5 +69,9 @@ public class ProductDetail {
 
   public String getImageLarge() {
     return imageLarge;
+  }
+
+  public List<Options> getOptions() {
+    return options;
   }
 }

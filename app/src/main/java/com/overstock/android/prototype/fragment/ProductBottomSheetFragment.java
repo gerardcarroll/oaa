@@ -1,5 +1,7 @@
 package com.overstock.android.prototype.fragment;
 
+import java.util.ArrayList;
+
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +23,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.adapters.OptionAdapter;
+import com.overstock.android.prototype.model.Options;
 
 /**
  * @author LeeMeehan Created on 07-Apr-16.
@@ -41,6 +46,9 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment {
   @Bind(R.id.totalPrice_txt)
   TextView totalAmount;
 
+  @Bind(R.id.options_spinner)
+  Spinner spinner;
+
   private Float startingPrice;
 
   @Nullable
@@ -49,6 +57,15 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment {
     View view = inflater.inflate(R.layout.product_details_bottom_sheet, container, false);
     ButterKnife.bind(this, view);
     startingPrice = Float.parseFloat(totalAmount.getText().toString().substring(1));
+    // TODO replace with real data.
+    ArrayList<Options> options = new ArrayList<>();
+    options.add(new Options(2, "Hey", 22, 22, new Float(2.2)));
+    options.add(new Options(2, "There", 22, 22, new Float(2.2)));
+    options.add(new Options(2, "How", 22, 22, new Float(2.2)));
+    options.add(new Options(2, "you", 22, 22, new Float(2.2)));
+    OptionAdapter optionAdapter = new OptionAdapter(options, getActivity());
+    spinner.setAdapter(optionAdapter);
+    // TODO Convert to mvp
     return view;
   }
 
@@ -103,7 +120,7 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment {
   }
 
   @OnClick(R.id.btn_pay_google_wallet)
-  public void payWithGoogleWallet(){
+  public void payWithGoogleWallet() {
     final Toast toast = Toast.makeText(getActivity(), "Google Wallet Payment coming soon!", Toast.LENGTH_SHORT);
     toast.setGravity(Gravity.BOTTOM, 0, 20);
     toast.show();
@@ -111,7 +128,7 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment {
   }
 
   @OnClick(R.id.btn_pay_credit_card)
-  public void payWithCreditCard(){
+  public void payWithCreditCard() {
     final Toast toast = Toast.makeText(getActivity(), "Credit Card Payment coming soon!", Toast.LENGTH_SHORT);
     toast.setGravity(Gravity.BOTTOM, 0, 20);
     toast.show();
