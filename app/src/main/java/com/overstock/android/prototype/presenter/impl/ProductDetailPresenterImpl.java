@@ -85,6 +85,7 @@ public class ProductDetailPresenterImpl implements ProductDetailPresenter {
           }
         });
 
+    //TODO: change call to recommendation service to provide an actual list of simialr products to the currently selected product
     productDataService.query(OappProviderContract.ProductEntry.buildProductBestsellerUri())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
