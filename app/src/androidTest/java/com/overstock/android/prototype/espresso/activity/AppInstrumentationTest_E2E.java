@@ -1,9 +1,14 @@
 package com.overstock.android.prototype.espresso.activity;
 
 import android.support.annotation.NonNull;
+import android.support.test.espresso.UiController;
+import android.support.test.espresso.ViewAction;
+import android.support.test.espresso.contrib.DrawerActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
@@ -15,6 +20,7 @@ import com.overstock.android.prototype.activity.HomeActivity;
 import com.overstock.android.prototype.espresso.dagger.rules.OAppPrototypeApplicationMockRule;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
 
+import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -30,8 +36,11 @@ import static android.support.test.espresso.assertion.ViewAssertions.doesNotExis
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
+import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -114,6 +123,8 @@ public class AppInstrumentationTest_E2E {
     onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
     onView(withId(R.id.btnCommunitySelection)).check(matches(not(isEnabled())));
     onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
+    onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.actionOnItemAtPosition(6, click()));
+    onView(withId(R.id.rvCommunities)).perform(RecyclerViewActions.actionOnItemAtPosition(8, click()));
     onView(withId(R.id.btnCommunitySelection)).check(matches(isEnabled()));
     onView(withId(R.id.btnCommunitySelection)).perform(click());
     onView(withId(R.id.feed_tabs)).check(matches(isDisplayed()));
@@ -124,17 +135,70 @@ public class AppInstrumentationTest_E2E {
     onView(withId(R.id.feed_viewpager)).check(matches(isDisplayed()));
     onView(withText(activityRule.getActivity().getString(R.string.my_location_tab))).perform(click());
     onView(withText("My Location Fragment")).check(matches(isDisplayed()));
-
     onView(withText(activityRule.getActivity().getString(R.string.my_feed_tab))).perform(click());
+
+    // open nav drawer with burger button
+    onView(withContentDescription("Open navigation drawer")).check(matches(isDisplayed()));
+    onView(withContentDescription("Open navigation drawer")).perform(click());
+    onView(withId(R.id.name)).check(matches(isDisplayed()));
+    onView(withId(R.id.email)).check(matches(isDisplayed()));
+    // close nav drawer with swipe
+    onView(withId(R.id.drawer_layout)).perform(DrawerActions.close());
+    onView(withId(R.id.rv_feed)).check(matches(isDisplayed()));
+    // open nav drawer with swipe
+    onView(withId(R.id.drawer_layout)).check(matches(isDisplayed()));
+    onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+    onView(withId(R.id.name)).check(matches(isDisplayed()));
+
+    // close nav drawer with swipe
+    onView(withId(R.id.drawer_layout)).perform(DrawerActions.close());
+    onView(withId(R.id.rv_feed)).check(matches(isDisplayed()));
+
     onView(withText("Top NFL Fan Products for 2016")).check(matches(isDisplayed()));
     onView(withId(R.id.rv_feed)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
     onView(withId(R.id.brand_activity)).check(matches(isDisplayed()));
+
+
+     // Scroll to position New Arrivals recycler view
+     onView(allOf(withId(R.id.rv_horizontal_scroll_frag), withParent(withId(R.id.new_arrivals_hrv)))).perform(new ViewAction() {
+
+       final int position = 9;
+
+       @Override
+       public Matcher<View> getConstraints() {
+         Matcher<View> standardConstraint = isEnabled();
+         return standardConstraint;
+       }
+
+       @Override
+       public String getDescription() {
+         return "scroll RecyclerView to position: " + position;
+       }
+
+       @Override
+       public void perform(UiController uiController, View view) {
+         RecyclerView recyclerView = (RecyclerView) view;
+         recyclerView.scrollToPosition(position);
+         uiController.loopMainThreadUntilIdle();
+       }
+     });
+
 
     /* Back stack Navigation */
     pressBack();
     onView(withText("Top NFL Fan Products for 2016")).check(matches(isDisplayed()));
     onView(withId(R.id.feed_viewpager)).check(matches(isDisplayed()));
     onView(withId(R.id.feed_tabs)).check(matches(isDisplayed()));
+
+    // Click on fab button to open arc menu
+    onView(withId(R.id.fab)).perform(click());
+    // Check arc menu is now displayed
+    onView(withId(R.id.menu_layout)).check(matches(isDisplayed()));
+    // Click on fab button again to close arc menu
+    onView(withId(R.id.fab)).perform(click());
+    // Check arc menu is now not displayed
+    onView(withId(R.id.menu_layout)).check(matches(not(isDisplayed())));
+
     pressBack();
     onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
     onView(withId(R.id.btnCommunitySelection)).check(matches(isEnabled())); // Asserting Community Selections have not
