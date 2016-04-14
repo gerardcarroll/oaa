@@ -32,8 +32,6 @@ import it.cosenonjaviste.daggermock.DaggerMockRule;
 /**
  * @author LeeMeehan Created on 05-Apr-16.
  */
-@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP)
-@RunWith(RobolectricGradleTestRunner.class)
 public class FeedFragmentTest {
 
   @Rule
