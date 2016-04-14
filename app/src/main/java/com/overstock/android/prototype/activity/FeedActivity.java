@@ -14,9 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.FeedPagerAdapter;
 import com.overstock.android.prototype.fragment.ArcMenuFragment;
@@ -27,6 +24,8 @@ import com.overstock.android.prototype.ui.adapter.NavDrawerRecyclerViewAdapter;
 import com.overstock.android.prototype.ui.model.NavDrawerModel;
 import com.overstock.android.prototype.ui.service.JsonFileLoader;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import icepick.State;
 
 public class FeedActivity extends AppCompatActivity {
@@ -148,7 +147,7 @@ public class FeedActivity extends AppCompatActivity {
     };
 
     mDrawerToggle.setDrawerIndicatorEnabled(true);
-    mDrawerLayout.setDrawerListener(mDrawerToggle);
+    mDrawerLayout.addDrawerListener(mDrawerToggle);
   }
 
 }

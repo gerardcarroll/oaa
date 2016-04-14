@@ -25,7 +25,7 @@ public class ProductsResponseTest {
 
     @Test
     public void productsGetterTest(){
-        ProductsResponse productsResponse = new ProductsResponse(mock(Products.class));
+        ProductsResponse productsResponse = new ProductsResponse(new Products());
         Assert.assertNotNull(productsResponse.getProducts());
     }
 

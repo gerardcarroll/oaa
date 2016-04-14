@@ -1,6 +1,7 @@
 package com.overstock.android.prototype.module;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.overstock.android.prototype.client.FeedClient;
 import com.overstock.android.prototype.client.TheOAppClient;
@@ -49,8 +50,8 @@ public class ApplicationModule {
   }
 
   @Provides
-  public ProductDetailPresenter productDetailPresenter(final ProductDataService productDataService) {
-    return new ProductDetailPresenterImpl(productDataService);
+  public ProductDetailPresenter productDetailPresenter(final Application applicationContext, final ProductDataService productDataService) {
+    return new ProductDetailPresenterImpl(applicationContext, productDataService);
   }
 
   @Provides
