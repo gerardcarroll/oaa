@@ -130,7 +130,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   @Override
   public void displayProductDetails(final ProductDetail productDetail) {
     Log.d(TAG, "Displaying Product Details." + productDetail.toString());
-    productDescription.loadData(productDetail.getDescription().trim(), "text/html; charset=UTF-8", null);
+    productDescription.loadData(productDetail.getDescription().trim(), getString(R.string.webview_html_encoding), null);
   }
 
   @Override
