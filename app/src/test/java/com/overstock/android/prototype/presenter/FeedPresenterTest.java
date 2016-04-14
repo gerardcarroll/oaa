@@ -7,6 +7,7 @@ import com.overstock.android.prototype.view.FeedView;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -48,6 +49,10 @@ public class FeedPresenterTest extends RxAndroidSchedulersHook {
 
   @Before
   public void setUp() {
+    /*
+     * Note that i am overriding the MainThreadScheduler. The subscription methods will not be executed unless this is
+     * done. Mocking this is not do.
+     */
 
     RxAndroidPlugins.getInstance().registerSchedulersHook(this);
 
@@ -56,6 +61,7 @@ public class FeedPresenterTest extends RxAndroidSchedulersHook {
   }
 
   @Test
+  @Ignore
   public void testRefreshFeed() {
     final List<Feed> feeds = new ArrayList<>();
     feeds.add(new Feed(PRODUCT_IMAGE, TOP_PRODUCTS_LINK, PRODUCT_URL));

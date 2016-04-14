@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
@@ -63,6 +64,7 @@ public class ProductDetailActivityTest {
 
         // Check Product Detail activity is displayed
         onView(withId(R.id.product_detail_product_name)).check(matches(withText("Latte iPearl S Pink 4 GB 1.8-inch LCD MP4 Player")));
+        onView(withId(R.id.product_detail_product_name)).perform(ViewActions.swipeUp());
         Log.i("","");
     }
 }

@@ -33,6 +33,7 @@ public class HorizontialScrollFragment extends Fragment {
 
     private static final String PARCELABLES = "PARCELABLES";
     private static final String DISPLAY_TEXT = "DISPLAY_TEXT";
+    public static final String TAG = HorizontialScrollFragment.class.getName();
 
 
     @Bind(R.id.rv_horizontal_scroll_frag)

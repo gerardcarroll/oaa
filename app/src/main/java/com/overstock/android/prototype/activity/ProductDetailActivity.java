@@ -5,17 +5,18 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.transition.Transition;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.component.ApplicationComponent;
+import com.overstock.android.prototype.fragment.HorizontialScrollFragment;
 import com.overstock.android.prototype.fragment.ProductBottomSheetFragment;
 import com.overstock.android.prototype.listener.TransitionListener;
 import com.overstock.android.prototype.model.Product;
@@ -26,6 +27,7 @@ import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
 import java.util.Currency;
 import java.util.Locale;
 
@@ -55,7 +57,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   TextView productPrice;
 
   @Bind(R.id.product_detail_content)
-  TextView productDescription;
+  WebView productDescription;
 
   @Bind(R.id.product_detail_activity_shared_image_1)
   ImageView productImage;
@@ -128,6 +130,15 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   @Override
   public void displayProductDetails(final ProductDetail productDetail) {
     Log.d(TAG, "Displaying Product Details." + productDetail.toString());
-    productDescription.setText(Html.fromHtml(productDetail.getDescription()));
+    productDescription.loadData(productDetail.getDescription().trim(), "text/html; charset=UTF-8", null);
+  }
+
+  @Override
+  public void addHorizontialRecyclerView(int layoutResourceId, ArrayList<Product> products, String displayText) {
+      Log.d(TAG, "Passing " + displayText + " products to adapter to be displayed. List size : " + products.size());
+      this.getSupportFragmentManager()
+              .beginTransaction()
+              .add(layoutResourceId, HorizontialScrollFragment.newInstance(products, displayText),HorizontialScrollFragment.TAG)
+              .commit();
   }
 }
