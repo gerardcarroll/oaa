@@ -39,9 +39,8 @@ public class FeedActivityTest {
     public void testTabItemsDisplayed(){
 
         // Check Feed tabs are displayed
-        onView(withId(R.id.feed_tabs)).check(matches(isDisplayed()));
+        onView(withId(R.id.feed_viewpager)).check(matches(isDisplayed()));
 
-        // Check tabs are displayed
         onView(withText(R.string.my_feed_tab)).check(matches(isDisplayed()));
         onView(withText(R.string.trending_tab)).check(matches(isDisplayed()));
         onView(withText(R.string.my_location_tab)).check(matches(isDisplayed()));
@@ -54,8 +53,8 @@ public class FeedActivityTest {
         onView(withId(R.id.feed_tabs)).check(matches(isDisplayed()));
 
         // Check click on tabs
-        onView(withText(R.string.my_feed_tab)).perform(click());
         onView(withText(R.string.trending_tab)).perform(click());
+        onView(withText(R.string.my_feed_tab)).perform(click());
         onView(withText(R.string.my_location_tab)).perform(click());
     }
 
@@ -85,6 +84,6 @@ public class FeedActivityTest {
         onView(withId(R.id.rv_feed)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
         // Check Brand activity is now displayed
-        onView(withId(R.id.best_sellers)).check(matches(isDisplayed()));
+        onView(withId(R.id.best_sellers_hrv)).check(matches(isDisplayed()));
     }
 }

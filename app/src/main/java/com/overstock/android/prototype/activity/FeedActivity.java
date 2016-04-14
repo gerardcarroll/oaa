@@ -147,7 +147,7 @@ public class FeedActivity extends AppCompatActivity {
     };
 
     mDrawerToggle.setDrawerIndicatorEnabled(true);
-    mDrawerLayout.setDrawerListener(mDrawerToggle);
+    mDrawerLayout.addDrawerListener(mDrawerToggle);
   }
 
 }

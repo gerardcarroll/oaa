@@ -22,19 +22,21 @@ public class Product implements Parcelable{
 
   public Product() {}
 
-  public Product(final int id, final String imageLarge, final String imageMedium, final String name,
+  public Product(final int id, final String imageLarge, final String imageMedium1, final String name,
       final float memberPrice) {
     this.id = id;
     this.imageLarge = imageLarge;
-    this.imageMedium1 = imageMedium;
+    this.imageMedium1 = imageMedium1;
     this.name = name;
     this.memberPrice = memberPrice;
   }
 
   protected Product(android.os.Parcel in) {
+    id = in.readInt();
     imageLarge = in.readString();
     imageMedium1 = in.readString();
     name = in.readString();
+    memberPrice = in.readFloat();
   }
 
   public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -76,8 +78,10 @@ public class Product implements Parcelable{
 
   @Override
   public void writeToParcel(android.os.Parcel dest, int flags) {
+    dest.writeInt(id);
     dest.writeString(imageLarge);
     dest.writeString(imageMedium1);
     dest.writeString(name);
+    dest.writeFloat(memberPrice);
   }
 }

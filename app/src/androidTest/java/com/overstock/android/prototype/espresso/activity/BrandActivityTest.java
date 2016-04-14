@@ -1,28 +1,28 @@
 package com.overstock.android.prototype.espresso.activity;
 
+import android.support.test.espresso.UiController;
+import android.support.test.espresso.ViewAction;
 import android.support.test.espresso.action.ViewActions;
-import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.activity.HomeActivity;
-import com.overstock.android.prototype.espresso.utils.EspressoTestSetup;
+import com.overstock.android.prototype.activity.BrandActivity;
 
-import org.junit.Before;
+import org.hamcrest.Matcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.core.IsNot.not;
+import static android.support.test.espresso.matcher.ViewMatchers.withParent;
+import static org.hamcrest.core.AllOf.allOf;
 
 /**
  * Created by rconnolly on 3/24/2016.
@@ -32,60 +32,71 @@ import static org.hamcrest.core.IsNot.not;
 public class BrandActivityTest {
 
     @Rule
-    public ActivityTestRule<HomeActivity> activityRule = new ActivityTestRule<>(HomeActivity.class);
-
-    @Before
-    public void setUp(){
-
-        // Login as guest
-        EspressoTestSetup.loginAsGuest();
-
-        // Navigate through communities activity process
-        EspressoTestSetup.chooseCommunities();
-
-        // Check Feed tabs are displayed before clicking on Feed tab
-        onView(withId(R.id.feed_tabs)).check(matches(isDisplayed()));
-        onView(withText(activityRule.getActivity().getString(R.string.my_feed_tab))).perform(click());
-
-        // Check Feed recycler view is displayed
-        onView(withId(R.id.rv_feed)).check(matches(isDisplayed()));
-
-        // Click on 1st Feed item in list
-        onView(withId(R.id.rv_feed)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-    }
+    public ActivityTestRule<BrandActivity> activityRule = new ActivityTestRule<>(BrandActivity.class);
 
     @Test
     public void testBrandRendering() {
-
-        // Check Brand Best Sellers recycler view is displayed
-        onView(withId(R.id.best_sellers)).check(matches(isDisplayed()));
+        onView(withId(R.id.brand_activity)).check(matches(isDisplayed()));
     }
 
     @Test
-    public void testBestSellersRecyclerViewScroll(){
+    public void testBestSellersRecyclerViewScroll() {
 
-        // Scroll to end of Best Sellers recycler view
-        onView(withId(R.id.best_sellers)).perform(RecyclerViewActions.scrollToPosition(30));
-    }
+        final int position = 9;
 
-    @Test
-    public void testToastIsDisplayedOnScroll(){
+        // Swipe up activity to display New Arrivals recycler view
+        onView(withId(R.id.brand_activity)).perform(ViewActions.swipeUp());
 
-        // Scroll to to 25th item in Best Sellers recycler view
-        onView(withId(R.id.best_sellers)).perform(RecyclerViewActions.scrollToPosition(25));
+        // Scroll to position New Arrivals recycler view
+        onView(allOf(withId(R.id.rv_horizontal_scroll_frag), withParent(withId(R.id.best_sellers_hrv)))).perform(new ViewAction() {
+            @Override
+            public Matcher<View> getConstraints() {
+                Matcher<View> standardConstraint = isEnabled();
+                return standardConstraint;
+            }
 
-        // Check Toast is displayed on scrolling to 25th item
-        View activityDecorView = activityRule.getActivity().getWindow().getDecorView();
-        onView(withText("HI THERE")).inRoot(withDecorView(not(activityDecorView))).check(matches(isDisplayed()));
+            @Override
+            public String getDescription() {
+                return "scroll RecyclerView to position: " + position;
+            }
+
+            @Override
+            public void perform(UiController uiController, View view) {
+                RecyclerView recyclerView = (RecyclerView) view;
+                recyclerView.scrollToPosition(position);
+                uiController.loopMainThreadUntilIdle();
+            }
+        });
     }
 
     @Test
     public void testNewArrivalsRecyclerViewScroll(){
 
+        final int position = 3;
+
         // Swipe up activity to display New Arrivals recycler view
         onView(withId(R.id.brand_activity)).perform(ViewActions.swipeUp());
 
-        // Scroll to end of New Arrivals recycler view
-        onView(withId(R.id.new_arrivals)).perform(RecyclerViewActions.scrollToPosition(30));
+        // Scroll to position New Arrivals recycler view
+
+        onView(allOf(withId(R.id.rv_horizontal_scroll_frag), withParent(withId(R.id.new_arrivals_hrv)))).perform(new ViewAction() {
+            @Override
+            public Matcher<View> getConstraints() {
+                Matcher<View> standardConstraint = isEnabled();
+                return standardConstraint;
+            }
+
+            @Override
+            public String getDescription() {
+                return "scroll RecyclerView to position: " + position;
+            }
+
+            @Override
+            public void perform(UiController uiController, View view) {
+                RecyclerView recyclerView = (RecyclerView) view;
+                recyclerView.scrollToPosition(position);
+                uiController.loopMainThreadUntilIdle();
+            }
+        });
     }
 }

@@ -8,6 +8,7 @@ import com.dd.processbutton.iml.SubmitProcessButton;
 import com.overstock.android.prototype.BuildConfig;
 import com.overstock.android.prototype.R;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -55,6 +56,10 @@ public class CommunitiesActivityTest {
     communitiesView = (RecyclerView) communitiesActivity.findViewById(R.id.rvCommunities);
   }
 
+  @After
+  public void tearDown(){
+    Robolectric.reset();
+  }
   /**
    * Simple test case to test that the Communities Activity was created successfully and the communities grid has been
    * populated.
