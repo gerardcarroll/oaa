@@ -1,46 +1,33 @@
 package com.overstock.android.prototype.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by rconnolly on 4/13/2016.
  */
 public class ProductImages {
 
-    List<String> productImages = new ArrayList<>();
+    private String[] oViewerImages;
 
-    private String imageLarge;
+    private String[] imageSizes;
 
-    private String imageMedium1;
+    private String imagePath;
 
-    private String imageMedium2;
+    public ProductImages(){}
 
-    private String imageMedium3;
-
-    public String getImageLarge() {
-        return imageLarge;
+    public ProductImages(String[] oViewerImages, String[] imageSizes, String imagePath) {
+        this.oViewerImages = oViewerImages;
+        this.imageSizes = imageSizes;
+        this.imagePath = imagePath;
     }
 
-    public String getImageMedium1() {
-        return imageMedium1;
+    public String[] getoViewerImages() {
+        return oViewerImages;
     }
 
-    public String getImageMedium2() {
-        return imageMedium2;
+    public String[] getImageSizes() {
+        return imageSizes;
     }
 
-    public String getImageMedium3() {
-        return imageMedium3;
-    }
-
-    public List<String> getProductImages() {
-
-        productImages.add(getImageMedium1());
-        productImages.add(getImageMedium2());
-        productImages.add(getImageMedium3());
-        productImages.add(getImageLarge());
-
-        return productImages;
+    public String getImagePath() {
+        return imagePath;
     }
 }

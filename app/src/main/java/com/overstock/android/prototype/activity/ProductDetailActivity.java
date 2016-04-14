@@ -16,20 +16,22 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.component.ApplicationComponent;
 import com.overstock.android.prototype.fragment.ProductBottomSheetFragment;
 import com.overstock.android.prototype.model.Product;
 import com.overstock.android.prototype.model.ProductDetail;
-import com.overstock.android.prototype.model.ProductImages;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
+import com.overstock.android.prototype.utils.ProductImageDeserializerUtil;
 import com.overstock.android.prototype.view.ProductDetailView;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 
 import java.util.Currency;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -71,14 +73,10 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   @Bind(R.id.btn_buy)
   FloatingActionButton btn_buy;
 
-//  private ImageSliderFragment fragment = null;
-//
-//  private FragmentManager manager = null;
-//
-//  private FragmentTransaction ft;
-
   @Bind(R.id.slider)
   SliderLayout sliderLayout;
+
+  List<String> productImages;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
@@ -87,73 +85,9 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     setContentView(R.layout.activity_product_detail);
     ButterKnife.bind(this);
 
-    // Add Image Slider fragment
-//    if (manager == null)
-//      manager = getSupportFragmentManager();
-//    if (manager.findFragmentById(R.id.image_slider_fragment_container) == null) {
-//      fragment = new ImageSliderFragment();
-//      ft = manager.beginTransaction();
-//      ft.add(R.id.image_slider_fragment_container, fragment).commit();
-//    }
-
-//    HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
-//    file_maps.put("Bedding", R.drawable.bedding);
-//    file_maps.put("Fitness", R.drawable.cat_fitness);
-//    file_maps.put("Furniture", R.drawable.cat_furniture);
-//    file_maps.put("Men & Women", R.drawable.cat_men_and_women);
-
-//    for(String name : file_maps.keySet()){
-//      TextSliderView textSliderView = new TextSliderView(this);
-//      // initialize a SliderLayout
-//      textSliderView
-//              .description(name)
-//              .image(file_maps.get(name))
-//              .setScaleType(BaseSliderView.ScaleType.Fit);
-
-      //add your extra information
-//            textSliderView.bundle(new Bundle());
-//            textSliderView.getBundle()
-//                    .putString("extra", name);
-
-//      sliderLayout.addSlider(textSliderView);
-//    }
-//    sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
-//    sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-//    sliderLayout.setCustomAnimation(new DescriptionAnimation());
-//    sliderLayout.setDuration(4000);
-
-
     final Bundle extras = getIntent().getExtras();
     final Product product = Parcels.unwrap(extras.getParcelable("parcel"));
     final Bitmap receivedImage = extras.getParcelable("image");
-
-    ProductImages productImages = new ProductImages();
-
-    HashMap<String, String> file_maps = new HashMap<String, String>();
-    file_maps.put("First", productImages.getImageMedium1());
-    file_maps.put("Second", productImages.getImageMedium2());
-    file_maps.put("Third", productImages.getImageMedium3());
-    file_maps.put("Fourth", productImages.getImageLarge());
-
-    for(String name : file_maps.keySet()) {
-
-      TextSliderView textSliderView = new TextSliderView(this);
-      // initialize a SliderLayout
-      textSliderView
-              .description(name)
-              .image(file_maps.get(name))
-              .setScaleType(BaseSliderView.ScaleType.Fit);
-
-      sliderLayout.addSlider(textSliderView);
-    }
-    sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
-    sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-    sliderLayout.setCustomAnimation(new DescriptionAnimation());
-    sliderLayout.setDuration(4000);
-
-
-
-
 
 //    productImage.setImageBitmap(receivedImage);
 //
@@ -207,5 +141,41 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   public void displayProductDetails(final ProductDetail productDetail) {
     Log.d(TAG, "Displaying Product Details." + productDetail.toString());
     productDescription.setText(Html.fromHtml(productDetail.getDescription()));
+
+    productImages = getProductImages(productDetail);
+    populateImageSlider(productImages);
   }
+
+  private List<String> getProductImages(final ProductDetail productDetail) {
+    Log.d(TAG, "Retrieving Product Images." + productDetail.toString());
+
+    String json = productDetail.getProductImages().toString();
+    Gson gson  = new GsonBuilder().registerTypeAdapter(List.class, new ProductImageDeserializerUtil()).create();
+    productImages = gson.fromJson(json, List.class);
+    for(String s: productImages) {
+      System.out.println(s);
+    }
+    return productImages;
+  }
+
+  private void populateImageSlider(List<String> productImages){
+
+    for (String image : productImages) {
+
+      TextSliderView textSliderView = new TextSliderView(this);
+      textSliderView
+              //.description(image)
+              .image(BASE_IMAGE_URL + image)
+              .setScaleType(BaseSliderView.ScaleType.Fit);
+
+      sliderLayout.addSlider(textSliderView);
+    }
+
+    sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
+    sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+    sliderLayout.setCustomAnimation(new DescriptionAnimation());
+    sliderLayout.setDuration(4000);
+    //sliderLayout.stopAutoCycle();
+  }
+
 }
