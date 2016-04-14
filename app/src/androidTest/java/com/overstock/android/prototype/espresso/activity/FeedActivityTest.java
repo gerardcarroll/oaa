@@ -7,6 +7,7 @@ import android.support.test.runner.AndroidJUnit4;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.FeedActivity;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,11 +27,15 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 public class FeedActivityTest {
 
     @Rule
-    public ActivityTestRule<FeedActivity> activityRule = new ActivityTestRule<>(FeedActivity.class);
-    
+    public ActivityTestRule<FeedActivity> activityRule = new ActivityTestRule<>(FeedActivity.class,true, false);
+
+    @Before
+    public void setUp(){
+        activityRule.launchActivity(null);
+    }
+
     @Test
     public void testFeedRendering() {
-
         // Check Feed recycler view is displayed
         onView(withId(R.id.rv_feed)).check(matches(isDisplayed()));
     }
