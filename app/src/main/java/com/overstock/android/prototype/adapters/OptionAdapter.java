@@ -13,7 +13,11 @@ import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.model.Options;
 
 /**
- * @author LeeMeehan Created on 12-Apr-16.
+ * Adapter class that extends BaseAdapter class to allow the binding of underlying data to a such UI element class.
+ *
+ * @author LeeMeehan.
+ * @since Created on 12-Apr-16.
+ * @see android.widget.BaseAdapter
  */
 public class OptionAdapter extends BaseAdapter {
 

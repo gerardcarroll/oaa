@@ -1,6 +1,12 @@
 package com.overstock.android.prototype.fragment;
 
 import java.util.ArrayList;
+import java.util.Currency;
+import java.util.Locale;
+
+import javax.inject.Inject;
+
+import org.parceler.Parcels;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -9,10 +15,12 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.CoordinatorLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -24,12 +32,40 @@ import butterknife.OnClick;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.OptionAdapter;
+import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.model.Options;
+import com.overstock.android.prototype.model.ProductDetail;
+import com.overstock.android.prototype.presenter.ProductBottomSheetPresenter;
+import com.overstock.android.prototype.view.ProductBottomSheetView;
 
 /**
- * @author LeeMeehan Created on 07-Apr-16.
+ * This class is used to display the BottomSheetDialogFragment. It also handles interactions between the UI on the
+ * ProductBottomSheet. It is responsible for displaying UI only all logical processes are in the presenter.
+ *
+ * @author LeeMeehan
+ * @since Created on 07-Apr-16.
+ * @see android.support.design.widget.BottomSheetDialogFragment
  */
-public class ProductBottomSheetFragment extends BottomSheetDialogFragment {
+public class ProductBottomSheetFragment extends BottomSheetDialogFragment implements ProductBottomSheetView {
+
+  private static final String TAG = ProductBottomSheetFragment.class.getName();
+
+  private BottomSheetBehavior.BottomSheetCallback bottomSheetCallback = new BottomSheetBehavior.BottomSheetCallback() {
+    @Override
+    public void onStateChanged(@NonNull View bottomSheet, int newState) {
+      if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+        dismiss();
+      }
+    }
+
+    @Override
+    public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+    }
+  };
+
+  @Inject
+  ProductBottomSheetPresenter presenter;
 
   @Bind(R.id.quantity_add)
   ImageView imageViewAdd;
@@ -49,74 +85,45 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment {
   @Bind(R.id.options_spinner)
   Spinner spinner;
 
-  private Float startingPrice;
-
   @Nullable
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.product_details_bottom_sheet, container, false);
+    ((OAppPrototypeApplication) getActivity().getApplication()).getComponent().inject(this);
     ButterKnife.bind(this, view);
-    startingPrice = Float.parseFloat(totalAmount.getText().toString().substring(1));
-    // TODO replace with real data.
-    ArrayList<Options> options = new ArrayList<>();
-    options.add(new Options(2, "Hey", 22, 22, new Float(2.2)));
-    options.add(new Options(2, "There", 22, 22, new Float(2.2)));
-    options.add(new Options(2, "How", 22, 22, new Float(2.2)));
-    options.add(new Options(2, "you", 22, 22, new Float(2.2)));
-    OptionAdapter optionAdapter = new OptionAdapter(options, getActivity());
-    spinner.setAdapter(optionAdapter);
-    // TODO Convert to mvp
+    final ProductDetail productDetail = Parcels.unwrap(getArguments().getParcelable("productDetails"));
+    presenter.setView(this);
+    final String placeholderRewards = "12.50";
+    presenter.setRewardsApplied(Float.valueOf(placeholderRewards));
+    presenter.updateProductPage(productDetail);
     return view;
   }
 
-  private BottomSheetBehavior.BottomSheetCallback bottomSheetCallback = new BottomSheetBehavior.BottomSheetCallback() {
-    @Override
-    public void onStateChanged(@NonNull View bottomSheet, int newState) {
-      if (newState == BottomSheetBehavior.STATE_HIDDEN) {
-        dismiss();
-      }
-    }
-
-    @Override
-    public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-
-    }
-  };
-
   @OnClick(R.id.quantity_add)
   public void addQuantity() {
-    // TODO Replace placeholder logic
-    String existingQuantity = txtIndicator.getText().toString();
-    Integer newQuantity = Integer.parseInt(existingQuantity) + 1;
-    txtIndicator.setText(newQuantity.toString());
-    setFinalAmount(newQuantity);
+    final String existingQuantity = txtIndicator.getText().toString();
+    presenter.addQuantity(Integer.parseInt(existingQuantity));
+  }
+
+  @Override
+  public void displayToast(final String message) {
+    final Toast toast = Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT);
+    toast.setGravity(Gravity.BOTTOM, 0, 20);
+    toast.show();
   }
 
   @OnClick(R.id.quantity_remove)
   public void removeQuantity() {
-    // TODO Replace placeholder logic
-    String existingQuantity = txtIndicator.getText().toString();
-    if (Integer.parseInt(existingQuantity) > 1) {
-      Integer newQuantity = Integer.parseInt(existingQuantity) - 1;
-      txtIndicator.setText(newQuantity.toString());
-      setFinalAmount(newQuantity);
-    }
-  }
-
-  private void setFinalAmount(Integer quantity) {
-    Float newPrice = startingPrice * quantity;
-    totalAmount.setText(String.format("$%.2f", newPrice));
+    final String existingQuantity = txtIndicator.getText().toString();
+    presenter.removeQuantity(Integer.parseInt(existingQuantity));
   }
 
   @OnClick(R.id.rewards_btn_apply)
   public void applyDiscount() {
-    // TODO Replace placeholder logic
+    // TODO replace placeholder logic to real implementation.
     String totalPrice = totalAmount.getText().toString().substring(1);
-    String discount = rewardsAmount.getText().toString().substring(1);
-    rewardsAmount.setText("$0.00");
-    Float finalPrice = (Float.parseFloat(totalPrice) - Float.parseFloat(discount));
-    startingPrice = finalPrice;
-    totalAmount.setText(String.format("$%.2f", finalPrice));
+    String discountApplied = rewardsAmount.getText().toString().substring(1);
+    presenter.applyDiscount(totalPrice, discountApplied);
   }
 
   @OnClick(R.id.btn_pay_google_wallet)
@@ -151,4 +158,75 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment {
     }
   }
 
+  @Override
+  public void onDestroyView() {
+    super.onDestroyView();
+    ButterKnife.unbind(this);
+    presenter.onDestroy();
+  }
+
+  @Override
+  public void updateQuantityIndicator(int newQuantity) {
+    txtIndicator.setText(String.valueOf(newQuantity));
+  }
+
+  @Override
+  public void updateFinalPrice(final float finalPrice) {
+    final String currencyCode = Currency.getInstance(Locale.US).getSymbol();
+    totalAmount.setText(getContext().getString(R.string.product_price_fmt_v2, currencyCode, finalPrice));
+  }
+
+  @Override
+  public void updateRewardsAmount(final float rewardAmount) {
+    final String currencyCode = Currency.getInstance(Locale.US).getSymbol();
+    rewardsAmount.setText(getContext().getString(R.string.product_price_fmt_v2, currencyCode, rewardAmount));
+  }
+
+  @Override
+  public void toggleSpinner(){
+    if(spinner.getVisibility() == View.VISIBLE) {
+      spinner.setVisibility(View.GONE);
+    }
+    else
+      spinner.setVisibility(View.VISIBLE);
+  }
+
+  /* Private method to setup and display the spinner. */
+  @Override
+  public void updateSpinner(final ArrayList<Options> options) {
+    final OptionAdapter optionAdapter = new OptionAdapter(options, getActivity());
+    spinner.setAdapter(optionAdapter);
+    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+      @Override
+      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        final Options option = (Options) optionAdapter.getItem(position);
+        presenter.setMaxQuantityAllowed(option.getMaxQuantityAllowed());
+        presenter.setCurrentPrice(option.getPrice());
+        final Integer existingQuantity = Integer.parseInt(txtIndicator.getText().toString());
+        presenter.updateFinalPrice(existingQuantity);
+        presenter.resetRewards();
+        Log.i(TAG, String.valueOf(option.getMaxQuantityAllowed()));
+      }
+
+      @Override
+      public void onNothingSelected(AdapterView<?> parent) {
+
+      }
+    });
+  }
+
+  /* Method for handling UI disabling and enabling of quantity buttons. */
+  @Override
+  public void handleQuantityIcons(final int currentQuantity, final int maxQuantityAllowed) {
+    if (currentQuantity == maxQuantityAllowed) {
+      imageViewAdd.setImageResource(R.drawable.ic_add_circle_disabled_24dp);
+    }
+    else if (currentQuantity == 1) {
+      imageViewRemove.setImageResource(R.drawable.ic_remove_circle_disabled_24dp);
+    }
+    else {
+      imageViewAdd.setImageResource(R.drawable.ic_add_circle_24dp);
+      imageViewRemove.setImageResource(R.drawable.ic_remove_circle_24dp);
+    }
+  }
 }

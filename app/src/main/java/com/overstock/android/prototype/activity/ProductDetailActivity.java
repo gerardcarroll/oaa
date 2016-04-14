@@ -17,6 +17,7 @@ import android.transition.Transition;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -92,15 +93,20 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     productName.setText(product.getName());
     final String currencyCode = Currency.getInstance(Locale.US).getSymbol();
     productPrice.setText(this.getString(R.string.product_price_fmt, currencyCode, product.getMemberPrice().toString()));
-
     presenter.setView(this);
     presenter.retrieveProductDetails(product.getId());
   }
 
   @OnClick(R.id.btn_buy)
   public void expandBottom_sheet() {
-    ProductBottomSheetFragment productBottomSheetFragment = new ProductBottomSheetFragment();
-    productBottomSheetFragment.show(getSupportFragmentManager(), productBottomSheetFragment.getTag());
+    ProductDetail productDetails = presenter.getProductDetails();
+    if (productDetails != null) {
+      ProductBottomSheetFragment productBottomSheetFragment = new ProductBottomSheetFragment();
+      Bundle bundle = new Bundle();
+      bundle.putParcelable("productDetails", Parcels.wrap(productDetails));
+      productBottomSheetFragment.setArguments(bundle);
+      productBottomSheetFragment.show(getSupportFragmentManager(), productBottomSheetFragment.getTag());
+    }
   }
 
   @Override
@@ -130,6 +136,6 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   public void displayProductDetails(final ProductDetail productDetail) {
     Log.d(TAG, "Displaying Product Details." + productDetail.toString());
     productDescription.setText(Html.fromHtml(productDetail.getDescription()));
-    // productDescription.setText(productDetail.getOptions().get(0).getDescription());
+    btn_buy.setVisibility(View.VISIBLE);
   }
 }

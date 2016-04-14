@@ -1,12 +1,5 @@
 package com.overstock.android.prototype.presenter.impl;
 
-import android.util.Log;
-
-import com.overstock.android.prototype.model.ProductDataService;
-import com.overstock.android.prototype.model.ProductDetail;
-import com.overstock.android.prototype.presenter.ProductDetailPresenter;
-import com.overstock.android.prototype.view.ProductDetailView;
-
 import javax.inject.Inject;
 
 import rx.Observer;
@@ -15,12 +8,21 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
 
+import android.util.Log;
+
+import com.overstock.android.prototype.model.ProductDataService;
+import com.overstock.android.prototype.model.ProductDetail;
+import com.overstock.android.prototype.presenter.ProductDetailPresenter;
+import com.overstock.android.prototype.view.ProductDetailView;
+
 /**
  * @author RayConnolly, LeeMeehan Created on 3/21/2016.
  */
 public class ProductDetailPresenterImpl implements ProductDetailPresenter {
 
   private static final String TAG = ProductDetailPresenterImpl.class.getName();
+
+  private ProductDetail productDetails;
 
   private Subscription subscription = Subscriptions.empty();
 
@@ -49,6 +51,14 @@ public class ProductDetailPresenterImpl implements ProductDetailPresenter {
   }
 
   @Override
+  public ProductDetail getProductDetails() {
+    if (productDetails != null) {
+      return productDetails;
+    }
+    return null;
+  }
+
+  @Override
   public void onDestroy() {
     productDetailView = null;
     subscription.unsubscribe();
@@ -70,8 +80,10 @@ public class ProductDetailPresenterImpl implements ProductDetailPresenter {
           @Override
           public void onNext(ProductDetail productDetail) {
             Log.d("SUCCESS", "SUCCESS, Product Details successfully loaded");
+            productDetails = productDetail;
             productDetailView.displayProductDetails(productDetail);
           }
         });
   }
+
 }

@@ -1,16 +1,19 @@
 package com.overstock.android.prototype.model;
 
+import org.parceler.Parcel;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
  * @author LeeMeehan Created on 12-Apr-16.
  */
+@Parcel
 public class Options {
 
   private int optionId;
 
   @SerializedName("decription")
-  private String description;// : "N/A",
+  private String description;
 
   @SerializedName("qtyOnHand")
   private int quantityOnHand;
@@ -19,9 +22,13 @@ public class Options {
 
   private float price;
 
-  public Options(int optionId, String decription, int quantityOnHand, int maxQuantityAllowed, float price) {
+  public Options() {
+
+  }
+
+  public Options(int optionId, String description, int quantityOnHand, int maxQuantityAllowed, float price) {
     this.optionId = optionId;
-    this.description = decription;
+    this.description = description;
     this.quantityOnHand = quantityOnHand;
     this.maxQuantityAllowed = maxQuantityAllowed;
     this.price = price;

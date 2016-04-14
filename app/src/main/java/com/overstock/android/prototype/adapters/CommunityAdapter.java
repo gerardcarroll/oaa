@@ -19,7 +19,8 @@ import com.squareup.picasso.Picasso;
 /**
  * Adapter class to aid communication between Communities Activity and underlying data.
  *
- * @author RayConnolly Created on 2/29/2016.
+ * @author RayConnolly.
+ * @since Created on 2/29/2016.
  */
 public class CommunityAdapter extends RecyclerView.Adapter<CommunityViewHolder> {
 
