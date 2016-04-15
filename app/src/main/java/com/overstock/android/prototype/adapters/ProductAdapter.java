@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,9 +89,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
         intent.putExtra("image", bitmap);
         intent.putExtra("parcel", Parcels.wrap(product));
 
-        final ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat
-            .makeSceneTransitionAnimation(activity, v, context.getString(R.string.shared_element_transition));
-        ActivityCompat.startActivity(activity, intent, transitionActivityOptions.toBundle());
+        activity.startActivity(intent);
+
+//        final ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat
+//            .makeSceneTransitionAnimation(activity, v, context.getString(R.string.shared_element_transition));
+//        ActivityCompat.startActivity(activity, intent, transitionActivityOptions.toBundle());
       }
     });
   }
