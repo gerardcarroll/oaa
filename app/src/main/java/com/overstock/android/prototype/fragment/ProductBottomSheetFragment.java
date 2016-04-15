@@ -85,6 +85,9 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
   @Bind(R.id.options_spinner)
   Spinner spinner;
 
+  @Bind(R.id.product_options_txt)
+  TextView productOptionsTxt;
+
   @Nullable
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -183,12 +186,15 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
   }
 
   @Override
-  public void toggleSpinner(){
-    if(spinner.getVisibility() == View.VISIBLE) {
+  public void toggleSpinner() {
+    if (spinner.getVisibility() == View.VISIBLE) {
+      productOptionsTxt.setVisibility(View.GONE);
       spinner.setVisibility(View.GONE);
     }
-    else
+    else {
+      productOptionsTxt.setVisibility(View.VISIBLE);
       spinner.setVisibility(View.VISIBLE);
+    }
   }
 
   /* Private method to setup and display the spinner. */
