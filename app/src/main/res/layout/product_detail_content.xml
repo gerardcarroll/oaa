@@ -37,31 +37,31 @@
                     <!--android:transitionName="@string/shared_element_transition"/>-->
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="bottom|start"
                     android:padding="5dp"
                     android:src="@drawable/ic_share_24dp" />
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_gravity="bottom|end"
                     android:layout_marginBottom="5dp"
                     android:layout_marginRight="90dp"
                     android:src="@drawable/ic_thumb_up_24dp" />
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_gravity="bottom|end"
                     android:layout_marginBottom="5dp"
                     android:layout_marginRight="50dp"
                     android:src="@drawable/ic_thumb_down_24dp" />
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_gravity="bottom|end"
                     android:layout_marginBottom="5dp"
                     android:layout_marginRight="10dp"

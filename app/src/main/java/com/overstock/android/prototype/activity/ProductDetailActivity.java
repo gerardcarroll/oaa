@@ -1,6 +1,5 @@
 package com.overstock.android.prototype.activity;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -87,7 +86,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
         final Bundle extras = getIntent().getExtras();
         final Product product = Parcels.unwrap(extras.getParcelable("parcel"));
-        final Bitmap receivedImage = extras.getParcelable("image");
+//        final Bitmap receivedImage = extras.getParcelable("image");
 
 //    productImage.setImageBitmap(receivedImage);
 //
@@ -141,9 +140,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     public void displayProductDetails(final ProductDetail productDetail) {
         Log.d(TAG, "Displaying Product Details." + productDetail.toString());
 
-        //productDescription.setText(Html.fromHtml(productDetail.getDescription()));
         productDescription.loadData(productDetail.getDescription().trim(), getString(R.string.webview_html_encoding), null);
-
 
         populateImageSlider(productDetail.getProductImages());
     }
@@ -166,8 +163,8 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
         sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         sliderLayout.setCustomAnimation(new DescriptionAnimation());
-        sliderLayout.setDuration(4000);
-        //sliderLayout.stopAutoCycle();
+        //sliderLayout.setDuration(4000);
+        sliderLayout.stopAutoCycle();
     }
 
     @Override
