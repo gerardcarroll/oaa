@@ -5,9 +5,11 @@ import android.os.Build;
 import android.os.StrictMode;
 import android.support.annotation.VisibleForTesting;
 
+import com.crashlytics.android.Crashlytics;
 import com.overstock.android.prototype.BuildConfig;
 import com.overstock.android.prototype.component.ApplicationComponent;
-import com.crashlytics.android.Crashlytics;
+import com.parse.Parse;
+
 import io.fabric.sdk.android.Fabric;
 
 /**
@@ -28,6 +30,10 @@ public class OAppPrototypeApplication extends Application {
         Fabric.with(this, new Crashlytics());
         //Dagger init
         component = ApplicationComponent.Initializer.init(this);
+        Parse.initialize(new Parse.Configuration.Builder(this)
+                .applicationId("oapp")
+                .server("http://parse.parse.dev.ostk.com:8080/parse")
+                .build());
     }
 
 
