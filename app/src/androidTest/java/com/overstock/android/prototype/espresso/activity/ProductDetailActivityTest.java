@@ -51,6 +51,7 @@ public class ProductDetailActivityTest {
         final Context context = InstrumentationRegistry.getInstrumentation().getTargetContext().getApplicationContext();
 
         URL url = new URL("https://images-common.test.overstock.com/images/products/T924666.jpg");
+
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setDoInput(true);
         connection.setRequestProperty("connection", "close");
