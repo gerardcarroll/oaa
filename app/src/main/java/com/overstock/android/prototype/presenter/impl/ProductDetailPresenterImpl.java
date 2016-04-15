@@ -1,5 +1,15 @@
 package com.overstock.android.prototype.presenter.impl;
 
+import java.util.ArrayList;
+
+import javax.inject.Inject;
+
+import rx.Observer;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.Subscriptions;
+
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
@@ -13,22 +23,14 @@ import com.overstock.android.prototype.presenter.ProductDetailPresenter;
 import com.overstock.android.prototype.provider.OappProviderContract;
 import com.overstock.android.prototype.view.ProductDetailView;
 
-import java.util.ArrayList;
-
-import javax.inject.Inject;
-
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.Subscriptions;
-
 /**
  * @author RayConnolly, LeeMeehan Created on 3/21/2016.
  */
 public class ProductDetailPresenterImpl implements ProductDetailPresenter {
 
   private static final String TAG = ProductDetailPresenterImpl.class.getName();
+
+  private ProductDetail productDetails;
 
   private Subscription subscription = Subscriptions.empty();
 
@@ -60,6 +62,14 @@ public class ProductDetailPresenterImpl implements ProductDetailPresenter {
   }
 
   @Override
+  public ProductDetail getProductDetails() {
+    if (productDetails != null) {
+      return productDetails;
+    }
+    return null;
+  }
+
+  @Override
   public void onDestroy() {
     productDetailView = null;
     subscription.unsubscribe();
@@ -81,30 +91,34 @@ public class ProductDetailPresenterImpl implements ProductDetailPresenter {
           @Override
           public void onNext(ProductDetail productDetail) {
             Log.d(TAG, "SUCCESS, Product Details successfully loaded");
+            productDetails = productDetail;
             productDetailView.displayProductDetails(productDetail);
           }
         });
 
-    //TODO: change call to recommendation service to provide an actual list of simialr products to the currently selected product
-    productDataService.query(OappProviderContract.ProductEntry.buildProductBestsellerUri())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(new Observer<ProductsResponse>() {
-              @Override
-              public void onCompleted() {
-                Log.i("COMPLETED", "Finished loading Similar Products");
-              }
+    // TODO: change call to recommendation service to provide an actual list of simialr products to the currently
+    // selected product
+    productDataService.query(OappProviderContract.ProductEntry.buildProductBestsellerUri()).subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ProductsResponse>() {
+          @Override
+          public void onCompleted() {
+            Log.i("COMPLETED", "Finished loading Similar Products");
+          }
 
-              @Override
-              public void onError(Throwable e) {
-                Log.i("FAILURE", "Failed to load Similar Products");
-              }
+          @Override
+          public void onError(Throwable e) {
+            Log.i("FAILURE", "Failed to load Similar Products");
+          }
 
-              @Override
-              public void onNext(ProductsResponse productsResponse) {
-                Log.i("SUCCESS", "Similar Products successfully loaded " + productsResponse.getProducts().getProductsList().size());
-                productDetailView.addHorizontialRecyclerView(R.id.similar_products_hrv, (ArrayList<Product>) productsResponse.getProducts().getProductsList(), context.getString(R.string.similar_producst_labels));
-              }
-            });
+          @Override
+          public void onNext(ProductsResponse productsResponse) {
+            Log.i("SUCCESS",
+              "Similar Products successfully loaded " + productsResponse.getProducts().getProductsList().size());
+            productDetailView.addHorizontialRecyclerView(R.id.similar_products_hrv,
+              (ArrayList<Product>) productsResponse.getProducts().getProductsList(),
+              context.getString(R.string.similar_producst_labels));
+          }
+        });
   }
+
 }

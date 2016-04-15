@@ -1,7 +1,6 @@
 package com.overstock.android.prototype.module;
 
 import android.app.Application;
-import android.content.Context;
 
 import com.overstock.android.prototype.client.FeedClient;
 import com.overstock.android.prototype.client.TheOAppClient;
@@ -10,11 +9,13 @@ import com.overstock.android.prototype.model.ProductDataService;
 import com.overstock.android.prototype.module.scope.ApplicationScope;
 import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.presenter.CommunityPresenter;
-import com.overstock.android.prototype.presenter.impl.CommunityPresenterImpl;
 import com.overstock.android.prototype.presenter.FeedPresenter;
+import com.overstock.android.prototype.presenter.ProductBottomSheetPresenter;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
 import com.overstock.android.prototype.presenter.impl.BrandPresenterImpl;
+import com.overstock.android.prototype.presenter.impl.CommunityPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.FeedPresenterImpl;
+import com.overstock.android.prototype.presenter.impl.ProductBottomSheetPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.ProductDetailPresenterImpl;
 import com.overstock.android.prototype.service.CommunityService;
 import com.overstock.android.prototype.service.FeedService;
@@ -50,7 +51,8 @@ public class ApplicationModule {
   }
 
   @Provides
-  public ProductDetailPresenter productDetailPresenter(final Application applicationContext, final ProductDataService productDataService) {
+  public ProductDetailPresenter productDetailPresenter(final Application applicationContext,
+    final ProductDataService productDataService) {
     return new ProductDetailPresenterImpl(applicationContext, productDataService);
   }
 
@@ -88,10 +90,14 @@ public class ApplicationModule {
     return new TheOAppClient(application.getApplicationContext());
   }
 
-
   @Provides
   public CommunityService providesCommunityService(final CommunityClient communityClient) {
     return communityClient.getClient();
+  }
+
+  @Provides
+  public ProductBottomSheetPresenter productBottomSheetPresenter() {
+    return new ProductBottomSheetPresenterImpl();
   }
 
   @Provides

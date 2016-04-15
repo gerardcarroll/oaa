@@ -34,8 +34,6 @@ import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFr
 /**
  * @author LeeMeehan Created on 05-Apr-16.
  */
-@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP)
-@RunWith(RobolectricGradleTestRunner.class)
 public class FeedFragmentTest {
 
   @Rule
