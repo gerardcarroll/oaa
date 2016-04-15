@@ -97,7 +97,7 @@ public class ArcMenuTest {
         onView(withId(R.id.arcMenuBtn3)).perform(click());
 
         // Check Brand activity is now displayed
-        onView(withId(R.id.best_sellers)).check(matches(isDisplayed()));
+        onView(withId(R.id.best_sellers_hrv)).check(matches(isDisplayed()));
     }
 
     @Test

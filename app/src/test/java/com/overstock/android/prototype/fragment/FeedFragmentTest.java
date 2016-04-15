@@ -1,20 +1,5 @@
 package com.overstock.android.prototype.fragment;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.TestCase.assertNotNull;
-import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFragment;
-
-import java.util.ArrayList;
-
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.robolectric.RobolectricGradleTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 
@@ -27,7 +12,24 @@ import com.overstock.android.prototype.module.ApplicationModule;
 import com.overstock.android.prototype.presenter.FeedPresenter;
 import com.squareup.picasso.Picasso;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+
+import java.util.ArrayList;
+
 import it.cosenonjaviste.daggermock.DaggerMockRule;
+
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.TestCase.assertNotNull;
+import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFragment;
 
 /**
  * @author LeeMeehan Created on 05-Apr-16.
@@ -64,6 +66,11 @@ public class FeedFragmentTest {
   public void setUp() {
     feedFragment = new FeedFragment();
     startFragment(feedFragment);
+  }
+
+  @After
+  public void tearDown(){
+    Robolectric.reset();
   }
 
   @Test

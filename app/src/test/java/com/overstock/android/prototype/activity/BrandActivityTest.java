@@ -4,6 +4,7 @@ import android.os.Build;
 
 import com.overstock.android.prototype.BuildConfig;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +26,11 @@ public class BrandActivityTest {
   @Before
   public void setUp() {
     brandActivity = Robolectric.buildActivity(BrandActivity.class).create().start().resume().visible().get();
+  }
+
+  @After
+  public void tearDown(){
+    Robolectric.reset();
   }
 
   @Test

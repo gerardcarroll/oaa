@@ -1,6 +1,7 @@
 package com.overstock.android.prototype.activity;
 
 import android.os.Build;
+import android.support.v4.app.FragmentActivity;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
@@ -9,9 +10,11 @@ import com.overstock.android.prototype.BuildConfig;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.fragment.ArcMenuFragment;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
@@ -34,7 +37,12 @@ public class ArcMenuFragmentTest {
     @Before
     public void setUp() {
         arcMenuFragment = new ArcMenuFragment();
-        startFragment(arcMenuFragment);
+        startFragment(arcMenuFragment, FragmentActivity.class);
+
+    }
+    @After
+    public void tearDown(){
+        Robolectric.reset();
     }
 
     @Test
@@ -46,16 +54,16 @@ public class ArcMenuFragmentTest {
     public void testArcMenuCreation() {
         assertNotNull(arcMenuFragment);
 
-        ImageButton fab = (ImageButton) arcMenuFragment.getActivity().findViewById(R.id.fab);
+        ImageButton fab = (ImageButton) arcMenuFragment.getView().findViewById(R.id.fab);
         assertNotNull(fab);
 
-        FrameLayout menuLayout = (FrameLayout) arcMenuFragment.getActivity().findViewById(R.id.menu_layout);
+        FrameLayout menuLayout = (FrameLayout) arcMenuFragment.getView().findViewById(R.id.menu_layout);
         assertNotNull(menuLayout);
         assertEquals(1, menuLayout.getChildCount());
 
-        ArcLayout arcLayout = (ArcLayout) arcMenuFragment.getActivity().findViewById(R.id.arc_layout);
+        ArcLayout arcLayout = (ArcLayout) arcMenuFragment.getView().findViewById(R.id.arc_layout);
         assertNotNull(arcLayout);
-        assertEquals(3, menuLayout.getChildCount());
+        assertEquals(3, arcLayout.getChildCount());
     }
 
 }

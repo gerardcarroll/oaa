@@ -85,7 +85,7 @@ public class ProductBottomSheetPresenterImpl implements ProductBottomSheetPresen
       productBottomSheetView.handleQuantityIcons(newQuantity, maxQuantityAllowed);
     }
     else
-      productBottomSheetView.displayToast("We cannot allow you to order more than 20 sorry.");
+      productBottomSheetView.displayToast("We cannot allow you to order any more than this amount sorry.");
   }
 
   @Override
