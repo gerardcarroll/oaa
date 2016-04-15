@@ -10,7 +10,8 @@
         app:auto_cycle="true"
         app:indicator_visibility="visible"
         app:pager_animation_span="1100"
-        android:layout_height="200dp"
+        android:background="@color/white"
+        android:layout_height="match_parent"
         />
 
     <com.daimajia.slider.library.Indicators.PagerIndicator

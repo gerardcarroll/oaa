@@ -16,8 +16,6 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.component.ApplicationComponent;
 import com.overstock.android.prototype.fragment.HorizontialScrollFragment;
@@ -26,7 +24,6 @@ import com.overstock.android.prototype.model.Product;
 import com.overstock.android.prototype.model.ProductDetail;
 import com.overstock.android.prototype.model.ProductImages;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
-import com.overstock.android.prototype.utils.ProductImageDeserializerUtil;
 import com.overstock.android.prototype.view.ProductDetailView;
 import com.squareup.picasso.Picasso;
 
@@ -151,18 +148,6 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         populateImageSlider(productDetail.getProductImages());
     }
 
-    private List<String> getProductImages(final ProductDetail productDetail) {
-
-        String json = productDetail.toString();
-        System.out.println(json);
-        Gson gson = new GsonBuilder().registerTypeAdapter(List.class, new ProductImageDeserializerUtil()).create();
-        productImages = gson.fromJson(json, List.class);
-        for (String images : productImages) {
-            System.out.println(images);
-        }
-        return productImages;
-    }
-
     private void populateImageSlider(List<ProductImages> productImages) {
         Log.d(TAG, "[In populateImageSlider method.]");
 
@@ -172,9 +157,8 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
             Log.d(TAG, "Passing " + BASE_IMAGE_URL + image.getImagePath() + " to image slider to be displayed");
             textSliderView
-                    //.description(image)
                     .image(BASE_IMAGE_URL + image.getImagePath())
-                    .setScaleType(BaseSliderView.ScaleType.Fit);
+                    .setScaleType(BaseSliderView.ScaleType.FitCenterCrop);
 
             sliderLayout.addSlider(textSliderView);
         }

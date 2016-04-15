@@ -15,21 +15,7 @@ import java.util.List;
 /**
  * Created by rconnolly on 4/14/2016.
  */
-public class ProductImageDeserializerUtil implements JsonDeserializer<ProductDetail> {
-
-//    public static void main(String[] args){
-//        try {
-//            String json = new Scanner(new File("c:\\users\\rconnolly\\Desktop\\android_misc\\productImagesJson.txt")).useDelimiter("\\Z").next();
-//            Gson gson  = new GsonBuilder().registerTypeAdapter(ProductDetail.class, new ProductImageDeserializerUtil()).create();
-//
-//            ProductDetail productDetail = gson.fromJson(json,ProductDetail.class);
-//            for(ProductImages s: productDetail.getProductImages()){
-//                System.out.println(s.getImagePath());
-//            }
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//    }
+public class ProductDetailDeserializerUtil implements JsonDeserializer<ProductDetail> {
 
     @Override
     public ProductDetail deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
