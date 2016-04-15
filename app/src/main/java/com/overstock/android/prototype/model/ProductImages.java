@@ -5,26 +5,12 @@ package com.overstock.android.prototype.model;
  */
 public class ProductImages {
 
-    private String[] oViewerImages;
-
-    private String[] imageSizes;
-
     private String imagePath;
 
     public ProductImages(){}
 
-    public ProductImages(String[] oViewerImages, String[] imageSizes, String imagePath) {
-        this.oViewerImages = oViewerImages;
-        this.imageSizes = imageSizes;
+    public ProductImages(String imagePath) {
         this.imagePath = imagePath;
-    }
-
-    public String[] getoViewerImages() {
-        return oViewerImages;
-    }
-
-    public String[] getImageSizes() {
-        return imageSizes;
     }
 
     public String getImagePath() {

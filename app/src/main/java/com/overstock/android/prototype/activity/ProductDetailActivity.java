@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
-import android.transition.Transition;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +24,7 @@ import com.overstock.android.prototype.fragment.HorizontialScrollFragment;
 import com.overstock.android.prototype.fragment.ProductBottomSheetFragment;
 import com.overstock.android.prototype.model.Product;
 import com.overstock.android.prototype.model.ProductDetail;
+import com.overstock.android.prototype.model.ProductImages;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
 import com.overstock.android.prototype.utils.ProductImageDeserializerUtil;
 import com.overstock.android.prototype.view.ProductDetailView;
@@ -43,7 +42,6 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.http.HEAD;
 
 /**
  * @author RayConnolly, LeeMeehan Created on 21-03-2016
@@ -149,39 +147,33 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         //productDescription.setText(Html.fromHtml(productDetail.getDescription()));
         productDescription.loadData(productDetail.getDescription().trim(), getString(R.string.webview_html_encoding), null);
 
-        productImages = getProductImages(productDetail);
-        populateImageSlider(productImages);
+
+        populateImageSlider(productDetail.getProductImages());
     }
 
     private List<String> getProductImages(final ProductDetail productDetail) {
-        Log.d(TAG, "Retrieving Product Images." + productDetail.toString());
 
-        String json = productDetail.getProductImages().toString();
+        String json = productDetail.toString();
+        System.out.println(json);
         Gson gson = new GsonBuilder().registerTypeAdapter(List.class, new ProductImageDeserializerUtil()).create();
         productImages = gson.fromJson(json, List.class);
-        for (String s : productImages) {
-            System.out.println(s);
+        for (String images : productImages) {
+            System.out.println(images);
         }
         return productImages;
     }
 
-    @Override
-    public void addHorizontialRecyclerView(int layoutResourceId, ArrayList<Product> products, String displayText) {
-        Log.d(TAG, "Passing " + displayText + " products to adapter to be displayed. List size : " + products.size());
-        this.getSupportFragmentManager()
-                .beginTransaction()
-                .add(layoutResourceId, HorizontialScrollFragment.newInstance(products, displayText), HorizontialScrollFragment.TAG)
-                .commit();
-    }
+    private void populateImageSlider(List<ProductImages> productImages) {
+        Log.d(TAG, "[In populateImageSlider method.]");
 
-    private void populateImageSlider(List<String> productImages) {
-
-        for (String image : productImages) {
+        for (ProductImages image : productImages) {
 
             TextSliderView textSliderView = new TextSliderView(this);
+
+            Log.d(TAG, "Passing " + BASE_IMAGE_URL + image.getImagePath() + " to image slider to be displayed");
             textSliderView
                     //.description(image)
-                    .image(BASE_IMAGE_URL + image)
+                    .image(BASE_IMAGE_URL + image.getImagePath())
                     .setScaleType(BaseSliderView.ScaleType.Fit);
 
             sliderLayout.addSlider(textSliderView);
@@ -192,6 +184,15 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         sliderLayout.setCustomAnimation(new DescriptionAnimation());
         sliderLayout.setDuration(4000);
         //sliderLayout.stopAutoCycle();
+    }
+
+    @Override
+    public void addHorizontialRecyclerView(int layoutResourceId, ArrayList<Product> products, String displayText) {
+        Log.d(TAG, "Passing " + displayText + " products to adapter to be displayed. List size : " + products.size());
+        this.getSupportFragmentManager()
+                .beginTransaction()
+                .add(layoutResourceId, HorizontialScrollFragment.newInstance(products, displayText), HorizontialScrollFragment.TAG)
+                .commit();
     }
 
 }
