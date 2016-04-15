@@ -45,7 +45,7 @@ public class AppInstrumentationTest_E2E {
   public static final String USERNAME = "johnsmith@gmail.com";
 
   @Rule
-  public ActivityTestRule<HomeActivity> activityRule = new ActivityTestRule<>(HomeActivity.class);
+  public ActivityTestRule<HomeActivity> activityRule = new ActivityTestRule<>(HomeActivity.class, true, false);
 
   @Rule
   public OAppPrototypeApplicationMockRule oAppPrototypeApplicationMockRule = new OAppPrototypeApplicationMockRule();
@@ -55,7 +55,6 @@ public class AppInstrumentationTest_E2E {
 
   @Before
   public void setUp() {
-
     when(oappGoogleAuthService.silentSignInStatus()).thenReturn(new OptionalPendingResult<GoogleSignInResult>() {
       @Override
       public boolean isDone() {
@@ -101,6 +100,8 @@ public class AppInstrumentationTest_E2E {
       public void setResultCallback(ResultCallback<? super GoogleSignInResult> resultCallback, long l,
         TimeUnit timeUnit) {}
     });
+
+    activityRule.launchActivity(null);
   }
 
   @Test
