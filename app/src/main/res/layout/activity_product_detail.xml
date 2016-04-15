@@ -6,7 +6,6 @@
     android:orientation="vertical"
     tools:context=".activity.ProductDetailActivity">
 
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/product_detail_toolbar"
         android:layout_width="match_parent"

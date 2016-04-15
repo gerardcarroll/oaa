@@ -162,6 +162,10 @@ dependencies {
     }
     // Arc Menu dependency
     compile 'com.ogaclejapan.arclayout:library:1.0.1@aar'
+
+    // Image Slider dependencies
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.daimajia.slider:library:1.1.5@aar'
 }
 
 afterEvaluate {
