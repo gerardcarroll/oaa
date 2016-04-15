@@ -42,7 +42,7 @@ public class HomeActivityInstrumentationTest_Google {
     public static final String USERNAME = "johnsmith@gmail.com";
 
     @Rule
-    public ActivityTestRule<HomeActivity> activityRule = new ActivityTestRule<>(HomeActivity.class);
+    public ActivityTestRule<HomeActivity> activityTestRule = new ActivityTestRule<HomeActivity>(HomeActivity.class, true, false);
 
     @Rule
     public OAppPrototypeApplicationMockRule oAppPrototypeApplicationMockRule = new OAppPrototypeApplicationMockRule();
@@ -100,6 +100,7 @@ public class HomeActivityInstrumentationTest_Google {
                                           TimeUnit timeUnit) {
             }
         });
+        activityTestRule.launchActivity(null);
     }
 
     @Test

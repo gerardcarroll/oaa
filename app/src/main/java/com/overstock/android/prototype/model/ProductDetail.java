@@ -26,10 +26,12 @@ public class ProductDetail {
 
   private List<Options> options;
 
+  private List<ProductImages> productImages;
+
   private ProductDetail() {}
 
   public ProductDetail(int id, String name, String imageLarge, String image, float price, int quantity,
-      String description, List<Options> options) {
+      String description, List<Options> options, List<ProductImages> productImages) {
     this.id = id;
     this.name = name;
     this.imageLarge = imageLarge;
@@ -38,6 +40,7 @@ public class ProductDetail {
     this.quantity = quantity;
     this.description = description;
     this.options = options;
+    this.productImages = productImages;
   }
 
   public int getId() {
@@ -79,4 +82,9 @@ public class ProductDetail {
   public List<Options> getOptions() {
     return options;
   }
+
+  public List<ProductImages> getProductImages() {
+    return productImages;
+  }
+
 }

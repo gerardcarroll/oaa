@@ -12,6 +12,7 @@ import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.BrandActivity;
 
 import org.hamcrest.Matcher;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,7 +33,12 @@ import static org.hamcrest.core.AllOf.allOf;
 public class BrandActivityTest {
 
     @Rule
-    public ActivityTestRule<BrandActivity> activityRule = new ActivityTestRule<>(BrandActivity.class);
+    public ActivityTestRule<BrandActivity> activityRule = new ActivityTestRule<>(BrandActivity.class, true, false);
+
+    @Before
+    public void setUp(){
+        activityRule.launchActivity(null);
+    }
 
     @Test
     public void testBrandRendering() {

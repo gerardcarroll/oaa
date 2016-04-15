@@ -90,7 +90,7 @@ public class ProductDetailPresenterImpl implements ProductDetailPresenter {
 
           @Override
           public void onNext(ProductDetail productDetail) {
-            Log.d("SUCCESS", "SUCCESS, Product Details successfully loaded");
+            Log.d(TAG, "SUCCESS, Product Details successfully loaded");
             productDetails = productDetail;
             productDetailView.displayProductDetails(productDetail);
           }
