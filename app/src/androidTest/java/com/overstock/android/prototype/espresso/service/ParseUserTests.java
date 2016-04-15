@@ -47,7 +47,6 @@ public class ParseUserTests {
         user.setUsername(username);
         user.setPassword(password);
         user.setEmail(email);
-
         //custom fields
         user.put("type","service");
         user.put("location", "sligo");
