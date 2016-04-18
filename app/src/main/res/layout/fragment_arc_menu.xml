@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <FrameLayout
+        android:id="@+id/menu_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dark_scrim"
+        android:visibility="invisible"
+        android:clickable="true"
+        >
+
+        <com.ogaclejapan.arclayout.ArcLayout
+            android:id="@+id/arc_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="40dp"
+            app:arc_axisRadius="@dimen/layout_child_offset_path"
+            app:arc_freeAngle="true"
+            app:arc_origin="bottom"
+            app:arc_radius="@dimen/layout_radius_path"
+            >
+
+            <ImageButton
+                android:id="@+id/arcMenuBtn1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_action_news"
+                android:background="@drawable/arc_menu_white_oval"
+                android:padding="10dp"
+                app:arc_angle="30"/>
+
+            <ImageButton
+                android:id="@+id/arcMenuBtn2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_person"
+                android:background="@drawable/arc_menu_white_oval"
+                android:padding="10dp"
+                app:arc_angle="90"/>
+
+            <ImageButton
+                android:id="@+id/arcMenuBtn3"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_local_offer"
+                android:background="@drawable/arc_menu_white_oval"
+                android:padding="10dp"
+                app:arc_angle="150"/>
+
+        </com.ogaclejapan.arclayout.ArcLayout>
+
+    </FrameLayout>
+
+    <ImageButton
+        android:id="@+id/fab"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/arc_menu_fab_btn"
+        android:src="@drawable/ic_add"
+        android:layout_above="@+id/empty_view"
+        android:layout_marginBottom="10dp"
+        />
+
+    <View
+        android:id = "@+id/empty_view"
+        android:layout_height = "3dp"
+        android:layout_width = "match_parent"
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>

@@ -9,12 +9,12 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.HomeActivity;
 import com.overstock.android.prototype.espresso.dagger.rules.OAppPrototypeApplicationMockRule;
-import com.overstock.android.prototype.interfaces.ProductService;
+import com.overstock.android.prototype.service.ProductService;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
-import com.overstock.android.prototype.models.Product;
-import com.overstock.android.prototype.models.ProductDataService;
-import com.overstock.android.prototype.models.Products;
-import com.overstock.android.prototype.models.ProductsResponse;
+import com.overstock.android.prototype.model.Product;
+import com.overstock.android.prototype.model.ProductDataService;
+import com.overstock.android.prototype.model.Products;
+import com.overstock.android.prototype.model.ProductsResponse;
 import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
 
@@ -77,8 +77,8 @@ public class OAppPrototypeApplicationTest {
     @Test
     public void productServiceMockTest(){
         when(productService.getBestSellers(any(String.class))).thenReturn(Observable.just(new ProductsResponse(new Products(new ArrayList<Product>() {{
-            add(new Product(1,"http://nfl.product.image.ostk.com", "nfl.product_image.png", 123.99F));
-            add(new Product(2, "http://nhl.product.image.ostk.com", "nhl.product_image.png", 25.01F));
+            add(new Product(1,"http://nfl.product.image.ostk.com", "nfl.product_image.png", "",123.99F));
+            add(new Product(2, "http://nhl.product.image.ostk.com", "nhl.product_image.png", "",25.01F));
         }}))));
 
         productService.getBestSellers("dummy").subscribe(new Observer<ProductsResponse>() {

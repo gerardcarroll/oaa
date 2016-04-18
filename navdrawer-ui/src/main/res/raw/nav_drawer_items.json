@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Home",
+    "icon": "ic_home",
+    "enabled": true
+  },
+  {
+    "title": "My Account",
+    "icon": "ic_fingerprint",
+    "enabled": true
+  },
+  {
+    "title": "My Feed ",
+    "icon": "ic_collections",
+    "enabled": true
+  },
+  {
+    "title": "My Communities",
+    "icon": "ic_ac_unit",
+    "enabled": true
+  },
+  {
+    "title": "My Friends",
+    "icon": "ic_people",
+    "enabled": true
+  },
+  {
+    "title": "My Brands",
+    "icon": "ic_favorite",
+    "enabled": true
+  },
+  {
+    "title": "Help",
+    "icon": "ic_help",
+    "enabled": false
+  },
+  {
+    "title": "Settings",
+    "icon": "ic_settings",
+    "enabled": false
+  }
+]

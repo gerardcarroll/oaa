@@ -1,8 +1,5 @@
 package com.overstock.android.prototype.model;
 
-import com.overstock.android.prototype.models.Products;
-import com.overstock.android.prototype.models.ProductsResponse;
-
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -28,7 +25,7 @@ public class ProductsResponseTest {
 
     @Test
     public void productsGetterTest(){
-        ProductsResponse productsResponse = new ProductsResponse(mock(Products.class));
+        ProductsResponse productsResponse = new ProductsResponse(new Products());
         Assert.assertNotNull(productsResponse.getProducts());
     }
 

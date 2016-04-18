@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!--
+  Navigation Item Format
+
+    <array name="nav_item_array_name">
+      <item>@id/nav_item_id</item>
+      <item>@string/navigation_item_text</item>
+      <item>@drawable/icon_drawable_resource</item>
+      <item>@integer/nav_drawer_large_item</item> or <item>@integer/nav_drawer_small_item</item> or <item>@integer/nav_drawer_my_account_item</item>
+      <item>@array/sub_menu</item> Link to an array that is used for it's sub menu or -1 if it doesn't have one
+    </array>
+  -->
+
+  <!-- Top Level Menu -->
+  <array name="nav_drawer_items">
+    <item>@array/home_item</item>
+    <item>@array/departments_item</item>
+    <item>@array/my_lists_item</item>
+    <item>@array/flash_deals_item</item>
+    <item>@array/gift_cards_item</item>
+    <item>@array/club_o_item</item>
+    <item>@array/contact_us_item</item>
+    <item>@array/help_item</item>
+    <item>@array/settings_item</item>
+  </array>
+
+  <array name="nav_drawer_items_silver">
+    <item>@array/home_item</item>
+    <item>@array/departments_item</item>
+    <item>@array/my_lists_item</item>
+    <item>@array/flash_deals_item</item>
+    <item>@array/gift_cards_item</item>
+    <item>@array/club_o_item_silver</item>
+    <item>@array/contact_us_item</item>
+    <item>@array/help_item</item>
+    <item>@array/settings_item</item>
+  </array>
+
+  <array name="nav_drawer_items_gold">
+    <item>@array/home_item</item>
+    <item>@array/departments_item</item>
+    <item>@array/my_lists_item</item>
+    <item>@array/flash_deals_item</item>
+    <item>@array/gift_cards_item</item>
+    <item>@array/club_o_item_gold</item>
+    <item>@array/contact_us_item</item>
+    <item>@array/help_item</item>
+    <item>@array/settings_item</item>
+  </array>
+
+  <array name="home_item">
+    <item>@id/home_nav_item</item>
+    <item>@string/home_nav_item</item>
+    <item>@drawable/ic_home_black_24dp</item>
+    <item>@integer/nav_drawer_item</item>
+    <item>-1</item>
+  </array>
+  <array name="departments_item">
+    <item>@id/departments_nav_item</item>
+    <item>@string/departments_nav_item</item>
+    <item>@drawable/ic_departments</item>
+    <item>@integer/nav_drawer_item</item>
+    <item>-1</item>
+  </array>
+  <array name="my_lists_item">
+    <item>@id/my_lists_nav_item</item>
+    <item>@string/my_lists_nav_item</item>
+    <item>@drawable/ic_favorite</item>
+    <item>@integer/nav_drawer_item</item>
+    <item>@array/my_lists_sub_menu</item>
+  </array>
+  <array name="flash_deals_item">
+    <item>@id/flash_deals_nav_item</item>
+    <item>@string/flash_deals_nav_item</item>
+    <item>@drawable/ic_flash_deals</item>
+    <item>@integer/nav_drawer_item</item>
+    <item>-1</item>
+  </array>
+  <array name="gift_cards_item">
+    <item>@id/gift_cards_nav_item</item>
+    <item>@string/gift_cards_nav_item</item>
+    <item>@drawable/ic_gift_cards</item>
+    <item>@integer/nav_drawer_item</item>
+    <item>@array/gift_cards_sub_menu</item>
+  </array>
+  <array name="club_o_item">
+    <item>@id/club_o_nav_item</item>
+    <item>@string/club_o_nav_item</item>
+    <item>@drawable/ic_club_o_24</item>
+    <item>@integer/nav_drawer_item</item>
+    <item>-1</item>
+  </array>
+  <array name="club_o_item_silver">
+    <item>@id/club_o_nav_item</item>
+    <item>@string/club_o_nav_item_silver</item>
+    <item>@drawable/ic_club_o_24_silver</item>
+    <item>@integer/nav_drawer_item</item>
+    <item>-1</item>
+  </array>
+  <array name="club_o_item_gold">
+    <item>@id/club_o_nav_item</item>
+    <item>@string/club_o_nav_item_gold</item>
+    <item>@drawable/ic_club_o_24_gold</item>
+    <item>@integer/nav_drawer_item</item>
+    <item>-1</item>
+  </array>
+  <array name="contact_us_item">
+    <item>@id/contact_us_nav_item</item>
+    <item>@string/contact_us_nav_item</item>
+    <item>@drawable/ic_contact_us</item>
+    <item>@integer/nav_drawer_item_top_border</item>
+    <item>@array/contact_us_sub_menu</item>
+  </array>
+  <array name="help_item">
+    <item>@id/help_nav_item</item>
+    <item>@string/help_nav_item</item>
+    <item>@drawable/ic_help_black_24dp</item>
+    <item>@integer/nav_drawer_item</item>
+    <item>-1</item>
+  </array>
+
+  <array name="settings_item">
+    <item>@id/settings_nav_item</item>
+    <item>@string/settings_nav_item</item>
+    <item>@drawable/ic_settings_black_24dp</item>
+    <item>@integer/nav_drawer_item</item>
+    <item>-1</item>
+  </array>
+
+  <!-- Gift Cards -->
+  <array name="gift_cards_sub_menu">
+    <item>@array/e_gift_cards_item</item>
+    <item>@array/physical_gift_cards</item>
+  </array>
+
+  <array name="e_gift_cards_item">
+    <item>@id/e_gift_cards_nav_item</item>
+    <item>@string/e_gift_cards_nav_item</item>
+    <item>-1</item>
+    <item>@integer/nav_drawer_item</item>
+  </array>
+
+  <array name="physical_gift_cards">
+    <item>@id/physical_gift_cards_nav_item</item>
+    <item>@string/physical_gift_cards_nav_item</item>
+    <item>-1</item>
+    <item>@integer/nav_drawer_item</item>
+  </array>
+
+
+  <!-- My Lists Sub Menu -->
+
+  <array name="view_my_lists_item">
+    <item>@id/view_my_lists_item</item>
+    <item>@string/view_my_lists_item</item>
+    <item>-1</item>
+    <item>@integer/nav_drawer_item</item>
+  </array>
+  <array name="find_a_list_item">
+    <item>@id/find_a_list_item</item>
+    <item>@string/find_a_list_item</item>
+    <item>-1</item>
+    <item>@integer/nav_drawer_item</item>
+  </array>
+  <array name="my_lists_sub_menu">
+    <item>@array/view_my_lists_item</item>
+    <item>@array/find_a_list_item</item>
+  </array>
+
+
+  <!-- Contact Us Sub Menu-->
+  <array name="app_feedback_nav_item">
+    <item>@id/app_feedback_nav_item</item>
+    <item>@string/app_feedback_nav_item</item>
+    <item>-1</item>
+    <item>@integer/nav_drawer_item</item>
+  </array>
+  <array name="chat_nav_item">
+    <item>@id/chat_nav_item</item>
+    <item>@string/chat_nav_item</item>
+    <item>-1</item>
+    <item>@integer/nav_drawer_item</item>
+  </array>
+  <array name="call_nav_item">
+    <item>@id/call_nav_item</item>
+    <item>@string/call_nav_item</item>
+    <item>-1</item>
+    <item>@integer/nav_drawer_item</item>
+  </array>
+
+  <array name="contact_us_sub_menu">
+    <item>@array/app_feedback_nav_item</item>
+    <item>@array/chat_nav_item</item>
+    <item>@array/call_nav_item</item>
+  </array>
+
+</resources>

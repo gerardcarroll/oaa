@@ -7,6 +7,7 @@ import android.support.test.runner.AndroidJUnit4;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.FeedActivity;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,11 +27,15 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 public class FeedActivityTest {
 
     @Rule
-    public ActivityTestRule<FeedActivity> activityRule = new ActivityTestRule<>(FeedActivity.class);
-    
+    public ActivityTestRule<FeedActivity> activityRule = new ActivityTestRule<>(FeedActivity.class,true, false);
+
+    @Before
+    public void setUp(){
+        activityRule.launchActivity(null);
+    }
+
     @Test
     public void testFeedRendering() {
-
         // Check Feed recycler view is displayed
         onView(withId(R.id.rv_feed)).check(matches(isDisplayed()));
     }
@@ -39,9 +44,8 @@ public class FeedActivityTest {
     public void testTabItemsDisplayed(){
 
         // Check Feed tabs are displayed
-        onView(withId(R.id.feed_tabs)).check(matches(isDisplayed()));
+        onView(withId(R.id.feed_viewpager)).check(matches(isDisplayed()));
 
-        // Check tabs are displayed
         onView(withText(R.string.my_feed_tab)).check(matches(isDisplayed()));
         onView(withText(R.string.trending_tab)).check(matches(isDisplayed()));
         onView(withText(R.string.my_location_tab)).check(matches(isDisplayed()));
@@ -54,8 +58,8 @@ public class FeedActivityTest {
         onView(withId(R.id.feed_tabs)).check(matches(isDisplayed()));
 
         // Check click on tabs
-        onView(withText(R.string.my_feed_tab)).perform(click());
         onView(withText(R.string.trending_tab)).perform(click());
+        onView(withText(R.string.my_feed_tab)).perform(click());
         onView(withText(R.string.my_location_tab)).perform(click());
     }
 
@@ -85,6 +89,6 @@ public class FeedActivityTest {
         onView(withId(R.id.rv_feed)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
         // Check Brand activity is now displayed
-        onView(withId(R.id.best_sellers)).check(matches(isDisplayed()));
+        onView(withId(R.id.best_sellers_hrv)).check(matches(isDisplayed()));
     }
 }
