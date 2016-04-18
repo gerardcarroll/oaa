@@ -1,12 +1,15 @@
 package com.overstock.android.prototype.fragment;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.verify;
-import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFragment;
+import android.os.Build;
+import android.os.Bundle;
 
-import java.util.ArrayList;
+import com.overstock.android.prototype.BuildConfig;
+import com.overstock.android.prototype.component.ApplicationComponent;
+import com.overstock.android.prototype.main.OAppPrototypeApplication;
+import com.overstock.android.prototype.model.Options;
+import com.overstock.android.prototype.model.ProductDetail;
+import com.overstock.android.prototype.module.ApplicationModule;
+import com.overstock.android.prototype.presenter.ProductBottomSheetPresenter;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -19,18 +22,15 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowToast;
 
-import android.os.Build;
-import android.os.Bundle;
-
-import com.overstock.android.prototype.BuildConfig;
-import com.overstock.android.prototype.component.ApplicationComponent;
-import com.overstock.android.prototype.main.OAppPrototypeApplication;
-import com.overstock.android.prototype.model.Options;
-import com.overstock.android.prototype.model.ProductDetail;
-import com.overstock.android.prototype.module.ApplicationModule;
-import com.overstock.android.prototype.presenter.ProductBottomSheetPresenter;
+import java.util.ArrayList;
 
 import it.cosenonjaviste.daggermock.DaggerMockRule;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.verify;
+import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFragment;
 
 /**
  * @author LeeMeehan.
@@ -91,7 +91,7 @@ public class ProductBottomSheetFragmentTest {
         OPTION_PRICE);
     options.add(option);
     productDetails = new ProductDetail(PRODUCT_DETAIL_ID, PRODUCT_NAME, IMAGE_LARGE, IMAGE_MEDIUM, PRICE, QUANTITY,
-        DESCRIPTION, options);
+        DESCRIPTION, options, null);
     productBottomSheetFragment = new ProductBottomSheetFragment();
     Bundle bundle = new Bundle();
     bundle.putParcelable("productDetails", Parcels.wrap(productDetails));
