@@ -31,6 +31,9 @@ ext {
     crashlyticsVersion = '2.5.5@aar'
     javaxInjectVersion = '1'
     testRunnerVersion = '0.4.1'
+    nineoldandroidsLibraryVersion = '2.4.0'
+    sliderLibraryVersion = '1.1.5@aar'
+    uiautomatorVersion = '2.1.1'
 
     javaxAnnotation = "org.glassfish:javax.annotation:${javaxAnnotationVersion}"
     autoParcelProcessor = "com.github.frankiesardo:auto-parcel-processor:${autoParcelProcessorVersion}"
@@ -52,7 +55,8 @@ ext {
     easyfonts = "com.vstechlab.easyfonts:easyfonts:${easyfontsVersion}"
     crashlytics = "com.crashlytics.sdk.android:crashlytics:${crashlyticsVersion}"
     javaxInject = "javax.inject:javax.inject:${javaxInjectVersion}"
-
+    nineoldandroidsLibrary = "com.nineoldandroids:library:${nineoldandroidsLibraryVersion}"
+    sliderLibrary = "com.daimajia.slider:library:${sliderLibraryVersion}"
 
     retrofit2 = [
             retrofit : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
@@ -93,7 +97,9 @@ ext {
                     espressoContrib: "com.android.support.test.espresso:espresso-contrib:${espressoVersion}",
                     espressoIntents: "com.android.support.test.espresso:espresso-intents:${espressoVersion}"
             ],
-            runner : "com.android.support.test:runner:${testRunnerVersion}"
+            runner : "com.android.support.test:runner:${testRunnerVersion}",
+            rules  : "com.android.support.test:rules:${testRunnerVersion}",
+            uiautomator : "com.android.support.test.uiautomator:uiautomator-v18:${uiautomatorVersion}"
     ]
 
     dexmaker = [

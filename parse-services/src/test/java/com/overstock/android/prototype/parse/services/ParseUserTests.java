@@ -1,4 +1,4 @@
-package com.overstock.android.prototype;
+package com.overstock.android.prototype.parse.services;
 
 import android.os.SystemClock;
 import android.util.Log;
