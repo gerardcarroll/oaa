@@ -1,10 +1,8 @@
-package com.overstock.android.prototype.espresso.service;
+package com.overstock.android.prototype;
 
 import android.os.SystemClock;
-import android.support.test.rule.ActivityTestRule;
 import android.util.Log;
 
-import com.overstock.android.prototype.activity.HomeActivity;
 import com.parse.LogInCallback;
 import com.parse.ParseAnonymousUtils;
 import com.parse.ParseException;
@@ -15,7 +13,6 @@ import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
@@ -30,15 +27,12 @@ public class ParseUserTests {
     private static final String email = "eurowhitetest@overtock.com";
     private static final String TAG = ParseUserTests.class.getName();
 
-    @Rule
-    public ActivityTestRule<HomeActivity> activityTestRule = new ActivityTestRule<HomeActivity>(HomeActivity.class, true, false);
 
     @Before
     public void setUp(){
         ParseQuery.clearAllCachedResults();
         ParseUser user = ParseUser.getCurrentUser();
         user.logOut();
-        activityTestRule.launchActivity(null);
     }
 
     @Test
