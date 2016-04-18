@@ -1,22 +1,22 @@
 package com.overstock.android.prototype.presenter;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.overstock.android.prototype.model.Options;
+import com.overstock.android.prototype.model.ProductDetail;
+import com.overstock.android.prototype.presenter.impl.ProductBottomSheetPresenterImpl;
+import com.overstock.android.prototype.view.ProductBottomSheetView;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.overstock.android.prototype.model.Options;
-import com.overstock.android.prototype.model.ProductDetail;
-import com.overstock.android.prototype.presenter.impl.ProductBottomSheetPresenterImpl;
-import com.overstock.android.prototype.view.ProductBottomSheetView;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 
 /**
  * @author LeeMeehan
@@ -118,7 +118,7 @@ public class ProductBottomSheetPresenterTest {
     options.add(option);
     options.add(option);
     final ProductDetail productDetail = new ProductDetail(PRODUCT_DETAIL_ID, PRODUCT_NAME, IMAGE_LARGE, IMAGE_MEDIUM,
-        PRICE, QUANTITY, DESCRIPTION, options);
+        PRICE, QUANTITY, DESCRIPTION, options, null);
     productBottomSheetPresenter.updateProductPage(productDetail);
     verify(productBottomSheetView).updateFinalPrice(productDetail.getMemberPrice());
     verify(productBottomSheetView).updateSpinner((ArrayList<Options>) options);
@@ -131,7 +131,7 @@ public class ProductBottomSheetPresenterTest {
         OPTION_PRICE);
     options.add(option);
     final ProductDetail productDetail = new ProductDetail(PRODUCT_DETAIL_ID, PRODUCT_NAME, IMAGE_LARGE, IMAGE_MEDIUM,
-        PRICE, QUANTITY, DESCRIPTION, options);
+        PRICE, QUANTITY, DESCRIPTION, options, null);
     productBottomSheetPresenter.updateProductPage(productDetail);
     verify(productBottomSheetView).updateFinalPrice(productDetail.getMemberPrice());
     verify(productBottomSheetView, never()).updateSpinner((ArrayList<Options>) options);
