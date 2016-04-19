@@ -8,7 +8,7 @@ import org.parceler.Parcel;
 @Parcel
 public class ProductImages {
 
-    private String imagePath;
+    protected String imagePath;
 
     public ProductImages(){}
 
