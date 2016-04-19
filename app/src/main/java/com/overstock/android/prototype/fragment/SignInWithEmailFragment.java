@@ -11,11 +11,11 @@ import com.overstock.android.prototype.R;
 /**
  * @author gcarroll Fragment used to allow sign-in using email
  */
-public class EmailSignInFragment extends Fragment {
+public class SignInWithEmailFragment extends Fragment {
 
-  public static final String TAG = EmailSignInFragment.class.getName();
+  public static final String TAG = SignInWithEmailFragment.class.getName();
 
-  public EmailSignInFragment() {
+  public SignInWithEmailFragment() {
     // Required empty public constructor
   }
 
@@ -27,6 +27,6 @@ public class EmailSignInFragment extends Fragment {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_email_sign_in, container, false);
+    return inflater.inflate(R.layout.fragment_sign_in_with_email, container, false);
   }
 }

@@ -1,12 +1,20 @@
 <resources>
     <string name="app_name">O.com App Prototype</string>
     <string name="app_title">O.com App</string>
+    <string name="app_title_short">OApp</string>
 
     <string name="home_page_label" translatable="false">O.com App</string>
     <string name="faceBook_connect">Connect with Facebook</string>
     <string name="google_connect">Connect with G+</string>
     <string name="email_connect">Connect with Email</string>
     <string name="guest_connect"><u>Continue As Guest</u></string>
+
+    <!-- Email Signin String Values -->
+    <string name="email_sign_in">Sign In</string>
+    <string name="email_sign_out">Sign Out</string>
+    <string name="email_cancel">Cancel</string>
+    <string name="email_sign_up">Sign Up</string>
+    <string name="email_sign_up_link"><u>Sign Up</u></string>
 
     <!-- GoogleSignInFragment string values-->
     <string name="desc_google_icon">Google Logo</string>

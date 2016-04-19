@@ -1,6 +1,6 @@
 package com.overstock.android.prototype.module;
 
-import com.overstock.android.prototype.fragment.EmailSignInFragment;
+import com.overstock.android.prototype.fragment.SignInWithEmailFragment;
 import com.overstock.android.prototype.fragment.GoogleFederatedIdentityFragment;
 import com.overstock.android.prototype.fragment.HomeFragment;
 import com.overstock.android.prototype.module.scope.ActivityScope;
@@ -28,8 +28,8 @@ public class HomeActivityFragmentsModule {
 
   @Provides
   @ActivityScope
-  public EmailSignInFragment providesEmailSignInFragement() {
-    return new EmailSignInFragment();
+  public SignInWithEmailFragment providesSignInWithEmailFragement() {
+    return new SignInWithEmailFragment();
   }
 
 }

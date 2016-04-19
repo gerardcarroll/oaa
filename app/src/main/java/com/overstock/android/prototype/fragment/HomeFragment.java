@@ -31,7 +31,7 @@ public class HomeFragment extends Fragment {
   GoogleFederatedIdentityFragment googleFederatedIdentityFragment;
 
   @Inject
-  EmailSignInFragment emailSignInFragment;
+  SignInWithEmailFragment signInWithEmailFragment;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,7 +60,7 @@ public class HomeFragment extends Fragment {
   @OnClick(R.id.email_login_btn)
   public void emailLogin_onClick() {
     FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-    fragmentTransaction.add(R.id.home_activity, emailSignInFragment, EmailSignInFragment.TAG);
+    fragmentTransaction.add(R.id.home_activity, signInWithEmailFragment, SignInWithEmailFragment.TAG);
     fragmentTransaction.addToBackStack(null);
     fragmentTransaction.commit();
   }
