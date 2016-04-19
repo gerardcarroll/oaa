@@ -10,15 +10,15 @@ import org.parceler.Parcel;
 @Parcel
 public class Product implements Parcelable{
 
-  private int id;
+  protected int id;
 
-  private String imageLarge;
+  protected String imageLarge;
 
-  private String imageMedium1;
+  protected String imageMedium1;
 
-  private String name;
+  protected String name;
 
-  private float memberPrice;
+  protected float memberPrice;
 
   public Product() {}
 

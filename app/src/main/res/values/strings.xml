@@ -81,5 +81,7 @@
     <string name="ostk_base_rest_url">http://www.overstock.com/api/</string>
     <string name="similar_producst_labels">Similar Products</string>
     <string name="webview_html_encoding">text/html; charset=UTF-8</string>
+    <string name="parse_service_url">http://parse.parse.dev.ostk.com:8080/parse</string>
+    <string name="parse_application_id">oapp</string>
 
 </resources>

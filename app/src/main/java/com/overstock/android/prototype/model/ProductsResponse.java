@@ -5,7 +5,7 @@ package com.overstock.android.prototype.model;
  */
 public class ProductsResponse {
 
-    private Products products;
+    protected Products products;
 
     public ProductsResponse(){}
 

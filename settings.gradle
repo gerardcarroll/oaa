@@ -1,1 +1,1 @@
-include ':app', ':navdrawer-ui'
+include ':app', ':navdrawer-ui', ':parse-services'

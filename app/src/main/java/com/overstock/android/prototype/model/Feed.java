@@ -5,9 +5,9 @@ package com.overstock.android.prototype.model;
  */
 public class Feed {
 
-    private int productImage;
-    private String topProductsLink;
-    private String productUrl;
+    protected int productImage;
+    protected String topProductsLink;
+    protected String productUrl;
 
     public Feed() {}
 
