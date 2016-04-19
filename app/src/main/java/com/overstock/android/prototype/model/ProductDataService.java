@@ -1,36 +1,36 @@
 package com.overstock.android.prototype.model;
 
-import javax.inject.Inject;
-
-import rx.Observable;
-
 import android.content.UriMatcher;
 import android.net.Uri;
 import android.util.Log;
 
 import com.overstock.android.prototype.interfaces.OappProvider;
-import com.overstock.android.prototype.service.ProductService;
 import com.overstock.android.prototype.provider.OappProviderContract;
+import com.overstock.android.prototype.service.ProductService;
+
+import javax.inject.Inject;
+
+import rx.Observable;
 
 /**
  * @author LeeMeehan, rayConnolly Created on 09-Mar-16.
  */
 public class ProductDataService implements OappProvider<ProductsResponse> {
 
-  private static final String TAG = ProductDataService.class.getName();
+  protected static final String TAG = ProductDataService.class.getName();
 
   public static final int ProductEntry_BESTSELLERS = 100;
 
   public static final int ProductEntry_NEWARRIVALS = 101;
 
-  private static final String BEST_SELLERS = "recommended";
+  protected static final String BEST_SELLERS = "recommended";
 
-  private static final String NEW_ARRIVALS = "New+Arrivals";
+  protected static final String NEW_ARRIVALS = "New+Arrivals";
 
   // The URI Matcher used by this content provider.
-  private static final UriMatcher sUriMatcher = buildUriMatcher();
+  protected static final UriMatcher sUriMatcher = buildUriMatcher();
 
-  private ProductService productService;
+  protected ProductService productService;
 
   @Inject
   public ProductDataService(final ProductService productService) {
@@ -52,7 +52,7 @@ public class ProductDataService implements OappProvider<ProductsResponse> {
     }
   }
 
-  private static UriMatcher buildUriMatcher() {
+  protected static UriMatcher buildUriMatcher() {
 
     final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
     final String authority = OappProviderContract.CONTENT_AUTHORITY;

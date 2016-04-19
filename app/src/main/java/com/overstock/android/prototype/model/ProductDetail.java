@@ -1,8 +1,8 @@
 package com.overstock.android.prototype.model;
 
-import java.util.List;
-
 import org.parceler.Parcel;
+
+import java.util.List;
 
 /**
  * @author Rayconnolly Created on 3/21/2016.
@@ -10,25 +10,25 @@ import org.parceler.Parcel;
 @Parcel
 public class ProductDetail {
 
-  private int id;
+  protected int id;
 
-  private String name;
+  protected String name;
 
-  private String imageLarge;
+  protected String imageLarge;
 
-  private String imageMedium1;
+  protected String imageMedium1;
 
-  private float memberPrice;
+  protected float memberPrice;
 
-  private Integer quantity;
+  protected Integer quantity;
 
-  private String description;
+  protected String description;
 
-  private List<Options> options;
+  protected List<Options> options;
 
-  private List<ProductImages> productImages;
+  protected List<ProductImages> productImages;
 
-  private ProductDetail() {}
+  protected ProductDetail() {}
 
   public ProductDetail(int id, String name, String imageLarge, String image, float price, int quantity,
       String description, List<Options> options, List<ProductImages> productImages) {
