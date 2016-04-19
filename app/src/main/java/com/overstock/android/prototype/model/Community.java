@@ -9,9 +9,9 @@ import android.os.Parcelable;
 @org.parceler.Parcel
 public class Community implements Parcelable{
 
-  private int imageId;
-  private String name;
-  private boolean selected;
+  protected int imageId;
+  protected String name;
+  protected boolean selected;
 
   public Community() { /* Required empty constructor */ }
 
