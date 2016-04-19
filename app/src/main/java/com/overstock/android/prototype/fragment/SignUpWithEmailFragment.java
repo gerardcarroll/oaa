@@ -3,6 +3,7 @@ package com.overstock.android.prototype.fragment;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,11 +68,25 @@ public class SignUpWithEmailFragment extends Fragment implements ConnectWithEmai
 
     @Override
     public void showSignUpSuccess() {
-        Toast.makeText(getActivity().getApplicationContext(), "User was signed up successfully.", Toast.LENGTH_LONG).show();
+        displayToast("New user was signed up successfully.");
     }
 
     @Override
     public void showSignUpError() {
-        Toast.makeText(getActivity().getApplicationContext(), "Unable to sign up user.", Toast.LENGTH_LONG).show();
+        displayToast("Unable to Sign Up new user.");
+    }
+
+    @Override
+    public void displayToast(String toastMessage) {
+        final Toast toast = Toast.makeText(getActivity(), toastMessage, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.BOTTOM, 0, 20);
+        toast.show();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+        connectWithEmailPresenter.onDestroy();
     }
 }

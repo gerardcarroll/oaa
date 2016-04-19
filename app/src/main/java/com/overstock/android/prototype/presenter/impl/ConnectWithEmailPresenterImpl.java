@@ -36,6 +36,7 @@ public class ConnectWithEmailPresenterImpl implements ConnectWithEmailPresenter 
 
     @Override
     public void onSignUp(String username, String password, String passwordConfirm) {
+
         parseUser = new ParseUser();
 
         parseUser.setUsername(username);
@@ -47,16 +48,18 @@ public class ConnectWithEmailPresenterImpl implements ConnectWithEmailPresenter 
             public void done(ParseException e) {
                 if (e == null){
                     hideProgressDialog();
-                    Log.e("SUCCESS", "Successfully signed up to OApp", e);
+                    Log.i(TAG, "Successfully signed up to OApp", e);
                     Toast.makeText(context, "User was signed up successfully.", Toast.LENGTH_LONG).show();
                 } else {
                     showProgressDialog();
-                    Log.e("ERROR", "Unsuccessful Sign Up to OApp", e);
+                    Log.i(TAG, "Unsuccessful Sign Up to OApp", e);
                     Toast.makeText(context, "Unable to sign up user.", Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
+
+
 
     @Override
     public void onDestroy() {

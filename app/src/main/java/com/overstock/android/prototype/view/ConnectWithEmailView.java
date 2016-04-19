@@ -12,4 +12,6 @@ public interface ConnectWithEmailView {
     void showSignUpSuccess();
 
     void showSignUpError();
+
+    void displayToast(String toastMessage);
 }
