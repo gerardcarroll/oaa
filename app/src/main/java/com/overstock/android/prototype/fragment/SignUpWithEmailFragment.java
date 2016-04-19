@@ -1,6 +1,6 @@
 package com.overstock.android.prototype.fragment;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.Gravity;
@@ -22,6 +22,8 @@ import butterknife.ButterKnife;
  * Created by rconnolly on 4/19/2016.
  */
 public class SignUpWithEmailFragment extends Fragment implements ConnectWithEmailView {
+
+    public static final String TAG = SignUpWithEmailFragment.class.getName();
 
     private ConnectWithEmailPresenter connectWithEmailPresenter;
 

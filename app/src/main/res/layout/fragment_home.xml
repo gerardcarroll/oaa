@@ -61,8 +61,7 @@
             android:elevation="@dimen/button_elevation"
             android:text="@string/email_connect"
             android:textColor="@android:color/background_dark"
-            android:typeface="normal"
-            android:enabled="false"/>
+            android:typeface="normal"/>
 
         <Button
             android:id="@+id/guest_login_btn"
@@ -75,7 +74,6 @@
             android:text="@string/guest_connect"
             android:textColor="@android:color/background_light"
             android:typeface="normal" />
-
 
     </LinearLayout>
 
