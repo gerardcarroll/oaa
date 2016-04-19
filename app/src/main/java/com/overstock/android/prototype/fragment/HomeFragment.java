@@ -30,6 +30,9 @@ public class HomeFragment extends Fragment {
   @Inject
   GoogleFederatedIdentityFragment googleFederatedIdentityFragment;
 
+  @Inject
+  EmailSignInFragment emailSignInFragment;
+
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View rootView = inflater.inflate(R.layout.fragment_home, container, false);
@@ -52,6 +55,14 @@ public class HomeFragment extends Fragment {
     final Toast toast = Toast.makeText(getActivity(), "FaceBook Login Coming Soon!", Toast.LENGTH_SHORT);
     toast.setGravity(Gravity.BOTTOM, 0, 20);
     toast.show();
+  }
+
+  @OnClick(R.id.email_login_btn)
+  public void emailLogin_onClick() {
+    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+    fragmentTransaction.add(R.id.home_activity, emailSignInFragment, EmailSignInFragment.TAG);
+    fragmentTransaction.addToBackStack(null);
+    fragmentTransaction.commit();
   }
 
   @OnClick(R.id.guest_login_btn)

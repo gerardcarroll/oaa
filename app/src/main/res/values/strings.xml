@@ -5,6 +5,7 @@
     <string name="home_page_label" translatable="false">O.com App</string>
     <string name="faceBook_connect">Connect with Facebook</string>
     <string name="google_connect">Connect with G+</string>
+    <string name="email_connect">Connect with Email</string>
     <string name="guest_connect"><u>Continue As Guest</u></string>
 
     <!-- GoogleSignInFragment string values-->

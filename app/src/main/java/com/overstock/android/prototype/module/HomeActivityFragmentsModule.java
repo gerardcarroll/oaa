@@ -1,5 +1,6 @@
 package com.overstock.android.prototype.module;
 
+import com.overstock.android.prototype.fragment.EmailSignInFragment;
 import com.overstock.android.prototype.fragment.GoogleFederatedIdentityFragment;
 import com.overstock.android.prototype.fragment.HomeFragment;
 import com.overstock.android.prototype.module.scope.ActivityScope;
@@ -13,16 +14,22 @@ import dagger.Provides;
 @Module
 public class HomeActivityFragmentsModule {
 
-    @Provides
-    @ActivityScope
-    public HomeFragment providesHomeFragment(){
-        return new HomeFragment();
-    }
+  @Provides
+  @ActivityScope
+  public HomeFragment providesHomeFragment() {
+    return new HomeFragment();
+  }
 
-    @Provides
-    @ActivityScope
-    public GoogleFederatedIdentityFragment providesGoogleFederatedIdentityFragment(){
-        return new GoogleFederatedIdentityFragment();
-    }
+  @Provides
+  @ActivityScope
+  public GoogleFederatedIdentityFragment providesGoogleFederatedIdentityFragment() {
+    return new GoogleFederatedIdentityFragment();
+  }
+
+  @Provides
+  @ActivityScope
+  public EmailSignInFragment providesEmailSignInFragement() {
+    return new EmailSignInFragment();
+  }
 
 }
