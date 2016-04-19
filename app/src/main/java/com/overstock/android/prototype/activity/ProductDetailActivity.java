@@ -1,16 +1,8 @@
 package com.overstock.android.prototype.activity;
 
-import java.util.ArrayList;
-import java.util.Currency;
-import java.util.List;
-import java.util.Locale;
-
-import javax.inject.Inject;
-
-import org.parceler.Parcels;
-
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -20,10 +12,6 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
@@ -39,6 +27,19 @@ import com.overstock.android.prototype.model.ProductImages;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
 import com.overstock.android.prototype.view.ProductDetailView;
 import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
+
+import java.util.ArrayList;
+import java.util.Currency;
+import java.util.List;
+import java.util.Locale;
+
+import javax.inject.Inject;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * @author RayConnolly, LeeMeehan Created on 21-03-2016
@@ -170,6 +171,14 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     sliderLayout.setCustomAnimation(new DescriptionAnimation());
     // sliderLayout.setDuration(4000);
     sliderLayout.stopAutoCycle();
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    for(Fragment fragment : getSupportFragmentManager().getFragments()){
+      getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+    }
   }
 
   @Override

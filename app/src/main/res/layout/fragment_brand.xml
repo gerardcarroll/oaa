@@ -169,9 +169,16 @@
 
             </LinearLayout>
 
-            <include layout="@layout/fragment_horizontial_scroll" android:id="@+id/best_sellers_hrv" />
-
-            <include layout="@layout/fragment_horizontial_scroll" android:id="@+id/new_arrivals_hrv" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <include android:id="@+id/best_sellers_hrv" layout="@layout/fragment_horizontial_scroll"  />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <include android:id="@+id/new_arrivals_hrv" layout="@layout/fragment_horizontial_scroll"  />
+            </FrameLayout>
 
         </LinearLayout>
 

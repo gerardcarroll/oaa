@@ -81,8 +81,11 @@ public class HorizontialScrollFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_horizontial_scroll, container, false);
+        View v = null;
+        if(savedInstanceState == null) {
+            v = inflater.inflate(R.layout.fragment_horizontial_scroll, container, false);
+        }
+        return v;
     }
 
     @Override
@@ -117,6 +120,11 @@ public class HorizontialScrollFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 
     /**
