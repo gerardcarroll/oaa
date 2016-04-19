@@ -97,6 +97,14 @@ public class BrandFragment extends Fragment implements BrandView {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        for(Fragment fragment : getChildFragmentManager().getFragments()){
+            getChildFragmentManager().beginTransaction().remove(fragment).commit();
+        }
+    }
+
+    @Override
     public void addHorizontialRecyclerView(
             final int layoutResourceId, final ArrayList<Product> products, final String displayText) {
         Log.d(TAG, "Passing " + displayText + " products to adapter to be displayed. List size : " + products.size());

@@ -2,6 +2,7 @@ package com.overstock.android.prototype.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -188,6 +189,14 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
       textSliderView.image(BASE_IMAGE_URL + largeImage).setScaleType(BaseSliderView.ScaleType.FitCenterCrop);
       sliderLayout.addSlider(textSliderView);
       sliderLayout.stopAutoCycle();
+    }
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    for(Fragment fragment : getSupportFragmentManager().getFragments()){
+      getSupportFragmentManager().beginTransaction().remove(fragment).commit();
     }
   }
 
