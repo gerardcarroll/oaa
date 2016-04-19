@@ -95,6 +95,7 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
     ((OAppPrototypeApplication) getActivity().getApplication()).getComponent().inject(this);
     ButterKnife.bind(this, view);
     final ProductDetail productDetail = Parcels.unwrap(getArguments().getParcelable("productDetails"));
+    Log.i(TAG, String.format("Product Id: %s", productDetail.getId()));
     presenter.setView(this);
     final String placeholderRewards = "12.50";
     presenter.setRewardsApplied(Float.valueOf(placeholderRewards));
@@ -156,7 +157,7 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
     CoordinatorLayout.Behavior behavior = params.getBehavior();
 
     if (behavior != null && behavior instanceof BottomSheetBehavior) {
-      ((BottomSheetBehavior) behavior).setPeekHeight(600);
+      // ((BottomSheetBehavior) behavior).se.setState(BottomSheetBehavior.STATE_EXPANDED);
       ((BottomSheetBehavior) behavior).setBottomSheetCallback(bottomSheetCallback);
     }
   }
