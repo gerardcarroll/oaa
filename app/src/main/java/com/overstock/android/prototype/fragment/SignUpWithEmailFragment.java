@@ -8,9 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.presenter.ConnectWithEmailPresenter;
+import com.overstock.android.prototype.view.ConnectWithEmailView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -18,7 +20,7 @@ import butterknife.ButterKnife;
 /**
  * Created by rconnolly on 4/19/2016.
  */
-public class SignUpWithEmailFragment extends Fragment {
+public class SignUpWithEmailFragment extends Fragment implements ConnectWithEmailView {
 
     private ConnectWithEmailPresenter connectWithEmailPresenter;
 
@@ -54,5 +56,22 @@ public class SignUpWithEmailFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         //connectWithEmailPresenter.setView(this);
+    }
+
+    @Override
+    public void signUp(String username, String password, String passwordConfirm) {
+        usernameEditText.setText(username);
+        passwordEditText.setText(password);
+        confirmPasswordEditText.setText(passwordConfirm);
+    }
+
+    @Override
+    public void showSignUpSuccess() {
+        Toast.makeText(getActivity().getApplicationContext(), "User was signed up successfully.", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showSignUpError() {
+        Toast.makeText(getActivity().getApplicationContext(), "Unable to sign up user.", Toast.LENGTH_LONG).show();
     }
 }

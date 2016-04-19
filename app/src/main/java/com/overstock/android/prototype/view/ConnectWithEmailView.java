@@ -5,7 +5,11 @@ package com.overstock.android.prototype.view;
  */
 public interface ConnectWithEmailView {
 
-    void signIn(String username, String password);
+    //void signIn(String username, String password);
 
     void signUp(String username, String password, String passwordConfirm);
+
+    void showSignUpSuccess();
+
+    void showSignUpError();
 }
