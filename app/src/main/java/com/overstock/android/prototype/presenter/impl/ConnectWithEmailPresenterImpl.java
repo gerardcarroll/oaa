@@ -18,21 +18,20 @@ import com.parse.SignUpCallback;
  */
 public class ConnectWithEmailPresenterImpl implements ConnectWithEmailPresenter {
 
+    private static final String TAG = ConnectWithEmailPresenterImpl.class.getName();
     private ConnectWithEmailView connectWithEmailView;
-
     private ParseQuery parseQuery;
     private ParseUser parseUser;
     private Context context;
     private ProgressDialog progressDialog;
 
-    public ConnectWithEmailPresenterImpl(ConnectWithEmailView view, Context context){
-        this.connectWithEmailView = view;
+    public ConnectWithEmailPresenterImpl(Context context){
         this.context = context;
     }
 
     @Override
-    public void setView(ConnectWithEmailView connectWithEmailView) {
-
+    public void setView(final ConnectWithEmailView connectWithEmailView) {
+        this.connectWithEmailView = connectWithEmailView;
     }
 
     @Override
@@ -61,7 +60,7 @@ public class ConnectWithEmailPresenterImpl implements ConnectWithEmailPresenter 
 
     @Override
     public void onDestroy() {
-
+        connectWithEmailView = null;
     }
 
     private void showProgressDialog() {
