@@ -3,6 +3,7 @@ package com.overstock.android.prototype.adapters;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,9 @@ public class OptionAdapter extends BaseAdapter {
     LayoutInflater inflater = activity.getLayoutInflater();
     View row = inflater.inflate(R.layout.support_simple_spinner_dropdown_item, parent, false);
     ((TextView) row).setText(option.getDescription());
+    if (position == 0) {
+      ((TextView) row).setTypeface(Typeface.DEFAULT_BOLD);
+    }
     return row;
   }
 }

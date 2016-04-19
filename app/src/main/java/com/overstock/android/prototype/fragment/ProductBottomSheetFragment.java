@@ -157,7 +157,6 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
     CoordinatorLayout.Behavior behavior = params.getBehavior();
 
     if (behavior != null && behavior instanceof BottomSheetBehavior) {
-      // ((BottomSheetBehavior) behavior).se.setState(BottomSheetBehavior.STATE_EXPANDED);
       ((BottomSheetBehavior) behavior).setBottomSheetCallback(bottomSheetCallback);
     }
   }
@@ -201,18 +200,21 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
   /* Private method to setup and display the spinner. */
   @Override
   public void updateSpinner(final ArrayList<Options> options) {
+    options.add(0, new Options(0, getResources().getString(R.string.option_placeholder_test), 0, 0, 0));
     final OptionAdapter optionAdapter = new OptionAdapter(options, getActivity());
     spinner.setAdapter(optionAdapter);
     spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
       @Override
       public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        final Options option = (Options) optionAdapter.getItem(position);
-        presenter.setMaxQuantityAllowed(option.getMaxQuantityAllowed());
-        presenter.setCurrentPrice(option.getPrice());
-        final Integer existingQuantity = Integer.parseInt(txtIndicator.getText().toString());
-        presenter.updateFinalPrice(existingQuantity);
-        presenter.resetRewards();
-        Log.i(TAG, String.valueOf(option.getMaxQuantityAllowed()));
+        if (position > 0) {
+          final Options option = (Options) optionAdapter.getItem(position);
+          presenter.setMaxQuantityAllowed(option.getMaxQuantityAllowed());
+          presenter.setCurrentPrice(option.getPrice());
+          final Integer existingQuantity = Integer.parseInt(txtIndicator.getText().toString());
+          presenter.updateFinalPrice(existingQuantity);
+          presenter.resetRewards();
+          Log.i(TAG, String.valueOf(option.getMaxQuantityAllowed()));
+        }
       }
 
       @Override
