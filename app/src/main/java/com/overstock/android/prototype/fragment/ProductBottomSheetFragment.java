@@ -200,7 +200,7 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
   /* Private method to setup and display the spinner. */
   @Override
   public void updateSpinner(final ArrayList<Options> options) {
-    options.add(0, new Options(0, "Please Select", 0, 0, 0));
+    options.add(0, new Options(0, getResources().getString(R.string.option_placeholder_test), 0, 0, 0));
     final OptionAdapter optionAdapter = new OptionAdapter(options, getActivity());
     spinner.setAdapter(optionAdapter);
     spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

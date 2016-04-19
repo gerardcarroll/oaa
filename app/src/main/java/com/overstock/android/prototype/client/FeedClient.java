@@ -50,7 +50,7 @@ public class FeedClient {
           public Observable<List<Feed>> call() {
             return Observable.just(feeds);
           }
-        }).delay(3, TimeUnit.SECONDS);
+        }).delay(1, TimeUnit.SECONDS);
       }
     };
   }
