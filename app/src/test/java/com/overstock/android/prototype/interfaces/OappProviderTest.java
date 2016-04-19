@@ -1,8 +1,10 @@
 package com.overstock.android.prototype.interfaces;
 
 import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
 
+import com.overstock.android.prototype.BuildConfig;
 import com.overstock.android.prototype.model.Product;
 import com.overstock.android.prototype.model.Products;
 import com.overstock.android.prototype.model.ProductsResponse;
@@ -15,6 +17,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 
@@ -26,6 +29,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by itowey on 22/03/16.
  */
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP)
 @RunWith(RobolectricGradleTestRunner.class)
 public class OappProviderTest {
   private static final String TAG = OappProviderTest.class.getName();

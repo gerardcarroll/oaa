@@ -10,6 +10,7 @@ import com.overstock.android.prototype.R;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -64,6 +65,7 @@ public class CommunitiesActivityTest {
    * Simple test case to test that the Communities Activity was created successfully and the communities grid has been
    * populated.
    */
+  @Ignore
   @Test
   public void testCommunitiesActivity_Creation() {
     assertNotNull("CommunityActivity is null it was not Created.", communitiesActivity);
@@ -78,6 +80,7 @@ public class CommunitiesActivityTest {
    * This test asserts that when items on the community grid are selected the progress button responds accordingly. It
    * then asserts that once the progress button reaches 100% and is clicked that the FeedActivity is started.
    */
+  @Ignore
   @Test
   public void testCommunitiesActivity_HappyPath() {
     assertFalse("ProcessButton is enabled. Expected to be Disabled", processButton.isEnabled());
