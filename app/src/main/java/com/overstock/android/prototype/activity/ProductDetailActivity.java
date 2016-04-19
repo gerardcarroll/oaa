@@ -1,14 +1,5 @@
 package com.overstock.android.prototype.activity;
 
-import java.util.ArrayList;
-import java.util.Currency;
-import java.util.List;
-import java.util.Locale;
-
-import javax.inject.Inject;
-
-import org.parceler.Parcels;
-
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -16,16 +7,14 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
@@ -39,6 +28,19 @@ import com.overstock.android.prototype.model.ProductImages;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
 import com.overstock.android.prototype.view.ProductDetailView;
 import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
+
+import java.util.ArrayList;
+import java.util.Currency;
+import java.util.List;
+import java.util.Locale;
+
+import javax.inject.Inject;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * @author RayConnolly, LeeMeehan Created on 21-03-2016
@@ -76,7 +78,8 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   @Bind(R.id.slider)
   SliderLayout sliderLayout;
 
-  List<String> productImages;
+  @Bind(R.id.custom_indicator)
+  PagerIndicator pagerIndicator;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
@@ -148,28 +151,44 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   public void displayProductDetails(final ProductDetail productDetail) {
     Log.d(TAG, "Displaying Product Details." + productDetail.toString());
     productDescription.loadData(productDetail.getDescription().trim(), getString(R.string.webview_html_encoding), null);
-    populateImageSlider(productDetail.getProductImages());
+
+    if (productDetail.getProductImages().isEmpty()) {
+      populateImageSlider(null, productDetail.getImageLarge());
+    } else {
+      populateImageSlider(productDetail.getProductImages(), null);
+    }
     btn_buy.setVisibility(View.VISIBLE);
   }
 
-  private void populateImageSlider(List<ProductImages> productImages) {
-    Log.d(TAG, "[In populateImageSlider method.]");
+  private void populateImageSlider(List<ProductImages> productImages, String largeImage) {
 
-    for (ProductImages image : productImages) {
-
-      TextSliderView textSliderView = new TextSliderView(this);
-
-      Log.d(TAG, "Passing " + BASE_IMAGE_URL + image.getImagePath() + " to image slider to be displayed");
-      textSliderView.image(BASE_IMAGE_URL + image.getImagePath()).setScaleType(BaseSliderView.ScaleType.FitCenterCrop);
-
+    TextSliderView textSliderView;
+    if (productImages != null){
+      for (ProductImages image : productImages) {
+        textSliderView = new TextSliderView(this);
+        Log.d(TAG, "Passing " + BASE_IMAGE_URL + image.getImagePath() + " to image slider to be displayed");
+        textSliderView.image(BASE_IMAGE_URL + image.getImagePath()).setScaleType(BaseSliderView.ScaleType.FitCenterCrop);
+        sliderLayout.addSlider(textSliderView);
+      }
+      sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
+      sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+      sliderLayout.setCustomIndicator(pagerIndicator);
+      sliderLayout.setCustomAnimation(new DescriptionAnimation());
+      sliderLayout.setDuration(400);
+      sliderLayout.setOnTouchListener(new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+          sliderLayout.stopAutoCycle();
+          return true;
+        }
+      });
+    } else {
+      textSliderView = new TextSliderView(this);
+      Log.d(TAG, "Passing " + BASE_IMAGE_URL + largeImage + " to image slider to be displayed");
+      textSliderView.image(BASE_IMAGE_URL + largeImage).setScaleType(BaseSliderView.ScaleType.FitCenterCrop);
       sliderLayout.addSlider(textSliderView);
+      sliderLayout.stopAutoCycle();
     }
-
-    sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
-    sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-    sliderLayout.setCustomAnimation(new DescriptionAnimation());
-    // sliderLayout.setDuration(4000);
-    sliderLayout.stopAutoCycle();
   }
 
   @Override
