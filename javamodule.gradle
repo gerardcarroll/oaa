@@ -1,0 +1,21 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        maven { url 'http://repository.overstock.com/content/groups/public' }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:1.5.0"
+    }
+}
+
+//From shopping app devs "We want to use java modules when possible to speed up the build"
+
+apply plugin: 'java'
+
+dependencies {
+    testCompile junit
+    testCompile mockitoCore
+}

@@ -1,8 +1,8 @@
 package com.overstock.android.prototype.model;
 
-import org.parceler.Parcel;
-
 import com.google.gson.annotations.SerializedName;
+
+import org.parceler.Parcel;
 
 /**
  * @author LeeMeehan Created on 12-Apr-16.
@@ -10,17 +10,17 @@ import com.google.gson.annotations.SerializedName;
 @Parcel
 public class Options {
 
-  private int optionId;
+  protected int optionId;
 
   @SerializedName("decription")
-  private String description;
+  protected String description;
 
   @SerializedName("qtyOnHand")
-  private int quantityOnHand;
+  protected int quantityOnHand;
 
-  private int maxQuantityAllowed;
+  protected int maxQuantityAllowed;
 
-  private float price;
+  protected float price;
 
   public Options() {
 
