@@ -1,6 +1,5 @@
 package com.overstock.android.prototype.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,7 +12,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.activity.HomeActivity;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.presenter.ConnectWithEmailPresenter;
 import com.overstock.android.prototype.view.ConnectWithEmailView;
@@ -94,9 +92,10 @@ public class SignUpWithEmailFragment extends Fragment implements ConnectWithEmai
 
     @OnClick(R.id.btn_cancel)
     public void onCancelClick(){
-        Intent intent = new Intent(getActivity(), HomeActivity.class);
-        startActivity(intent);
+        getActivity().onBackPressed();
     }
+
+
 
     @Override
     @OnClick(R.id.btn_sign_up)

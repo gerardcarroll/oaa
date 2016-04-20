@@ -9,7 +9,7 @@ public interface ConnectWithEmailView {
 
     void showSignUpError();
 
-    void displayToast(String toastMessage);
+    void displayToast(final String toastMessage);
 
     void OnSignUpClick();
 }

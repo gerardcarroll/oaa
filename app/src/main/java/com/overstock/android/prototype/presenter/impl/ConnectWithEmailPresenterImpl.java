@@ -35,7 +35,7 @@ public class ConnectWithEmailPresenterImpl implements ConnectWithEmailPresenter 
     }
 
     @Override
-    public void onSignUp(String username, String password) {
+    public void onSignUp(final String username, final String password) {
 
         parseUser = new ParseUser();
 

@@ -7,10 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.overstock.android.prototype.R;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import com.overstock.android.prototype.R;
 
 /**
  * @author gcarroll Fragment used to allow sign-in using email
@@ -42,5 +42,10 @@ public class SignInWithEmailFragment extends Fragment {
     fragmentTransaction.replace(R.id.home_activity, new SignUpWithEmailFragment(), SignUpWithEmailFragment.TAG);
     fragmentTransaction.addToBackStack(null);
     fragmentTransaction.commit();
+  }
+
+  @OnClick(R.id.btn_email_sign_in_cancel)
+  public void onCancelClick(){
+    getActivity().onBackPressed();
   }
 }

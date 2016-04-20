@@ -9,7 +9,7 @@ public interface ConnectWithEmailPresenter {
 
     void setView(final ConnectWithEmailView connectWithEmailView);
 
-    void onSignUp(String username, String password);
+    void onSignUp(final String username, final String password);
 
     void onDestroy();
 }
