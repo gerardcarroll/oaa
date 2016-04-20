@@ -214,12 +214,4 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
               HorizontialScrollFragment.newInstance(products, displayText), HorizontialScrollFragment.TAG).commit();
     }
   }
-
-  @Override
-  public void onBackPressed() {
-    super.onBackPressed();
-    Log.d(TAG, "TODO: clean up backstack");
-
-  }
-
 }
