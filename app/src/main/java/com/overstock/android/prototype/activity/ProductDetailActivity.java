@@ -1,5 +1,14 @@
 package com.overstock.android.prototype.activity;
 
+import java.util.ArrayList;
+import java.util.Currency;
+import java.util.List;
+import java.util.Locale;
+
+import javax.inject.Inject;
+
+import org.parceler.Parcels;
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -14,12 +23,16 @@ import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.animatorutils.CustomDescriptionAnimation;
 import com.overstock.android.prototype.component.ApplicationComponent;
 import com.overstock.android.prototype.fragment.HorizontialScrollFragment;
 import com.overstock.android.prototype.fragment.ProductBottomSheetFragment;
@@ -29,19 +42,6 @@ import com.overstock.android.prototype.model.ProductImages;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
 import com.overstock.android.prototype.view.ProductDetailView;
 import com.squareup.picasso.Picasso;
-
-import org.parceler.Parcels;
-
-import java.util.ArrayList;
-import java.util.Currency;
-import java.util.List;
-import java.util.Locale;
-
-import javax.inject.Inject;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * @author RayConnolly, LeeMeehan Created on 21-03-2016
@@ -67,9 +67,6 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   @Bind(R.id.product_detail_content)
   WebView productDescription;
 
-  // @Bind(R.id.product_detail_activity_shared_image_1)
-  // ImageView productImage;
-
   @Bind(R.id.product_detail_toolbar)
   Toolbar toolbar;
 
@@ -79,8 +76,8 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   @Bind(R.id.slider)
   SliderLayout sliderLayout;
 
-  @Bind(R.id.custom_indicator)
-  PagerIndicator pagerIndicator;
+  // @Bind(R.id.custom_indicator)
+  // PagerIndicator pagerIndicator;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
@@ -155,7 +152,8 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     if (productDetail.getProductImages().isEmpty()) {
       populateImageSlider(null, productDetail.getImageLarge());
-    } else {
+    }
+    else {
       populateImageSlider(productDetail.getProductImages(), null);
     }
     btn_buy.setVisibility(View.VISIBLE);
@@ -164,18 +162,18 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   private void populateImageSlider(List<ProductImages> productImages, String largeImage) {
 
     TextSliderView textSliderView;
-    if (productImages != null){
+    if (productImages != null) {
       for (ProductImages image : productImages) {
         textSliderView = new TextSliderView(this);
         Log.d(TAG, "Passing " + BASE_IMAGE_URL + image.getImagePath() + " to image slider to be displayed");
-        textSliderView.image(BASE_IMAGE_URL + image.getImagePath()).setScaleType(BaseSliderView.ScaleType.FitCenterCrop);
+        textSliderView.image(BASE_IMAGE_URL + image.getImagePath())
+            .setScaleType(BaseSliderView.ScaleType.FitCenterCrop);
         sliderLayout.addSlider(textSliderView);
       }
       sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
-      sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-      sliderLayout.setCustomIndicator(pagerIndicator);
-      sliderLayout.setCustomAnimation(new DescriptionAnimation());
+      sliderLayout.setCustomAnimation(new CustomDescriptionAnimation());
       sliderLayout.setDuration(400);
+      sliderLayout.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Invisible);
       sliderLayout.setOnTouchListener(new View.OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
@@ -183,7 +181,8 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
           return true;
         }
       });
-    } else {
+    }
+    else {
       textSliderView = new TextSliderView(this);
       Log.d(TAG, "Passing " + BASE_IMAGE_URL + largeImage + " to image slider to be displayed");
       textSliderView.image(BASE_IMAGE_URL + largeImage).setScaleType(BaseSliderView.ScaleType.FitCenterCrop);
@@ -195,13 +194,13 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   @Override
   public void onPause() {
     super.onPause();
-    for(Fragment fragment : getSupportFragmentManager().getFragments()){
+    for (Fragment fragment : getSupportFragmentManager().getFragments()) {
       getSupportFragmentManager().beginTransaction().remove(fragment).commit();
     }
   }
 
   @Override
-  public void addHorizontialRecyclerView(int layoutResourceId, ArrayList<Product> products, String displayText) {
+  public void addHorizontalRecyclerView(int layoutResourceId, ArrayList<Product> products, String displayText) {
     Log.d(TAG, "Passing " + displayText + " products to adapter to be displayed. List size : " + products.size());
     this.getSupportFragmentManager().beginTransaction().add(layoutResourceId,
       HorizontialScrollFragment.newInstance(products, displayText), HorizontialScrollFragment.TAG).commit();

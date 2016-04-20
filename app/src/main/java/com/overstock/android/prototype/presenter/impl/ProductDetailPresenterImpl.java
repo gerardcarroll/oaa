@@ -96,7 +96,7 @@ public class ProductDetailPresenterImpl implements ProductDetailPresenter {
           }
         });
 
-    // TODO: change call to recommendation service to provide an actual list of simialr products to the currently
+    // TODO: change call to recommendation service to provide an actual list of similar products to the currently
     // selected product
     productDataService.query(OappProviderContract.ProductEntry.buildProductBestsellerUri()).subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ProductsResponse>() {
@@ -114,7 +114,7 @@ public class ProductDetailPresenterImpl implements ProductDetailPresenter {
           public void onNext(ProductsResponse productsResponse) {
             Log.i("SUCCESS",
               "Similar Products successfully loaded " + productsResponse.getProducts().getProductsList().size());
-            productDetailView.addHorizontialRecyclerView(R.id.similar_products_hrv,
+            productDetailView.addHorizontalRecyclerView(R.id.similar_products_hrv,
               (ArrayList<Product>) productsResponse.getProducts().getProductsList(),
               context.getString(R.string.similar_producst_labels));
           }

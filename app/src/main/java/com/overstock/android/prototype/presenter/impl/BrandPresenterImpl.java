@@ -72,7 +72,7 @@ public class BrandPresenterImpl implements BrandPresenter {
           @Override
           public void onNext(ProductsResponse productsResponse) {
             Log.d(TAG, "Next value on subscribing to ProductDataService.GetProducts " + productsResponse.getProducts().getProductsList().size());
-            brandView.addHorizontialRecyclerView(R.id.best_sellers_hrv, (ArrayList<Product>) productsResponse.getProducts().getProductsList(), "Best Sellers");
+            brandView.addHorizontalRecyclerView(R.id.best_sellers_hrv, (ArrayList<Product>) productsResponse.getProducts().getProductsList(), "Best Sellers");
           }
         });
 
@@ -93,7 +93,7 @@ public class BrandPresenterImpl implements BrandPresenter {
           @Override
           public void onNext(ProductsResponse productsResponse) {
             Log.i("SUCCESS", "New Arrivals successfully loaded " + productsResponse.getProducts().getProductsList().size());
-            brandView.addHorizontialRecyclerView(R.id.best_sellers_hrv,(ArrayList<Product>) productsResponse.getProducts().getProductsList(), "New Arrivals");
+            brandView.addHorizontalRecyclerView(R.id.best_sellers_hrv,(ArrayList<Product>) productsResponse.getProducts().getProductsList(), "New Arrivals");
           }
         });
 
