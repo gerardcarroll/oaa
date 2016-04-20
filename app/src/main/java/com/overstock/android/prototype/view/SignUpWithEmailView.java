@@ -12,4 +12,6 @@ public interface SignUpWithEmailView {
     void displayToast(final String toastMessage);
 
     void OnSignUpClick();
+
+    void navigateToCommunity();
 }

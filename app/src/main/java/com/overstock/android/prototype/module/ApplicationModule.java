@@ -122,8 +122,8 @@ public class ApplicationModule {
   }
 
   @Provides
-  public SignUpWithEmailPresenter connectWithEmailPresenter(final Application applicationContext) {
-    return new SignUpWithEmailPresenterImpl(applicationContext);
+  public SignUpWithEmailPresenter connectWithEmailPresenter() {
+    return new SignUpWithEmailPresenterImpl();
   }
 
 }

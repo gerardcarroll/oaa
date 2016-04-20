@@ -1,8 +1,9 @@
 package com.overstock.android.prototype.fragment;
 
-import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.activity.CommunityActivity;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.model.User;
 import com.overstock.android.prototype.presenter.SignUpWithEmailPresenter;
@@ -49,8 +51,6 @@ public class SignUpWithEmailFragment extends Fragment implements SignUpWithEmail
     @Bind(R.id.btn_sign_up)
     Button signUpButton;
 
-    private ProgressDialog progressDialog;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,14 +70,44 @@ public class SignUpWithEmailFragment extends Fragment implements SignUpWithEmail
         connectWithEmailPresenter.setView(this);
     }
 
+    @OnClick(R.id.btn_cancel)
+    public void onCancelClick(){
+        getActivity().onBackPressed();
+    }
+
+    @Override
+    @OnClick(R.id.btn_sign_up)
+    public void OnSignUpClick(){
+
+        String username = usernameEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
+        String passwordConfirm = confirmPasswordEditText.getText().toString();
+
+        if(username.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty()){
+            displayToast(getActivity().getApplicationContext().getResources().getString(R.string.sign_up_required_fields_message));
+        } else if (!password.equals(passwordConfirm)){
+            displayToast(getActivity().getApplicationContext().getResources().getString(R.string.sign_up_passwordconfirm_error_message));
+        } else {
+            User user = new User(username, password);
+            connectWithEmailPresenter.onSignUp(user.getUsername(), user.getPassword());
+        }
+    }
+
+    @Override
+    public void navigateToCommunity() {
+        final ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(getContext(),
+                R.transition.slide_in_vertical, R.transition.slide_out_vertical);
+        startActivity(new Intent(getActivity(), CommunityActivity.class), options.toBundle());
+    }
+
     @Override
     public void showSignUpSuccess() {
-        displayToast("New user was signed up successfully.");
+        displayToast(getActivity().getApplicationContext().getResources().getString(R.string.successful_oapp_sign_up_message));
     }
 
     @Override
     public void showSignUpError() {
-        displayToast("Unable to Sign Up new user.");
+        displayToast(getActivity().getApplicationContext().getResources().getString(R.string.unsuccessful_oapp_sign_up_message));
     }
 
     @Override
@@ -92,43 +122,6 @@ public class SignUpWithEmailFragment extends Fragment implements SignUpWithEmail
         super.onDestroyView();
         ButterKnife.unbind(this);
         connectWithEmailPresenter.onDestroy();
-    }
-
-    @OnClick(R.id.btn_cancel)
-    public void onCancelClick(){
-        getActivity().onBackPressed();
-    }
-
-    @Override
-    @OnClick(R.id.btn_sign_up)
-    public void OnSignUpClick(){
-
-        User user = new User(usernameEditText.getText().toString(),passwordEditText.getText().toString());
-
-        if (user.getUsername() != null && user.getPassword() != null){
-            hideProgressDialog();
-            connectWithEmailPresenter.onSignUp(user.getUsername(), user.getPassword());
-        }
-        else {
-            showProgressDialog();
-            Toast.makeText(getContext(), "Please populate textboxes", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private void showProgressDialog() {
-        if (progressDialog == null) {
-            progressDialog = new ProgressDialog(getContext());
-            progressDialog.setMessage(getContext().getResources().getString(R.string.loading));
-            progressDialog.setIndeterminate(true);
-        }
-
-        progressDialog.show();
-    }
-
-    private void hideProgressDialog() {
-        if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.hide();
-        }
     }
 
 }

@@ -1,13 +1,10 @@
 package com.overstock.android.prototype.presenter.impl;
 
-import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.overstock.android.prototype.presenter.SignUpWithEmailPresenter;
 import com.overstock.android.prototype.view.SignUpWithEmailView;
 import com.parse.ParseException;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
@@ -18,13 +15,9 @@ public class SignUpWithEmailPresenterImpl implements SignUpWithEmailPresenter {
 
     private static final String TAG = SignUpWithEmailPresenterImpl.class.getName();
     private SignUpWithEmailView connectWithEmailView;
-    private ParseQuery parseQuery;
     private ParseUser parseUser;
-    private Context context;
 
-    public SignUpWithEmailPresenterImpl(Context context){
-        this.context = context;
-    }
+    public SignUpWithEmailPresenterImpl(){}
 
     @Override
     public void setView(final SignUpWithEmailView connectWithEmailView) {
@@ -44,16 +37,16 @@ public class SignUpWithEmailPresenterImpl implements SignUpWithEmailPresenter {
             public void done(ParseException e) {
                 if (e == null){
                     Log.i(TAG, "Successfully signed up to OApp", e);
-                    Toast.makeText(context, "User was signed up successfully.", Toast.LENGTH_LONG).show();
+                    connectWithEmailView.showSignUpSuccess();
+                    connectWithEmailView.navigateToCommunity();
+
                 } else {
                     Log.i(TAG, "Unsuccessful Sign Up to OApp", e);
-                    Toast.makeText(context, "Unable to sign up user.", Toast.LENGTH_LONG).show();
+                    connectWithEmailView.showSignUpError();
                 }
             }
         });
     }
-
-
 
     @Override
     public void onDestroy() {

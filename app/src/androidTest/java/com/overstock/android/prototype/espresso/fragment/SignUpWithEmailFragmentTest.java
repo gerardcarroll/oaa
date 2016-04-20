@@ -32,7 +32,7 @@ public class SignUpWithEmailFragmentTest {
 
     private static final String username = "testuser1@gmail.com" ;
     private static final String password = "androidsignuptest" ;
-    private static final String errorToastmessage = "Unable to sign up user.";
+    private static final String errorToastmessage = "User account has already been created.";
     private static final String successToastmessage = "User was signed up successfully.";
 
     @Rule
