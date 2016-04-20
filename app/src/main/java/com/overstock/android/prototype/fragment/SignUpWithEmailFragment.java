@@ -1,5 +1,6 @@
 package com.overstock.android.prototype.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,8 +14,9 @@ import android.widget.Toast;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
-import com.overstock.android.prototype.presenter.ConnectWithEmailPresenter;
-import com.overstock.android.prototype.view.ConnectWithEmailView;
+import com.overstock.android.prototype.model.User;
+import com.overstock.android.prototype.presenter.SignUpWithEmailPresenter;
+import com.overstock.android.prototype.view.SignUpWithEmailView;
 
 import javax.inject.Inject;
 
@@ -25,12 +27,12 @@ import butterknife.OnClick;
 /**
  * Created by rconnolly on 4/19/2016.
  */
-public class SignUpWithEmailFragment extends Fragment implements ConnectWithEmailView {
+public class SignUpWithEmailFragment extends Fragment implements SignUpWithEmailView {
 
     public static final String TAG = SignUpWithEmailFragment.class.getName();
 
     @Inject
-    ConnectWithEmailPresenter connectWithEmailPresenter;
+    SignUpWithEmailPresenter connectWithEmailPresenter;
 
     @Bind(R.id.et_username)
     EditText usernameEditText;
@@ -46,6 +48,8 @@ public class SignUpWithEmailFragment extends Fragment implements ConnectWithEmai
 
     @Bind(R.id.btn_sign_up)
     Button signUpButton;
+
+    private ProgressDialog progressDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -95,16 +99,36 @@ public class SignUpWithEmailFragment extends Fragment implements ConnectWithEmai
         getActivity().onBackPressed();
     }
 
-
-
     @Override
     @OnClick(R.id.btn_sign_up)
     public void OnSignUpClick(){
 
-        String username = usernameEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
+        User user = new User(usernameEditText.getText().toString(),passwordEditText.getText().toString());
 
-        connectWithEmailPresenter.onSignUp(username, password);
+        if (user.getUsername() != null && user.getPassword() != null){
+            hideProgressDialog();
+            connectWithEmailPresenter.onSignUp(user.getUsername(), user.getPassword());
+        }
+        else {
+            showProgressDialog();
+            Toast.makeText(getContext(), "Please populate textboxes", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void showProgressDialog() {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(getContext());
+            progressDialog.setMessage(getContext().getResources().getString(R.string.loading));
+            progressDialog.setIndeterminate(true);
+        }
+
+        progressDialog.show();
+    }
+
+    private void hideProgressDialog() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.hide();
+        }
     }
 
 }

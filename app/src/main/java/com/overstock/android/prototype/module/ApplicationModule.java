@@ -9,13 +9,13 @@ import com.overstock.android.prototype.model.ProductDataService;
 import com.overstock.android.prototype.module.scope.ApplicationScope;
 import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.presenter.CommunityPresenter;
-import com.overstock.android.prototype.presenter.ConnectWithEmailPresenter;
+import com.overstock.android.prototype.presenter.SignUpWithEmailPresenter;
 import com.overstock.android.prototype.presenter.FeedPresenter;
 import com.overstock.android.prototype.presenter.ProductBottomSheetPresenter;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
 import com.overstock.android.prototype.presenter.impl.BrandPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.CommunityPresenterImpl;
-import com.overstock.android.prototype.presenter.impl.ConnectWithEmailPresenterImpl;
+import com.overstock.android.prototype.presenter.impl.SignUpWithEmailPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.FeedPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.ProductBottomSheetPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.ProductDetailPresenterImpl;
@@ -122,8 +122,8 @@ public class ApplicationModule {
   }
 
   @Provides
-  public ConnectWithEmailPresenter connectWithEmailPresenter(final Application applicationContext) {
-    return new ConnectWithEmailPresenterImpl(applicationContext);
+  public SignUpWithEmailPresenter connectWithEmailPresenter(final Application applicationContext) {
+    return new SignUpWithEmailPresenterImpl(applicationContext);
   }
 
 }
