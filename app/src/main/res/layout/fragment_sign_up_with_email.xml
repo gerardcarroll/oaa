@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.SignUpWithEmailFragment"
-    android:background="@color/emailLoginWhite"
-    android:id="@+id/sign_up_with_email_fragment" >
+    android:background="@color/emailLoginWhite" >
 
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
