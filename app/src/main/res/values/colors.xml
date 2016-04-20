@@ -39,6 +39,9 @@
     <color name="googlePlusRedPrimaryLight">#EC6D5C</color>
     <color name="googlePlusRed_75_Percent_Transparent">#BFd34836</color>
 
+    <!--Email Login Colors-->
+    <color name="emailLoginWhite">#FFFFFF</color>
+
     <color name="white_Transparent">#CCFFFFFF</color>
 
     <color name="blue_grey_500">#607D8B</color>
