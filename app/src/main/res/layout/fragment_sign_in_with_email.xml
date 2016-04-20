@@ -10,7 +10,8 @@
     <LinearLayout android:id="@+id/sign_in_fragment"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:orientation="vertical" >
+                  android:orientation="vertical"
+                  android:padding="15dp" >
 
         <include
             layout="@layout/email_connect_common"/>
