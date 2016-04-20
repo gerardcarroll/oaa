@@ -35,13 +35,12 @@ public class ConnectWithEmailPresenterImpl implements ConnectWithEmailPresenter 
     }
 
     @Override
-    public void onSignUp(String username, String password, String passwordConfirm) {
+    public void onSignUp(String username, String password) {
 
         parseUser = new ParseUser();
 
         parseUser.setUsername(username);
         parseUser.setPassword(password);
-        parseUser.put("passwordConfirm", passwordConfirm);
 
         parseUser.signUpInBackground(new SignUpCallback() {
             @Override

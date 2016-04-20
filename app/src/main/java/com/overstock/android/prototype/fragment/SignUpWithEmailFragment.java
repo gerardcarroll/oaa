@@ -1,8 +1,9 @@
 package com.overstock.android.prototype.fragment;
 
-import android.support.v4.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +13,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.activity.HomeActivity;
+import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.presenter.ConnectWithEmailPresenter;
 import com.overstock.android.prototype.view.ConnectWithEmailView;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by rconnolly on 4/19/2016.
@@ -25,7 +31,8 @@ public class SignUpWithEmailFragment extends Fragment implements ConnectWithEmai
 
     public static final String TAG = SignUpWithEmailFragment.class.getName();
 
-    private ConnectWithEmailPresenter connectWithEmailPresenter;
+    @Inject
+    ConnectWithEmailPresenter connectWithEmailPresenter;
 
     @Bind(R.id.et_username)
     EditText usernameEditText;
@@ -45,7 +52,7 @@ public class SignUpWithEmailFragment extends Fragment implements ConnectWithEmai
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        ((OAppPrototypeApplication) getActivity().getApplication()).getComponent().inject(this);
     }
 
     @Nullable
@@ -58,14 +65,7 @@ public class SignUpWithEmailFragment extends Fragment implements ConnectWithEmai
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        //connectWithEmailPresenter.setView(this);
-    }
-
-    @Override
-    public void signUp(String username, String password, String passwordConfirm) {
-        usernameEditText.setText(username);
-        passwordEditText.setText(password);
-        confirmPasswordEditText.setText(passwordConfirm);
+        connectWithEmailPresenter.setView(this);
     }
 
     @Override
@@ -91,4 +91,21 @@ public class SignUpWithEmailFragment extends Fragment implements ConnectWithEmai
         ButterKnife.unbind(this);
         connectWithEmailPresenter.onDestroy();
     }
+
+    @OnClick(R.id.btn_cancel)
+    public void onCancelClick(){
+        Intent intent = new Intent(getActivity(), HomeActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    @OnClick(R.id.btn_sign_up)
+    public void OnSignUpClick(){
+
+        String username = usernameEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
+
+        connectWithEmailPresenter.onSignUp(username, password);
+    }
+
 }

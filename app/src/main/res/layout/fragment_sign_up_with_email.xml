@@ -1,51 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:orientation="vertical"
-              android:background="@color/emailLoginWhite"
-              tools:context=".fragment.SignUpWithEmailFragment">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    tools:context=".fragment.SignUpWithEmailFragment"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    android:padding="10dp" >
+    <!--android:fillViewport="true"-->
 
-    <include
-        layout="@layout/email_connect_common"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:background="@color/emailLoginWhite" >
 
-    <EditText
-        android:id="@+id/et_confirm_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="15dp"
-        android:ems="10"
-        android:hint="@string/confirm_password_placeholder_text"
-        android:inputType="textPassword"/>
+        <include
+            layout="@layout/email_connect_common"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/et_confirm_password"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:padding="5dp"
-            android:text="@string/email_cancel"/>
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="15dp"
+            android:ems="10"
+            android:hint="@string/confirm_password_placeholder_text"
+            android:inputType="textPassword"/>
 
-        <Button
-            android:id="@+id/btn_sign_up"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:padding="5dp"
-            android:text="@string/email_sign_up"/>
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="25dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:text="@string/email_cancel"/>
+
+            <Button
+                android:id="@+id/btn_sign_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:text="@string/email_sign_up" />
+
+        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>
