@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -52,27 +53,16 @@ public class BrandActivityTest {
 
         // Swipe up activity to display New Arrivals recycler view
         onView(withId(R.id.brand_activity)).perform(ViewActions.swipeUp());
+//        onView(withId(R.id.rv_horizontal_scroll_frag)).check(matches(isDisplayed()));
+        onView(withId(R.id.best_sellers_hrv)).check(matches(isDisplayed()));
 
-        // Scroll to position New Arrivals recycler view
-        onView(allOf(withId(R.id.rv_horizontal_scroll_frag), withParent(withId(R.id.best_sellers_hrv)))).perform(new ViewAction() {
-            @Override
-            public Matcher<View> getConstraints() {
-                Matcher<View> standardConstraint = isEnabled();
-                return standardConstraint;
-            }
+        onView(allOf(isDescendantOfA(withId(R.id.new_arrivals_hrv)), withId(R.id.rv_horizontal_scroll_frag)))
+                .check(matches(isEnabled()));
+//                .perform(RecyclerViewActions.scrollToPosition(9)).perform(RecyclerViewActions.actionOnItemAtPosition(9, click()));
+//
+//        onView(allOf(isDescendantOfA(withId(R.id.best_sellers_hrv)), withId(R.id.rv_horizontal_scroll_frag)))
+//                .perform(RecyclerViewActions.scrollToPosition(9)).perform(RecyclerViewActions.actionOnItemAtPosition(9, click()));
 
-            @Override
-            public String getDescription() {
-                return "scroll RecyclerView to position: " + position;
-            }
-
-            @Override
-            public void perform(UiController uiController, View view) {
-                RecyclerView recyclerView = (RecyclerView) view;
-                recyclerView.scrollToPosition(position);
-                uiController.loopMainThreadUntilIdle();
-            }
-        });
     }
 
     @Test

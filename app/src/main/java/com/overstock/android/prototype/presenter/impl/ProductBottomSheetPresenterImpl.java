@@ -74,6 +74,7 @@ public class ProductBottomSheetPresenterImpl implements ProductBottomSheetPresen
     }
     else
       productBottomSheetView.toggleSpinner();
+    maxQuantityAllowed = options.get(0).getMaxQuantityAllowed();
   }
 
   @Override

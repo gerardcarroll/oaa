@@ -20,8 +20,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         app:selected_color="#0095BF"
-        app:unselected_color="#55333333"
-        app:selected_drawable="@drawable/cat_furniture"
+        app:unselected_color="@color/white"
         app:shape="oval"
         app:selected_padding_left="5dp"
         app:selected_padding_right="5dp"
@@ -34,6 +33,7 @@
         app:unselected_width="6dp"
         app:unselected_height="6dp"
         android:layout_marginBottom="20dp"
+        android:paddingBottom="10dp"
         />
 
 </RelativeLayout>

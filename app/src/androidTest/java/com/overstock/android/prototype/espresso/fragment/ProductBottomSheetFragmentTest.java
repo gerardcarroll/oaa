@@ -1,8 +1,12 @@
 package com.overstock.android.prototype.espresso.fragment;
 
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.swipeUp;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.RootMatchers.isPlatformPopup;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -11,6 +15,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -27,6 +32,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.ProductDetailActivity;
+import com.overstock.android.prototype.model.Options;
 import com.overstock.android.prototype.model.Product;
 
 /**
@@ -45,7 +51,7 @@ public class ProductBottomSheetFragmentTest {
 
     final Context context = InstrumentationRegistry.getInstrumentation().getTargetContext().getApplicationContext();
 
-    URL url = new URL("https://images-common.test.overstock.com/images/products/T13729834.jpg");
+    URL url = new URL("http://ak1.ostkcdn.com/images/products/T13729834.jpg");
     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
     connection.setDoInput(true);
     connection.setRequestProperty("connection", "close");
@@ -55,8 +61,10 @@ public class ProductBottomSheetFragmentTest {
     connection.disconnect();
     final Intent intent = new Intent(context, ProductDetailActivity.class);
     intent.putExtra("image", bitmapExtra);
-    intent.putExtra("parcel", Parcels.wrap(new Product(6053246, "L13729834.jpg", "P13729834.jpg",
-        "Latte iPearl S Pink 4 GB 1.8-inch LCD MP4 Player", 26.26f)));
+    intent.putExtra("parcel",
+      Parcels.wrap(new Product(8939543, "8939543/Alternative-Apparel-Mens-Eco-Jersey-Football-T-Shirt-L16153098.jpg",
+          "8939543/Alternative-Apparel-Mens-Eco-Jersey-Football-T-Shirt-P16153098.jpg",
+          "Alternative Apparel Men's Eco-Jersey Football T-Shirt", 28.89f)));
 
     activityRule.launchActivity(intent);
 
@@ -71,8 +79,32 @@ public class ProductBottomSheetFragmentTest {
     // Click on add to chart button to open product bottom sheet
     onView(withId(R.id.btn_buy)).perform(click());
 
+    onView(withId(R.id.bottom_sheet)).check(matches(isDisplayed()));
+
+    onView(withId(R.id.product_options_txt)).check(matches(withText("Product Options")));
+    // Im swiping up on product_options_txt because it is 100% visible. whereas the product bottom sheet is less than
+    // 50% visible.
+    onView(withId(R.id.product_options_txt)).perform(swipeUp());
+
+    onView(withId(R.id.options_spinner)).check(matches(isDisplayed()));
+    onView(withId(R.id.options_spinner)).perform(click());
+    onData(Matchers.instanceOf(Options.class)).atPosition(3).inRoot(isPlatformPopup()).perform(click());
+    onView(withId(R.id.totalPrice_txt)).check(matches(withText("$ 28.89")));
+    // Assert that quantity controls are working.
     onView(withId(R.id.quantity_add)).perform(click());
+    onView(withId(R.id.quantity_indicator)).check(matches(withText("2")));
+    onView(withId(R.id.totalPrice_txt)).check(matches(withText("$ 57.78")));
+    onView(withId(R.id.quantity_remove)).perform(click());
     onView(withId(R.id.quantity_indicator)).check(matches(withText("1")));
+    onView(withId(R.id.totalPrice_txt)).check(matches(withText("$ 28.89")));
+
+    // Confirming that the discount has been applied.
+    onView(withId(R.id.rewards_btn_apply)).perform(click());
+    onView(withId(R.id.totalPrice_txt)).check(matches(withText("$ 16.39")));
+
+    // assert that popup has been dismissed.
+    onView(withId(R.id.btn_pay_credit_card)).perform(click());
+    onView(withId(R.id.bottom_sheet)).check(doesNotExist());
   }
 
 }

@@ -14,7 +14,7 @@ import com.overstock.android.prototype.model.ProductDetail;
 import com.overstock.android.prototype.model.ProductImages;
 
 /**
- * Created by rconnolly on 4/14/2016.
+ * @author RayConnolly on 4/14/2016.
  */
 public class ProductDetailDeserializerUtil implements JsonDeserializer<ProductDetail> {
 
