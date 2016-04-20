@@ -18,66 +18,70 @@ import com.parse.SignUpCallback;
  */
 public class ConnectWithEmailPresenterImpl implements ConnectWithEmailPresenter {
 
-    private static final String TAG = ConnectWithEmailPresenterImpl.class.getName();
-    private ConnectWithEmailView connectWithEmailView;
-    private ParseQuery parseQuery;
-    private ParseUser parseUser;
-    private Context context;
-    private ProgressDialog progressDialog;
+  private static final String TAG = ConnectWithEmailPresenterImpl.class.getName();
 
-    public ConnectWithEmailPresenterImpl(Context context){
-        this.context = context;
-    }
+  private ConnectWithEmailView connectWithEmailView;
 
-    @Override
-    public void setView(final ConnectWithEmailView connectWithEmailView) {
-        this.connectWithEmailView = connectWithEmailView;
-    }
+  private ParseQuery parseQuery;
 
-    @Override
-    public void onSignUp(final String username, final String password) {
+  private ParseUser parseUser;
 
-        parseUser = new ParseUser();
+  private Context context;
 
-        parseUser.setUsername(username);
-        parseUser.setPassword(password);
+  private ProgressDialog progressDialog;
 
-        parseUser.signUpInBackground(new SignUpCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null){
-                    hideProgressDialog();
-                    Log.i(TAG, "Successfully signed up to OApp", e);
-                    Toast.makeText(context, "User was signed up successfully.", Toast.LENGTH_LONG).show();
-                } else {
-                    showProgressDialog();
-                    Log.i(TAG, "Unsuccessful Sign Up to OApp", e);
-                    Toast.makeText(context, "Unable to sign up user.", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-    }
+  public ConnectWithEmailPresenterImpl(Context context) {
+    this.context = context;
+  }
 
+  @Override
+  public void setView(final ConnectWithEmailView connectWithEmailView) {
+    this.connectWithEmailView = connectWithEmailView;
+  }
 
+  @Override
+  public void onSignUp(final String username, final String password) {
 
-    @Override
-    public void onDestroy() {
-        connectWithEmailView = null;
-    }
+    parseUser = new ParseUser();
 
-    private void showProgressDialog() {
-        if (progressDialog == null) {
-            progressDialog = new ProgressDialog(context.getApplicationContext());
-            progressDialog.setMessage(context.getResources().getString(R.string.loading));
-            progressDialog.setIndeterminate(true);
+    parseUser.setUsername(username);
+    parseUser.setPassword(password);
+
+    parseUser.signUpInBackground(new SignUpCallback() {
+      @Override
+      public void done(ParseException e) {
+        if (e == null) {
+          hideProgressDialog();
+          Log.i(TAG, "Successfully signed up to OApp", e);
+          Toast.makeText(context, "User was signed up successfully.", Toast.LENGTH_LONG).show();
         }
-
-        progressDialog.show();
-    }
-
-    private void hideProgressDialog() {
-        if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.hide();
+        else {
+          showProgressDialog();
+          Log.i(TAG, "Unsuccessful Sign Up to OApp", e);
+          Toast.makeText(context, "Unable to sign up user.", Toast.LENGTH_LONG).show();
         }
+      }
+    });
+  }
+
+  @Override
+  public void onDestroy() {
+    connectWithEmailView = null;
+  }
+
+  private void showProgressDialog() {
+    if (progressDialog == null) {
+      progressDialog = new ProgressDialog(context.getApplicationContext());
+      progressDialog.setMessage(context.getResources().getString(R.string.loading));
+      progressDialog.setIndeterminate(true);
     }
+
+    progressDialog.show();
+  }
+
+  private void hideProgressDialog() {
+    if (progressDialog != null && progressDialog.isShowing()) {
+      progressDialog.hide();
+    }
+  }
 }
