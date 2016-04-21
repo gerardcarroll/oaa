@@ -31,7 +31,7 @@ public class SignInWithEmailPresenterImpl implements SignInWithEmailPresenter {
 
   @Override
   public void onSignIn(String username, String password) {
-    Log.v(TAG, "Signing In with email...");
+    Log.d(TAG, "Signing In with email...");
     Toast.makeText(context, "Sign In to be implemented; Username: " + username + " Password: " + password,
       Toast.LENGTH_SHORT).show();
     final Intent signInIntent = new Intent(context, CommunityActivity.class);
@@ -41,7 +41,7 @@ public class SignInWithEmailPresenterImpl implements SignInWithEmailPresenter {
 
   @Override
   public void onSignInError(String message) {
-    Log.v(TAG, "Error signing in...");
+    Log.d(TAG, "Error signing in...");
     Toast.makeText(context, "Sign In Error: " + message, Toast.LENGTH_LONG).show();
   }
 
