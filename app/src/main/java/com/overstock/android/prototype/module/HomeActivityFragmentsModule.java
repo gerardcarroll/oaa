@@ -27,10 +27,10 @@ public class HomeActivityFragmentsModule {
     return new GoogleFederatedIdentityFragment();
   }
 
-  @Provides
-  @ActivityScope
-  public SignInWithEmailFragment providesSignInWithEmailFragment() {
-    return new SignInWithEmailFragment();
-  }
+//  @Provides
+//  @ActivityScope
+//  public SignInWithEmailFragment providesSignInWithEmailFragment() {
+//    return new SignInWithEmailFragment();
+//  }
 
 }

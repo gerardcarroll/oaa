@@ -41,6 +41,7 @@ public class SignInWithEmailPresenterImpl implements SignInWithEmailPresenter {
 
   @Override
   public void onSignInError(String message) {
+    Log.v(TAG, "Error signing in...");
     Toast.makeText(context, "Sign In Error: " + message, Toast.LENGTH_LONG).show();
   }
 
