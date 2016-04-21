@@ -140,7 +140,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     Log.d(TAG, "Displaying Product Details." + productDetail.toString());
     productDescription.loadData(productDetail.getDescription().trim(), getString(R.string.webview_html_encoding), null);
 
-    if (productDetail.getProductImages().isEmpty()) {
+    if (productDetail.getProductImages().isEmpty() || productDetail.getProductImages().size() == 1) {
       populateImageSlider(null, productDetail.getImageLarge());
     }
     else {
@@ -153,7 +153,6 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     TextSliderView textSliderView;
     if (productImages != null) {
-      Log.i(TAG, "Number of Images : " + productImages.size());
       pagerIndicator.setTotalNumberOfPages(productImages.size());
       for (ProductImages image : productImages) {
         textSliderView = new TextSliderView(this);
@@ -164,7 +163,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
       }
       sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
       sliderLayout.setCustomAnimation(new CustomDescriptionAnimation());
-      sliderLayout.setDuration(400);
+      sliderLayout.setDuration(100);
       sliderLayout.addOnPageChangeListener(new PageChangeListener() {
         @Override
         public void onPageSelected(int position) {
@@ -188,6 +187,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
       Log.d(TAG, "Passing " + BASE_IMAGE_URL + largeImage + " to image slider to be displayed");
       textSliderView.image(BASE_IMAGE_URL + largeImage).setScaleType(BaseSliderView.ScaleType.FitCenterCrop);
       sliderLayout.addSlider(textSliderView);
+      sliderLayout.setCustomAnimation(new CustomDescriptionAnimation());
       sliderLayout.stopAutoCycle();
     }
   }
