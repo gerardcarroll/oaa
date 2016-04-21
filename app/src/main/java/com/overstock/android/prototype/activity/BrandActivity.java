@@ -21,6 +21,7 @@ public class BrandActivity extends AppCompatActivity {
   public void onBackPressed() {
     super.onBackPressed();
     overridePendingTransition(R.transition.slide_back_in_horizontal, R.transition.slide_back_out_horizontal);
+
   }
 
 }

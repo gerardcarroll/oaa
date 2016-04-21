@@ -1,17 +1,13 @@
 package com.overstock.android.prototype.espresso.activity;
 
-import android.support.test.espresso.UiController;
-import android.support.test.espresso.ViewAction;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.BrandActivity;
+import com.overstock.android.prototype.espresso.viewaction.HorizontialScrollFragmentScrollToPositionViewAction;
 
-import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,7 +15,6 @@ import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -53,16 +48,19 @@ public class BrandActivityTest {
 
         // Swipe up activity to display New Arrivals recycler view
         onView(withId(R.id.brand_activity)).perform(ViewActions.swipeUp());
-//        onView(withId(R.id.rv_horizontal_scroll_frag)).check(matches(isDisplayed()));
         onView(withId(R.id.best_sellers_hrv)).check(matches(isDisplayed()));
-
-        onView(allOf(isDescendantOfA(withId(R.id.new_arrivals_hrv)), withId(R.id.rv_horizontal_scroll_frag)))
+        onView(allOf(withParent(withId(R.id.best_sellers_hrv)), withId(R.id.rv_horizontal_scroll_frag)))
                 .check(matches(isEnabled()));
-//                .perform(RecyclerViewActions.scrollToPosition(9)).perform(RecyclerViewActions.actionOnItemAtPosition(9, click()));
-//
-//        onView(allOf(isDescendantOfA(withId(R.id.best_sellers_hrv)), withId(R.id.rv_horizontal_scroll_frag)))
-//                .perform(RecyclerViewActions.scrollToPosition(9)).perform(RecyclerViewActions.actionOnItemAtPosition(9, click()));
+        onView(allOf(withParent(withId(R.id.best_sellers_hrv)), withId(R.id.rv_horizontal_scroll_frag)))
+                .perform(HorizontialScrollFragmentScrollToPositionViewAction.scrollToPosition(position));
 
+        //https://stackoverflow.com/questions/35272953/espresso-scrolling-not-working-when-nestedscrollview-or-recyclerview-is-in-coor
+        //
+        //  click action on a recycler view item, with lout as : CoordinatorLayout -> NestedScrollView -> Recycler
+
+        //        onView(allOf(withParent(withId(R.id.best_sellers_hrv)), withId(R.id.rv_horizontal_scroll_frag)))
+        //                .perform(HorizontialScrollFragmentActionOnItemAtPositionViewAction.actionOnItemAtPosition(position,
+        //                        HorizontialScrollFragmentGeneralClickAction.click()));
     }
 
     @Test
@@ -72,27 +70,11 @@ public class BrandActivityTest {
 
         // Swipe up activity to display New Arrivals recycler view
         onView(withId(R.id.brand_activity)).perform(ViewActions.swipeUp());
+        onView(withId(R.id.new_arrivals_hrv)).check(matches(isDisplayed()));
+        onView(allOf(withParent(withId(R.id.new_arrivals_hrv)), withId(R.id.rv_horizontal_scroll_frag)))
+                .check(matches(isEnabled()));
+        onView(allOf(withParent(withId(R.id.best_sellers_hrv)), withId(R.id.rv_horizontal_scroll_frag)))
+                .perform(HorizontialScrollFragmentScrollToPositionViewAction.scrollToPosition(position));
 
-        // Scroll to position New Arrivals recycler view
-
-        onView(allOf(withId(R.id.rv_horizontal_scroll_frag), withParent(withId(R.id.new_arrivals_hrv)))).perform(new ViewAction() {
-            @Override
-            public Matcher<View> getConstraints() {
-                Matcher<View> standardConstraint = isEnabled();
-                return standardConstraint;
-            }
-
-            @Override
-            public String getDescription() {
-                return "scroll RecyclerView to position: " + position;
-            }
-
-            @Override
-            public void perform(UiController uiController, View view) {
-                RecyclerView recyclerView = (RecyclerView) view;
-                recyclerView.scrollToPosition(position);
-                uiController.loopMainThreadUntilIdle();
-            }
-        });
     }
 }

@@ -9,4 +9,6 @@ public interface BrandPresenter {
   void setView(final BrandView brandView);
 
   void onDestroy();
+
+  void refresh();
 }

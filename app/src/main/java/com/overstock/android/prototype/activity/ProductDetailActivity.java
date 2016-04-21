@@ -1,5 +1,6 @@
 package com.overstock.android.prototype.activity;
 
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -91,18 +92,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     final Bundle extras = getIntent().getExtras();
     final Product product = Parcels.unwrap(extras.getParcelable("parcel"));
-    // final Bitmap receivedImage = extras.getParcelable("image");
 
-    // productImage.setImageBitmap(receivedImage);
-    //
-    // this.getWindow().getSharedElementEnterTransition().addListener(new TransitionListener() {
-    // @Override
-    // public void onTransitionEnd(Transition transition) {
-    // Log.d(TAG, "Updating Image.");
-    // picasso.load(BASE_IMAGE_URL + product.getImageLarge()).fit().error(R.drawable.product_placeholder)
-    // .noPlaceholder().into(productImage);
-    // }
-    // });
 
     productName.setText(product.getName());
     final String currencyCode = Currency.getInstance(Locale.US).getSymbol();
@@ -193,17 +183,35 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   }
 
   @Override
+  protected void onResume() {
+    super.onResume();
+    Log.i("","TODO");
+  }
+
+  @Override
   public void onPause() {
     super.onPause();
-    for(Fragment fragment : getSupportFragmentManager().getFragments()){
-      getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-    }
+    restHorizontialScrollRecyclerViews();
+  }
+
+  public void restHorizontialScrollRecyclerViews() {
+    super.onPause();
+//    Fragment frag = getSupportFragmentManager().findFragmentByTag(HorizontialScrollFragment.TAG);
+//    if(frag != null) {
+//      getSupportFragmentManager().beginTransaction().remove(frag).commit();
+//    }
   }
 
   @Override
   public void addHorizontialRecyclerView(int layoutResourceId, ArrayList<Product> products, String displayText) {
     Log.d(TAG, "Passing " + displayText + " products to adapter to be displayed. List size : " + products.size());
-    this.getSupportFragmentManager().beginTransaction().add(layoutResourceId,
-      HorizontialScrollFragment.newInstance(products, displayText), HorizontialScrollFragment.TAG).commit();
+    Fragment frag = getSupportFragmentManager().findFragmentByTag(HorizontialScrollFragment.TAG);
+    if(frag == null) {
+      this.getSupportFragmentManager().beginTransaction().add(layoutResourceId,
+              HorizontialScrollFragment.newInstance(products, displayText), HorizontialScrollFragment.TAG).commit();
+    } else {
+      this.getSupportFragmentManager().beginTransaction().replace(layoutResourceId,
+              HorizontialScrollFragment.newInstance(products, displayText), HorizontialScrollFragment.TAG).commit();
+    }
   }
 }
