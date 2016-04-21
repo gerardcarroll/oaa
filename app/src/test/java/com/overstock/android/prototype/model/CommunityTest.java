@@ -1,7 +1,5 @@
 package com.overstock.android.prototype.model;
 
-import static org.mockito.Matchers.any;
-
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -19,7 +17,7 @@ public class CommunityTest {
 
   @Test
   public void argConstructorTest() {
-    Community community = new Community(any(Integer.class), any(String.class));
+    Community community = new Community(1, "s2");
     Assert.assertNotNull(community);
   }
 

@@ -22,6 +22,7 @@ import com.overstock.android.prototype.service.OappGoogleAuthService;
 
 import org.hamcrest.Matcher;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -113,6 +114,7 @@ public class AppInstrumentationTest_E2E {
     activityRule.launchActivity(null);
   }
 
+  @Ignore
   @Test
   public void appTest() {
 

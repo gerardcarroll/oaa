@@ -90,7 +90,7 @@ public class ArcMenuFragment extends Fragment implements View.OnClickListener {
                     R.transition.slide_in_vertical, R.transition.slide_out_vertical);
 
             if (v.equals(imgBtnOne)){
-                startActivity(new Intent(getActivity(), FeedActivity.class), options.toBundle());
+                startActivity( new Intent(getActivity(), FeedActivity.class), options.toBundle());
             }
             else if (v.equals(imgBtnTwo)){
                 startActivity(new Intent(getActivity(), CommunityActivity.class), options.toBundle());

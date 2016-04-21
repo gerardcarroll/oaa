@@ -38,7 +38,7 @@ public class NavDrawerTest {
     public void testOpenWithBurger() {
 
         // Check Feed recycler view is displayed
-        onView(withId(R.id.rv_feed)).check(matches(isDisplayed()));
+        onView(withId(R.id.drawer_layout)).check(matches(isDisplayed()));
         onView(withContentDescription("Open navigation drawer")).check(matches(isDisplayed()));
         onView(withContentDescription("Open navigation drawer")).perform(click());
         onView(withId(R.id.name)).check(matches(isDisplayed()));
@@ -60,7 +60,7 @@ public class NavDrawerTest {
     @Test
     public void testCloseWithSwipe() {
 
-        onView(withId(R.id.rv_feed)).check(matches(isDisplayed()));
+        onView(withId(R.id.drawer_layout)).check(matches(isDisplayed()));
         onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
         onView(withId(R.id.name)).check(matches(isDisplayed()));
         onView(withId(R.id.email)).check(matches(isDisplayed()));

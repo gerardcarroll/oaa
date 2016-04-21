@@ -1,27 +1,5 @@
 package com.overstock.android.prototype.espresso.fragment;
 
-import static android.support.test.espresso.Espresso.onData;
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.swipeUp;
-import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.RootMatchers.isPlatformPopup;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
-
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import org.hamcrest.Matchers;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.parceler.Parcels;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -34,6 +12,28 @@ import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.ProductDetailActivity;
 import com.overstock.android.prototype.model.Options;
 import com.overstock.android.prototype.model.Product;
+
+import org.hamcrest.Matchers;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.parceler.Parcels;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import static android.support.test.espresso.Espresso.onData;
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.swipeUp;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.RootMatchers.isPlatformPopup;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
  * @author LeeMeehan.
@@ -89,18 +89,18 @@ public class ProductBottomSheetFragmentTest {
     onView(withId(R.id.options_spinner)).check(matches(isDisplayed()));
     onView(withId(R.id.options_spinner)).perform(click());
     onData(Matchers.instanceOf(Options.class)).atPosition(3).inRoot(isPlatformPopup()).perform(click());
-    onView(withId(R.id.totalPrice_txt)).check(matches(withText("$ 28.89")));
+    onView(withId(R.id.totalPrice_txt)).check(matches(withText("$ 30.99")));
     // Assert that quantity controls are working.
     onView(withId(R.id.quantity_add)).perform(click());
     onView(withId(R.id.quantity_indicator)).check(matches(withText("2")));
-    onView(withId(R.id.totalPrice_txt)).check(matches(withText("$ 57.78")));
+    onView(withId(R.id.totalPrice_txt)).check(matches(withText("$ 61.98")));
     onView(withId(R.id.quantity_remove)).perform(click());
     onView(withId(R.id.quantity_indicator)).check(matches(withText("1")));
-    onView(withId(R.id.totalPrice_txt)).check(matches(withText("$ 28.89")));
+    onView(withId(R.id.totalPrice_txt)).check(matches(withText("$ 30.99")));
 
     // Confirming that the discount has been applied.
     onView(withId(R.id.rewards_btn_apply)).perform(click());
-    onView(withId(R.id.totalPrice_txt)).check(matches(withText("$ 16.39")));
+    onView(withId(R.id.totalPrice_txt)).check(matches(withText("$ 18.49")));
 
     // assert that popup has been dismissed.
     onView(withId(R.id.btn_pay_credit_card)).perform(click());
