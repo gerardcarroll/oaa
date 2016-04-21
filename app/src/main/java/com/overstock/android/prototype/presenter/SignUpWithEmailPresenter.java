@@ -1,13 +1,13 @@
 package com.overstock.android.prototype.presenter;
 
-import com.overstock.android.prototype.view.ConnectWithEmailView;
+import com.overstock.android.prototype.view.SignUpWithEmailView;
 
 /**
  * Created by rconnolly on 4/19/2016.
  */
-public interface ConnectWithEmailPresenter {
+public interface SignUpWithEmailPresenter {
 
-    void setView(final ConnectWithEmailView connectWithEmailView);
+    void setView(final SignUpWithEmailView connectWithEmailView);
 
     void onSignUp(final String username, final String password);
 

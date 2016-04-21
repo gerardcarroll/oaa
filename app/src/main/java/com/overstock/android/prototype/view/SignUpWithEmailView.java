@@ -3,7 +3,7 @@ package com.overstock.android.prototype.view;
 /**
  * Created by rconnolly on 4/19/2016.
  */
-public interface ConnectWithEmailView {
+public interface SignUpWithEmailView {
 
     void showSignUpSuccess();
 
@@ -12,4 +12,6 @@ public interface ConnectWithEmailView {
     void displayToast(final String toastMessage);
 
     void OnSignUpClick();
+
+    void navigateToCommunity();
 }
