@@ -26,11 +26,4 @@ public class HomeActivityFragmentsModule {
   public GoogleFederatedIdentityFragment providesGoogleFederatedIdentityFragment() {
     return new GoogleFederatedIdentityFragment();
   }
-
-//  @Provides
-//  @ActivityScope
-//  public SignInWithEmailFragment providesSignInWithEmailFragment() {
-//    return new SignInWithEmailFragment();
-//  }
-
 }
