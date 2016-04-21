@@ -36,11 +36,13 @@ import com.overstock.android.prototype.animatorutils.CustomDescriptionAnimation;
 import com.overstock.android.prototype.component.ApplicationComponent;
 import com.overstock.android.prototype.fragment.HorizontialScrollFragment;
 import com.overstock.android.prototype.fragment.ProductBottomSheetFragment;
+import com.overstock.android.prototype.listener.PageChangeListener;
 import com.overstock.android.prototype.model.Product;
 import com.overstock.android.prototype.model.ProductDetail;
 import com.overstock.android.prototype.model.ProductImages;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
 import com.overstock.android.prototype.view.ProductDetailView;
+import com.overstock.android.prototype.widgets.PageNumberIndicator;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -76,8 +78,8 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   @Bind(R.id.slider)
   SliderLayout sliderLayout;
 
-  // @Bind(R.id.custom_indicator)
-  // PagerIndicator pagerIndicator;
+  @Bind(R.id.custom_Indicator)
+  PageNumberIndicator pagerIndicator;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
@@ -150,8 +152,9 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   private void populateImageSlider(List<ProductImages> productImages, String largeImage) {
 
     TextSliderView textSliderView;
-    // pagerIndicator = new PagerIndicator(this);
     if (productImages != null) {
+      Log.i(TAG, "Number of Images : " + productImages.size());
+      pagerIndicator.setTotalNumberOfPages(productImages.size());
       for (ProductImages image : productImages) {
         textSliderView = new TextSliderView(this);
         Log.d(TAG, "Passing " + BASE_IMAGE_URL + image.getImagePath() + " to image slider to be displayed");
@@ -162,6 +165,14 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
       sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
       sliderLayout.setCustomAnimation(new CustomDescriptionAnimation());
       sliderLayout.setDuration(400);
+      sliderLayout.addOnPageChangeListener(new PageChangeListener() {
+        @Override
+        public void onPageSelected(int position) {
+          if (pagerIndicator != null) {
+            pagerIndicator.setCurrentPageNumber(position + 1);
+          }
+        }
+      });
       sliderLayout.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Invisible);
       sliderLayout.setOnTouchListener(new View.OnTouchListener() {
         @Override
@@ -179,26 +190,6 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
       sliderLayout.addSlider(textSliderView);
       sliderLayout.stopAutoCycle();
     }
-  }
-
-  @Override
-  protected void onResume() {
-    super.onResume();
-    Log.i("", "TODO");
-  }
-
-  @Override
-  public void onPause() {
-    super.onPause();
-    restHorizontalScrollRecyclerViews();
-  }
-
-  public void restHorizontalScrollRecyclerViews() {
-    super.onPause();
-    // Fragment frag = getSupportFragmentManager().findFragmentByTag(HorizontialScrollFragment.TAG);
-    // if(frag != null) {
-    // getSupportFragmentManager().beginTransaction().remove(frag).commit();
-    // }
   }
 
   @Override

@@ -15,4 +15,8 @@
     <dimen name="item_circle_size_path">56dp</dimen>
     <dimen name="item_font_size_path">28sp</dimen>
 
+    <dimen name="pager_indicator_padding_vertical">20dp</dimen>
+    <dimen name="pager_indicator_padding_horizontal">5dp</dimen>
+    <dimen name="pager_indicator_text_size">20sp</dimen>
+
 </resources>
