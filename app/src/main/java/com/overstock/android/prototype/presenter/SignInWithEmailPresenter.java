@@ -7,11 +7,11 @@ import com.overstock.android.prototype.view.SignInWithEmailView;
  */
 public interface SignInWithEmailPresenter {
 
-  void setView(SignInWithEmailView emailSignInView);
+  void setView(final SignInWithEmailView emailSignInView);
 
-  void onSignIn(String username, String password);
+  void onSignIn(final String username, final String password);
 
-  void onSignInError(String message);
+  void onSignInError(final String message);
 
   void onDestroy();
 }
