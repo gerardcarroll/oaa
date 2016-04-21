@@ -76,7 +76,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   @Bind(R.id.slider)
   SliderLayout sliderLayout;
 
-//  @Bind(R.id.custom_indicator)
+  // @Bind(R.id.custom_indicator)
   // PagerIndicator pagerIndicator;
 
   @Override
@@ -88,18 +88,6 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     final Bundle extras = getIntent().getExtras();
     final Product product = Parcels.unwrap(extras.getParcelable("parcel"));
-    // final Bitmap receivedImage = extras.getParcelable("image");
-
-    // productImage.setImageBitmap(receivedImage);
-    //
-    // this.getWindow().getSharedElementEnterTransition().addListener(new TransitionListener() {
-    // @Override
-    // public void onTransitionEnd(Transition transition) {
-    // Log.d(TAG, "Updating Image.");
-    // picasso.load(BASE_IMAGE_URL + product.getImageLarge()).fit().error(R.drawable.product_placeholder)
-    // .noPlaceholder().into(productImage);
-    // }
-    // });
 
     productName.setText(product.getName());
     final String currencyCode = Currency.getInstance(Locale.US).getSymbol();
@@ -162,7 +150,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   private void populateImageSlider(List<ProductImages> productImages, String largeImage) {
 
     TextSliderView textSliderView;
-//    pagerIndicator = new PagerIndicator(this);
+    // pagerIndicator = new PagerIndicator(this);
     if (productImages != null) {
       for (ProductImages image : productImages) {
         textSliderView = new TextSliderView(this);
@@ -194,17 +182,36 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   }
 
   @Override
+  protected void onResume() {
+    super.onResume();
+    Log.i("", "TODO");
+  }
+
+  @Override
   public void onPause() {
     super.onPause();
-    for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-      getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-    }
+    restHorizontalScrollRecyclerViews();
+  }
+
+  public void restHorizontalScrollRecyclerViews() {
+    super.onPause();
+    // Fragment frag = getSupportFragmentManager().findFragmentByTag(HorizontialScrollFragment.TAG);
+    // if(frag != null) {
+    // getSupportFragmentManager().beginTransaction().remove(frag).commit();
+    // }
   }
 
   @Override
   public void addHorizontalRecyclerView(int layoutResourceId, ArrayList<Product> products, String displayText) {
     Log.d(TAG, "Passing " + displayText + " products to adapter to be displayed. List size : " + products.size());
-    this.getSupportFragmentManager().beginTransaction().add(layoutResourceId,
-      HorizontialScrollFragment.newInstance(products, displayText), HorizontialScrollFragment.TAG).commit();
+    Fragment frag = getSupportFragmentManager().findFragmentByTag(HorizontialScrollFragment.TAG);
+    if (frag == null) {
+      this.getSupportFragmentManager().beginTransaction().add(layoutResourceId,
+        HorizontialScrollFragment.newInstance(products, displayText), HorizontialScrollFragment.TAG).commit();
+    }
+    else {
+      this.getSupportFragmentManager().beginTransaction().replace(layoutResourceId,
+        HorizontialScrollFragment.newInstance(products, displayText), HorizontialScrollFragment.TAG).commit();
+    }
   }
 }

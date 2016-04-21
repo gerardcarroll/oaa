@@ -97,21 +97,21 @@ public class BrandFragment extends Fragment implements BrandView {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        for(Fragment fragment : getChildFragmentManager().getFragments()){
-            getChildFragmentManager().beginTransaction().remove(fragment).commit();
-        }
+    public void onResume() {
+        super.onResume();
     }
 
     @Override
     public void addHorizontalRecyclerView(
             final int layoutResourceId, final ArrayList<Product> products, final String displayText) {
-        Log.d(TAG, "Passing " + displayText + " products to adapter to be displayed. List size : " + products.size());
-        getChildFragmentManager()
-                .beginTransaction()
-                .add(layoutResourceId, HorizontialScrollFragment.newInstance(products, displayText))
-                .commit();
+        Log.d(TAG, "Passing " +
+                displayText + " products to adapter to be displayed. List size : " +
+                products.size() + "\t\t" + getChildFragmentManager().getBackStackEntryCount());
+
+            getChildFragmentManager()
+                    .beginTransaction()
+                    .replace(layoutResourceId, HorizontialScrollFragment.newInstance(products, displayText), displayText)
+                    .commit();
     }
 
 }
