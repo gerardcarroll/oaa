@@ -35,7 +35,7 @@ import static org.hamcrest.core.IsNot.not;
 public class SignUpWithEmailFragmentTest {
 
     private static final String registeredUsername = "testuser1@gmail.com" ;
-    private static final String newUsername = "testuser52@gmail.com" ;
+    private final String newUsername = "testuser53@gmail.com" ;
     private static final String password = "androidsignuptest" ;
     private static final String passwordConfirm = "androidsignuptest2" ;
 
@@ -210,11 +210,9 @@ public class SignUpWithEmailFragmentTest {
 
         SystemClock.sleep(3000L);
 
-        // Check Success message Toast is displayed on Sign Up fragment
-        onView(withText(activityRule.getActivity().getResources().getString(R.string.successful_oapp_sign_up_message))).inRoot(withDecorView(not(activityRule.getActivity().getWindow().getDecorView()))).check(matches(isDisplayed()));
-
         // Check Communities recycler view is displayed
         onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
 
     }
+
 }
