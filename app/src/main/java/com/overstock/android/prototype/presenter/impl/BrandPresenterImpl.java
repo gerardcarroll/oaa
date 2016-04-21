@@ -93,7 +93,7 @@ public class BrandPresenterImpl implements BrandPresenter {
           @Override
           public void onNext(ProductsResponse productsResponse) {
             Log.i("SUCCESS", "New Arrivals successfully loaded " + productsResponse.getProducts().getProductsList().size());
-            brandView.addHorizontialRecyclerView(R.id.best_sellers_hrv,(ArrayList<Product>) productsResponse.getProducts().getProductsList(), "New Arrivals");
+            brandView.addHorizontialRecyclerView(R.id.new_arrivals_hrv,(ArrayList<Product>) productsResponse.getProducts().getProductsList(), "New Arrivals");
           }
         });
 

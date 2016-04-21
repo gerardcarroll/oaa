@@ -73,7 +73,6 @@
             android:padding="6dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -169,16 +168,9 @@
 
             </LinearLayout>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <include android:id="@+id/best_sellers_hrv" layout="@layout/fragment_horizontial_scroll"  />
-            </FrameLayout>
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <include android:id="@+id/new_arrivals_hrv" layout="@layout/fragment_horizontial_scroll"  />
-            </FrameLayout>
+            <include android:id="@+id/best_sellers_hrv" layout="@layout/fragment_horizontial_scroll"  />
+
+            <include android:id="@+id/new_arrivals_hrv" layout="@layout/fragment_horizontial_scroll"  />
 
         </LinearLayout>
 
