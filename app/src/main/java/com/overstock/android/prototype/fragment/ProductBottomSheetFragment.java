@@ -199,7 +199,7 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
 
   /* Private method to setup and display the spinner. */
   @Override
-  public void updateSpinner(final ArrayList<Options> options) {
+  public void updateSpinner(ArrayList<Options> options) {
     options.add(0, new Options(0, getResources().getString(R.string.option_placeholder_test), 0, 0, 0));
     final OptionAdapter optionAdapter = new OptionAdapter(options, getActivity());
     spinner.setAdapter(optionAdapter);
@@ -211,7 +211,13 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
           presenter.setMaxQuantityAllowed(option.getMaxQuantityAllowed());
           presenter.setCurrentPrice(option.getPrice());
           final Integer existingQuantity = Integer.parseInt(txtIndicator.getText().toString());
-          presenter.updateFinalPrice(existingQuantity);
+          if (existingQuantity < option.getMaxQuantityAllowed()) {
+            presenter.updateFinalPrice(existingQuantity);
+          }
+          else {
+            updateQuantityIndicator(1);
+            handleQuantityIcons(1, option.getMaxQuantityAllowed());
+          }
           presenter.resetRewards();
           Log.i(TAG, String.valueOf(option.getMaxQuantityAllowed()));
         }

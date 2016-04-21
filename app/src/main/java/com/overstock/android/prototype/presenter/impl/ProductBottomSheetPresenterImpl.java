@@ -51,6 +51,7 @@ public class ProductBottomSheetPresenterImpl implements ProductBottomSheetPresen
     this.rewardsApplied = rewardsApplied;
   }
 
+
   @Override
   public void applyDiscount(String totalPrice, String discount) {
     final String placeHolderText = "0.00";
