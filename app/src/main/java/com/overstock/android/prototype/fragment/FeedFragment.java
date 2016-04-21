@@ -1,9 +1,5 @@
 package com.overstock.android.prototype.fragment;
 
-import java.util.ArrayList;
-
-import javax.inject.Inject;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -19,10 +15,14 @@ import android.widget.ProgressBar;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.adapters.FeedAdapter;
-import com.overstock.android.prototype.main.OAppPrototypeApplication;
+import com.overstock.android.prototype.component.FeedActivityComponent;
 import com.overstock.android.prototype.model.Feed;
 import com.overstock.android.prototype.presenter.FeedPresenter;
 import com.overstock.android.prototype.view.FeedView;
+
+import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -45,7 +45,7 @@ public class FeedFragment extends Fragment implements FeedView {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    ((OAppPrototypeApplication) getActivity().getApplication()).getComponent().inject(this);
+    FeedActivityComponent.Initializer.init(this.getContext()).inject(this);
   }
 
   @Override

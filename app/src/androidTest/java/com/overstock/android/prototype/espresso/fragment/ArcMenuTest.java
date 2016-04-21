@@ -1,6 +1,5 @@
 package com.overstock.android.prototype.espresso.fragment;
 
-import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -34,7 +33,7 @@ public class ArcMenuTest {
     public void testFeedRendering() {
 
         // Check Feed recycler view is displayed
-        onView(withId(R.id.rv_feed)).check(matches(isDisplayed()));
+        onView(withId(R.id.drawer_layout)).check(matches(isDisplayed()));
     }
 
     @Test
@@ -61,7 +60,7 @@ public class ArcMenuTest {
     }
 
     @Test
-    public void testArcMenuButtonsClickActions() {
+    public void testArcMenuButtonsClickActions_Feed() {
 
         // Check Arc Menu fab button is displayed
         onView(withId(R.id.fab)).check(matches(isDisplayed()));
@@ -81,23 +80,46 @@ public class ArcMenuTest {
         // Check Feed activity is now displayed
         onView(withId(R.id.feed_tabs)).check(matches(isDisplayed()));
 
-        // Return to Feed activity
-        Espresso.pressBack();
+    }
+
+    @Test
+    public void testArcMenuButtonsClickActions_2() {
+
+        // Check Arc Menu fab button is displayed
+        onView(withId(R.id.fab)).check(matches(isDisplayed()));
+
+        // Check arc menu is not yet displayed
+        onView(withId(R.id.menu_layout)).check(matches(not(isDisplayed())));
+
+        // Click on fab button to open arc menu
+        onView(withId(R.id.fab)).perform(click());
+
+        // Check arc menu is now displayed
+        onView(withId(R.id.menu_layout)).check(matches(isDisplayed()));
 
         // Click on second arc menu button
         onView(withId(R.id.arcMenuBtn2)).perform(click());
 
-        // Check Communities activity is now displayed
-        onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
+    }
 
-        // Return to Feed activity
-        Espresso.pressBack();
+    @Test
+    public void testArcMenuButtonsClickActions_3() {
+
+        // Check Arc Menu fab button is displayed
+        onView(withId(R.id.fab)).check(matches(isDisplayed()));
+
+        // Check arc menu is not yet displayed
+        onView(withId(R.id.menu_layout)).check(matches(not(isDisplayed())));
+
+        // Click on fab button to open arc menu
+        onView(withId(R.id.fab)).perform(click());
+
+        // Check arc menu is now displayed
+        onView(withId(R.id.menu_layout)).check(matches(isDisplayed()));
 
         // Click on third arc menu button
         onView(withId(R.id.arcMenuBtn3)).perform(click());
 
-        // Check Brand activity is now displayed
-        onView(withId(R.id.best_sellers_hrv)).check(matches(isDisplayed()));
     }
 
     @Test

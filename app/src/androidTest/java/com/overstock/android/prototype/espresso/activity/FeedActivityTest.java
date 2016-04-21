@@ -37,7 +37,7 @@ public class FeedActivityTest {
     @Test
     public void testFeedRendering() {
         // Check Feed recycler view is displayed
-        onView(withId(R.id.rv_feed)).check(matches(isDisplayed()));
+        onView(withId(R.id.drawer_layout)).check(matches(isDisplayed()));
     }
 
     @Test
