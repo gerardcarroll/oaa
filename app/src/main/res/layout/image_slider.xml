@@ -14,4 +14,10 @@
         app:pager_animation="Accordion"
         app:pager_animation_span="1100" />
 
+    <!--<com.overstock.android.prototype.widgets.PagerIndicator-->
+        <!--android:id="@+id/R.id.custom_indicator"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+
+
 </RelativeLayout>

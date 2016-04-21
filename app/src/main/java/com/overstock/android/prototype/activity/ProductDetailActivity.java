@@ -76,7 +76,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   @Bind(R.id.slider)
   SliderLayout sliderLayout;
 
-  // @Bind(R.id.custom_indicator)
+//  @Bind(R.id.custom_indicator)
   // PagerIndicator pagerIndicator;
 
   @Override
@@ -162,6 +162,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   private void populateImageSlider(List<ProductImages> productImages, String largeImage) {
 
     TextSliderView textSliderView;
+//    pagerIndicator = new PagerIndicator(this);
     if (productImages != null) {
       for (ProductImages image : productImages) {
         textSliderView = new TextSliderView(this);
@@ -181,6 +182,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
           return true;
         }
       });
+
     }
     else {
       textSliderView = new TextSliderView(this);
