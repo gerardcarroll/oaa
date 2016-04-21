@@ -1,6 +1,5 @@
 package com.overstock.android.prototype.parse.services;
 
-
 import com.parse.LogInCallback;
 import com.parse.ParseAnonymousUtils;
 import com.parse.ParseException;
@@ -18,6 +17,8 @@ import org.junit.runners.MethodSorters;
 /**
  * Created by itowey on 15/04/16.
  */
+
+@Ignore
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ParseUserTests {
 

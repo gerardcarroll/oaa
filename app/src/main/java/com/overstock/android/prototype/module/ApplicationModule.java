@@ -8,14 +8,19 @@ import com.overstock.android.prototype.model.ProductDataService;
 import com.overstock.android.prototype.module.scope.ApplicationScope;
 import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.presenter.CommunityPresenter;
-import com.overstock.android.prototype.presenter.ConnectWithEmailPresenter;
+import com.overstock.android.prototype.presenter.SignUpWithEmailPresenter;
+import com.overstock.android.prototype.presenter.FeedPresenter;
 import com.overstock.android.prototype.presenter.ProductBottomSheetPresenter;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
+import com.overstock.android.prototype.presenter.SignInWithEmailPresenter;
 import com.overstock.android.prototype.presenter.impl.BrandPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.CommunityPresenterImpl;
-import com.overstock.android.prototype.presenter.impl.ConnectWithEmailPresenterImpl;
+
+import com.overstock.android.prototype.presenter.impl.SignUpWithEmailPresenterImpl;
+import com.overstock.android.prototype.presenter.impl.FeedPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.ProductBottomSheetPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.ProductDetailPresenterImpl;
+import com.overstock.android.prototype.presenter.impl.SignInWithEmailPresenterImpl;
 import com.overstock.android.prototype.service.CommunityService;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
 import com.overstock.android.prototype.service.ParseService;
@@ -104,8 +109,13 @@ public class ApplicationModule {
   }
 
   @Provides
-  public ConnectWithEmailPresenter connectWithEmailPresenter(final Application applicationContext) {
-    return new ConnectWithEmailPresenterImpl(applicationContext);
+  public SignUpWithEmailPresenter connectWithEmailPresenter() {
+    return new SignUpWithEmailPresenterImpl();
+  }
+
+  @Provides
+  public SignInWithEmailPresenter signInWithEmailPresenter(Application application) {
+    return new SignInWithEmailPresenterImpl(application.getApplicationContext());
   }
 
   @Provides
