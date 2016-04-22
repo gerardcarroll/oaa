@@ -95,7 +95,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     final String currencyCode = Currency.getInstance(Locale.US).getSymbol();
     productPrice
         .setText(this.getString(R.string.product_price_fmt, currencyCode, String.valueOf(product.getMemberPrice())));
-
+    sliderLayout.stopAutoCycle();
     presenter.setView(this);
     presenter.retrieveProductDetails(product.getId());
   }
@@ -150,7 +150,6 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
   }
 
   private void populateImageSlider(List<ProductImages> productImages, String largeImage) {
-
     TextSliderView textSliderView;
     if (productImages != null) {
       pagerIndicator.setTotalNumberOfPages(productImages.size());
@@ -163,7 +162,6 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
       }
       sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
       sliderLayout.setCustomAnimation(new CustomDescriptionAnimation());
-      sliderLayout.setDuration(100);
       sliderLayout.addOnPageChangeListener(new PageChangeListener() {
         @Override
         public void onPageSelected(int position) {
