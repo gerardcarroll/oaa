@@ -51,7 +51,6 @@ public class ProductBottomSheetPresenterImpl implements ProductBottomSheetPresen
     this.rewardsApplied = rewardsApplied;
   }
 
-
   @Override
   public void applyDiscount(String totalPrice, String discount) {
     final String placeHolderText = "0.00";
@@ -67,11 +66,11 @@ public class ProductBottomSheetPresenterImpl implements ProductBottomSheetPresen
 
   @Override
   public void updateProductPage(final ProductDetail productDetail) {
-    ArrayList<Options> options = (ArrayList<Options>) productDetail.getOptions();
+    final ArrayList<Options> options = (ArrayList<Options>) productDetail.getOptions();
     productBottomSheetView.updateFinalPrice(productDetail.getMemberPrice());
     currentPrice = productDetail.getMemberPrice();
     if (options.size() > 1) {
-      productBottomSheetView.updateSpinner(options);
+      productBottomSheetView.updateSpinner((ArrayList<Options>)options.clone());
     }
     else
       productBottomSheetView.toggleSpinner();
