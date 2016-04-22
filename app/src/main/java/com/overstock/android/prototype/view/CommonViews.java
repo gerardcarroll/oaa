@@ -8,5 +8,5 @@ import java.util.ArrayList;
  * Created by itowey on 14/04/16.
  */
 public interface CommonViews {
-    void addHorizontialRecyclerView(final int layoutResourceId,final ArrayList<Product> parcelables, final String displayText);
+    void addHorizontalRecyclerView(final int layoutResourceId,final ArrayList<Product> parcelables, final String displayText);
 }

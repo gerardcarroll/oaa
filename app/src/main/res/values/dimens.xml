@@ -4,6 +4,10 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="button_elevation">2dp</dimen>
 
+    <dimen name="communities_card_width">160dp</dimen>
+    <dimen name="communities_card_height">150dp</dimen>
+    <dimen name="communities_card_text_width">140dp</dimen>
+
     <dimen name="g_top_margin">100dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <!-- Gallery Columns -->
@@ -14,5 +18,9 @@
     <dimen name="layout_child_offset_path">114dp</dimen>
     <dimen name="item_circle_size_path">56dp</dimen>
     <dimen name="item_font_size_path">28sp</dimen>
+
+    <dimen name="pager_indicator_padding_vertical">20dp</dimen>
+    <dimen name="pager_indicator_padding_horizontal">5dp</dimen>
+    <dimen name="pager_indicator_text_size">20sp</dimen>
 
 </resources>
