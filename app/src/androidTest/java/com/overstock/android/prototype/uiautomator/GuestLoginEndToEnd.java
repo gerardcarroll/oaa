@@ -22,6 +22,7 @@ import android.support.test.uiautomator.Until;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -41,6 +42,7 @@ public class GuestLoginEndToEnd {
     private static final String STRING_TO_BE_TYPED = "UiAutomator";
 
     @Test
+    @Ignore
     public void startMainActivityFromHomeScreen() throws RemoteException {
 
         // Start from the home screen

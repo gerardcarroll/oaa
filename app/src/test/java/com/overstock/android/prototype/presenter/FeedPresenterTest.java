@@ -1,13 +1,13 @@
 package com.overstock.android.prototype.presenter;
 
+import com.overstock.android.prototype.RxSchedulersOverrideRule;
 import com.overstock.android.prototype.model.Feed;
 import com.overstock.android.prototype.presenter.impl.FeedPresenterImpl;
 import com.overstock.android.prototype.service.FeedService;
 import com.overstock.android.prototype.view.FeedView;
 
-import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -18,10 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
-import rx.Scheduler;
-import rx.android.plugins.RxAndroidPlugins;
-import rx.android.plugins.RxAndroidSchedulersHook;
-import rx.schedulers.Schedulers;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -31,7 +27,7 @@ import static org.mockito.Mockito.when;
  * @author LeeMeehan Created on 06-Apr-16.
  */
 @RunWith(RobolectricTestRunner.class)
-public class FeedPresenterTest extends RxAndroidSchedulersHook {
+public class FeedPresenterTest {
 
   private static final int PRODUCT_IMAGE = 1001;
 
@@ -40,6 +36,9 @@ public class FeedPresenterTest extends RxAndroidSchedulersHook {
   private static final String PRODUCT_URL = "TEST.com";
 
   private FeedPresenter feedPresenter;
+
+  @Rule
+  public RxSchedulersOverrideRule rxSchedulersOverrideRule = new RxSchedulersOverrideRule();
 
   @Mock
   private FeedService feedService;
@@ -50,14 +49,11 @@ public class FeedPresenterTest extends RxAndroidSchedulersHook {
   @Before
   public void setUp() {
 
-    RxAndroidPlugins.getInstance().registerSchedulersHook(this);
-
     MockitoAnnotations.initMocks(this);
     feedPresenter = new FeedPresenterImpl(feedService);
   }
 
   @Test
-  @Ignore
   public void testRefreshFeed() {
     final List<Feed> feeds = new ArrayList<>();
     feeds.add(new Feed(PRODUCT_IMAGE, TOP_PRODUCTS_LINK, PRODUCT_URL));
@@ -86,18 +82,6 @@ public class FeedPresenterTest extends RxAndroidSchedulersHook {
     verifyZeroInteractions(feedView);
   }
 
-  @After
-  public void tearDown() {
-    /*
-     * Must be called after each method or you will get a IllegalState Exception. Due to the SchedulersHook being
-     * already registered.
-     */
-    RxAndroidPlugins.getInstance().reset();
-  }
 
-  @Override
-  public Scheduler getMainThreadScheduler() {
-    return Schedulers.immediate();
-  }
 
 }

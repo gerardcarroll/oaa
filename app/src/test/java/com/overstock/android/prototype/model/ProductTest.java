@@ -4,8 +4,6 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import static org.mockito.Matchers.any;
-
 /**
  * @author itowey on 25/03/16.
  */
@@ -19,7 +17,7 @@ public class ProductTest {
 
     @Test
     public void argConstructorTest(){
-        Product product = new Product(any(Integer.class),any(String.class),any(String.class),any(String.class),any(Float.class));
+        Product product = new Product(1,"s1","s2","s3",0.01f);
         Assert.assertNotNull(product);
     }
 

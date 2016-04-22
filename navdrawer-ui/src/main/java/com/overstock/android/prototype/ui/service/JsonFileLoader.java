@@ -1,9 +1,12 @@
 package com.overstock.android.prototype.ui.service;
 
+import android.app.Application;
 import android.content.Context;
 
 import java.io.InputStream;
 import java.util.Scanner;
+
+import javax.inject.Inject;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -16,6 +19,9 @@ import rx.Subscriber;
  * @since 06/04/16
  */
 public class JsonFileLoader {
+
+    @Inject
+    Application application;
 
     public JsonFileLoader() {
 

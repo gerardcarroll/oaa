@@ -1,5 +1,7 @@
 package com.overstock.android.prototype.presenter.impl;
 
+import android.util.Log;
+
 import com.overstock.android.prototype.presenter.SignUpWithEmailPresenter;
 import com.overstock.android.prototype.service.ParseService;
 import com.overstock.android.prototype.view.SignUpWithEmailView;
@@ -15,7 +17,9 @@ public class SignUpWithEmailPresenterImpl implements SignUpWithEmailPresenter {
 
   private ParseService parseService;
 
-  public SignUpWithEmailPresenterImpl() {}
+  public SignUpWithEmailPresenterImpl(ParseService parseService) {
+    this.parseService = parseService;
+  }
 
   @Override
   public void setView(final SignUpWithEmailView connectWithEmailView) {
@@ -24,6 +28,7 @@ public class SignUpWithEmailPresenterImpl implements SignUpWithEmailPresenter {
 
   @Override
   public void onSignUp(final String username, final String password) {
+    Log.d(TAG, "Calling ParseService for user SignUp");
     parseService.signUpNewParseUser(username, password);
   }
 

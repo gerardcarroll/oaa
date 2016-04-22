@@ -1,11 +1,6 @@
 package com.overstock.android.prototype.presenter.impl;
 
-import rx.Subscription;
-import rx.subscriptions.Subscriptions;
-
-import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.overstock.android.prototype.presenter.SignInWithEmailPresenter;
 import com.overstock.android.prototype.service.ParseService;
@@ -20,15 +15,10 @@ public class SignInWithEmailPresenterImpl implements SignInWithEmailPresenter {
 
   private SignInWithEmailView signInWithEmailView;
 
-  private Context context;
-
-  private Subscription subscription = Subscriptions.empty();
-
   private ParseService parseService;
 
-  public SignInWithEmailPresenterImpl(Context context, ParseService parseService) {
+  public SignInWithEmailPresenterImpl(ParseService parseService) {
     this.parseService = parseService;
-    this.context = context;
   }
 
   @Override
@@ -38,13 +28,8 @@ public class SignInWithEmailPresenterImpl implements SignInWithEmailPresenter {
 
   @Override
   public void onSignIn(final String username, final String password) {
+    Log.d(TAG, "Calling ParseService for user SignIn");
     parseService.loginParseUser(username, password);
-  }
-
-  @Override
-  public void onSignInError(String message) {
-    Log.d(TAG, "Error signing in...");
-    Toast.makeText(context, "Sign In Error: " + message, Toast.LENGTH_LONG).show();
   }
 
   @Override

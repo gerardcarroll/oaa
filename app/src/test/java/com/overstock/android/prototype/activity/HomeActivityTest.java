@@ -21,7 +21,6 @@ import com.overstock.android.prototype.service.OappGoogleAuthService;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -105,6 +104,7 @@ public abstract class HomeActivityTest {
   @Rule
   public final DaggerMockRule<ApplicationComponent> mockRule = new DaggerMockRule<>(ApplicationComponent.class,
       new ApplicationModule(new OAppPrototypeApplication()))
+//          .providesMock(Picasso.class)
           .set(new DaggerMockRule.ComponentSetter<ApplicationComponent>() {
             @Override
             public void setComponent(ApplicationComponent applicationComponent) {
@@ -139,7 +139,6 @@ public abstract class HomeActivityTest {
     Robolectric.flushForegroundThreadScheduler();
   }
 
-  @Ignore
   @Test
   public void testHomeActivityCreated() {
     flushRobo();
@@ -156,7 +155,6 @@ public abstract class HomeActivityTest {
     assertNotNull(guestLogin);
   }
 
-  @Ignore
   @Test
   public void testGooglePlusLoginButton_CLICKED() {
     flushRobo();
@@ -177,9 +175,6 @@ public abstract class HomeActivityTest {
       equalTo(CommunityActivity.class.getName()));
   }
 
-
-
-  @Ignore
   @Test
   public void testFaceBookLoginButton_CLICKED() {
     flushRobo();
@@ -189,7 +184,6 @@ public abstract class HomeActivityTest {
     assertEquals("FaceBook Login Coming Soon!", ShadowToast.getTextOfLatestToast());
   }
 
-  @Ignore
   @Test
   public void testGuestLoginButton_CLICKED() {
     flushRobo();
