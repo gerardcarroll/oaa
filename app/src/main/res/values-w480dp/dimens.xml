@@ -1,8 +1,12 @@
 <resources>
     <!-- Example customization of dimensions originally defined in res/values/dimens.xml
-         (such as screen margins) for screens with more than 600dp of available width. 
+         (such as screen margins) for screens with more than 480dp of available width.
     -->
     <dimen name="activity_horizontal_margin">32dp</dimen>
+
+    <dimen name="communities_card_width">200dp</dimen>
+    <dimen name="communities_card_height">190dp</dimen>
+    <dimen name="communities_card_text_width">160dp</dimen>
 
     <!-- Gallery Columns -->
     <integer name="communities_columns">3</integer>

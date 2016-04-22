@@ -98,7 +98,6 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityViewHolder> 
         if (mOnDataChangeListener != null) {
           mOnDataChangeListener.onDataChanged(getSelectedCommunityList().size());
         }
-
         // Add Animation to view
         v.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in));
       }
