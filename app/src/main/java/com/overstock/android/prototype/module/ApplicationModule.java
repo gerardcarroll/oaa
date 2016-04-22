@@ -105,13 +105,13 @@ public class ApplicationModule {
   }
 
   @Provides
-  public SignUpWithEmailPresenter signUpWithEmailPresenter(Application applicationContext) {
-    return new SignUpWithEmailPresenterImpl(providesParseService(applicationContext));
+  public SignUpWithEmailPresenter signUpWithEmailPresenter(ParseService parseService) {
+    return new SignUpWithEmailPresenterImpl(parseService);
   }
 
   @Provides
-  public SignInWithEmailPresenter signInWithEmailPresenter(Application applicationContext) {
-    return new SignInWithEmailPresenterImpl(providesParseService(applicationContext));
+  public SignInWithEmailPresenter signInWithEmailPresenter(ParseService parseService) {
+    return new SignInWithEmailPresenterImpl(parseService);
   }
 
   @Provides

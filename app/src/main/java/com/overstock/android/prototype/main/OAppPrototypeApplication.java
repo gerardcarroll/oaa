@@ -36,9 +36,6 @@ public class OAppPrototypeApplication extends Application {
     Fabric.with(this, new Crashlytics());
     // Dagger init
     component = ApplicationComponent.Initializer.init(this);
-    // Parse init
-    Parse.initialize(new Parse.Configuration.Builder(this).applicationId(this.getString(R.string.parse_application_id))
-        .server(this.getString(R.string.parse_service_url)).build());
   }
 
   public ApplicationComponent getComponent() {

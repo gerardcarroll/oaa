@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.CommunityActivity;
 import com.parse.LogInCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -22,6 +24,10 @@ public class ParseService {
 
   public ParseService(Context context) {
     this.context = context;
+    // Parse init
+    Parse.initialize(
+      new Parse.Configuration.Builder(context).applicationId(context.getString(R.string.parse_application_id))
+          .server(context.getString(R.string.parse_service_url)).build());
   }
 
   public void loginParseUser(String username, String password) {
