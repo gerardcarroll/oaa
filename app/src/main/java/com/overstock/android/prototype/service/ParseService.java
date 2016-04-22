@@ -66,14 +66,11 @@ public class ParseService {
           final Intent signInIntent = new Intent(context, CommunityActivity.class);
           signInIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
           context.startActivity(signInIntent);
-          // connectWithEmailView.showSignUpSuccess();
-          // connectWithEmailView.navigateToCommunity();
         }
         else {
           Log.d(TAG, "Unsuccessful Sign Up using Parse", e);
           // TODO Remove Toast
           Toast.makeText(context, "Unsuccessful Sign Up using Parse", Toast.LENGTH_SHORT).show();
-          // connectWithEmailView.showSignUpError();
         }
       }
     });
