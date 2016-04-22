@@ -2,26 +2,28 @@ package com.overstock.android.prototype.module;
 
 import android.app.Application;
 
-import com.overstock.android.prototype.client.FeedClient;
 import com.overstock.android.prototype.client.TheOAppClient;
 import com.overstock.android.prototype.interfaces.CommunityClient;
 import com.overstock.android.prototype.model.ProductDataService;
 import com.overstock.android.prototype.module.scope.ApplicationScope;
 import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.presenter.CommunityPresenter;
-import com.overstock.android.prototype.presenter.ConnectWithEmailPresenter;
+import com.overstock.android.prototype.presenter.SignUpWithEmailPresenter;
 import com.overstock.android.prototype.presenter.FeedPresenter;
 import com.overstock.android.prototype.presenter.ProductBottomSheetPresenter;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
+import com.overstock.android.prototype.presenter.SignInWithEmailPresenter;
 import com.overstock.android.prototype.presenter.impl.BrandPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.CommunityPresenterImpl;
-import com.overstock.android.prototype.presenter.impl.ConnectWithEmailPresenterImpl;
+
+import com.overstock.android.prototype.presenter.impl.SignUpWithEmailPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.FeedPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.ProductBottomSheetPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.ProductDetailPresenterImpl;
+import com.overstock.android.prototype.presenter.impl.SignInWithEmailPresenterImpl;
 import com.overstock.android.prototype.service.CommunityService;
-import com.overstock.android.prototype.service.FeedService;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
+import com.overstock.android.prototype.service.ParseService;
 import com.overstock.android.prototype.service.ProductService;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
@@ -56,21 +58,6 @@ public class ApplicationModule {
   public ProductDetailPresenter productDetailPresenter(final Application applicationContext,
     final ProductDataService productDataService) {
     return new ProductDetailPresenterImpl(applicationContext, productDataService);
-  }
-
-  @Provides
-  public FeedPresenter feedPresenter(final FeedService feedService) {
-    return new FeedPresenterImpl(feedService);
-  }
-
-  @Provides
-  public FeedClient feedClient(final Application application) {
-    return new FeedClient(application);
-  }
-
-  @Provides
-  public FeedService feedService(final FeedClient feedClient) {
-    return feedClient.getClient();
   }
 
   public ProductDataService providesProductDataService(final ProductService productService) {
@@ -108,22 +95,32 @@ public class ApplicationModule {
   }
 
   @Provides
-  public OappGoogleAuthService providesOappGoogleAuthService(Application application) {
+  public OappGoogleAuthService providesOappGoogleAuthService(final Application application) {
     return new OappGoogleAuthService(application);
   }
 
   @Provides
-  public Picasso providesPicasso() {
+  public Picasso providesPicasso(final Application application) {
     final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
     final int cacheSize = maxMemory / 8;
-    final Picasso picasso = new Picasso.Builder(application.getBaseContext()).memoryCache(new LruCache(cacheSize))
+    final Picasso picasso = new Picasso.Builder(application).memoryCache(new LruCache(cacheSize))
         .build();
     return picasso;
   }
 
   @Provides
-  public ConnectWithEmailPresenter connectWithEmailPresenter(final Application applicationContext) {
-    return new ConnectWithEmailPresenterImpl(applicationContext);
+  public SignUpWithEmailPresenter connectWithEmailPresenter() {
+    return new SignUpWithEmailPresenterImpl();
+  }
+
+  @Provides
+  public SignInWithEmailPresenter signInWithEmailPresenter(Application application) {
+    return new SignInWithEmailPresenterImpl(application.getApplicationContext());
+  }
+
+  @Provides
+  public ParseService providesParseService(final Application applicationContext){
+    return new ParseService(applicationContext);
   }
 
 }

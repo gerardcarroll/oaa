@@ -4,8 +4,6 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import static org.mockito.Matchers.any;
-
 /**
  * Created by itowey on 25/03/16.
  */
@@ -19,7 +17,7 @@ public class FeedTest {
 
     @Test
     public void argConstructorTest(){
-        Feed feed = new Feed(any(Integer.class),any(String.class),any(String.class));
+        Feed feed = new Feed(1,"£","%");
         Assert.assertNotNull(feed);
     }
 

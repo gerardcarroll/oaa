@@ -100,5 +100,9 @@
     <string name="parse_service_url">http://parse.parse.dev.ostk.com:8080/parse</string>
     <string name="parse_application_id">oapp</string>
     <string name="option_placeholder_test">Select Option</string>
+    <string name="unsuccessful_oapp_sign_up_message">User account has already been created.</string>
+    <string name="successful_oapp_sign_up_message">User was signed up successfully.</string>
+    <string name="sign_up_required_fields_message">Please enter required fields.</string>
+    <string name="sign_up_passwordconfirm_error_message">Password and Confirm Password fields do not match.</string>
 
 </resources>

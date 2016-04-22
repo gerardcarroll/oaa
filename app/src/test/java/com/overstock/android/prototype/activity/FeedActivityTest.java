@@ -6,16 +6,22 @@ import android.support.v4.view.ViewPager;
 
 import com.overstock.android.prototype.BuildConfig;
 import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.component.ApplicationComponent;
+import com.overstock.android.prototype.component.FeedActivityComponent;
+import com.overstock.android.prototype.main.OAppPrototypeApplication;
+import com.overstock.android.prototype.module.ApplicationModule;
+import com.overstock.android.prototype.module.FeedActivityModule;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.util.ActivityController;
+
+import it.cosenonjaviste.daggermock.DaggerMockRule;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -29,14 +35,15 @@ public class FeedActivityTest {
 
   private FeedActivity feedActivity;
 
+  @Rule
+  public final DaggerMockRule<FeedActivityComponent> mockRule1 = new DaggerMockRule<>(FeedActivityComponent.class,
+          new FeedActivityModule()).addComponentDependency(ApplicationComponent.class,
+          new ApplicationModule(new OAppPrototypeApplication()));
+
   @Before
   public void setUp() {
-    ActivityController<FeedActivity> feedActivityActivityController =  Robolectric.buildActivity(FeedActivity.class);
-    feedActivityActivityController.create();
-    feedActivityActivityController.start();
-    feedActivityActivityController.resume();
-    feedActivityActivityController.visible();
-    feedActivity = feedActivityActivityController.get();
+    mockRule1.addComponentDependency(ApplicationComponent.class);
+    feedActivity  =  Robolectric.buildActivity(FeedActivity.class).create().start().resume().visible().get();
   }
 
   @After
@@ -45,7 +52,6 @@ public class FeedActivityTest {
   }
 
   @Test
-  @Ignore
   public void testFeedActivity_Creation() {
     assertNotNull(feedActivity);
     TabLayout feedTabLayout = (TabLayout) feedActivity.findViewById(R.id.feed_tabs);

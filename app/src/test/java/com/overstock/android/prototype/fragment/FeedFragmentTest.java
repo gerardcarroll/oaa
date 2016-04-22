@@ -3,16 +3,22 @@ package com.overstock.android.prototype.fragment;
 import android.support.v7.widget.RecyclerView;
 
 import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.RxSchedulersOverrideRule;
 import com.overstock.android.prototype.component.ApplicationComponent;
+import com.overstock.android.prototype.component.FeedActivityComponent;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.model.Feed;
 import com.overstock.android.prototype.module.ApplicationModule;
+import com.overstock.android.prototype.module.FeedActivityModule;
 import com.overstock.android.prototype.presenter.FeedPresenter;
 import com.squareup.picasso.Picasso;
 
 import org.junit.After;
-import org.robolectric.Robolectric;
-import org.robolectric.RuntimeEnvironment;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Rule;
+import org.junit.Test;
+import org.mockito.Mock;
 
 import java.util.ArrayList;
 
@@ -25,17 +31,17 @@ import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFr
 /**
  * @author LeeMeehan Created on 05-Apr-16.
  */
-public class FeedFragmentTest {
+//@RunWith(MockitoJUnitRunner.class)
+public class FeedFragmentTest  {
 
-//  @Rule
-  public final DaggerMockRule<ApplicationComponent> mockRule = new DaggerMockRule<>(ApplicationComponent.class,
-      new ApplicationModule(new OAppPrototypeApplication()))
-          .set(new DaggerMockRule.ComponentSetter<ApplicationComponent>() {
-            @Override
-            public void setComponent(ApplicationComponent applicationComponent) {
-              ((OAppPrototypeApplication) RuntimeEnvironment.application).setComponent(applicationComponent);
-            }
-          });
+  @Rule
+  public final RxSchedulersOverrideRule rxSchedulersOverrideRule = new RxSchedulersOverrideRule();
+
+  @Rule
+  public final DaggerMockRule<FeedActivityComponent> mockRule1 =
+          new DaggerMockRule<>(FeedActivityComponent.class, new FeedActivityModule())
+            .addComponentDependency(ApplicationComponent.class,new ApplicationModule(new OAppPrototypeApplication()))
+          ;
 
   private static final int ITEM_COUNT = 1;
 
@@ -47,13 +53,13 @@ public class FeedFragmentTest {
 
   private FeedFragment feedFragment;
 
-//  @Mock
+  @Mock
   private Picasso picasso;
 
-//  @Mock
+  @Mock
   FeedPresenter feedPresenter;
 
-//  @Before
+  @Before
   public void setUp() {
     feedFragment = new FeedFragment();
     startFragment(feedFragment);
@@ -61,15 +67,17 @@ public class FeedFragmentTest {
 
   @After
   public void tearDown(){
-    Robolectric.reset();
+//    Robolectric.reset();
   }
 
-//  @Test
+  @Test
+  @Ignore
   public void testFragmentNotNull() {
     assertNotNull(feedFragment);
   }
 
-//  @Test
+  @Test
+  @Ignore
   public void testUpdateFeed() {
     ArrayList<Feed> feeds = new ArrayList<>();
     feeds.add(new Feed(PRODUCT_IMAGE, TOP_PRODUCTS_LINK, PRODUCT_URL));
@@ -79,4 +87,5 @@ public class FeedFragmentTest {
     assertNotNull(recyclerView.getAdapter());
     assertEquals(ITEM_COUNT, recyclerView.getAdapter().getItemCount());
   }
+
 }
