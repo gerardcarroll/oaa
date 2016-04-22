@@ -11,7 +11,5 @@ public interface SignInWithEmailPresenter {
 
   void onSignIn(final String username, final String password);
 
-  void onSignInError(final String message);
-
   void onDestroy();
 }

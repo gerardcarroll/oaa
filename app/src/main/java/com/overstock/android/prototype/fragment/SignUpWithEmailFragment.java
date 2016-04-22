@@ -1,30 +1,32 @@
 package com.overstock.android.prototype.fragment;
 
+import javax.inject.Inject;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.activity.CommunityActivity;
-import com.overstock.android.prototype.main.OAppPrototypeApplication;
-import com.overstock.android.prototype.model.User;
-import com.overstock.android.prototype.presenter.SignUpWithEmailPresenter;
-import com.overstock.android.prototype.view.SignUpWithEmailView;
-
-import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.activity.CommunityActivity;
+import com.overstock.android.prototype.main.OAppPrototypeApplication;
+import com.overstock.android.prototype.presenter.SignUpWithEmailPresenter;
+import com.overstock.android.prototype.view.SignUpWithEmailView;
 
 /**
  * Created by rconnolly on 4/19/2016.
@@ -34,7 +36,7 @@ public class SignUpWithEmailFragment extends Fragment implements SignUpWithEmail
     public static final String TAG = SignUpWithEmailFragment.class.getName();
 
     @Inject
-    SignUpWithEmailPresenter connectWithEmailPresenter;
+    SignUpWithEmailPresenter signUpWithEmailPresenter;
 
     @Bind(R.id.et_username)
     EditText usernameEditText;
@@ -67,29 +69,32 @@ public class SignUpWithEmailFragment extends Fragment implements SignUpWithEmail
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        connectWithEmailPresenter.setView(this);
+        signUpWithEmailPresenter.setView(this);
+        onDoneKeyPressedListener();
     }
 
     @OnClick(R.id.btn_cancel)
-    public void onCancelClick(){
+    public void onCancelClick() {
         getActivity().onBackPressed();
     }
 
     @Override
     @OnClick(R.id.btn_sign_up)
-    public void OnSignUpClick(){
+    public void OnSignUpClick() {
+        validateCredentials();
+    }
 
+    private void validateCredentials() {
         String username = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
         String passwordConfirm = confirmPasswordEditText.getText().toString();
 
-        if(username.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty()){
+        if (username.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty()) {
             displayToast(getActivity().getApplicationContext().getResources().getString(R.string.sign_up_required_fields_message));
-        } else if (!password.equals(passwordConfirm)){
+        } else if (!password.equals(passwordConfirm)) {
             displayToast(getActivity().getApplicationContext().getResources().getString(R.string.sign_up_passwordconfirm_error_message));
         } else {
-            User user = new User(username, password);
-            connectWithEmailPresenter.onSignUp(user.getUsername(), user.getPassword());
+            signUpWithEmailPresenter.onSignUp(username, password);
         }
     }
 
@@ -121,7 +126,25 @@ public class SignUpWithEmailFragment extends Fragment implements SignUpWithEmail
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
-        connectWithEmailPresenter.onDestroy();
+        signUpWithEmailPresenter.onDestroy();
+    }
+
+    /**
+     * This listens to when the Done key is pressed when the user is on the password text box. If pressed the onSignIn
+     * method is called in the presenter
+     */
+    private void onDoneKeyPressedListener() {
+        confirmPasswordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView exampleView, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    validateCredentials();
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
     }
 
 }

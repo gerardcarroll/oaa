@@ -3,53 +3,37 @@ package com.overstock.android.prototype.presenter.impl;
 import android.util.Log;
 
 import com.overstock.android.prototype.presenter.SignUpWithEmailPresenter;
+import com.overstock.android.prototype.service.ParseService;
 import com.overstock.android.prototype.view.SignUpWithEmailView;
-import com.parse.ParseException;
-import com.parse.ParseUser;
-import com.parse.SignUpCallback;
 
 /**
  * Created by rconnolly on 4/19/2016.
  */
 public class SignUpWithEmailPresenterImpl implements SignUpWithEmailPresenter {
 
-    private static final String TAG = SignUpWithEmailPresenterImpl.class.getName();
-    private SignUpWithEmailView connectWithEmailView;
-    private ParseUser parseUser;
+  private static final String TAG = SignUpWithEmailPresenterImpl.class.getName();
 
-    public SignUpWithEmailPresenterImpl(){}
+  private SignUpWithEmailView connectWithEmailView;
 
-    @Override
-    public void setView(final SignUpWithEmailView connectWithEmailView) {
-        this.connectWithEmailView = connectWithEmailView;
-    }
+  private ParseService parseService;
 
-    @Override
-    public void onSignUp(final String username, final String password) {
+  public SignUpWithEmailPresenterImpl(ParseService parseService) {
+    this.parseService = parseService;
+  }
 
-        parseUser = new ParseUser();
+  @Override
+  public void setView(final SignUpWithEmailView connectWithEmailView) {
+    this.connectWithEmailView = connectWithEmailView;
+  }
 
-        parseUser.setUsername(username);
-        parseUser.setPassword(password);
+  @Override
+  public void onSignUp(final String username, final String password) {
+    Log.d(TAG, "Calling ParseService for user SignUp");
+    parseService.signUpNewParseUser(username, password);
+  }
 
-        parseUser.signUpInBackground(new SignUpCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null){
-                    Log.i(TAG, "Successfully signed up to OApp", e);
-                    connectWithEmailView.showSignUpSuccess();
-                    connectWithEmailView.navigateToCommunity();
-
-                } else {
-                    Log.i(TAG, "Unsuccessful Sign Up to OApp", e);
-                    connectWithEmailView.showSignUpError();
-                }
-            }
-        });
-    }
-
-    @Override
-    public void onDestroy() {
-        connectWithEmailView = null;
-    }
+  @Override
+  public void onDestroy() {
+    connectWithEmailView = null;
+  }
 }
