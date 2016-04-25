@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.SystemClock;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.assertion.ViewAssertions;
@@ -69,6 +70,8 @@ public class ProductDetailActivityTest {
     @Test
     public void testProductDetailRendering(){
 
+        SystemClock.sleep(2000);
+
         // Check Product Detail activity is displayed
         onView(withId(R.id.product_detail_product_name)).check(matches(withText("Invicta Men's 9212 Speedway GS Chronograph Watch")));
         onView(withId(R.id.product_detail_product_name)).perform(ViewActions.swipeUp());
@@ -86,7 +89,13 @@ class Matchers {
     public static Matcher<View> withCurrentPositiom (final int position) {
         return new TypeSafeMatcher<View>() {
             @Override public boolean matchesSafely (final View view) {
-                return ((SliderLayout) view).getCurrentPosition() == position;
+                int tmpPosition = 0;
+                try{
+                    tmpPosition = ((SliderLayout) view).getCurrentPosition();
+                } catch(Exception e){
+
+                }
+                return tmpPosition == position;
             }
 
             @Override public void describeTo (final Description description) {

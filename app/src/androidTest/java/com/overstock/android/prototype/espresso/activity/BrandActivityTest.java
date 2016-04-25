@@ -73,7 +73,7 @@ public class BrandActivityTest {
         onView(withId(R.id.new_arrivals_hrv)).check(matches(isDisplayed()));
         onView(allOf(withParent(withId(R.id.new_arrivals_hrv)), withId(R.id.rv_horizontal_scroll_frag)))
                 .check(matches(isEnabled()));
-        onView(allOf(withParent(withId(R.id.best_sellers_hrv)), withId(R.id.rv_horizontal_scroll_frag)))
+        onView(allOf(withParent(withId(R.id.new_arrivals_hrv)), withId(R.id.rv_horizontal_scroll_frag)))
                 .perform(HorizontialScrollFragmentScrollToPositionViewAction.scrollToPosition(position));
 
     }
