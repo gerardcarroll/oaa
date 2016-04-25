@@ -22,7 +22,6 @@ import android.support.test.uiautomator.Until;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -41,16 +40,30 @@ public class GuestLoginEndToEnd {
     private static final int TIMEOUT = 6000;
     private static final String STRING_TO_BE_TYPED = "UiAutomator";
 
+    @Before
+    public void setUp() {
+
+        // Initialize UiDevice instance
+        mDevice = UiDevice.getInstance(getInstrumentation());
+
+        // Launch a simple OAppPrototype app
+        Context context = getInstrumentation().getContext();
+
+        Intent intent = context.getPackageManager() .getLaunchIntentForPackage(OApp_PACKAGE);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+    }
+
     @Test
-    @Ignore
-    public void startMainActivityFromHomeScreen() throws RemoteException {
+    public void startMainActivityFromHomeScreen() throws RemoteException, UiObjectNotFoundException {
 
         // Start from the home screen
         mDevice.pressHome();
 
          // Click the Apps icon
-         UiObject2 AppsIcon = mDevice.findObject(By.res("com.sec.android.app.launcher", "home_allAppsIcon"));
-         AppsIcon.click();
+        UiObject AppsIcon = mDevice.findObject(new UiSelector().description("Apps"));
+        Assert.assertNotNull(AppsIcon);
+        AppsIcon.click();
 
         // Click the OApp icon
         mDevice.wait(Until.hasObject(By.text("O.com App Prototype")), TIMEOUT);
@@ -178,17 +191,5 @@ public class GuestLoginEndToEnd {
 
 
 
-    @Before
-    public void setUp() {
 
-        // Initialize UiDevice instance
-        mDevice = UiDevice.getInstance(getInstrumentation());
-
-        // Launch a simple OAppPrototype app
-        Context context = getInstrumentation().getContext();
-
-        Intent intent = context.getPackageManager() .getLaunchIntentForPackage(OApp_PACKAGE);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-    }
 }
