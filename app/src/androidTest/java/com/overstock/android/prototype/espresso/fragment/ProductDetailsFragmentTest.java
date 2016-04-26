@@ -1,4 +1,4 @@
-package com.overstock.android.prototype.espresso.activity;
+package com.overstock.android.prototype.espresso.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.parceler.Parcels;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -34,21 +35,21 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
- * Created by rconnolly on 3/24/2016.
+ * Created by itowey on 26/04/16.
  */
 
 @RunWith(AndroidJUnit4.class)
-public class ProductDetailActivityTest {
+public class ProductDetailsFragmentTest {
 
     @Rule
     public ActivityTestRule<ProductDetailActivity> activityRule = new ActivityTestRule<>(ProductDetailActivity.class, true, false);
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws IOException {
 
         final Context context = InstrumentationRegistry.getInstrumentation().getTargetContext().getApplicationContext();
 
-        URL url = new URL("https://images-common.test.overstock.com/images/products/T924666.jpg");
+        URL url = new URL("http://images-common.test.overstock.com/images/products/T924666.jpg");
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setDoInput(true);
@@ -64,12 +65,13 @@ public class ProductDetailActivityTest {
         activityRule.launchActivity(intent);
 
     }
+
     @Test
-    public void testProductDetailRendering(){
+    public void testProductDetailRendering() {
+        SystemClock.sleep(1000);
+        // Click Connect With Email button
+        onView(withId(R.id.slider)).check(matches(isDisplayed()));
 
-        SystemClock.sleep(2000);
-
-        // Check Product Detail activity is displayed
         onView(withId(R.id.product_detail_product_name)).check(matches(withText("Invicta Men's 9212 Speedway GS Chronograph Watch")));
         onView(withId(R.id.product_detail_product_name)).perform(ViewActions.swipeUp());
         onView(withId(R.id.slider)).check(matches(isDisplayed()));
@@ -80,5 +82,5 @@ public class ProductDetailActivityTest {
         onView(withId(R.id.slider)).perform(ViewActions.swipeRight());
         onView(withId(R.id.slider)).check(ViewAssertions.matches(SliderMatcher.withCurrentPositiom(1)));
     }
-}
 
+}
