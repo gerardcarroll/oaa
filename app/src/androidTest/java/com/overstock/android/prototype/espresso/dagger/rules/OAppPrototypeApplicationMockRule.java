@@ -6,6 +6,7 @@ import android.support.test.InstrumentationRegistry;
 import com.overstock.android.prototype.component.ApplicationComponent;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.module.ApplicationModule;
+import com.overstock.android.prototype.presenter.SignUpWithEmailPresenter;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
 
 import it.cosenonjaviste.daggermock.DaggerMockRule;
@@ -17,7 +18,7 @@ public class OAppPrototypeApplicationMockRule extends DaggerMockRule<Application
 
     public OAppPrototypeApplicationMockRule()  {
         super(ApplicationComponent.class, new ApplicationModule((Application) InstrumentationRegistry.getInstrumentation().getTargetContext().getApplicationContext()));
-        providesMock(OappGoogleAuthService.class);
+        providesMock(OappGoogleAuthService.class, SignUpWithEmailPresenter.class);
 
         set(new ComponentSetter<ApplicationComponent>() {
 

@@ -105,4 +105,8 @@
     <string name="sign_up_required_fields_message">Please enter required fields.</string>
     <string name="sign_up_passwordconfirm_error_message">Password and Confirm Password fields do not match.</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cdn_img_url">http://ak1.ostkcdn.com/images/products/</string>
+
 </resources>

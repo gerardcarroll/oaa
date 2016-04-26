@@ -8,15 +8,23 @@ import android.widget.ImageButton;
 import com.ogaclejapan.arclayout.ArcLayout;
 import com.overstock.android.prototype.BuildConfig;
 import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.component.ApplicationComponent;
+import com.overstock.android.prototype.component.FeedActivityComponent;
 import com.overstock.android.prototype.fragment.ArcMenuFragment;
+import com.overstock.android.prototype.main.OAppPrototypeApplication;
+import com.overstock.android.prototype.module.ApplicationModule;
+import com.overstock.android.prototype.module.FeedActivityModule;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
+
+import it.cosenonjaviste.daggermock.DaggerMockRule;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -30,9 +38,14 @@ import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFr
 
 @Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP)
 @RunWith(RobolectricGradleTestRunner.class)
-public class ArcMenuFragmentTest {
+public class ArcMenuFragmentTest  {
 
     private ArcMenuFragment arcMenuFragment;
+
+    @Rule
+    public final DaggerMockRule<FeedActivityComponent> mockRule1 = new DaggerMockRule<>(FeedActivityComponent.class,
+            new FeedActivityModule()).addComponentDependency(ApplicationComponent.class,
+            new ApplicationModule(new OAppPrototypeApplication()));
 
     @Before
     public void setUp() {
