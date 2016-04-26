@@ -1,5 +1,13 @@
 package com.overstock.android.prototype.adapters;
 
+import java.util.ArrayList;
+import java.util.Currency;
+import java.util.Locale;
+
+import javax.inject.Inject;
+
+import org.parceler.Parcels;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -19,14 +27,6 @@ import com.overstock.android.prototype.model.Product;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-import org.parceler.Parcels;
-
-import java.util.ArrayList;
-import java.util.Currency;
-import java.util.Locale;
-
-import javax.inject.Inject;
-
 /**
  * @author LeeMeehan Created on 08-Mar-16.
  */
@@ -37,7 +37,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
   Picasso picasso;
 
   private ArrayList<Product> products;
+
   private Context context;
+
   private Activity activity;
 
   private static final String BASE_IMAGE_URL = "http://ak1.ostkcdn.com/images/products/";
@@ -66,7 +68,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
         .setText(context.getString(R.string.product_price_fmt, currencyCode, String.valueOf(product.getMemberPrice())));
 
     holder.progressBar.setVisibility(View.VISIBLE);
-    picasso.load(BASE_IMAGE_URL + product.getImageMedium1()).resize(300, 300).error(R.drawable.product_placeholder)
+    picasso.load(BASE_IMAGE_URL + product.getImageThumbnail()).error(R.drawable.product_placeholder)
         .into(holder.imageView, new Callback() {
           @Override
           public void onSuccess() {
@@ -91,9 +93,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
 
         activity.startActivity(intent);
 
-//        final ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat
-//            .makeSceneTransitionAnimation(activity, v, context.getString(R.string.shared_element_transition));
-//        ActivityCompat.startActivity(activity, intent, transitionActivityOptions.toBundle());
+        // final ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat
+        // .makeSceneTransitionAnimation(activity, v, context.getString(R.string.shared_element_transition));
+        // ActivityCompat.startActivity(activity, intent, transitionActivityOptions.toBundle());
       }
     });
   }

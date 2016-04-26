@@ -40,27 +40,27 @@ public class ProductServiceTest {
     when(mockProductService.getBestSellers(any(String.class)))
         .thenReturn(Observable.just(new ProductsResponse(new Products(new ArrayList<Product>() {
             {
-                add(new Product(1, "http://nfl.product.image.ostk.com/large", "http://nfl.product.image.ostk.com",
+                add(new Product(1, "http://nfl.product.image.ostk.com/large", "http://nfl.product.image.ostk.com","8554452/T15832063.jpg",
                         "nfl.product_image.png", 123.99F));
-                add(new Product(2, "http://nhl.product.image.ostk.com/large", "http://nhl.product.image.ostk.com",
+                add(new Product(2, "http://nhl.product.image.ostk.com/large", "http://nhl.product.image.ostk.com","8554452/T15832063.jpg",
                         "nhl.product_image.png", 25.01F));
             }
         }))));
     when(mockProductService.getNewArrivals(any(String.class)))
         .thenReturn(Observable.just(new ProductsResponse(new Products(new ArrayList<Product>() {
             {
-                add(new Product(3, "http://nfl.product.image.ostk.com/large", "http://nfl.product.image.ostk.com",
+                add(new Product(3, "http://nfl.product.image.ostk.com/large", "http://nfl.product.image.ostk.com","8554452/T15832063.jpg",
                         "new.nfl.product_image.png", 13.99F));
-                add(new Product(4, "http://nhl.product.image.ostk.com/large", "http://nhl.product.image.ostk.com",
+                add(new Product(4, "http://nhl.product.image.ostk.com/large", "http://nhl.product.image.ostk.com","8554452/T15832063.jpg",
                         "new.nhl.product_image.png", 15.01F));
             }
         }))));
     when(mockProductService.query(any(String.class), any(String.class), any(Integer.class)))
         .thenReturn(Observable.just(new ProductsResponse(new Products(new ArrayList<Product>() {
             {
-                add(new Product(5, "http://nfl.product.image.ostk.com/large", "http://nfl.product.image.ostk.com",
+                add(new Product(5, "http://nfl.product.image.ostk.com/large", "http://nfl.product.image.ostk.com","8554452/T15832063.jpg",
                         "nfl.product_image.png", 3.99F));
-                add(new Product(6, "http://nhl.product.image.ostk.com/large", "http://nhl.product.image.ostk.com",
+                add(new Product(6, "http://nhl.product.image.ostk.com/large", "http://nhl.product.image.ostk.com","8554452/T15832063.jpg",
                         "nhl.product_image.png", 2.01F));
             }
         }))));

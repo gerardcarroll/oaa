@@ -46,9 +46,9 @@ public class OappProviderTest {
     when(mockOappProvider.query(uri))
         .thenReturn(Observable.just(new ProductsResponse(new Products(new ArrayList<Product>() {
           {
-            add(new Product(1, "http://nfl.product.image.ostk.com/large", "http://nfl.product.image.ostk.com",
+            add(new Product(1, "http://nfl.product.image.ostk.com/large", "http://nfl.product.image.ostk.com","8554452/T15832063.jpg",
                 "nfl.product_image.png", 3.99F));
-            add(new Product(2, "http://nhl.product.image.ostk.com/large", "http://nhl.product.image.ostk.com",
+            add(new Product(2, "http://nhl.product.image.ostk.com/large", "http://nhl.product.image.ostk.com","8554452/T15832063.jpg",
                 "nhl.product_image.png", 2.01F));
           }
         }))));

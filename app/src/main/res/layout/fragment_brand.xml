@@ -1,5 +1,4 @@
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -50,8 +49,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginBottom="4dp"
                     android:layout_marginTop="4dp"
-                    android:elevation="6dp"
                     android:alpha="0"
+                    android:elevation="6dp"
                     android:src="@drawable/nfl_logo" />
 
             </android.support.v7.widget.Toolbar>
@@ -73,10 +72,9 @@
             android:padding="6dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp">
@@ -84,17 +82,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    android:text="@string/top_category_title"/>
+                    android:layout_gravity="start"
+                    android:text="@string/top_category_title" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
+                    android:layout_gravity="end"
                     android:text="@string/top_category_link" />
-            </LinearLayout>
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -116,9 +112,9 @@
                     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                     <ImageView
+                        android:id="@+id/top_cat_image1"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/superbowl_nails" />
+                        android:layout_height="match_parent" />
 
                     <View
                         android:layout_width="match_parent"
@@ -144,10 +140,10 @@
                     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                     <ImageView
+                        android:id="@+id/top_cat_image2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:adjustViewBounds="true"
-                        android:background="@drawable/nfl_men" />
+                        android:adjustViewBounds="true" />
 
                     <View
                         android:layout_width="match_parent"
@@ -168,9 +164,13 @@
 
             </LinearLayout>
 
-            <include android:id="@+id/best_sellers_hrv" layout="@layout/fragment_horizontial_scroll"  />
+            <include
+                android:id="@+id/best_sellers_hrv"
+                layout="@layout/fragment_horizontial_scroll" />
 
-            <include android:id="@+id/new_arrivals_hrv" layout="@layout/fragment_horizontial_scroll"  />
+            <include
+                android:id="@+id/new_arrivals_hrv"
+                layout="@layout/fragment_horizontial_scroll" />
 
         </LinearLayout>
 
