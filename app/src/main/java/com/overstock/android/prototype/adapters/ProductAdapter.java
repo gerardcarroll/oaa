@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.activity.BrandActivity;
 import com.overstock.android.prototype.activity.ProductDetailActivity;
 import com.overstock.android.prototype.fragment.ProductDetailsFragment;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
@@ -87,19 +86,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
         Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
 
         //TODO: investigate cleaner routing methodology
-        if(activity instanceof BrandActivity) {
-          final Intent intent = new Intent(activity, ProductDetailActivity.class);
-          intent.putExtra("image", bitmap);
-          intent.putExtra(ProductDetailsFragment.PRODUCT_DETAILS_PARCEL, Parcels.wrap(product));
-          activity.startActivity(intent);
-        } else {
+        if(activity instanceof ProductDetailActivity) {
           ((AppCompatActivity) activity).getSupportFragmentManager()
                   .beginTransaction()
                   .replace(
                           R.id.product_detils_activity_frm,
                           ProductDetailsFragment.newInstance(product),
-                          ProductDetailsFragment.TAG)
+                          product.getName())
+                  .addToBackStack(product.getName())
                   .commit();
+        } else {
+          final Intent intent = new Intent(activity, ProductDetailActivity.class);
+          intent.putExtra("image", bitmap);
+          intent.putExtra(ProductDetailsFragment.PRODUCT_DETAILS_PARCEL, Parcels.wrap(product));
+          activity.startActivity(intent);
         }
       }
     });

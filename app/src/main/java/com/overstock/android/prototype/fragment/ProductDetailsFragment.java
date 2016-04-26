@@ -49,6 +49,10 @@ public class ProductDetailsFragment extends Fragment implements ProductDetailVie
 
     public static final String PRODUCT_DETAILS_PARCEL = "PRODUCT_DETAILS_PARCEL";
 
+    public Product getProduct() {
+        return product;
+    }
+
     private Product product;
 
     private OnFragmentInteractionListener mListener;
