@@ -38,10 +38,10 @@ public class ImageGalleryFragment extends Fragment implements ImageGalleryView {
 
     private static final String BASE_IMAGE_URL = "http://ak1.ostkcdn.com/images/products/";
 
-    @Bind(R.id.slider)
+    @Bind(R.id.slider_2)
     SliderLayout sliderLayout;
 
-    @Bind(R.id.custom_Indicator)
+    @Bind(R.id.custom_Indicator_2)
     PageNumberIndicator pagerIndicator;
 
     @Inject

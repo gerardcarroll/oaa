@@ -27,15 +27,7 @@
                 android:layout_height="300dp"
                 app:layout_collapseMode="parallax">
 
-                <!-- TEMP IMAGE GALLERY FRAGMENT -->
-                <FrameLayout
-                android:id="@+id/image_gallery_fragment_container"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-                </FrameLayout>
-
-                <!--<include layout="@layout/image_gallery" />-->
+                <include layout="@layout/image_gallery" />
 
                 <!--<ImageView-->
                     <!--android:id="@+id/product_detail_activity_shared_image_1"-->
@@ -102,15 +94,7 @@
                 android:layout_marginTop="12dp"
                 android:textSize="24sp"
                 android:textStyle="bold" />
-
-            <!-- TEMP IMAGE GALLERY FRAGMENT -->
-            <!--<FrameLayout-->
-                <!--android:id="@+id/image_gallery_fragment_container"-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="vertical" >-->
-            <!--</FrameLayout>-->
-
+            
             <TextView
                 android:id="@+id/product_detail_product_price"
                 android:layout_width="match_parent"
