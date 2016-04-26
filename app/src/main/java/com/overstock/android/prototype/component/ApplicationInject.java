@@ -8,6 +8,7 @@ import com.overstock.android.prototype.adapters.FeedAdapter;
 import com.overstock.android.prototype.adapters.ProductAdapter;
 import com.overstock.android.prototype.fragment.BrandFragment;
 import com.overstock.android.prototype.fragment.GoogleFederatedIdentityFragment;
+import com.overstock.android.prototype.fragment.ImageGalleryFragment;
 import com.overstock.android.prototype.fragment.ProductBottomSheetFragment;
 import com.overstock.android.prototype.fragment.SignInWithEmailFragment;
 import com.overstock.android.prototype.fragment.SignUpWithEmailFragment;
@@ -42,5 +43,7 @@ public interface ApplicationInject {
   void inject(final SignInWithEmailFragment signInWithEmailFragment);
 
   void inject(final SignUpWithEmailFragment signUpWithEmailFragment);
+
+  void inject(final ImageGalleryFragment imageGalleryFragment);
 
 }

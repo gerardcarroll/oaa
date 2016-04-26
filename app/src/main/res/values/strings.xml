@@ -86,7 +86,7 @@
     <string name="title_activity_test">TestActivity</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
-    <string name="product_img_base_url">http://ak1.ostkcdn.com/images/products/</string>
+    <!--<string name="product_img_base_url">http://ak1.ostkcdn.com/images/products/</string>-->
     <string name="ostk_base_rest_url">http://www.overstock.com/api/</string>
     <string name="similar_producst_labels">Similar Products</string>
     <string name="webview_html_encoding">text/html; charset=UTF-8</string>
@@ -104,5 +104,6 @@
     <string name="successful_oapp_sign_up_message">User was signed up successfully.</string>
     <string name="sign_up_required_fields_message">Please enter required fields.</string>
     <string name="sign_up_passwordconfirm_error_message">Password and Confirm Password fields do not match.</string>
+    <string name="product_base_image_url">http://ak1.ostkcdn.com/images/products/</string>
 
 </resources>

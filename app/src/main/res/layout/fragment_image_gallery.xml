@@ -4,10 +4,32 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <fragment
+    <TextView
         android:id="@+id/image_gallery_temp_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TEMP IMAGE GALLERY FRAGMENT" />
+
+    <com.daimajia.slider.library.SliderLayout
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        app:auto_cycle="true"
+        app:indicator_visibility="invisible"
+        app:pager_animation="Accordion"
+        app:pager_animation_span="1100" />
+
+    <com.overstock.android.prototype.widgets.PageNumberIndicator
+        android:id="@+id/custom_Indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/oapp_primary_text"
+        android:textSize="@dimen/pager_indicator_text_size"
+        android:paddingTop="@dimen/pager_indicator_padding_horizontal"
+        android:paddingBottom="@dimen/pager_indicator_padding_horizontal"
+        android:paddingStart="@dimen/pager_indicator_padding_vertical"
+        android:paddingEnd="@dimen/pager_indicator_padding_vertical"
+        android:layout_gravity="end" />
 
 </FrameLayout>
