@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.model.Product;
+import com.overstock.android.prototype.module.ApplicationModule;
 import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.view.BrandView;
 

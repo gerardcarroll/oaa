@@ -1,14 +1,11 @@
 package com.overstock.android.prototype.service;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.activity.CommunityActivity;
+import com.overstock.android.prototype.view.SignInWithEmailView;
+import com.overstock.android.prototype.view.SignUpWithEmailView;
 import com.parse.LogInCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -24,41 +21,39 @@ public class ParseService {
 
   public ParseService(Context context) {
     this.context = context;
-    // Parse init
-    Parse.initialize(
-      new Parse.Configuration.Builder(context).applicationId(context.getString(R.string.parse_application_id))
-          .server(context.getString(R.string.parse_service_url)).build());
+    // // Parse init
+    // Parse.initialize(
+    // new Parse.Configuration.Builder(context).applicationId(context.getString(R.string.parse_application_id))
+    // .server(context.getString(R.string.parse_service_url)).build());
   }
 
-  public void loginParseUser(String username, String password) {
+  public void loginParseUser(String username, String password, final SignInWithEmailView view) {
     ParseUser.logInInBackground(username, password, new LogInCallback() {
       @Override
       public void done(ParseUser user, ParseException e) {
         if (e == null && user != null) {
-          Log.d(TAG, "Username: " + user.getUsername());
-          // TODO Remove Toast
-          Toast.makeText(context, "Signing in as : " + user.getUsername(), Toast.LENGTH_SHORT).show();
-          final Intent signInIntent = new Intent(context, CommunityActivity.class);
-          signInIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-          context.startActivity(signInIntent);
+          String message = "Email Sign In as: ";
+          Log.d(TAG, message + user.getUsername());
+          view.displayToast(message + user.getUsername());
+          view.navigateToCommunity();
         }
         else if (user == null) {
           // username or password invalid
-          Log.d(TAG, "Username or Password invalid");
-          // TODO Remove Toast
-          Toast.makeText(context, "Username or Password Invalid", Toast.LENGTH_SHORT).show();
+          String message = "Username or Password invalid.";
+          Log.d(TAG, message);
+          view.displayToast(message);
         }
         else {
           // Something went wrong
-          Log.d(TAG, "Error with Parse login", e);
-          // TODO Remove Toast
-          Toast.makeText(context, "Username or Password Invalid", Toast.LENGTH_SHORT).show();
+          String message = "Error with Parse login. ";
+          Log.d(TAG, message, e);
+          view.displayToast(message + e.getMessage());
         }
       }
     });
   }
 
-  public void signUpNewParseUser(String username, String password) {
+  public void signUpNewParseUser(String username, String password, final SignUpWithEmailView view) {
     ParseUser parseUser = new ParseUser();
     parseUser.setUsername(username);
     parseUser.setPassword(password);
@@ -66,17 +61,15 @@ public class ParseService {
       @Override
       public void done(ParseException e) {
         if (e == null) {
-          Log.d(TAG, "Successfully signed up using Parse");
-          // TODO Remove Toast
-          Toast.makeText(context, "Successfully signed up using Parse", Toast.LENGTH_SHORT).show();
-          final Intent signInIntent = new Intent(context, CommunityActivity.class);
-          signInIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-          context.startActivity(signInIntent);
+          String message = "Successfully signed up using Email. ";
+          Log.d(TAG, message);
+          view.displayToast(message);
+          view.navigateToCommunity();
         }
         else {
-          Log.d(TAG, "Unsuccessful Sign Up using Parse", e);
-          // TODO Remove Toast
-          Toast.makeText(context, "Unsuccessful Sign Up using Parse", Toast.LENGTH_SHORT).show();
+          String message = "Unsuccessful Sign Up using Email. ";
+          Log.d(TAG, message + e.getMessage());
+          view.displayToast(message + e.getMessage());
         }
       }
     });

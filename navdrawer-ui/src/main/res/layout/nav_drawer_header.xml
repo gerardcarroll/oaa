@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <data>
-        <variable name="user" type="com.parse.Parse"/>
-    </data>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="178dp"
@@ -56,4 +52,3 @@
         android:layout_marginTop="100dp"
         android:layout_marginLeft="200dp" />
 </RelativeLayout>
-</layout>

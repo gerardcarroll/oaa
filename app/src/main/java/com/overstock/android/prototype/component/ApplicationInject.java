@@ -39,8 +39,6 @@ public interface ApplicationInject {
 
   void inject(final ProductBottomSheetFragment productBottomSheetFragment);
 
-  void inject(final SignInWithEmailFragment signInWithEmailFragment);
 
-  void inject(final SignUpWithEmailFragment signUpWithEmailFragment);
 
 }

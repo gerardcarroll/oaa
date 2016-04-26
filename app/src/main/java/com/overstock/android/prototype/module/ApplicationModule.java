@@ -2,6 +2,7 @@ package com.overstock.android.prototype.module;
 
 import android.app.Application;
 
+import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.client.TheOAppClient;
 import com.overstock.android.prototype.interfaces.CommunityClient;
 import com.overstock.android.prototype.model.ProductDataService;
@@ -10,18 +11,14 @@ import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.presenter.CommunityPresenter;
 import com.overstock.android.prototype.presenter.ProductBottomSheetPresenter;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
-import com.overstock.android.prototype.presenter.SignInWithEmailPresenter;
-import com.overstock.android.prototype.presenter.SignUpWithEmailPresenter;
 import com.overstock.android.prototype.presenter.impl.BrandPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.CommunityPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.ProductBottomSheetPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.ProductDetailPresenterImpl;
-import com.overstock.android.prototype.presenter.impl.SignInWithEmailPresenterImpl;
-import com.overstock.android.prototype.presenter.impl.SignUpWithEmailPresenterImpl;
 import com.overstock.android.prototype.service.CommunityService;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
-import com.overstock.android.prototype.service.ParseService;
 import com.overstock.android.prototype.service.ProductService;
+import com.parse.Parse;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
 
@@ -38,6 +35,11 @@ public class ApplicationModule {
   Application application;
 
   public ApplicationModule(Application application) {
+
+    // Parse init
+    Parse.initialize(
+      new Parse.Configuration.Builder(application).applicationId(application.getString(R.string.parse_application_id))
+          .server(application.getString(R.string.parse_service_url)).build());
     this.application = application;
   }
 
@@ -102,21 +104,6 @@ public class ApplicationModule {
     final int cacheSize = maxMemory / 8;
     final Picasso picasso = new Picasso.Builder(application).memoryCache(new LruCache(cacheSize)).build();
     return picasso;
-  }
-
-  @Provides
-  public SignUpWithEmailPresenter signUpWithEmailPresenter(ParseService parseService) {
-    return new SignUpWithEmailPresenterImpl(parseService);
-  }
-
-  @Provides
-  public SignInWithEmailPresenter signInWithEmailPresenter(ParseService parseService) {
-    return new SignInWithEmailPresenterImpl(parseService);
-  }
-
-  @Provides
-  public ParseService providesParseService(final Application applicationContext) {
-    return new ParseService(applicationContext);
   }
 
 }

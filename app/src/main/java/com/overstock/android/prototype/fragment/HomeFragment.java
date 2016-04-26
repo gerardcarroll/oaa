@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment {
     View rootView = inflater.inflate(R.layout.fragment_home, container, false);
     ButterKnife.bind(this, rootView);
     // Dagger init
-    HomeActivityComponent.Initializer.init().inject(this);
+    HomeActivityComponent.Initializer.init(this.getActivity()).inject(this);
     return rootView;
   }
 

@@ -2,9 +2,12 @@ package com.overstock.android.prototype.fragment;
 
 import javax.inject.Inject;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,13 +15,15 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.main.OAppPrototypeApplication;
+import com.overstock.android.prototype.activity.CommunityActivity;
+import com.overstock.android.prototype.component.HomeActivityComponent;
 import com.overstock.android.prototype.presenter.SignInWithEmailPresenter;
 import com.overstock.android.prototype.view.SignInWithEmailView;
 
@@ -45,7 +50,7 @@ public class SignInWithEmailFragment extends Fragment implements SignInWithEmail
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    ((OAppPrototypeApplication) getActivity().getApplication()).getComponent().inject(this);
+    HomeActivityComponent.Initializer.init(this.getActivity()).inject(this);
   }
 
   @Override
@@ -73,7 +78,7 @@ public class SignInWithEmailFragment extends Fragment implements SignInWithEmail
 
   @Override
   @OnClick(R.id.btn_sign_in)
-  public void OnSignInClick() {
+  public void onSignInClick() {
     signInWithEmailPresenter.onSignIn(usernameEditText.getText().toString(), passwordEditText.getText().toString());
   }
 
@@ -82,6 +87,20 @@ public class SignInWithEmailFragment extends Fragment implements SignInWithEmail
     super.onDestroyView();
     ButterKnife.unbind(this);
     signInWithEmailPresenter.onDestroy();
+  }
+
+  @Override
+  public void navigateToCommunity() {
+    final ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(getContext(),
+      R.transition.slide_in_vertical, R.transition.slide_out_vertical);
+    startActivity(new Intent(getActivity(), CommunityActivity.class), options.toBundle());
+  }
+
+  @Override
+  public void displayToast(String toastMessage) {
+    final Toast toast = Toast.makeText(getActivity(), toastMessage, Toast.LENGTH_LONG);
+    toast.setGravity(Gravity.BOTTOM, 0, 20);
+    toast.show();
   }
 
   /**
@@ -93,8 +112,7 @@ public class SignInWithEmailFragment extends Fragment implements SignInWithEmail
       @Override
       public boolean onEditorAction(TextView exampleView, int actionId, KeyEvent event) {
         if (actionId == EditorInfo.IME_ACTION_DONE) {
-          signInWithEmailPresenter.onSignIn(usernameEditText.getText().toString(),
-            passwordEditText.getText().toString());
+          onSignInClick();
           return true;
         }
         else {

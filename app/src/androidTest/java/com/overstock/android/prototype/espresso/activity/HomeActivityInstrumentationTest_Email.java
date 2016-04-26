@@ -32,141 +32,141 @@ import com.overstock.android.prototype.activity.HomeActivity;
 @RunWith(AndroidJUnit4.class)
 public class HomeActivityInstrumentationTest_Email {
 
-    private static final String registeredUsername = "testuser1@gmail.com";
+  private static final String registeredUsername = "testuser1@gmail.com";
 
-    private static final String password = "androidsignuptest";
+  private static final String password = "androidsignuptest";
 
-    private static final String passwordConfirm = "androidsignuptest2";
+  private static final String passwordConfirm = "androidsignuptest2";
 
-    private static final String uniqueID = UUID.randomUUID().toString();
+  private static final String uniqueID = UUID.randomUUID().toString();
 
-    private final String newUsername = uniqueID + "@gmail.com";
+  private final String newUsername = uniqueID + "@gmail.com";
 
-    @Rule
-    public ActivityTestRule<HomeActivity> activityTestRule = new ActivityTestRule<>(HomeActivity.class, true, false);
+  @Rule
+  public ActivityTestRule<HomeActivity> activityTestRule = new ActivityTestRule<>(HomeActivity.class, true, false);
 
-    @Before
-    public void setUp() {
-        activityTestRule.launchActivity(null);
-    }
+  @Before
+  public void setUp() {
+    activityTestRule.launchActivity(null);
+  }
 
-    @Test
-    public void testEmailSignIn_CancelPressed() {
-        navigateToSignInPage();
-        checkElementsOfSignInPageDisplayed();
-        // Click Cancel
-        onView(withId(R.id.btn_email_sign_in_cancel)).perform(click());
-        // Check Connect with Email button is displayed
-        onView(withId(R.id.email_login_btn)).check(matches(isDisplayed()));
-    }
+  @Test
+  public void testEmailSignIn_CancelPressed() {
+    navigateToSignInPage();
+    checkElementsOfSignInPageDisplayed();
+    // Click Cancel
+    onView(withId(R.id.btn_email_sign_in_cancel)).perform(click());
+    // Check Connect with Email button is displayed
+    onView(withId(R.id.email_login_btn)).check(matches(isDisplayed()));
+  }
 
-    @Test
-    public void testEmailSignIn_Successful() {
-        navigateToSignInPage();
-        checkElementsOfSignInPageDisplayed();
-        // Enter username/email
-        onView(withId(R.id.et_username)).perform(clearText(), typeText(registeredUsername));
-        // Enter password
-        onView(withId(R.id.et_password)).perform(clearText(), typeText(password));
-        // Close keyboard
-        Espresso.closeSoftKeyboard();
-        // Click Sign In
-        onView(withId(R.id.btn_sign_in)).perform(click());
-        // wait for sign in
-        SystemClock.sleep(2000L);
-        // verify communities page now shown
-        onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
-    }
+  @Test
+  public void testEmailSignIn_Successful() {
+    navigateToSignInPage();
+    checkElementsOfSignInPageDisplayed();
+    // Enter username/email
+    onView(withId(R.id.et_username)).perform(clearText(), typeText(registeredUsername));
+    // Enter password
+    onView(withId(R.id.et_password)).perform(clearText(), typeText(password));
+    // Close keyboard
+    Espresso.closeSoftKeyboard();
+    // Click Sign In
+    onView(withId(R.id.btn_sign_in)).perform(click());
+    // wait for sign in
+    SystemClock.sleep(2000L);
+    // verify communities page now shown
+    onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
+  }
 
-    @Test
-    public void testEmailSignIn_UnSuccessful() {
-        navigateToSignInPage();
-        checkElementsOfSignInPageDisplayed();
-        // Enter username/email
-        onView(withId(R.id.et_username)).perform(clearText(), typeText(registeredUsername));
-        // Enter incorrect password
-        onView(withId(R.id.et_password)).perform(clearText(), typeText("zzzz"));
-        // Close keyboard
-        Espresso.closeSoftKeyboard();
-        // Click Sign In
-        onView(withId(R.id.btn_sign_in)).perform(click());
-        // wait for sign in
-        SystemClock.sleep(2000L);
-        // Check Invalid Username/Password toast is displayed
-        onView(withText("Username or Password invalid."))
-                .inRoot(withDecorView(not(activityTestRule.getActivity().getWindow().getDecorView())))
-                .check(matches(isDisplayed()));
-    }
+  @Test
+  public void testEmailSignIn_UnSuccessful() {
+    navigateToSignInPage();
+    checkElementsOfSignInPageDisplayed();
+    // Enter username/email
+    onView(withId(R.id.et_username)).perform(clearText(), typeText(registeredUsername));
+    // Enter incorrect password
+    onView(withId(R.id.et_password)).perform(clearText(), typeText("zzzz"));
+    // Close keyboard
+    Espresso.closeSoftKeyboard();
+    // Click Sign In
+    onView(withId(R.id.btn_sign_in)).perform(click());
+    // wait for sign in
+    SystemClock.sleep(2000L);
+    // Check Invalid Username/Password toast is displayed
+    onView(withText("Username or Password invalid."))
+        .inRoot(withDecorView(not(activityTestRule.getActivity().getWindow().getDecorView())))
+        .check(matches(isDisplayed()));
+  }
 
-    @Test
-    public void testEmailSignUp_Successful() {
-        navigateToSignUpPage();
-        onView(withId(R.id.et_username)).perform(clearText(), typeText(newUsername));
-        // Enter password
-        onView(withId(R.id.et_password)).perform(clearText(), typeText(password));
-        // Enter password confirm
-        onView(withId(R.id.et_confirm_password)).perform(clearText(), typeText(password));
-        // Close keyboard
-        Espresso.closeSoftKeyboard();
-        // Click Sign In
-        onView(withId(R.id.btn_sign_up)).perform(click());
-        // wait for sign in
-        SystemClock.sleep(2000L);
-        // verify communities page now shown
-        onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
-    }
+  @Test
+  public void testEmailSignUp_Successful() {
+    navigateToSignUpPage();
+    onView(withId(R.id.et_username)).perform(clearText(), typeText(newUsername));
+    // Enter password
+    onView(withId(R.id.et_password)).perform(clearText(), typeText(password));
+    // Enter password confirm
+    onView(withId(R.id.et_confirm_password)).perform(clearText(), typeText(password));
+    // Close keyboard
+    Espresso.closeSoftKeyboard();
+    // Click Sign In
+    onView(withId(R.id.btn_sign_up)).perform(click());
+    // wait for sign in
+    SystemClock.sleep(2000L);
+    // verify communities page now shown
+    onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
+  }
 
-    @Test
-    public void testEmailSignUp_UnSuccessful_UserAlreadyExists() {
-        navigateToSignUpPage();
-        // Enter username/email
-        onView(withId(R.id.et_username)).perform(clearText(), typeText(registeredUsername));
-        // Enter password
-        onView(withId(R.id.et_password)).perform(clearText(), typeText(password));
-        // Enter password confirm
-        onView(withId(R.id.et_confirm_password)).perform(clearText(), typeText(password));
-        // Close keyboard
-        Espresso.closeSoftKeyboard();
-        // Click Sign In
-        onView(withId(R.id.btn_sign_up)).perform(click());
-        // wait for sign in
-        SystemClock.sleep(2000L);
-        // Check already exists toast is displayed
-        onView(withText("Unsuccessful Sign Up using Email. Account already exists for this username"))
-                .inRoot(withDecorView(not(activityTestRule.getActivity().getWindow().getDecorView())))
-                .check(matches(isDisplayed()));
-    }
+  @Test
+  public void testEmailSignUp_UnSuccessful_UserAlreadyExists() {
+    navigateToSignUpPage();
+    // Enter username/email
+    onView(withId(R.id.et_username)).perform(clearText(), typeText(registeredUsername));
+    // Enter password
+    onView(withId(R.id.et_password)).perform(clearText(), typeText(password));
+    // Enter password confirm
+    onView(withId(R.id.et_confirm_password)).perform(clearText(), typeText(password));
+    // Close keyboard
+    Espresso.closeSoftKeyboard();
+    // Click Sign In
+    onView(withId(R.id.btn_sign_up)).perform(click());
+    // wait for sign in
+    SystemClock.sleep(2000L);
+    // Check already exists toast is displayed
+    onView(withText("Unsuccessful Sign Up using Email. Account already exists for this username"))
+        .inRoot(withDecorView(not(activityTestRule.getActivity().getWindow().getDecorView())))
+        .check(matches(isDisplayed()));
+  }
 
-    @Test
-    public void testEmailSignUp_CancelPressed() {
-        navigateToSignUpPage();
-        // Click Cancel on SIgn up page
-        onView(withId(R.id.btn_cancel)).perform(click());
-        // Check Sign in page is displayed
-        onView(withId(R.id.txt_email_sign_up)).check(matches(isDisplayed()));
-    }
+  @Test
+  public void testEmailSignUp_CancelPressed() {
+    navigateToSignUpPage();
+    // Click Cancel on SIgn up page
+    onView(withId(R.id.btn_cancel)).perform(click());
+    // Check Sign in page is displayed
+    onView(withId(R.id.txt_email_sign_up_link)).check(matches(isDisplayed()));
+  }
 
-    private void checkElementsOfSignInPageDisplayed() {
-        // Check elements of view are displayed
-        onView(withId(R.id.et_username)).check(matches(isDisplayed()));
-        onView(withId(R.id.et_password)).check(matches(isDisplayed()));
-        onView(withId(R.id.btn_email_sign_in_cancel)).check(matches(isDisplayed()));
-        onView(withId(R.id.btn_sign_in)).check(matches(isDisplayed()));
-        onView(withId(R.id.txt_email_sign_up)).check(matches(isDisplayed()));
-    }
+  private void checkElementsOfSignInPageDisplayed() {
+    // Check elements of view are displayed
+    onView(withId(R.id.et_username)).check(matches(isDisplayed()));
+    onView(withId(R.id.et_password)).check(matches(isDisplayed()));
+    onView(withId(R.id.btn_email_sign_in_cancel)).check(matches(isDisplayed()));
+    onView(withId(R.id.btn_sign_in)).check(matches(isDisplayed()));
+    onView(withId(R.id.txt_email_sign_up_link)).check(matches(isDisplayed()));
+  }
 
-    private void navigateToSignInPage() {
-        // Check Connect with Email button is displayed
-        onView(withId(R.id.email_login_btn)).check(matches(isDisplayed()));
-        // Click Connect With Email button
-        onView(withId(R.id.email_login_btn)).perform(click());
-    }
+  private void navigateToSignInPage() {
+    // Check Connect with Email button is displayed
+    onView(withId(R.id.email_login_btn)).check(matches(isDisplayed()));
+    // Click Connect With Email button
+    onView(withId(R.id.email_login_btn)).perform(click());
+  }
 
-    public void navigateToSignUpPage() {
-        navigateToSignInPage();
-        // Check sign up button displayed
-        onView(withId(R.id.txt_email_sign_up)).check(matches(isDisplayed()));
-        // Click sign up
-        onView(withId(R.id.txt_email_sign_up)).perform(click());
-    }
+  public void navigateToSignUpPage() {
+    navigateToSignInPage();
+    // Check sign up button displayed
+    onView(withId(R.id.txt_email_sign_up_link)).check(matches(isDisplayed()));
+    // Click sign up
+    onView(withId(R.id.txt_email_sign_up_link)).perform(click());
+  }
 }

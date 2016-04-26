@@ -12,8 +12,6 @@ dependencies {
     compile rx.rxandroid
     compile rx.rxjava
     compile javaxInject
-    compile parseAndroid
-
 }
 
 apply from: '../jacoco.gradle'

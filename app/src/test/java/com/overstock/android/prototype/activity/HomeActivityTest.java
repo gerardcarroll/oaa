@@ -1,5 +1,28 @@
 package com.overstock.android.prototype.activity;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.util.concurrent.TimeUnit;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowActivity;
+import org.robolectric.shadows.ShadowToast;
+
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -19,30 +42,7 @@ import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.module.ApplicationModule;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.robolectric.Robolectric;
-import org.robolectric.RobolectricGradleTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowActivity;
-import org.robolectric.shadows.ShadowToast;
-
-import java.util.concurrent.TimeUnit;
-
 import it.cosenonjaviste.daggermock.DaggerMockRule;
-
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * Simple Test class to test that the Home Activity was created successfully
@@ -104,7 +104,7 @@ public abstract class HomeActivityTest {
   @Rule
   public final DaggerMockRule<ApplicationComponent> mockRule = new DaggerMockRule<>(ApplicationComponent.class,
       new ApplicationModule(new OAppPrototypeApplication()))
-//          .providesMock(Picasso.class)
+          // .providesMock(Picasso.class)
           .set(new DaggerMockRule.ComponentSetter<ApplicationComponent>() {
             @Override
             public void setComponent(ApplicationComponent applicationComponent) {
@@ -112,12 +112,12 @@ public abstract class HomeActivityTest {
             }
           });
 
-  @Mock
-  private OappGoogleAuthService oappGoogleAuthService;
-
   protected HomeActivity homeActivity;
 
   protected HomeFragment homeFragment;
+
+  @Mock
+  private OappGoogleAuthService oappGoogleAuthService;
 
   @Before
   public void setUp() {
@@ -130,11 +130,11 @@ public abstract class HomeActivityTest {
   }
 
   @After
-  public void tearDown(){
+  public void tearDown() {
     Robolectric.reset();
   }
 
-  protected void flushRobo(){
+  protected void flushRobo() {
     Robolectric.flushBackgroundThreadScheduler();
     Robolectric.flushForegroundThreadScheduler();
   }
@@ -148,10 +148,12 @@ public abstract class HomeActivityTest {
     // Assert elements are visible.
     Button faceBookButton = (Button) homeFragment.getView().findViewById(R.id.facebook_login_btn);
     Button googlePlusButton = (Button) homeFragment.getView().findViewById(R.id.googlePlus_login_btn);
+    Button emailConnectButton = (Button) homeFragment.getView().findViewById(R.id.email_login_btn);
     Button guestLogin = (Button) homeFragment.getView().findViewById(R.id.guest_login_btn);
 
     assertNotNull(faceBookButton);
     assertNotNull(googlePlusButton);
+    assertNotNull(emailConnectButton);
     assertNotNull(guestLogin);
   }
 
