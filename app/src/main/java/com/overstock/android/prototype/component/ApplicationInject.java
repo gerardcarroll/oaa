@@ -3,13 +3,13 @@ package com.overstock.android.prototype.component;
 import android.app.Application;
 
 import com.overstock.android.prototype.activity.CommunityActivity;
-import com.overstock.android.prototype.activity.ProductDetailActivity;
 import com.overstock.android.prototype.adapters.FeedAdapter;
 import com.overstock.android.prototype.adapters.ProductAdapter;
 import com.overstock.android.prototype.fragment.BrandFragment;
 import com.overstock.android.prototype.fragment.GoogleFederatedIdentityFragment;
 import com.overstock.android.prototype.fragment.ImageGalleryFragment;
 import com.overstock.android.prototype.fragment.ProductBottomSheetFragment;
+import com.overstock.android.prototype.fragment.ProductDetailsFragment;
 import com.overstock.android.prototype.fragment.SignInWithEmailFragment;
 import com.overstock.android.prototype.fragment.SignUpWithEmailFragment;
 import com.overstock.android.prototype.model.ProductDataService;
@@ -30,7 +30,7 @@ public interface ApplicationInject {
 
   void inject(final GoogleFederatedIdentityFragment googleFederatedIdentityFragment);
 
-  void inject(final ProductDetailActivity productDetailActivity);
+  void inject(final ProductDetailsFragment productDetailsFragment);
 
   void inject(final ProductAdapter productAdapter);
 

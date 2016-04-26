@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.activity.BrandActivity;
 import com.overstock.android.prototype.activity.ProductDetailActivity;
+import com.overstock.android.prototype.fragment.ProductDetailsFragment;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.model.Product;
 import com.squareup.picasso.Callback;
@@ -40,8 +43,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
   private Context context;
   private Activity activity;
 
-  private static final String BASE_IMAGE_URL = "http://ak1.ostkcdn.com/images/products/";
-
   public ProductAdapter(Activity activity, Context context, ArrayList<Product> products) {
     this.activity = activity;
     this.context = context;
@@ -66,7 +67,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
         .setText(context.getString(R.string.product_price_fmt, currencyCode, String.valueOf(product.getMemberPrice())));
 
     holder.progressBar.setVisibility(View.VISIBLE);
-    picasso.load(BASE_IMAGE_URL + product.getImageMedium1()).resize(300, 300).error(R.drawable.product_placeholder)
+    picasso.load(context.getString(R.string.cdn_img_url) + product.getImageMedium1()).resize(300, 300).error(R.drawable.product_placeholder)
         .into(holder.imageView, new Callback() {
           @Override
           public void onSuccess() {
@@ -85,15 +86,21 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
         final ImageView imageView = (ImageView) v;
         Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
 
-        final Intent intent = new Intent(activity, ProductDetailActivity.class);
-        intent.putExtra("image", bitmap);
-        intent.putExtra("parcel", Parcels.wrap(product));
-
-        activity.startActivity(intent);
-
-//        final ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat
-//            .makeSceneTransitionAnimation(activity, v, context.getString(R.string.shared_element_transition));
-//        ActivityCompat.startActivity(activity, intent, transitionActivityOptions.toBundle());
+        //TODO: investigate cleaner routing methodology
+        if(activity instanceof BrandActivity) {
+          final Intent intent = new Intent(activity, ProductDetailActivity.class);
+          intent.putExtra("image", bitmap);
+          intent.putExtra(ProductDetailsFragment.PRODUCT_DETAILS_PARCEL, Parcels.wrap(product));
+          activity.startActivity(intent);
+        } else {
+          ((AppCompatActivity) activity).getSupportFragmentManager()
+                  .beginTransaction()
+                  .replace(
+                          R.id.product_detils_activity_frm,
+                          ProductDetailsFragment.newInstance(product),
+                          ProductDetailsFragment.TAG)
+                  .commit();
+        }
       }
     });
   }
