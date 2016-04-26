@@ -58,7 +58,7 @@ public class SignInWithEmailFragment extends Fragment implements SignInWithEmail
     return rootView;
   }
 
-  @OnClick(R.id.txt_email_sign_up)
+  @OnClick(R.id.txt_email_sign_up_link)
   public void emailSignUp_onClick() {
     FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
     fragmentTransaction.replace(R.id.home_activity, new SignUpWithEmailFragment(), SignUpWithEmailFragment.TAG);
