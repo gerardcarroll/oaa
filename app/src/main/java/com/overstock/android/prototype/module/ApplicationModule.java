@@ -20,6 +20,7 @@ import com.overstock.android.prototype.presenter.impl.SignInWithEmailPresenterIm
 import com.overstock.android.prototype.presenter.impl.SignUpWithEmailPresenterImpl;
 import com.overstock.android.prototype.service.CommunityService;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
+import com.overstock.android.prototype.service.ParseInit;
 import com.overstock.android.prototype.service.ParseService;
 import com.overstock.android.prototype.service.ProductService;
 import com.squareup.picasso.LruCache;
@@ -117,6 +118,11 @@ public class ApplicationModule {
   @Provides
   public ParseService providesParseService(final Application applicationContext) {
     return new ParseService(applicationContext);
+  }
+
+  @Provides
+  public ParseInit providesParseInit(final Application applicationContext) {
+    return new ParseInit(applicationContext);
   }
 
 }

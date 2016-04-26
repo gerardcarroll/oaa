@@ -8,9 +8,7 @@ import android.support.annotation.VisibleForTesting;
 
 import com.crashlytics.android.Crashlytics;
 import com.overstock.android.prototype.BuildConfig;
-import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.component.ApplicationComponent;
-import com.parse.Parse;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -36,9 +34,6 @@ public class OAppPrototypeApplication extends Application {
     Fabric.with(this, new Crashlytics());
     // Dagger init
     component = ApplicationComponent.Initializer.init(this);
-    // Parse init
-    Parse.initialize(new Parse.Configuration.Builder(this).applicationId(this.getString(R.string.parse_application_id))
-        .server(this.getString(R.string.parse_service_url)).build());
   }
 
   public ApplicationComponent getComponent() {
