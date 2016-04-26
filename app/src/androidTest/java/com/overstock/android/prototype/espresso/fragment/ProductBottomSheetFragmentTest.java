@@ -10,6 +10,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.ProductDetailActivity;
+import com.overstock.android.prototype.fragment.ProductDetailsFragment;
 import com.overstock.android.prototype.model.Options;
 import com.overstock.android.prototype.model.Product;
 
@@ -61,7 +62,7 @@ public class ProductBottomSheetFragmentTest {
     connection.disconnect();
     final Intent intent = new Intent(context, ProductDetailActivity.class);
     intent.putExtra("image", bitmapExtra);
-    intent.putExtra("parcel",
+    intent.putExtra(ProductDetailsFragment.PRODUCT_DETAILS_PARCEL,
       Parcels.wrap(new Product(8939543, "8939543/Alternative-Apparel-Mens-Eco-Jersey-Football-T-Shirt-L16153098.jpg",
           "8939543/Alternative-Apparel-Mens-Eco-Jersey-Football-T-Shirt-P16153098.jpg",
           "Alternative Apparel Men's Eco-Jersey Football T-Shirt", 28.89f)));
