@@ -8,9 +8,7 @@ import android.support.annotation.VisibleForTesting;
 
 import com.crashlytics.android.Crashlytics;
 import com.overstock.android.prototype.BuildConfig;
-import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.component.ApplicationComponent;
-import com.parse.Parse;
 
 import io.fabric.sdk.android.Fabric;
 

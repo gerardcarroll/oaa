@@ -51,7 +51,7 @@ import static org.mockito.Mockito.when;
  */
 @Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP)
 @RunWith(RobolectricGradleTestRunner.class)
-public abstract class HomeActivityTest {
+public abstract class HomeActivityTest  {
 
   private static final String TEST_USERNAME = "Test User";
 
@@ -104,7 +104,6 @@ public abstract class HomeActivityTest {
   @Rule
   public final DaggerMockRule<ApplicationComponent> mockRule = new DaggerMockRule<>(ApplicationComponent.class,
       new ApplicationModule(new OAppPrototypeApplication()))
-//          .providesMock(Picasso.class)
           .set(new DaggerMockRule.ComponentSetter<ApplicationComponent>() {
             @Override
             public void setComponent(ApplicationComponent applicationComponent) {
