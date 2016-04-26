@@ -85,7 +85,7 @@ public class ImageGalleryPresenterImpl implements ImageGalleryPresenter {
                     public void onNext(ProductDetail productDetail) {
                         Log.d(TAG, "SUCCESS, Product Details successfully loaded");
                         productDetails = productDetail;
-                        imageGalleryView.displayImages(productDetail.getProductImages(), productDetail.getImageLarge());
+                        imageGalleryView.displayImages(productDetail);
                     }
                 });
     }

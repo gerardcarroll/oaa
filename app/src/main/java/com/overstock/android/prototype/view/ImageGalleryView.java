@@ -1,13 +1,11 @@
 package com.overstock.android.prototype.view;
 
-import com.overstock.android.prototype.model.ProductImages;
-
-import java.util.List;
+import com.overstock.android.prototype.model.ProductDetail;
 
 /**
  * @author RayConnolly, created on 4/25/2016.
  */
 public interface ImageGalleryView {
 
-    void displayImages(final List<ProductImages> galleryProductImages, final String productImage);
+    void displayImages(final ProductDetail productDetail);
 }

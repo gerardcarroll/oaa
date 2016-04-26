@@ -127,9 +127,9 @@ public class ApplicationModule {
         return new ImageGalleryPresenterImpl(applicationContext, productDataService);
     }
 
-  @Provides
-  public ParseInit providesParseInit(final Application applicationContext) {
-    return new ParseInit(applicationContext);
-  }
+    @Provides
+    public ParseInit providesParseInit(final Application applicationContext) {
+        return new ParseInit(applicationContext);
+    }
 
 }

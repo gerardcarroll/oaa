@@ -18,7 +18,6 @@ import org.parceler.Parcels;
  */
 public class ProductDetailActivity extends AppCompatActivity {
 
-
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -52,5 +51,5 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
     return super.onOptionsItemSelected(item);
   }
-  
+
 }

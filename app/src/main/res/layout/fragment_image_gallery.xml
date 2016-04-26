@@ -4,14 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/image_gallery_temp_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TEMP IMAGE GALLERY FRAGMENT" />
-
     <com.daimajia.slider.library.SliderLayout
-        android:id="@+id/slider_2"
+        android:id="@+id/slider"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
@@ -21,7 +15,7 @@
         app:pager_animation_span="1100" />
 
     <com.overstock.android.prototype.widgets.PageNumberIndicator
-        android:id="@+id/custom_Indicator_2"
+        android:id="@+id/custom_Indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/oapp_primary_text"
