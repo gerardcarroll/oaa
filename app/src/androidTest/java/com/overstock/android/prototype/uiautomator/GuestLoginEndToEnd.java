@@ -6,8 +6,6 @@
 
 package com.overstock.android.prototype.uiautomator;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.RemoteException;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
@@ -47,10 +45,10 @@ public class GuestLoginEndToEnd {
         mDevice = UiDevice.getInstance(getInstrumentation());
 
         // Launch a simple OAppPrototype app
-        Context context = getInstrumentation().getContext();
+//        Context context = getInstrumentation().getContext();
 
-        Intent intent = context.getPackageManager() .getLaunchIntentForPackage(OApp_PACKAGE);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        Intent intent = context.getPackageManager() .getLaunchIntentForPackage(OApp_PACKAGE);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
     }
 
