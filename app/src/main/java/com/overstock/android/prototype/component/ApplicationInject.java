@@ -11,6 +11,7 @@ import com.overstock.android.prototype.fragment.ImageGalleryFragment;
 import com.overstock.android.prototype.fragment.MoreInformationFragment;
 import com.overstock.android.prototype.fragment.ProductBottomSheetFragment;
 import com.overstock.android.prototype.fragment.ProductDetailsFragment;
+import com.overstock.android.prototype.fragment.ProductDetailsSummaryFragment;
 import com.overstock.android.prototype.fragment.SignInWithEmailFragment;
 import com.overstock.android.prototype.fragment.SignUpWithEmailFragment;
 import com.overstock.android.prototype.model.ProductDataService;
@@ -48,5 +49,7 @@ public interface ApplicationInject {
   void inject(final ImageGalleryFragment imageGalleryFragment);
 
   void inject(final MoreInformationFragment moreInformationFragment);
+
+  void inject(final ProductDetailsSummaryFragment productDetailsSummaryFragment);
 
 }

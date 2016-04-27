@@ -3,8 +3,6 @@ package com.overstock.android.prototype.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +11,6 @@ import android.widget.Button;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.component.ApplicationComponent;
-import com.overstock.android.prototype.model.Product;
 import com.overstock.android.prototype.model.ProductDetail;
 import com.overstock.android.prototype.presenter.MoreInformationPresenter;
 import com.overstock.android.prototype.view.MoreInformationView;
@@ -32,7 +29,7 @@ public class MoreInformationFragment extends Fragment implements MoreInformation
 
     public static final String PRODUCT_DETAILS_PARCEL = "PRODUCT_DETAILS_PARCEL";
 
-    private Product product;
+    private ProductDetail productDetail;
 
     @Inject
     MoreInformationPresenter moreInformationPresenter;
@@ -48,10 +45,10 @@ public class MoreInformationFragment extends Fragment implements MoreInformation
 
     public MoreInformationFragment(){}
 
-    public static MoreInformationFragment newInstance(Product product) {
+    public static MoreInformationFragment newInstance(ProductDetail productDetail) {
         MoreInformationFragment fragment = new MoreInformationFragment();
         Bundle args = new Bundle();
-        args.putParcelable(PRODUCT_DETAILS_PARCEL, product);
+        args.putParcelable(PRODUCT_DETAILS_PARCEL, productDetail);
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,14 +65,14 @@ public class MoreInformationFragment extends Fragment implements MoreInformation
 
         View view = inflater.inflate(R.layout.fragment_more_information, container, false);
         if (getArguments() != null) {
-            product = getArguments().getParcelable(PRODUCT_DETAILS_PARCEL);
+            productDetail = getArguments().getParcelable(PRODUCT_DETAILS_PARCEL);
         }
         ButterKnife.bind(this, view);
 
         displayMoreInfoFragments();
 
         moreInformationPresenter.setView(this);
-        moreInformationPresenter.retrieveProductDetails(product.getId());
+        moreInformationPresenter.retrieveProductDetails(productDetail.getId());
         return view;
     }
 
@@ -85,35 +82,22 @@ public class MoreInformationFragment extends Fragment implements MoreInformation
         //productDescription.loadData(productDetail.getDescription().trim(), getString(R.string.webview_html_encoding), null);
     }
 
-//    @OnClick(R.id.btn_shipping_returns)
-//    public void shippingReturnsBtn_onClick(){
-//
-//        this.getChildFragmentManager()
-//                .beginTransaction()
-//                .replace(R.id.more_info_container, MoreInformationFragment.newInstance(product))
-//                .addToBackStack(null)
-//                .commit();
-//
-//    }
-
     private void displayMoreInfoFragments(){
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Fragment fragment = null;
-                if(v == shippingReturnsBtn){
-                    fragment = new MoreInfoShippingReturnsFragment();
-                    //setRecipeDetails(fragment);
+                if(v == detailsBtn){
+                    fragment = MoreInfoDetailsFragment.newInstance(productDetail);
                 } else {
-                    fragment = new MoreInfoDetailsFragment();
-                    //setSourceDetails(fragment);
+                    fragment =  new MoreInfoShippingReturnsFragment();
                 }
-                FragmentManager manager = getFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.more_info_container, fragment);
-                transaction.addToBackStack("fragment");
-                transaction.commit();
+                getChildFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.more_info_container, fragment)
+                    .addToBackStack("fragment")
+                    .commit();
             }
         };
         detailsBtn.setOnClickListener(listener);

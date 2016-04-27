@@ -12,6 +12,7 @@ import com.overstock.android.prototype.presenter.ImageGalleryPresenter;
 import com.overstock.android.prototype.presenter.MoreInformationPresenter;
 import com.overstock.android.prototype.presenter.ProductBottomSheetPresenter;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
+import com.overstock.android.prototype.presenter.ProductDetailsSummaryPresenter;
 import com.overstock.android.prototype.presenter.SignInWithEmailPresenter;
 import com.overstock.android.prototype.presenter.SignUpWithEmailPresenter;
 import com.overstock.android.prototype.presenter.impl.BrandPresenterImpl;
@@ -20,6 +21,7 @@ import com.overstock.android.prototype.presenter.impl.ImageGalleryPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.MoreInformationPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.ProductBottomSheetPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.ProductDetailPresenterImpl;
+import com.overstock.android.prototype.presenter.impl.ProductDetailsSummaryPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.SignInWithEmailPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.SignUpWithEmailPresenterImpl;
 import com.overstock.android.prototype.service.CommunityService;
@@ -138,5 +140,12 @@ public class ApplicationModule {
     public MoreInformationPresenter moreInformationPresenter(final Application applicationContext, final ProductDataService productDataService){
         return new MoreInformationPresenterImpl(applicationContext, productDataService);
     }
+
+    @Provides
+    public ProductDetailsSummaryPresenter providesProductDetailsSummaryPresenter(final Application applicationContext,
+                                                                                 final ProductDataService productDataService){
+        return new ProductDetailsSummaryPresenterImpl( applicationContext, productDataService);
+    }
+
 
 }

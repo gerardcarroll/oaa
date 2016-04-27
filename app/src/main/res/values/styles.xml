@@ -51,17 +51,4 @@
         <item name="android:background">@drawable/arc_menu_white_oval</item>
     </style>
 
-    <!-- More Information buttons -->
-    <style name="MoreInfoDetailsButton">
-        <item name="android:background">@drawable/more_info_details_button</item>
-        <item name="android:gravity">center</item>
-        <item name="android:padding">5dp</item>
-    </style>
-
-    <style name="MoreInfoShippingReturnsButton">
-        <item name="android:background">@drawable/more_info_shipping_returns_button</item>
-        <item name="android:gravity">center</item>
-        <item name="android:padding">5dp</item>
-    </style>
-
 </resources>

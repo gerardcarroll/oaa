@@ -1,5 +1,7 @@
 package com.overstock.android.prototype.model;
 
+import android.os.Parcelable;
+
 import org.parceler.Parcel;
 
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.List;
  * @author Rayconnolly Created on 3/21/2016.
  */
 @Parcel
-public class ProductDetail {
+public class ProductDetail implements Parcelable {
 
   protected int id;
 
@@ -42,6 +44,27 @@ public class ProductDetail {
     this.options = options;
     this.productImages = productImages;
   }
+
+  protected ProductDetail(android.os.Parcel in) {
+    id = in.readInt();
+    name = in.readString();
+    imageLarge = in.readString();
+    imageMedium1 = in.readString();
+    memberPrice = in.readFloat();
+    description = in.readString();
+  }
+
+  public static final Creator<ProductDetail> CREATOR = new Creator<ProductDetail>() {
+    @Override
+    public ProductDetail createFromParcel(android.os.Parcel in) {
+      return new ProductDetail(in);
+    }
+
+    @Override
+    public ProductDetail[] newArray(int size) {
+      return new ProductDetail[size];
+    }
+  };
 
   public int getId() {
     return id;
@@ -87,4 +110,18 @@ public class ProductDetail {
     return productImages;
   }
 
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(android.os.Parcel dest, int flags) {
+    dest.writeInt(id);
+    dest.writeString(name);
+    dest.writeString(imageLarge);
+    dest.writeString(imageMedium1);
+    dest.writeFloat(memberPrice);
+    dest.writeString(description);
+  }
 }

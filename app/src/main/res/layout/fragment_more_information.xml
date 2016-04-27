@@ -24,9 +24,6 @@
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
-            <!-- style="@style/MoreInfoDetailsButton"
-             android:layout_margin="5dp"
-                android:padding="5dp"-->
 
             <Button
                 android:id="@+id/btn_shipping_returns"
@@ -38,9 +35,6 @@
                 android:textColor="@color/oapp_secondary_text"
                 android:textSize="15sp"
                 android:textStyle="bold" />
-            <!-- style="@style/MoreInfoShippingReturnsButton"
-             android:layout_margin="5dp"
-             android:padding="5dp"-->
 
         </LinearLayout>
 

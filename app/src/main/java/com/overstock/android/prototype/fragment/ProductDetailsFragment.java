@@ -6,11 +6,9 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.component.ApplicationComponent;
@@ -21,10 +19,6 @@ import com.overstock.android.prototype.view.ProductDetailView;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
-
-import java.util.ArrayList;
-import java.util.Currency;
-import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -59,23 +53,17 @@ public class ProductDetailsFragment extends Fragment implements ProductDetailVie
     @Inject
     ProductDetailPresenter presenter;
 
+    @Bind(R.id.btn_buy)
+    FloatingActionButton btn_buy;
+
     @Inject
     Picasso picasso;
-
-    @Bind(R.id.product_detail_product_name)
-    TextView productName;
-
-    @Bind(R.id.product_detail_product_price)
-    TextView productPrice;
 
 //    @Bind(R.id.product_detail_content)
 //    WebView productDescription;
 
     @Bind(R.id.product_detail_toolbar)
     Toolbar toolbar;
-
-    @Bind(R.id.btn_buy)
-    FloatingActionButton btn_buy;
 
     public ProductDetailsFragment() {
     }
@@ -119,32 +107,24 @@ public class ProductDetailsFragment extends Fragment implements ProductDetailVie
 
         ButterKnife.bind(this, view);
 
-        // Add image gallery
-        addImageGalleryFragment();
-
-        productName.setText(product.getName());
-        final String currencyCode = Currency.getInstance(Locale.US).getSymbol();
-        productPrice.setText(this.getString(R.string.product_price_fmt, currencyCode, String.valueOf(product.getMemberPrice())));
-
         presenter.setView(this);
         presenter.retrieveProductDetails(product.getId());
         return view;
     }
 
-    private void addImageGalleryFragment() {
+    @Override
+    public void addProductDetailsSummaryFragment(ProductDetail productDetail) {
         this.getChildFragmentManager()
                 .beginTransaction()
-                .add(R.id.image_gallery_fragment_container, ImageGalleryFragment.newInstance(product))
+                .replace(R.id.prod_details_placeholder, ProductDetailsSummaryFragment.newInstance(productDetail))
                 .commit();
     }
 
-    @OnClick(R.id.txt_more_information_link)
-    public void moreInformation_onClick() {
-
+    @Override
+    public void addImageGalleryFragment() {
         this.getChildFragmentManager()
                 .beginTransaction()
-                .replace(R.id.more_information_fragment_container, MoreInformationFragment.newInstance(product))
-                .addToBackStack(null)
+                .add(R.id.image_gallery_fragment_container, ImageGalleryFragment.newInstance(product))
                 .commit();
     }
 
@@ -169,30 +149,19 @@ public class ProductDetailsFragment extends Fragment implements ProductDetailVie
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+//        try {
+//            mListener = (OnFragmentInteractionListener) context;
+//        } catch (ClassCastException e) {
+//            throw new ClassCastException(context.toString() + " must implement OnFragmentInteractionListener");
+//        }
+
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    @Override
-    public void displayProductDetails(final ProductDetail productDetail) {
-//        Log.d(TAG, "Displaying Product Details." + productDetail.toString());
-//        productDescription.loadData(productDetail.getDescription().trim(), getString(R.string.webview_html_encoding), null);
-        btn_buy.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void addHorizontalRecyclerView(int layoutResourceId, ArrayList<Product> products, String displayText) {
-        Log.d(TAG, "Passing " + displayText + " products to adapter to be displayed. List size : " + products.size());
-
-        this.getChildFragmentManager()
-                .beginTransaction()
-                .replace(layoutResourceId, HorizontialScrollFragment.newInstance(products, displayText), displayText)
-                .commit();
-
     }
 
     /**
