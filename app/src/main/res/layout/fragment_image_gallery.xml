@@ -26,5 +26,4 @@
         android:paddingEnd="@dimen/pager_indicator_padding_vertical"
         android:layout_gravity="end" />
 
-
 </FrameLayout>

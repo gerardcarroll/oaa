@@ -8,12 +8,14 @@ import com.overstock.android.prototype.model.ProductDataService;
 import com.overstock.android.prototype.module.scope.ApplicationScope;
 import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.presenter.CommunityPresenter;
+import com.overstock.android.prototype.presenter.ImageGalleryPresenter;
 import com.overstock.android.prototype.presenter.ProductBottomSheetPresenter;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
 import com.overstock.android.prototype.presenter.SignInWithEmailPresenter;
 import com.overstock.android.prototype.presenter.SignUpWithEmailPresenter;
 import com.overstock.android.prototype.presenter.impl.BrandPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.CommunityPresenterImpl;
+import com.overstock.android.prototype.presenter.impl.ImageGalleryPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.ProductBottomSheetPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.ProductDetailPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.SignInWithEmailPresenterImpl;
@@ -84,6 +86,11 @@ public class ApplicationModule {
   }
 
   @Provides
+  public ProductImageUtil providesProductImageUtil(final Application applicationContext) {
+    return new ProductImageUtil(applicationContext);
+  }
+
+  @Provides
   public ProductBottomSheetPresenter productBottomSheetPresenter() {
     return new ProductBottomSheetPresenterImpl();
   }
@@ -96,11 +103,6 @@ public class ApplicationModule {
   @Provides
   public OappGoogleAuthService providesOappGoogleAuthService(final Application application) {
     return new OappGoogleAuthService(application);
-  }
-
-  @Provides
-  public ProductImageUtil providesProductImageUtil(final Application applicationContext) {
-    return new ProductImageUtil(applicationContext);
   }
 
   @Provides
@@ -124,6 +126,12 @@ public class ApplicationModule {
   @Provides
   public ParseService providesParseService(final Application applicationContext) {
     return new ParseService(applicationContext);
+  }
+
+  @Provides
+  public ImageGalleryPresenter imageGalleryPresenter(final Application applicationContext,
+    final ProductDataService productDataService) {
+    return new ImageGalleryPresenterImpl(applicationContext, productDataService);
   }
 
   @Provides
