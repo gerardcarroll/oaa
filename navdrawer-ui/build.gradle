@@ -12,6 +12,7 @@ dependencies {
     compile rx.rxandroid
     compile rx.rxjava
     compile javaxInject
+
 }
 
 apply from: '../jacoco.gradle'
