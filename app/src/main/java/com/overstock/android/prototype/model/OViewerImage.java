@@ -12,7 +12,7 @@ import org.parceler.Parcel;
  * @since Created on 26-Apr-16.
  */
 @Parcel
-public class OViewerImages {
+public class OViewerImage {
 
     @SerializedName("cdnPath")
     private String originalImagePath;
@@ -24,10 +24,10 @@ public class OViewerImages {
     private List<ImageSizes> imageSizes;
 
     //Used by Gson
-    public OViewerImages() {
+    public OViewerImage() {
     }
 
-    public OViewerImages(final String originalImagePath, final int originalWidth, final int originalHeight, List<ImageSizes> imageSizes) {
+    public OViewerImage(final String originalImagePath, final int originalWidth, final int originalHeight, List<ImageSizes> imageSizes) {
         this.originalImagePath = originalImagePath;
         this.originalWidth = originalWidth;
         this.originalHeight = originalHeight;

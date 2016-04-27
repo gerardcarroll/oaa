@@ -10,7 +10,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.util.Log;
 
-import com.overstock.android.prototype.model.OViewerImages;
+import com.overstock.android.prototype.model.OViewerImage;
 
 /**
  * Util class to handle image display quality depending on the device the user in operating on.
@@ -35,7 +35,7 @@ public class ProductImageUtil {
    * @param oViewerImages a list of viewer objects.
    * @return Image Urls.
    */
-  public List<String> getOptimizedImages(List<OViewerImages> oViewerImages) {
+  public List<String> getOptimizedImages(List<OViewerImage> oViewerImages) {
     List<String> imagesPaths = new ArrayList<>();
     final int ImageSizeId = getSizeId();
     for (int i = 0; i < oViewerImages.size(); i++) {

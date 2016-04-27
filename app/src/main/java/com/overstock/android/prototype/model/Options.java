@@ -5,7 +5,8 @@ import com.google.gson.annotations.SerializedName;
 import org.parceler.Parcel;
 
 /**
- * @author LeeMeehan Created on 12-Apr-16.
+ * @author LeeMeehan
+ * @since Created on 12-Apr-16.
  */
 @Parcel
 public class Options {

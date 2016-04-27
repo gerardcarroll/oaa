@@ -26,13 +26,13 @@ public class ProductDetail {
 
   protected List<Options> options;
 
-  protected List<OViewerImages> oViewerImages;
+  protected List<OViewerImage> oViewerImages;
 
   protected ProductDetail() {}
 
   public ProductDetail(final int id, final String name, final String imageLarge, final String image, final float price,
       final int quantity, final String description, final List<Options> options,
-      final List<OViewerImages> oViewerImages) {
+      final List<OViewerImage> oViewerImages) {
     this.id = id;
     this.name = name;
     this.imageLarge = imageLarge;
@@ -84,7 +84,7 @@ public class ProductDetail {
     return options;
   }
 
-  public List<OViewerImages> getoViewerImages() {
+  public List<OViewerImage> getoViewerImages() {
     return oViewerImages;
   }
 
