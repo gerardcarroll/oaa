@@ -102,14 +102,34 @@
                 android:textSize="20sp"
                 android:textStyle="bold"/>
 
-            <WebView
-                android:id="@+id/product_detail_content"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/txt_more_information_link"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:textSize="14sp" />
+                android:layout_gravity="left"
+                android:autoLink="web"
+                android:gravity="left"
+                android:text="@string/more_information_link_text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="15dp" />
+
+            <!-- MORE INFORMATION FRAGMENT CONTAINER -->
+            <FrameLayout
+                android:id="@+id/more_information_fragment_container"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+            </FrameLayout>
+
+            <!--<WebView-->
+                <!--android:id="@+id/product_detail_content"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="15dp"-->
+                <!--android:paddingBottom="10dp"-->
+                <!--android:paddingTop="10dp"-->
+                <!--android:textSize="14sp" />-->
 
             <include layout="@layout/fragment_horizontial_scroll" android:id="@+id/similar_products_hrv" />
 

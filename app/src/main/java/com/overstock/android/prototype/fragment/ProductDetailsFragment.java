@@ -10,8 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.component.ApplicationComponent;
@@ -69,8 +69,8 @@ public class ProductDetailsFragment extends Fragment implements ProductDetailVie
     @Bind(R.id.product_detail_product_price)
     TextView productPrice;
 
-    @Bind(R.id.product_detail_content)
-    WebView productDescription;
+//    @Bind(R.id.product_detail_content)
+//    WebView productDescription;
 
     @Bind(R.id.product_detail_toolbar)
     Toolbar toolbar;
@@ -139,6 +139,18 @@ public class ProductDetailsFragment extends Fragment implements ProductDetailVie
                 .commit();
     }
 
+    @OnClick(R.id.txt_more_information_link)
+    public void moreInformation_onClick() {
+
+        Toast.makeText(getContext(), "This is the MORE INFO fragment", Toast.LENGTH_LONG).show();
+
+        this.getChildFragmentManager()
+                .beginTransaction()
+                .replace(R.id.more_information_fragment_container, MoreInformationFragment.newInstance(product))
+                .addToBackStack(null)
+                .commit();
+    }
+
     @OnClick(R.id.btn_buy)
     public void expandBottom_sheet() {
         ProductDetail productDetails = presenter.getProductDetails();
@@ -170,8 +182,8 @@ public class ProductDetailsFragment extends Fragment implements ProductDetailVie
 
     @Override
     public void displayProductDetails(final ProductDetail productDetail) {
-        Log.d(TAG, "Displaying Product Details." + productDetail.toString());
-        productDescription.loadData(productDetail.getDescription().trim(), getString(R.string.webview_html_encoding), null);
+//        Log.d(TAG, "Displaying Product Details." + productDetail.toString());
+//        productDescription.loadData(productDetail.getDescription().trim(), getString(R.string.webview_html_encoding), null);
         btn_buy.setVisibility(View.VISIBLE);
     }
 
