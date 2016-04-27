@@ -105,15 +105,15 @@ public class ApplicationModule {
         return picasso;
     }
 
-    @Provides
-    public SignUpWithEmailPresenter signUpWithEmailPresenter(Application applicationContext) {
-        return new SignUpWithEmailPresenterImpl(providesParseService(applicationContext));
-    }
-
-    @Provides
-    public SignInWithEmailPresenter signInWithEmailPresenter(Application applicationContext) {
-        return new SignInWithEmailPresenterImpl(providesParseService(applicationContext));
-    }
+//    @Provides
+//    public SignUpWithEmailPresenter signUpWithEmailPresenter(Application applicationContext) {
+//        return new SignUpWithEmailPresenterImpl(providesParseService(applicationContext));
+//    }
+//
+//    @Provides
+//    public SignInWithEmailPresenter signInWithEmailPresenter(Application applicationContext) {
+//        return new SignInWithEmailPresenterImpl(providesParseService(applicationContext));
+//    }
 
     @Provides
     public ParseService providesParseService(final Application applicationContext) {

@@ -3,9 +3,11 @@ package com.overstock.android.prototype.service;
 import android.content.Context;
 import android.util.Log;
 
+import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.view.SignInWithEmailView;
 import com.overstock.android.prototype.view.SignUpWithEmailView;
 import com.parse.LogInCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -21,10 +23,6 @@ public class ParseService {
 
   public ParseService(Context context) {
     this.context = context;
-    // // Parse init
-    // Parse.initialize(
-    // new Parse.Configuration.Builder(context).applicationId(context.getString(R.string.parse_application_id))
-    // .server(context.getString(R.string.parse_service_url)).build());
   }
 
   public void loginParseUser(String username, String password, final SignInWithEmailView view) {
