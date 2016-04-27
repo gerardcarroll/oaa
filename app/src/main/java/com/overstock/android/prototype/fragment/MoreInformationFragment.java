@@ -3,11 +3,12 @@ package com.overstock.android.prototype.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.Button;
 
 import com.overstock.android.prototype.R;
@@ -21,7 +22,6 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by rconnolly on 4/26/2016.
@@ -43,8 +43,8 @@ public class MoreInformationFragment extends Fragment implements MoreInformation
     @Bind(R.id.btn_shipping_returns)
     Button shippingReturnsBtn;
 
-    @Bind(R.id.more_info_product_detail_content)
-    WebView productDescription;
+//    @Bind(R.id.more_info_product_detail_content)
+//    WebView productDescription;
 
     public MoreInformationFragment(){}
 
@@ -72,6 +72,8 @@ public class MoreInformationFragment extends Fragment implements MoreInformation
         }
         ButterKnife.bind(this, view);
 
+        displayMoreInfoFragments();
+
         moreInformationPresenter.setView(this);
         moreInformationPresenter.retrieveProductDetails(product.getId());
         return view;
@@ -80,12 +82,42 @@ public class MoreInformationFragment extends Fragment implements MoreInformation
     @Override
     public void displayDetails(ProductDetail productDetail) {
         Log.d(TAG, "Displaying Product Details." + productDetail.toString());
-        productDescription.loadData(productDetail.getDescription().trim(), getString(R.string.webview_html_encoding), null);
+        //productDescription.loadData(productDetail.getDescription().trim(), getString(R.string.webview_html_encoding), null);
     }
 
-    @OnClick(R.id.btn_shipping_returns)
-    public void shippingReturnsBtn_onClick(){
+//    @OnClick(R.id.btn_shipping_returns)
+//    public void shippingReturnsBtn_onClick(){
+//
+//        this.getChildFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.more_info_container, MoreInformationFragment.newInstance(product))
+//                .addToBackStack(null)
+//                .commit();
+//
+//    }
 
+    private void displayMoreInfoFragments(){
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Fragment fragment = null;
+                if(v == shippingReturnsBtn){
+                    fragment = new MoreInfoShippingReturnsFragment();
+                    //setRecipeDetails(fragment);
+                } else {
+                    fragment = new MoreInfoDetailsFragment();
+                    //setSourceDetails(fragment);
+                }
+                FragmentManager manager = getFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.more_info_container, fragment);
+                transaction.addToBackStack("fragment");
+                transaction.commit();
+            }
+        };
+        detailsBtn.setOnClickListener(listener);
+        shippingReturnsBtn.setOnClickListener(listener);
     }
 
     @Override

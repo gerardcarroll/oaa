@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.component.ApplicationComponent;
@@ -141,8 +140,6 @@ public class ProductDetailsFragment extends Fragment implements ProductDetailVie
 
     @OnClick(R.id.txt_more_information_link)
     public void moreInformation_onClick() {
-
-        Toast.makeText(getContext(), "This is the MORE INFO fragment", Toast.LENGTH_LONG).show();
 
         this.getChildFragmentManager()
                 .beginTransaction()

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp" >
+
+        <TextView
+            android:id="@+id/shipping_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/shipping_title_text"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/shipping_lorem_ipsum_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lorem_ipsum_text"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/returns_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/returns_title_text"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginTop="25dp" />
+
+        <TextView
+            android:id="@+id/returns_lorem_ipsum_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lorem_ipsum_text"
+            android:layout_marginTop="10dp" />
+
+    </LinearLayout>
+
+</FrameLayout>

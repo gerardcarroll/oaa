@@ -16,32 +16,52 @@
 
             <Button
                 android:id="@+id/btn_details"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/more_info_details_button_text"
                 android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:padding="5dp" />
+                android:background="@drawable/more_info_details_button"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+            <!-- style="@style/MoreInfoDetailsButton"
+             android:layout_margin="5dp"
+                android:padding="5dp"-->
 
             <Button
                 android:id="@+id/btn_shipping_returns"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/more_info_shipping_button_text"
                 android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:padding="5dp" />
+                android:background="@drawable/more_info_shipping_returns_button"
+                android:textColor="@color/oapp_secondary_text"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+            <!-- style="@style/MoreInfoShippingReturnsButton"
+             android:layout_margin="5dp"
+             android:padding="5dp"-->
 
         </LinearLayout>
 
-    <WebView
-        android:id="@+id/more_info_product_detail_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:textSize="14sp" />
+        <!--<include android:id="@+id/frag_more_info_details" layout="@layout/fragment_more_info_details" />-->
+
+        <!-- MORE INFORMATION FRAGMENT CONTAINER -->
+        <FrameLayout
+            android:id="@+id/more_info_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+        </FrameLayout>
+
+    <!--<WebView-->
+        <!--android:id="@+id/more_info_product_detail_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:paddingBottom="10dp"-->
+        <!--android:paddingTop="10dp"-->
+        <!--android:textSize="14sp" />-->
 
     </LinearLayout>
 
