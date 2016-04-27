@@ -79,7 +79,8 @@ public class SignInWithEmailFragment extends Fragment implements SignInWithEmail
   @Override
   @OnClick(R.id.btn_sign_in)
   public void onSignInClick() {
-    signInWithEmailPresenter.onSignIn(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+    signInWithEmailPresenter.validateCredentials(usernameEditText.getText().toString(),
+      passwordEditText.getText().toString());
   }
 
   @Override

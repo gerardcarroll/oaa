@@ -38,6 +38,7 @@ import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.component.ApplicationComponent;
 import com.overstock.android.prototype.fragment.GoogleFederatedIdentityFragment;
 import com.overstock.android.prototype.fragment.HomeFragment;
+import com.overstock.android.prototype.fragment.SignInWithEmailFragment;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.module.ApplicationModule;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
@@ -51,7 +52,7 @@ import it.cosenonjaviste.daggermock.DaggerMockRule;
  */
 @Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP)
 @RunWith(RobolectricGradleTestRunner.class)
-public abstract class HomeActivityTest  {
+public abstract class HomeActivityTest {
 
   private static final String TEST_USERNAME = "Test User";
 
@@ -166,6 +167,25 @@ public abstract class HomeActivityTest  {
         .getSupportFragmentManager().findFragmentByTag(GoogleFederatedIdentityFragment.TAG);
     assertNotNull("The GoogleFederatedIdentityFragment was not committed to the page.",
       googleFederatedIdentityFragment);
+
+    ShadowActivity shadowActivity = Shadows.shadowOf(homeActivity);
+    // peekNextStartedActivity dose not consume intent.
+    Intent startedIntent = shadowActivity.peekNextStartedActivity();
+    assertNotNull("The started intent is null. No Activity has started.", startedIntent);
+    assertNotNull("The intent is a empty.", startedIntent.getComponent());
+    assertThat("The started Activity is not the activity that is expected", startedIntent.getComponent().getClassName(),
+      equalTo(CommunityActivity.class.getName()));
+  }
+
+  @Test
+  public void testEmailLoginButton_CLICKED() {
+    flushRobo();
+    Button emailLoginButton = (Button) homeFragment.getView().findViewById(R.id.email_login_btn);
+    emailLoginButton.performClick();
+
+    SignInWithEmailFragment signInWithEmailFragment = (SignInWithEmailFragment) homeActivity.getSupportFragmentManager()
+        .findFragmentByTag(SignInWithEmailFragment.TAG);
+    assertNotNull("The SignInWithEmailFragment was not committed to the page.", signInWithEmailFragment);
 
     ShadowActivity shadowActivity = Shadows.shadowOf(homeActivity);
     // peekNextStartedActivity dose not consume intent.
