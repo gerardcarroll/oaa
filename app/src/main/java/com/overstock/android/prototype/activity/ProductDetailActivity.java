@@ -39,8 +39,8 @@ import com.overstock.android.prototype.fragment.ProductBottomSheetFragment;
 import com.overstock.android.prototype.listener.PageChangeListener;
 import com.overstock.android.prototype.model.Product;
 import com.overstock.android.prototype.model.ProductDetail;
-import com.overstock.android.prototype.model.ProductImages;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
+import com.overstock.android.prototype.utils.ProductImageUtil;
 import com.overstock.android.prototype.view.ProductDetailView;
 import com.overstock.android.prototype.widgets.PageNumberIndicator;
 import com.squareup.picasso.Picasso;
@@ -52,10 +52,11 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
   private static final String TAG = ProductDetailActivity.class.getName();
 
-  private static final String BASE_IMAGE_URL = "http://ak1.ostkcdn.com/images/products/";
-
   @Inject
   ProductDetailPresenter presenter;
+
+  @Inject
+  ProductImageUtil productImageUtil;
 
   @Inject
   Picasso picasso;
@@ -140,24 +141,25 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     Log.d(TAG, "Displaying Product Details." + productDetail.toString());
     productDescription.loadData(productDetail.getDescription().trim(), getString(R.string.webview_html_encoding), null);
 
-    if (productDetail.getProductImages().isEmpty() || productDetail.getProductImages().size() == 1) {
+    if (productDetail.getoViewerImages().isEmpty() || productDetail.getoViewerImages().size() == 1) {
       populateImageSlider(null, productDetail.getImageLarge());
     }
     else {
-      populateImageSlider(productDetail.getProductImages(), null);
+      List<String> productImages = productImageUtil.getOptimizedImages(productDetail.getoViewerImages());
+      populateImageSlider(productImages, null);
     }
     btn_buy.setVisibility(View.VISIBLE);
   }
 
-  private void populateImageSlider(List<ProductImages> productImages, String largeImage) {
+  private void populateImageSlider(List<String> productImages, String largeImage) {
     TextSliderView textSliderView;
+    final String baseImageUrl = this.getResources().getString(R.string.cdn_base_url);
     if (productImages != null) {
       pagerIndicator.setTotalNumberOfPages(productImages.size());
-      for (ProductImages image : productImages) {
+      for (String imagePath : productImages) {
         textSliderView = new TextSliderView(this);
-        Log.d(TAG, "Passing " + BASE_IMAGE_URL + image.getImagePath() + " to image slider to be displayed");
-        textSliderView.image(BASE_IMAGE_URL + image.getImagePath())
-            .setScaleType(BaseSliderView.ScaleType.FitCenterCrop);
+        Log.d(TAG, "Passing " + baseImageUrl + imagePath + " to image slider to be displayed");
+        textSliderView.image(baseImageUrl + imagePath).setScaleType(BaseSliderView.ScaleType.FitCenterCrop);
         sliderLayout.addSlider(textSliderView);
       }
       sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
@@ -182,8 +184,8 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     }
     else {
       textSliderView = new TextSliderView(this);
-      Log.d(TAG, "Passing " + BASE_IMAGE_URL + largeImage + " to image slider to be displayed");
-      textSliderView.image(BASE_IMAGE_URL + largeImage).setScaleType(BaseSliderView.ScaleType.FitCenterCrop);
+      Log.d(TAG, "Passing " + baseImageUrl + largeImage + " to image slider to be displayed");
+      textSliderView.image(baseImageUrl + largeImage).setScaleType(BaseSliderView.ScaleType.FitCenterCrop);
       sliderLayout.addSlider(textSliderView);
       sliderLayout.setCustomAnimation(new CustomDescriptionAnimation());
       sliderLayout.stopAutoCycle();

@@ -23,9 +23,9 @@ public class TheOAppClient {
 
     public TheOAppClient(Context context) {
         OkHttpClient okHttpClient = new OkHttpClient();
-        Gson gson = new GsonBuilder().registerTypeAdapter(ProductDetail.class, new ProductDetailDeserializerUtil()).create();
+        //Gson gson = new GsonBuilder().registerTypeAdapter(ProductDetail.class, new ProductDetailDeserializerUtil()).create();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(context.getString(R.string.ostk_base_rest_url)).client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create(gson)).addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         productService = retrofit.create(ProductService.class);
 

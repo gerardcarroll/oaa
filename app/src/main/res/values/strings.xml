@@ -105,4 +105,7 @@
     <string name="sign_up_required_fields_message">Please enter required fields.</string>
     <string name="sign_up_passwordconfirm_error_message">Password and Confirm Password fields do not match.</string>
 
+    <!-- Image Base URLS -->
+    <string name="cdn_base_url">http://ak1.ostkcdn.com/images/products/</string>
+
 </resources>

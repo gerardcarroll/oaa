@@ -22,6 +22,7 @@ import com.overstock.android.prototype.service.CommunityService;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
 import com.overstock.android.prototype.service.ParseService;
 import com.overstock.android.prototype.service.ProductService;
+import com.overstock.android.prototype.utils.ProductImageUtil;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
 
@@ -94,6 +95,11 @@ public class ApplicationModule {
   @Provides
   public OappGoogleAuthService providesOappGoogleAuthService(final Application application) {
     return new OappGoogleAuthService(application);
+  }
+
+  @Provides
+  public ProductImageUtil providesProductImageUtil(final Application applicationContext) {
+    return new ProductImageUtil(applicationContext);
   }
 
   @Provides

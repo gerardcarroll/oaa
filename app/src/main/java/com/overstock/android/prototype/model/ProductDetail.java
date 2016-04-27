@@ -1,8 +1,8 @@
 package com.overstock.android.prototype.model;
 
-import org.parceler.Parcel;
-
 import java.util.List;
+
+import org.parceler.Parcel;
 
 /**
  * @author Rayconnolly Created on 3/21/2016.
@@ -26,12 +26,13 @@ public class ProductDetail {
 
   protected List<Options> options;
 
-  protected List<ProductImages> productImages;
+  protected List<OViewerImages> oViewerImages;
 
   protected ProductDetail() {}
 
-  public ProductDetail(int id, String name, String imageLarge, String image, float price, int quantity,
-      String description, List<Options> options, List<ProductImages> productImages) {
+  public ProductDetail(final int id, final String name, final String imageLarge, final String image, final float price,
+      final int quantity, final String description, final List<Options> options,
+      final List<OViewerImages> oViewerImages) {
     this.id = id;
     this.name = name;
     this.imageLarge = imageLarge;
@@ -40,7 +41,7 @@ public class ProductDetail {
     this.quantity = quantity;
     this.description = description;
     this.options = options;
-    this.productImages = productImages;
+    this.oViewerImages = oViewerImages;
   }
 
   public int getId() {
@@ -83,8 +84,8 @@ public class ProductDetail {
     return options;
   }
 
-  public List<ProductImages> getProductImages() {
-    return productImages;
+  public List<OViewerImages> getoViewerImages() {
+    return oViewerImages;
   }
 
 }
