@@ -13,7 +13,7 @@ public interface HomeActivityInject {
 
   void inject(HomeFragment homeFragment);
 
-  void inject(final SignInWithEmailFragment signInWithEmailFragment);
+  void inject(SignInWithEmailFragment signInWithEmailFragment);
 
-  void inject(final SignUpWithEmailFragment signUpWithEmailFragment);
+  void inject(SignUpWithEmailFragment signUpWithEmailFragment);
 }

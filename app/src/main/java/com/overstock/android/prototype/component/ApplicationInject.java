@@ -38,7 +38,4 @@ public interface ApplicationInject {
   void inject(final CommunityActivity communitiesActivity);
 
   void inject(final ProductBottomSheetFragment productBottomSheetFragment);
-
-
-
 }

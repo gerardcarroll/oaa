@@ -3,11 +3,9 @@ package com.overstock.android.prototype.service;
 import android.content.Context;
 import android.util.Log;
 
-import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.view.SignInWithEmailView;
 import com.overstock.android.prototype.view.SignUpWithEmailView;
 import com.parse.LogInCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
