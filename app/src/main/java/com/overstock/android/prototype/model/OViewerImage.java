@@ -15,13 +15,13 @@ import org.parceler.Parcel;
 public class OViewerImage {
 
     @SerializedName("cdnPath")
-    private String originalImagePath;
+    protected String originalImagePath;
 
-    private int originalWidth;
+    protected int originalWidth;
 
-    private int originalHeight;
+    protected int originalHeight;
 
-    private List<ImageSizes> imageSizes;
+    protected List<ImageSizes> imageSizes;
 
     //Used by Gson
     public OViewerImage() {

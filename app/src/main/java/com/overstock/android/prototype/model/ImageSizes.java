@@ -9,11 +9,11 @@ import org.parceler.Parcel;
 @Parcel
 public class ImageSizes {
 
-  private String imagePath;
+  protected String imagePath;
 
-  private int height;
+  protected int height;
 
-  private int width;
+  protected int width;
 
   // Used by Gson
   public ImageSizes() {}

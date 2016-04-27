@@ -58,10 +58,10 @@ public class BrandFragment extends Fragment implements BrandView {
   @Bind(R.id.brand_logo_icon)
   CircleImageView imageView;
 
-  @Bind(R.id.top_cat_image1)
+  @Bind(R.id.top_cat_img_left)
   ImageView topCatStart;
 
-  @Bind(R.id.top_cat_image2)
+  @Bind(R.id.top_cat_img_right)
   ImageView topCatEnd;
 
   @Override
@@ -80,7 +80,7 @@ public class BrandFragment extends Fragment implements BrandView {
     super.onViewCreated(view, savedInstanceState);
     ButterKnife.bind(this, view);
     toolbar.inflateMenu(R.menu.menu_main);
-
+    loadTopCategories();
     final AppBarLayout.OnOffsetChangedListener listener = new AppBarLayout.OnOffsetChangedListener() {
       @Override
       public void onOffsetChanged(final AppBarLayout appBarLayout, final int verticalOffset) {
@@ -94,15 +94,14 @@ public class BrandFragment extends Fragment implements BrandView {
       }
     };
     appBarLayout.addOnOffsetChangedListener(listener);
-    loadTopCategories();
     presenter.setView(this);
   }
 
   private void loadTopCategories() {
-    picasso.load(R.drawable.superbowl_nails).fit().noPlaceholder().error(R.drawable.product_placeholder)
+    picasso.load(R.drawable.superbowl_nails).fit().error(R.drawable.product_placeholder)
         .into(topCatStart);
     topCatStart.setAdjustViewBounds(true);
-    picasso.load(R.drawable.nfl_men).fit().noPlaceholder().error(R.drawable.product_placeholder).into(topCatEnd);
+    picasso.load(R.drawable.nfl_men).fit().error(R.drawable.product_placeholder).into(topCatEnd);
     topCatEnd.setAdjustViewBounds(true);
   }
 
