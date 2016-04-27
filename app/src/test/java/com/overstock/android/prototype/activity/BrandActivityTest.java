@@ -3,6 +3,7 @@ package com.overstock.android.prototype.activity;
 import android.os.Build;
 
 import com.overstock.android.prototype.BuildConfig;
+import com.overstock.android.prototype.OAppPrototypeApplicationMockRule;
 import com.overstock.android.prototype.component.ApplicationComponent;
 import com.overstock.android.prototype.component.FeedActivityComponent;
 import com.overstock.android.prototype.main.OAppPrototypeApplication;
@@ -25,10 +26,12 @@ import static org.junit.Assert.assertNotNull;
 /**
  * @author LeeMeehan Created on 06-Apr-16.
  */
-@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP, application =  com.overstock.android.prototype.TestOAppPrototypeApplication.class)
 @RunWith(RobolectricGradleTestRunner.class)
 public class BrandActivityTest  {
 
+  @Rule
+  public OAppPrototypeApplicationMockRule oAppPrototypeApplicationMockRule = new OAppPrototypeApplicationMockRule();
 
   @Rule
   public final DaggerMockRule<FeedActivityComponent> mockRule1 = new DaggerMockRule<>(FeedActivityComponent.class,

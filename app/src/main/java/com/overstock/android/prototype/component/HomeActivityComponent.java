@@ -21,7 +21,8 @@ public interface HomeActivityComponent extends HomeActivityInject {
   final class Initializer {
     public static HomeActivityComponent init(Context context) {
       return DaggerHomeActivityComponent.builder()
-          .applicationComponent(OAppPrototypeApplication.get(context).getComponent()).build();
+                .applicationComponent(OAppPrototypeApplication.get(context).getComponent())
+              .build();
     }
   }
 }

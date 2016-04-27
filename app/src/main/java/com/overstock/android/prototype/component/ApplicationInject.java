@@ -9,8 +9,6 @@ import com.overstock.android.prototype.fragment.BrandFragment;
 import com.overstock.android.prototype.fragment.GoogleFederatedIdentityFragment;
 import com.overstock.android.prototype.fragment.ProductBottomSheetFragment;
 import com.overstock.android.prototype.fragment.ProductDetailsFragment;
-import com.overstock.android.prototype.fragment.SignInWithEmailFragment;
-import com.overstock.android.prototype.fragment.SignUpWithEmailFragment;
 import com.overstock.android.prototype.model.ProductDataService;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
 

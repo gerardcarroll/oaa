@@ -17,7 +17,8 @@ public interface ApplicationComponent extends ApplicationInject {
 
     final class Initializer{
         public static ApplicationComponent init(Application application){
-            return DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(application)).build();
+            return DaggerApplicationComponent.builder()
+                    .applicationModule(new ApplicationModule(application)).build();
         }
     }
 }
