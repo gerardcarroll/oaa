@@ -106,6 +106,9 @@
     <string name="sign_up_passwordconfirm_error_message">Password and Confirm Password fields do not match.</string>
 
     <!-- Image Base URLS -->
-    <string name="cdn_base_url">http://ak1.ostkcdn.com/images/products/</string>
+    <string name="cdn_img_base_url">http://ak1.ostkcdn.com/images/products/</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

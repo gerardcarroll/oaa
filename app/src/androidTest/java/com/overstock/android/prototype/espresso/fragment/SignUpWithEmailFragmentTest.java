@@ -7,6 +7,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.HomeActivity;
+import com.overstock.android.prototype.espresso.dagger.rules.OAppPrototypeApplicationMockRule;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -19,6 +20,7 @@ import org.junit.runners.MethodSorters;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.swipeUp;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
@@ -39,6 +41,9 @@ public class SignUpWithEmailFragmentTest {
     private final String newUsername = "testuser53@gmail.com" ;
     private static final String password = "androidsignuptest" ;
     private static final String passwordConfirm = "androidsignuptest2" ;
+
+    @Rule
+    public OAppPrototypeApplicationMockRule oAppPrototypeApplicationMockRule = new OAppPrototypeApplicationMockRule();
 
     @Rule
     public ActivityTestRule<HomeActivity> activityRule = new ActivityTestRule<>(HomeActivity.class, true, false);
@@ -96,7 +101,10 @@ public class SignUpWithEmailFragmentTest {
         onView(withId(R.id.btn_sign_up)).perform(click());
 
         // Check Error message Toast is displayed on Sign Up fragment
-        onView(withText(activityRule.getActivity().getResources().getString(R.string.sign_up_required_fields_message))).inRoot(withDecorView(not(activityRule.getActivity().getWindow().getDecorView()))).check(matches(isDisplayed()));
+        onView(withText(activityRule.getActivity().getResources().getString(R.string.sign_up_required_fields_message)))
+                .inRoot(withDecorView(not(activityRule.getActivity().getWindow().getDecorView())))
+                .check(matches(isDisplayed()));
+
     }
 
     @Test
@@ -123,6 +131,10 @@ public class SignUpWithEmailFragmentTest {
         // Enter password
         onView(withId(R.id.et_password)).perform(clearText(), typeText(password));
 
+        onView(withId(R.id.email_connect_common)).perform(swipeUp());
+
+        onView(withId(R.id.et_confirm_password)).check(matches(isDisplayed()));
+
         // Enter password confirmation
         onView(withId(R.id.et_confirm_password)).perform(clearText(), typeText(passwordConfirm));
 
@@ -133,7 +145,9 @@ public class SignUpWithEmailFragmentTest {
         onView(withId(R.id.btn_sign_up)).perform(click());
 
         // Check Error message Toast is displayed on Sign Up fragment
-        onView(withText(activityRule.getActivity().getResources().getString(R.string.sign_up_passwordconfirm_error_message))).inRoot(withDecorView(not(activityRule.getActivity().getWindow().getDecorView()))).check(matches(isDisplayed()));
+        onView(withText(activityRule.getActivity().getResources().getString(R.string.sign_up_passwordconfirm_error_message)))
+                .inRoot(withDecorView(not(activityRule.getActivity().getWindow().getDecorView()))).check(matches(isDisplayed()));
+        SystemClock.sleep(3000);
     }
 
     //TODO
@@ -171,11 +185,6 @@ public class SignUpWithEmailFragmentTest {
         // Click Sign Up link text on Sign In fragment
         onView(withId(R.id.btn_sign_up)).perform(click());
 
-        SystemClock.sleep(3000L);
-
-        // Check Success message Toast is displayed on Sign Up fragment
-        onView(withText(activityRule.getActivity().getResources().getString(R.string.unsuccessful_oapp_sign_up_message))).inRoot(withDecorView(not(activityRule.getActivity().getWindow().getDecorView()))).check(matches(isDisplayed()));
-
     }
 
     //TODO
@@ -211,12 +220,8 @@ public class SignUpWithEmailFragmentTest {
         Espresso.closeSoftKeyboard();
 
         // Click Sign Up link text on Sign In fragment
+        onView(withId(R.id.btn_sign_up)).check(matches(isDisplayed()));
         onView(withId(R.id.btn_sign_up)).perform(click());
-
-        SystemClock.sleep(3000L);
-
-        // Check Communities recycler view is displayed
-        onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
 
     }
 

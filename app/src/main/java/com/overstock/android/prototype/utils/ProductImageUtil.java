@@ -8,6 +8,8 @@ import javax.inject.Inject;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.overstock.android.prototype.model.OViewerImage;
@@ -35,11 +37,16 @@ public class ProductImageUtil {
    * @param oViewerImages a list of viewer objects.
    * @return Image Urls.
    */
+  @NonNull
   public List<String> getOptimizedImages(List<OViewerImage> oViewerImages) {
     List<String> imagesPaths = new ArrayList<>();
     final int ImageSizeId = getSizeId();
     for (int i = 0; i < oViewerImages.size(); i++) {
-      imagesPaths.add(oViewerImages.get(i).getImageSizes().get(ImageSizeId).getImagePath());
+      if (oViewerImages.get(i).getImageSizes().isEmpty()) {
+        imagesPaths.add(oViewerImages.get(i).getOriginalImagePath());
+      }
+      else
+        imagesPaths.add(oViewerImages.get(i).getImageSizes().get(ImageSizeId).getImagePath());
     }
     return imagesPaths;
   }

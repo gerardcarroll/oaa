@@ -15,7 +15,7 @@
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/OappTheme">
+            android:theme="@style/OappActionBar">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/product_detail_toolbar"
@@ -44,6 +44,7 @@
                 android:layout_height="wrap_content"
                 app:tabGravity="fill"
                 app:tabMode="fixed"
+                app:tabBackground="@drawable/tab_color_selector"
                 app:tabSelectedTextColor="@color/oapp_accent_a200"
                 app:tabTextColor="@color/white" />
 

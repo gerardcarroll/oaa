@@ -23,9 +23,7 @@ import org.mockito.Mock;
 import java.util.concurrent.TimeUnit;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -107,8 +105,5 @@ public class HomeActivityInstrumentationTest_Google {
     public void validateGoogleLoginButtonClicked() {
         onView(withId(R.id.googlePlus_login_btn)).perform(click());
         onView(withId(R.id.rvCommunities)).check(matches(isDisplayed()));
-        pressBack(); //Press Back key.
-        onView(withId(R.id.guest_login_btn)).check(doesNotExist()); //Assert that we have not rooted to the login page.
-        onView(withId(R.id.rvCommunities)).check(matches(isDisplayed())); //Assert that we have not rooted from the Communities Page.
     }
 }
