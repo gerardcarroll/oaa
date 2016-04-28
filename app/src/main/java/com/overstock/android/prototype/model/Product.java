@@ -8,7 +8,7 @@ import org.parceler.Parcel;
  * @author RayConnolly on 3/7/2016.
  */
 @Parcel
-public class Product implements Parcelable{
+public class Product implements Parcelable {
 
   protected int id;
 
@@ -20,13 +20,16 @@ public class Product implements Parcelable{
 
   protected float memberPrice;
 
+  protected String imageThumbnail;
+
   public Product() {}
 
-  public Product(final int id, final String imageLarge, final String imageMedium1, final String name,
-      final float memberPrice) {
+  public Product(final int id, final String imageLarge, final String imageMedium1, final String imageThumbnail,
+      final String name, final float memberPrice) {
     this.id = id;
     this.imageLarge = imageLarge;
     this.imageMedium1 = imageMedium1;
+    this.imageThumbnail = imageThumbnail;
     this.name = name;
     this.memberPrice = memberPrice;
   }
@@ -69,6 +72,10 @@ public class Product implements Parcelable{
 
   public String getImageLarge() {
     return imageLarge;
+  }
+
+  public String getImageThumbnail() {
+    return imageThumbnail;
   }
 
   @Override

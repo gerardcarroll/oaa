@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,6 +27,7 @@ import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.model.Product;
 import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.view.BrandView;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -37,6 +39,9 @@ public class BrandFragment extends Fragment implements BrandView {
 
   @Inject
   BrandPresenter presenter;
+
+  @Inject
+  Picasso picasso;
 
   @Bind(R.id.brand_scroll)
   NestedScrollView scrollView;
@@ -52,6 +57,12 @@ public class BrandFragment extends Fragment implements BrandView {
 
   @Bind(R.id.brand_logo_icon)
   CircleImageView imageView;
+
+  @Bind(R.id.top_cat_img_left)
+  ImageView topCatStart;
+
+  @Bind(R.id.top_cat_img_right)
+  ImageView topCatEnd;
 
   @Override
   public void onCreate(final Bundle savedInstanceState) {
@@ -69,7 +80,7 @@ public class BrandFragment extends Fragment implements BrandView {
     super.onViewCreated(view, savedInstanceState);
     ButterKnife.bind(this, view);
     toolbar.inflateMenu(R.menu.menu_main);
-
+    loadTopCategories();
     final AppBarLayout.OnOffsetChangedListener listener = new AppBarLayout.OnOffsetChangedListener() {
       @Override
       public void onOffsetChanged(final AppBarLayout appBarLayout, final int verticalOffset) {
@@ -84,6 +95,13 @@ public class BrandFragment extends Fragment implements BrandView {
     };
     appBarLayout.addOnOffsetChangedListener(listener);
     presenter.setView(this);
+  }
+
+  private void loadTopCategories() {
+    picasso.load(R.drawable.superbowl_nails).fit().error(R.drawable.product_placeholder).into(topCatStart);
+    topCatStart.setAdjustViewBounds(true);
+    picasso.load(R.drawable.nfl_men).fit().error(R.drawable.product_placeholder).into(topCatEnd);
+    topCatEnd.setAdjustViewBounds(true);
   }
 
   @Override

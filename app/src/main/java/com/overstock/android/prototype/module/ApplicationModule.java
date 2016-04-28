@@ -18,6 +18,7 @@ import com.overstock.android.prototype.presenter.impl.ProductDetailPresenterImpl
 import com.overstock.android.prototype.service.CommunityService;
 import com.overstock.android.prototype.service.OappGoogleAuthService;
 import com.overstock.android.prototype.service.ProductService;
+import com.overstock.android.prototype.utils.ProductImageUtil;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
 
@@ -74,6 +75,11 @@ public class ApplicationModule {
   @Provides
   public CommunityService providesCommunityService(final CommunityClient communityClient) {
     return communityClient.getClient();
+  }
+
+  @Provides
+  public ProductImageUtil providesProductImageUtil(final Application applicationContext) {
+    return new ProductImageUtil(applicationContext);
   }
 
   @Provides

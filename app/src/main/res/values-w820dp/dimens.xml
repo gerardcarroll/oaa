@@ -10,4 +10,5 @@
 
     <!-- Gallery Columns -->
     <integer name="communities_columns">5</integer>
+    <integer name="product_image_id">2</integer>
 </resources>
