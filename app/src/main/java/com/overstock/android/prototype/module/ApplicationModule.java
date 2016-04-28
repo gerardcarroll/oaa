@@ -25,6 +25,7 @@ import com.overstock.android.prototype.service.OappGoogleAuthService;
 import com.overstock.android.prototype.service.ParseInit;
 import com.overstock.android.prototype.service.ParseService;
 import com.overstock.android.prototype.service.ProductService;
+import com.overstock.android.prototype.utils.ProductImageUtil;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
 
@@ -38,98 +39,104 @@ import dagger.Provides;
 @ApplicationScope
 public class ApplicationModule {
 
-    Application application;
+  Application application;
 
-    public ApplicationModule(Application application) {
-        this.application = application;
-    }
+  public ApplicationModule(Application application) {
+    this.application = application;
+  }
 
-    @Provides
-    public Application providesApplication() {
-        return application;
-    }
+  @Provides
+  public Application providesApplication() {
+    return application;
+  }
 
-    @Provides
-    public BrandPresenter providesBrandPresenter(final ProductDataService productDataService) {
-        return new BrandPresenterImpl(productDataService);
-    }
+  @Provides
+  public BrandPresenter providesBrandPresenter(final ProductDataService productDataService) {
+    return new BrandPresenterImpl(productDataService);
+  }
 
-    @Provides
-    public ProductDetailPresenter productDetailPresenter(final Application applicationContext,
-                                                         final ProductDataService productDataService) {
-        return new ProductDetailPresenterImpl(applicationContext, productDataService);
-    }
+  @Provides
+  public ProductDetailPresenter productDetailPresenter(final Application applicationContext,
+    final ProductDataService productDataService) {
+    return new ProductDetailPresenterImpl(applicationContext, productDataService);
+  }
 
-    public ProductDataService providesProductDataService(final ProductService productService) {
-        return new ProductDataService(productService);
-    }
+  public ProductDataService providesProductDataService(final ProductService productService) {
+    return new ProductDataService(productService);
+  }
 
-    @Provides
-    public CommunityPresenter communitiesPresenter(CommunityService communityService) {
-        return new CommunityPresenterImpl(communityService);
-    }
+  @Provides
+  public CommunityPresenter communitiesPresenter(CommunityService communityService) {
+    return new CommunityPresenterImpl(communityService);
+  }
 
-    @Provides
-    public CommunityClient providesCommunityClient(Application application) {
-        return new CommunityClient(application.getApplicationContext());
-    }
+  @Provides
+  public CommunityClient providesCommunityClient(Application application) {
+    return new CommunityClient(application.getApplicationContext());
+  }
 
-    @Provides
-    public TheOAppClient providesTheOAppClient(Application application) {
-        return new TheOAppClient(application.getApplicationContext());
-    }
+  @Provides
+  public TheOAppClient providesTheOAppClient(Application application) {
+    return new TheOAppClient(application.getApplicationContext());
+  }
 
-    @Provides
-    public CommunityService providesCommunityService(final CommunityClient communityClient) {
-        return communityClient.getClient();
-    }
+  @Provides
+  public CommunityService providesCommunityService(final CommunityClient communityClient) {
+    return communityClient.getClient();
+  }
 
-    @Provides
-    public ProductBottomSheetPresenter productBottomSheetPresenter() {
-        return new ProductBottomSheetPresenterImpl();
-    }
+  @Provides
+  public ProductImageUtil providesProductImageUtil(final Application applicationContext) {
+    return new ProductImageUtil(applicationContext);
+  }
 
-    @Provides
-    public ProductService providesProductService(final TheOAppClient theOAppClient) {
-        return theOAppClient.getClient();
-    }
+  @Provides
+  public ProductBottomSheetPresenter productBottomSheetPresenter() {
+    return new ProductBottomSheetPresenterImpl();
+  }
 
-    @Provides
-    public OappGoogleAuthService providesOappGoogleAuthService(final Application application) {
-        return new OappGoogleAuthService(application);
-    }
+  @Provides
+  public ProductService providesProductService(final TheOAppClient theOAppClient) {
+    return theOAppClient.getClient();
+  }
 
-    @Provides
-    public Picasso providesPicasso(final Application application) {
-        final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
-        final int cacheSize = maxMemory / 8;
-        final Picasso picasso = new Picasso.Builder(application).memoryCache(new LruCache(cacheSize)).build();
-        return picasso;
-    }
+  @Provides
+  public OappGoogleAuthService providesOappGoogleAuthService(final Application application) {
+    return new OappGoogleAuthService(application);
+  }
 
-    @Provides
-    public SignUpWithEmailPresenter signUpWithEmailPresenter(Application applicationContext) {
-        return new SignUpWithEmailPresenterImpl(providesParseService(applicationContext));
-    }
+  @Provides
+  public Picasso providesPicasso(final Application application) {
+    final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+    final int cacheSize = maxMemory / 8;
+    final Picasso picasso = new Picasso.Builder(application).memoryCache(new LruCache(cacheSize)).build();
+    return picasso;
+  }
 
-    @Provides
-    public SignInWithEmailPresenter signInWithEmailPresenter(Application applicationContext) {
-        return new SignInWithEmailPresenterImpl(providesParseService(applicationContext));
-    }
+  @Provides
+  public SignUpWithEmailPresenter signUpWithEmailPresenter(Application applicationContext) {
+    return new SignUpWithEmailPresenterImpl(providesParseService(applicationContext));
+  }
 
-    @Provides
-    public ParseService providesParseService(final Application applicationContext) {
-        return new ParseService(applicationContext);
-    }
+  @Provides
+  public SignInWithEmailPresenter signInWithEmailPresenter(Application applicationContext) {
+    return new SignInWithEmailPresenterImpl(providesParseService(applicationContext));
+  }
 
-    @Provides
-    public ImageGalleryPresenter imageGalleryPresenter(final Application applicationContext, final ProductDataService productDataService) {
-        return new ImageGalleryPresenterImpl(applicationContext, productDataService);
-    }
+  @Provides
+  public ParseService providesParseService(final Application applicationContext) {
+    return new ParseService(applicationContext);
+  }
 
-    @Provides
-    public ParseInit providesParseInit(final Application applicationContext) {
-        return new ParseInit(applicationContext);
-    }
+  @Provides
+  public ImageGalleryPresenter imageGalleryPresenter(final Application applicationContext,
+    final ProductDataService productDataService) {
+    return new ImageGalleryPresenterImpl(applicationContext, productDataService);
+  }
+
+  @Provides
+  public ParseInit providesParseInit(final Application applicationContext) {
+    return new ParseInit(applicationContext);
+  }
 
 }

@@ -22,5 +22,5 @@
     <dimen name="pager_indicator_padding_vertical">20dp</dimen>
     <dimen name="pager_indicator_padding_horizontal">5dp</dimen>
     <dimen name="pager_indicator_text_size">20sp</dimen>
-
+    <integer name="product_image_id">0</integer>
 </resources>
