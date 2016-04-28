@@ -12,6 +12,7 @@ import com.overstock.android.prototype.model.Product;
 
 import org.parceler.Parcels;
 
+
 /**
  * @author RayConnolly, LeeMeehan Created on 21-03-2016
  */
