@@ -105,11 +105,6 @@ public class MoreInformationFragment extends Fragment implements MoreInformation
     }
 
     @Override
-    public void displayShipping() {
-
-    }
-
-    @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);

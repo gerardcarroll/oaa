@@ -1,7 +1,6 @@
 package com.overstock.android.prototype.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -36,6 +35,8 @@ public class MoreInformationFragment1 extends Fragment implements MoreInformatio
 
     private ProductDetail productDetail;
 
+    private MoreInfoPagerAdapter moreInfoPagerAdapter;
+
     @Inject
     MoreInformationPresenter moreInformationPresenter;
 
@@ -53,14 +54,13 @@ public class MoreInformationFragment1 extends Fragment implements MoreInformatio
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ApplicationComponent.Initializer.init(this.getActivity().getApplication()).inject(this);
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_more_information1, container, false);
         if (getArguments() != null) {
@@ -75,12 +75,13 @@ public class MoreInformationFragment1 extends Fragment implements MoreInformatio
 //        setShippingViewChildViews(shippingReturnsView, productDetail);
         setDetailsViewChildViews(detailsView, productDetail);
 
-        MoreInfoPagerAdapter moreInfoPagerAdapter = new MoreInfoPagerAdapter(viewPager);
+        moreInfoPagerAdapter = new MoreInfoPagerAdapter(viewPager);
 
         moreInfoPagerAdapter.addView(shippingReturnsView, 0);
         moreInfoPagerAdapter.addView(detailsView, 1);
 
         viewPager.setCurrentItem(0);
+
 
 //        moreInformationPresenter.setView(this);
 //        moreInformationPresenter.retrieveProductDetails(productDetail.getId());
@@ -104,6 +105,7 @@ public class MoreInformationFragment1 extends Fragment implements MoreInformatio
     @Override
     public void displayDetails(ProductDetail productDetail) {
         Log.d(TAG, "Displaying Product Details." + productDetail.toString());
+
         //productDescription.loadData(productDetail.getDescription().trim(), getString(R.string.webview_html_encoding), null);
     }
 
@@ -128,11 +130,6 @@ public class MoreInformationFragment1 extends Fragment implements MoreInformatio
 //        detailsBtn.setOnClickListener(listener);
 //        shippingReturnsBtn.setOnClickListener(listener);
 //    }
-
-    @Override
-    public void displayShipping() {
-
-    }
 
     @Override
     public void onDestroyView() {

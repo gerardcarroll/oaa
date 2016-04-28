@@ -8,6 +8,4 @@ import com.overstock.android.prototype.model.ProductDetail;
 public interface MoreInformationView {
 
     void displayDetails(ProductDetail productDetail);
-
-    void displayShipping();
 }
