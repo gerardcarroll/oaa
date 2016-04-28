@@ -1,21 +1,5 @@
 package com.overstock.android.prototype.adapter;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricGradleTestRunner;
-import org.robolectric.annotation.Config;
-
 import android.app.Activity;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -27,11 +11,27 @@ import com.overstock.android.prototype.BuildConfig;
 import com.overstock.android.prototype.adapters.OptionAdapter;
 import com.overstock.android.prototype.model.Options;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.annotation.Config;
+
+import java.util.ArrayList;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.when;
+
 /**
  * @author LeeMeehan
  * @since Created on 14-Apr-16.
  */
-@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP, application =  com.overstock.android.prototype.TestOAppPrototypeApplication.class)
 @RunWith(RobolectricGradleTestRunner.class)
 public class OptionAdapterTest {
 

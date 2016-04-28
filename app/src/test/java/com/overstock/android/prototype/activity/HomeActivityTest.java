@@ -1,23 +1,13 @@
 package com.overstock.android.prototype.activity;
 
-import android.content.Intent;
-import android.os.Build;
-import android.support.annotation.NonNull;
-import android.widget.Button;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.api.OptionalPendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
-import com.overstock.android.prototype.BuildConfig;
-import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.component.ApplicationComponent;
-import com.overstock.android.prototype.fragment.GoogleFederatedIdentityFragment;
-import com.overstock.android.prototype.fragment.HomeFragment;
-import com.overstock.android.prototype.main.OAppPrototypeApplication;
-import com.overstock.android.prototype.module.ApplicationModule;
-import com.overstock.android.prototype.service.OappGoogleAuthService;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.Before;
@@ -33,16 +23,27 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowToast;
 
-import java.util.concurrent.TimeUnit;
+import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.NonNull;
+import android.widget.Button;
+
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.api.OptionalPendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.overstock.android.prototype.BuildConfig;
+import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.component.ApplicationComponent;
+import com.overstock.android.prototype.fragment.GoogleFederatedIdentityFragment;
+import com.overstock.android.prototype.fragment.HomeFragment;
+import com.overstock.android.prototype.fragment.SignInWithEmailFragment;
+import com.overstock.android.prototype.main.OAppPrototypeApplication;
+import com.overstock.android.prototype.module.ApplicationModule;
+import com.overstock.android.prototype.service.OappGoogleAuthService;
 
 import it.cosenonjaviste.daggermock.DaggerMockRule;
-
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * Simple Test class to test that the Home Activity was created successfully
@@ -51,7 +52,7 @@ import static org.mockito.Mockito.when;
  */
 @Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP)
 @RunWith(RobolectricGradleTestRunner.class)
-public abstract class HomeActivityTest  {
+public abstract class HomeActivityTest {
 
   private static final String TEST_USERNAME = "Test User";
 
@@ -111,12 +112,12 @@ public abstract class HomeActivityTest  {
             }
           });
 
-  @Mock
-  private OappGoogleAuthService oappGoogleAuthService;
-
   protected HomeActivity homeActivity;
 
   protected HomeFragment homeFragment;
+
+  @Mock
+  private OappGoogleAuthService oappGoogleAuthService;
 
   @Before
   public void setUp() {
@@ -129,11 +130,11 @@ public abstract class HomeActivityTest  {
   }
 
   @After
-  public void tearDown(){
+  public void tearDown() {
     Robolectric.reset();
   }
 
-  protected void flushRobo(){
+  protected void flushRobo() {
     Robolectric.flushBackgroundThreadScheduler();
     Robolectric.flushForegroundThreadScheduler();
   }
@@ -147,10 +148,12 @@ public abstract class HomeActivityTest  {
     // Assert elements are visible.
     Button faceBookButton = (Button) homeFragment.getView().findViewById(R.id.facebook_login_btn);
     Button googlePlusButton = (Button) homeFragment.getView().findViewById(R.id.googlePlus_login_btn);
+    Button emailConnectButton = (Button) homeFragment.getView().findViewById(R.id.email_login_btn);
     Button guestLogin = (Button) homeFragment.getView().findViewById(R.id.guest_login_btn);
 
     assertNotNull(faceBookButton);
     assertNotNull(googlePlusButton);
+    assertNotNull(emailConnectButton);
     assertNotNull(guestLogin);
   }
 
@@ -164,6 +167,25 @@ public abstract class HomeActivityTest  {
         .getSupportFragmentManager().findFragmentByTag(GoogleFederatedIdentityFragment.TAG);
     assertNotNull("The GoogleFederatedIdentityFragment was not committed to the page.",
       googleFederatedIdentityFragment);
+
+    ShadowActivity shadowActivity = Shadows.shadowOf(homeActivity);
+    // peekNextStartedActivity dose not consume intent.
+    Intent startedIntent = shadowActivity.peekNextStartedActivity();
+    assertNotNull("The started intent is null. No Activity has started.", startedIntent);
+    assertNotNull("The intent is a empty.", startedIntent.getComponent());
+    assertThat("The started Activity is not the activity that is expected", startedIntent.getComponent().getClassName(),
+      equalTo(CommunityActivity.class.getName()));
+  }
+
+  @Test
+  public void testEmailLoginButton_CLICKED() {
+    flushRobo();
+    Button emailLoginButton = (Button) homeFragment.getView().findViewById(R.id.email_login_btn);
+    emailLoginButton.performClick();
+
+    SignInWithEmailFragment signInWithEmailFragment = (SignInWithEmailFragment) homeActivity.getSupportFragmentManager()
+        .findFragmentByTag(SignInWithEmailFragment.TAG);
+    assertNotNull("The SignInWithEmailFragment was not committed to the page.", signInWithEmailFragment);
 
     ShadowActivity shadowActivity = Shadows.shadowOf(homeActivity);
     // peekNextStartedActivity dose not consume intent.

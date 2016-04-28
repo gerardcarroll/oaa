@@ -98,8 +98,7 @@ public class BrandFragment extends Fragment implements BrandView {
   }
 
   private void loadTopCategories() {
-    picasso.load(R.drawable.superbowl_nails).fit().error(R.drawable.product_placeholder)
-        .into(topCatStart);
+    picasso.load(R.drawable.superbowl_nails).fit().error(R.drawable.product_placeholder).into(topCatStart);
     topCatStart.setAdjustViewBounds(true);
     picasso.load(R.drawable.nfl_men).fit().error(R.drawable.product_placeholder).into(topCatEnd);
     topCatEnd.setAdjustViewBounds(true);

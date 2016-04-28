@@ -36,7 +36,7 @@ import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFr
  * @author LeeMeehan.
  * @since Created on 13-Apr-16
  */
-@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP, application =  com.overstock.android.prototype.TestOAppPrototypeApplication.class)
 @RunWith(RobolectricGradleTestRunner.class)
 public class ProductBottomSheetFragmentTest {
 

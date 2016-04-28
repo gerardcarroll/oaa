@@ -18,12 +18,12 @@ public class HomeActivity extends AppCompatActivity {
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     // Dagger init
-    HomeActivityComponent.Initializer.init().inject(this);
+    HomeActivityComponent.Initializer.init(this).inject(this);
 
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_home);
     if (savedInstanceState == null) {
-      getSupportFragmentManager().beginTransaction().add(R.id.home_activity, homeFragment,HomeFragment.TAG).commit();
+      getSupportFragmentManager().beginTransaction().add(R.id.home_activity, homeFragment, HomeFragment.TAG).commit();
     }
   }
 

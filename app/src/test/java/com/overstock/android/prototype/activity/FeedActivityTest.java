@@ -5,6 +5,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
 import com.overstock.android.prototype.BuildConfig;
+import com.overstock.android.prototype.OAppPrototypeApplicationMockRule;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.component.ApplicationComponent;
 import com.overstock.android.prototype.component.FeedActivityComponent;
@@ -29,11 +30,14 @@ import static org.junit.Assert.assertNotNull;
 /**
  * @author LeeMeehan Created on 29-Mar-16.
  */
-@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP, application =  com.overstock.android.prototype.TestOAppPrototypeApplication.class)
 @RunWith(RobolectricGradleTestRunner.class)
 public class FeedActivityTest {
 
   private FeedActivity feedActivity;
+
+  @Rule
+  public OAppPrototypeApplicationMockRule oAppPrototypeApplicationMockRule = new OAppPrototypeApplicationMockRule();
 
   @Rule
   public final DaggerMockRule<FeedActivityComponent> mockRule1 = new DaggerMockRule<>(FeedActivityComponent.class,
