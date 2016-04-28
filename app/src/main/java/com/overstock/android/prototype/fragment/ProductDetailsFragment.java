@@ -116,7 +116,7 @@ public class ProductDetailsFragment extends Fragment implements ProductDetailVie
     public void addProductDetailsSummaryFragment(ProductDetail productDetail) {
         this.getChildFragmentManager()
                 .beginTransaction()
-                .replace(R.id.prod_details_placeholder, ProductDetailsSummaryFragment.newInstance(productDetail))
+                .add(R.id.prod_details_placeholder, ProductDetailsSummaryFragment.newInstance(productDetail))
                 .commit();
     }
 
@@ -124,7 +124,7 @@ public class ProductDetailsFragment extends Fragment implements ProductDetailVie
     public void addImageGalleryFragment() {
         this.getChildFragmentManager()
                 .beginTransaction()
-                .add(R.id.image_gallery_fragment_container, ImageGalleryFragment.newInstance(product))
+                .replace(R.id.image_gallery_fragment_container, ImageGalleryFragment.newInstance(product), String.valueOf(R.id.prod_details_placeholder))
                 .commit();
     }
 

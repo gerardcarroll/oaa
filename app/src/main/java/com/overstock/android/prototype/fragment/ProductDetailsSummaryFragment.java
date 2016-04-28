@@ -1,5 +1,6 @@
 package com.overstock.android.prototype.fragment;
 
+import android.app.Application;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.component.ApplicationComponent;
 import com.overstock.android.prototype.model.Product;
 import com.overstock.android.prototype.model.ProductDetail;
 import com.overstock.android.prototype.presenter.ProductDetailsSummaryPresenter;
@@ -76,7 +78,14 @@ public class ProductDetailsSummaryFragment extends Fragment implements ProductDe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ApplicationComponent.Initializer.init((Application)this.getContext().getApplicationContext()).inject(this);
+        presenter.setView(this);
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.removeView();
     }
 
     @Override
@@ -93,15 +102,15 @@ public class ProductDetailsSummaryFragment extends Fragment implements ProductDe
 //        //TODO: move to child presenter
 //        productDetailView.displayProductDetails(productDetail);
 //        //End TODO
+        presenter.addSimilarItemsRecyclerView();
         return view;
     }
 
     @OnClick(R.id.txt_more_information_link)
     public void moreInformation_onClick() {
-        this.getChildFragmentManager()
+        this.getParentFragment().getChildFragmentManager()
                 .beginTransaction()
-                .replace(R.id.prod_details_placeholder, MoreInformationFragment.newInstance(productDetail))
-                .addToBackStack(null)
+                .replace(R.id.prod_details_placeholder, MoreInformationFragment1.newInstance(productDetail), String.valueOf(R.id.prod_details_placeholder))
                 .commit();
     }
 

@@ -24,6 +24,7 @@ import rx.schedulers.Schedulers;
  */
 public class ProductDetailsSummaryPresenterImpl implements ProductDetailsSummaryPresenter {
 
+    ProductDetailsSummaryView productDetailsSummaryView ;
     private final ProductDataService productDataService;
     private final Context context;
 
@@ -33,19 +34,18 @@ public class ProductDetailsSummaryPresenterImpl implements ProductDetailsSummary
         this.context = context;
     }
 
-    ProductDetailsSummaryView productDetailsSummaryView ;
-
     @Override
     public void setView(ProductDetailsSummaryView productDetailsSummaryView) {
         this.productDetailsSummaryView  = productDetailsSummaryView ;
     }
 
     @Override
-    public void onDestroy() {
+    public void removeView() {
         this.productDetailsSummaryView = null;
     }
 
-    public void a(){
+    @Override
+    public void addSimilarItemsRecyclerView(){
         // TODO: change call to recommendation service to provide an actual list of similar products to the currently
         // selected product
         productDataService.query(OappProviderContract.ProductEntry.buildProductBestsellerUri()).subscribeOn(Schedulers.io())

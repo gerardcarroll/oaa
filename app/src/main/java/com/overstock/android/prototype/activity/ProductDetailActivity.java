@@ -31,7 +31,6 @@ public class ProductDetailActivity extends AppCompatActivity {
               .add(R.id.product_detils_activity_frm, ProductDetailsFragment.newInstance(product), product.getName())
               .addToBackStack(product.getName())
               .commit();
-
     }
   }
 

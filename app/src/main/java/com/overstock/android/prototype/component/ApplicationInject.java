@@ -9,6 +9,7 @@ import com.overstock.android.prototype.fragment.BrandFragment;
 import com.overstock.android.prototype.fragment.GoogleFederatedIdentityFragment;
 import com.overstock.android.prototype.fragment.ImageGalleryFragment;
 import com.overstock.android.prototype.fragment.MoreInformationFragment;
+import com.overstock.android.prototype.fragment.MoreInformationFragment1;
 import com.overstock.android.prototype.fragment.ProductBottomSheetFragment;
 import com.overstock.android.prototype.fragment.ProductDetailsFragment;
 import com.overstock.android.prototype.fragment.ProductDetailsSummaryFragment;
@@ -49,6 +50,8 @@ public interface ApplicationInject {
   void inject(final ImageGalleryFragment imageGalleryFragment);
 
   void inject(final MoreInformationFragment moreInformationFragment);
+
+  void inject(final MoreInformationFragment1 moreInformationFragment1);
 
   void inject(final ProductDetailsSummaryFragment productDetailsSummaryFragment);
 

@@ -7,5 +7,6 @@ import com.overstock.android.prototype.view.ProductDetailsSummaryView;
  */
 public interface ProductDetailsSummaryPresenter {
     void setView(ProductDetailsSummaryView productDetailsSummaryView) ;
-    void onDestroy();
+    void addSimilarItemsRecyclerView();
+    void removeView();
 }
