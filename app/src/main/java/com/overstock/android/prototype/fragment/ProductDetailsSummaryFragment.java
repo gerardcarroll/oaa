@@ -106,7 +106,7 @@ public class ProductDetailsSummaryFragment extends Fragment implements ProductDe
         productName.setText(productDetail.getName());
         String review = productDetail.getReviews();
         if (review != null) {
-            productName.getLayoutParams().width = 600;
+            productName.getLayoutParams().width = 700;
             productReview.setText(" " + review + " " + getResources().getString(R.string.reviews_text));
         } else {
             productName.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
