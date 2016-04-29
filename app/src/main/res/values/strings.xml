@@ -94,7 +94,7 @@
     <!-- Connect with Email Sign Up placeholder text -->
     <string name="password_placeholder_text">Password</string>
     <string name="confirm_password_placeholder_text">Confirm Password</string>
-    <string name="username_placeholder_text">Username</string>
+    <string name="username_placeholder_text">Email</string>
 
     <!-- Parse strings -->
     <string name="parse_service_url">http://parse.parse.dev.ostk.com:8080/parse</string>
@@ -104,11 +104,12 @@
     <string name="successful_oapp_sign_up_message">User was signed up successfully.</string>
     <string name="sign_up_required_fields_message">Please enter required fields.</string>
     <string name="sign_up_passwordconfirm_error_message">Password and Confirm Password fields do not match.</string>
-    <string name="product_base_image_url">http://ak1.ostkcdn.com/images/products/</string>
+
+    <!-- Image Base URLS -->
+    <string name="cdn_img_base_url">http://ak1.ostkcdn.com/images/products/</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="cdn_img_url">http://ak1.ostkcdn.com/images/products/</string>
 
     <!-- More Information link text -->
     <string name="more_information_link_text">More Information +</string>

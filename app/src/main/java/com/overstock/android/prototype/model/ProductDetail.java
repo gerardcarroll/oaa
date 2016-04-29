@@ -1,10 +1,11 @@
 package com.overstock.android.prototype.model;
 
-import android.os.Parcelable;
-
 import org.parceler.Parcel;
 
+import android.os.Parcelable;
+
 import java.util.List;
+
 
 /**
  * @author Rayconnolly Created on 3/21/2016.
@@ -28,12 +29,13 @@ public class ProductDetail implements Parcelable {
 
   protected List<Options> options;
 
-  protected List<ProductImages> productImages;
+  protected List<OViewerImage> oViewerImages;
 
   protected ProductDetail() {}
 
-  public ProductDetail(int id, String name, String imageLarge, String image, float price, int quantity,
-      String description, List<Options> options, List<ProductImages> productImages) {
+  public ProductDetail(final int id, final String name, final String imageLarge, final String image, final float price,
+      final int quantity, final String description, final List<Options> options,
+      final List<OViewerImage> oViewerImages) {
     this.id = id;
     this.name = name;
     this.imageLarge = imageLarge;
@@ -42,7 +44,7 @@ public class ProductDetail implements Parcelable {
     this.quantity = quantity;
     this.description = description;
     this.options = options;
-    this.productImages = productImages;
+    this.oViewerImages = oViewerImages;
   }
 
   protected ProductDetail(android.os.Parcel in) {
@@ -106,8 +108,8 @@ public class ProductDetail implements Parcelable {
     return options;
   }
 
-  public List<ProductImages> getProductImages() {
-    return productImages;
+  public List<OViewerImage> getoViewerImages() {
+    return oViewerImages;
   }
 
   @Override

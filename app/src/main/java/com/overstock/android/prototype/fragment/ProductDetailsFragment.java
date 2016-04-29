@@ -1,5 +1,13 @@
 package com.overstock.android.prototype.fragment;
 
+import java.util.ArrayList;
+import java.util.Currency;
+import java.util.Locale;
+
+import javax.inject.Inject;
+
+import org.parceler.Parcels;
+
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +18,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.component.ApplicationComponent;
 import com.overstock.android.prototype.model.Product;
@@ -18,23 +30,10 @@ import com.overstock.android.prototype.presenter.ProductDetailPresenter;
 import com.overstock.android.prototype.view.ProductDetailView;
 import com.squareup.picasso.Picasso;
 
-import org.parceler.Parcels;
-
-import javax.inject.Inject;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 /**
- * ProductDetailsFragment
- *
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ProductDetailsFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ProductDetailsFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * ProductDetailsFragment A simple {@link Fragment} subclass. Activities that contain this fragment must implement the
+ * {@link ProductDetailsFragment.OnFragmentInteractionListener} interface to handle interaction events. Use the
+ * {@link ProductDetailsFragment#newInstance} factory method to create an instance of this fragment.
  */
 public class ProductDetailsFragment extends Fragment implements ProductDetailView {
 

@@ -17,17 +17,18 @@ public class ProductTest {
 
     @Test
     public void argConstructorTest(){
-        Product product = new Product(1,"s1","s2","s3",0.01f);
+        Product product = new Product(1,"s1","s2","s3","s4",0.01f);
         Assert.assertNotNull(product);
     }
 
     @Test
     public void productGetterTest(){
-        Product product = new Product(1,"imageLarge","imageMedium","name",0.1F);
+        Product product = new Product(1,"imageLarge","imageMedium","imageThumbnail","name",0.1F);
         Assert.assertNotNull(product);
         Assert.assertEquals(product.getId(), 1);
         Assert.assertEquals(product.getImageLarge(), "imageLarge");
         Assert.assertEquals(product.getImageMedium1(), "imageMedium");
+        Assert.assertEquals(product.getImageThumbnail(),"imageThumbnail");
         Assert.assertEquals(product.getName(), "name");
         Assert.assertEquals(product.getMemberPrice(), 0.1F);
     }

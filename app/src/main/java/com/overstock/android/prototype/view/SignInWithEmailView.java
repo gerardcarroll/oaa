@@ -5,5 +5,9 @@ package com.overstock.android.prototype.view;
  */
 public interface SignInWithEmailView {
 
-    void OnSignInClick();
+  void onSignInClick();
+
+  void displayToast(final String toastMessage);
+
+  void navigateToCommunity();
 }
