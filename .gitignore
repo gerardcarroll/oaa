@@ -10,3 +10,4 @@
 *.tap
 patch.txt
 /perftesting
+/buildSrc/build
