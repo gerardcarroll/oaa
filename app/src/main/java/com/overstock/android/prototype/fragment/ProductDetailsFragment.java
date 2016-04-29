@@ -40,142 +40,158 @@ import com.squareup.picasso.Picasso;
  */
 public class ProductDetailsFragment extends Fragment implements ProductDetailView {
 
-  public static final String TAG = ProductDetailsFragment.class.getName();
+    public static final String TAG = ProductDetailsFragment.class.getName();
 
-  public static final String PRODUCT_DETAILS_PARCEL = "PRODUCT_DETAILS_PARCEL";
-  @Inject
-  ProductDetailPresenter presenter;
-  @Inject
-  Picasso picasso;
-  @Bind(R.id.product_detail_product_name)
-  TextView productName;
-  @Bind(R.id.product_detail_product_price)
-  TextView productPrice;
-  @Bind(R.id.product_detail_reviews)
-  TextView productReviews;
-  @Bind(R.id.product_detail_content)
-  WebView productDescription;
-  @Bind(R.id.product_detail_toolbar)
-  Toolbar toolbar;
-  @Bind(R.id.btn_buy)
-  FloatingActionButton btn_buy;
-  private Product product;
-  private OnFragmentInteractionListener mListener;
+    public static final String PRODUCT_DETAILS_PARCEL = "PRODUCT_DETAILS_PARCEL";
 
-  public ProductDetailsFragment() {}
-
-  /**
-   * Use this factory method to create a new instance of this fragment using the provided parameters.
-   *
-   * @param product
-   * @return A new instance of fragment ProductDetailsFragment.
-   */
-  public static ProductDetailsFragment newInstance(Product product) {
-    ProductDetailsFragment fragment = new ProductDetailsFragment();
-    Bundle args = new Bundle();
-    args.putParcelable(PRODUCT_DETAILS_PARCEL, product);
-    fragment.setArguments(args);
-    return fragment;
-  }
-
-  public Product getProduct() {
-    return product;
-  }
-
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    // Dagger inject dependencies
-    ApplicationComponent.Initializer.init(this.getActivity().getApplication()).inject(this);
-  }
-
-  @Override
-  public void onDestroy() {
-    super.onDestroy();
-    ButterKnife.unbind(this);
-    presenter.onDestroy();
-  }
-
-  @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_product_details, container, false);
-    if (getArguments() != null) {
-      product = getArguments().getParcelable(PRODUCT_DETAILS_PARCEL);
+    public Product getProduct() {
+        return product;
     }
 
-    ButterKnife.bind(this, view);
+    private Product product;
 
-    // Add image gallery
-    addImageGalleryFragment();
+    private OnFragmentInteractionListener mListener;
 
-    productName.setText(product.getName());
-    final String currencyCode = Currency.getInstance(Locale.US).getSymbol();
-    productPrice
-        .setText(this.getString(R.string.product_price_fmt, currencyCode, String.valueOf(product.getMemberPrice())));
-    presenter.setView(this);
-    presenter.retrieveProductDetails(product.getId());
-    return view;
-  }
+    @Inject
+    ProductDetailPresenter presenter;
 
-  private void addImageGalleryFragment() {
-    this.getChildFragmentManager().beginTransaction()
-        .add(R.id.image_gallery_fragment_container, ImageGalleryFragment.newInstance(product)).commit();
-  }
+    @Inject
+    Picasso picasso;
 
-  @OnClick(R.id.btn_buy)
-  public void expandBottom_sheet() {
-    ProductDetail productDetails = presenter.getProductDetails();
-    if (productDetails != null) {
-      ProductBottomSheetFragment productBottomSheetFragment = new ProductBottomSheetFragment();
-      Bundle bundle = new Bundle();
-      bundle.putParcelable("productDetails", Parcels.wrap(productDetails));
-      productBottomSheetFragment.setArguments(bundle);
-      productBottomSheetFragment.show(getFragmentManager(), productBottomSheetFragment.getTag());
+    @Bind(R.id.product_detail_product_name)
+    TextView productName;
+
+    @Bind(R.id.product_detail_product_price)
+    TextView productPrice;
+
+    @Bind(R.id.product_detail_content)
+    WebView productDescription;
+
+    @Bind(R.id.product_detail_toolbar)
+    Toolbar toolbar;
+
+    @Bind(R.id.btn_buy)
+    FloatingActionButton btn_buy;
+
+    public ProductDetailsFragment() {
     }
-  }
 
-  public void onButtonPressed(Uri uri) {
-    if (mListener != null) {
-      mListener.onFragmentInteraction(uri);
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param product
+     * @return A new instance of fragment ProductDetailsFragment.
+     */
+    public static ProductDetailsFragment newInstance(Product product) {
+        ProductDetailsFragment fragment = new ProductDetailsFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(PRODUCT_DETAILS_PARCEL, product);
+        fragment.setArguments(args);
+        return fragment;
     }
-  }
 
-  @Override
-  public void onAttach(Context context) {
-    super.onAttach(context);
-  }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //Dagger inject dependencies
+        ApplicationComponent.Initializer.init(this.getActivity().getApplication()).inject(this);
+    }
 
-  @Override
-  public void onDetach() {
-    super.onDetach();
-    mListener = null;
-  }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+        presenter.onDestroy();
+    }
 
-  @Override
-  public void displayProductDetails(final ProductDetail productDetail) {
-    Log.d(TAG, "Displaying Product Details." + productDetail.toString());
-    productDescription.loadData(productDetail.getDescription().trim(), getString(R.string.webview_html_encoding), null);
-    btn_buy.setVisibility(View.VISIBLE);
-  }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_product_details, container, false);
+        if (getArguments() != null) {
+            product = getArguments().getParcelable(PRODUCT_DETAILS_PARCEL);
+        }
 
-  @Override
-  public void addHorizontalRecyclerView(int layoutResourceId, ArrayList<Product> products, String displayText) {
-    Log.d(TAG, "Passing " + displayText + " products to adapter to be displayed. List size : " + products.size());
+        ButterKnife.bind(this, view);
 
-    this.getChildFragmentManager().beginTransaction()
-        .replace(layoutResourceId, HorizontialScrollFragment.newInstance(products, displayText), displayText).commit();
+        // Add image gallery
+        addImageGalleryFragment();
 
-  }
+        productName.setText(product.getName());
+        final String currencyCode = Currency.getInstance(Locale.US).getSymbol();
+        productPrice.setText(this.getString(R.string.product_price_fmt, currencyCode, String.valueOf(product.getMemberPrice())));
 
-  /**
-   * This interface must be implemented by activities that contain this fragment to allow an interaction in this
-   * fragment to be communicated to the activity and potentially other fragments contained in that activity.
-   * <p/>
-   * See the Android Training lesson
-   * <a href= "http://developer.android.com/training/basics/fragments/communicating.html" >Communicating with Other
-   * Fragments</a> for more information.
-   */
-  public interface OnFragmentInteractionListener {
-    void onFragmentInteraction(Uri uri);
-  }
+        presenter.setView(this);
+        presenter.retrieveProductDetails(product.getId());
+        return view;
+    }
+
+    private void addImageGalleryFragment() {
+        this.getChildFragmentManager()
+                .beginTransaction()
+                .add(R.id.image_gallery_fragment_container, ImageGalleryFragment.newInstance(product))
+                .commit();
+    }
+
+    @OnClick(R.id.btn_buy)
+    public void expandBottom_sheet() {
+        ProductDetail productDetails = presenter.getProductDetails();
+        if (productDetails != null) {
+            ProductBottomSheetFragment productBottomSheetFragment = new ProductBottomSheetFragment();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("productDetails", Parcels.wrap(productDetails));
+            productBottomSheetFragment.setArguments(bundle);
+            productBottomSheetFragment.show(getFragmentManager(), productBottomSheetFragment.getTag());
+        }
+    }
+
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    @Override
+    public void displayProductDetails(final ProductDetail productDetail) {
+        Log.d(TAG, "Displaying Product Details." + productDetail.toString());
+        productDescription.loadData(productDetail.getDescription().trim(), getString(R.string.webview_html_encoding), null);
+        btn_buy.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void addHorizontalRecyclerView(int layoutResourceId, ArrayList<Product> products, String displayText) {
+        Log.d(TAG, "Passing " + displayText + " products to adapter to be displayed. List size : " + products.size());
+
+        this.getChildFragmentManager()
+                .beginTransaction()
+                .replace(layoutResourceId, HorizontialScrollFragment.newInstance(products, displayText), displayText)
+                .commit();
+
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(Uri uri);
+    }
 }

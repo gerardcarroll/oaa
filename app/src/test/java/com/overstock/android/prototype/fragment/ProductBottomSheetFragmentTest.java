@@ -1,12 +1,15 @@
 package com.overstock.android.prototype.fragment;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.verify;
-import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFragment;
+import android.os.Build;
+import android.os.Bundle;
 
-import java.util.ArrayList;
+import com.overstock.android.prototype.BuildConfig;
+import com.overstock.android.prototype.component.ApplicationComponent;
+import com.overstock.android.prototype.main.OAppPrototypeApplication;
+import com.overstock.android.prototype.model.Options;
+import com.overstock.android.prototype.model.ProductDetail;
+import com.overstock.android.prototype.module.ApplicationModule;
+import com.overstock.android.prototype.presenter.ProductBottomSheetPresenter;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -19,26 +22,33 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowToast;
 
-import android.os.Build;
-import android.os.Bundle;
-
-import com.overstock.android.prototype.BuildConfig;
-import com.overstock.android.prototype.component.ApplicationComponent;
-import com.overstock.android.prototype.main.OAppPrototypeApplication;
-import com.overstock.android.prototype.model.Options;
-import com.overstock.android.prototype.model.ProductDetail;
-import com.overstock.android.prototype.module.ApplicationModule;
-import com.overstock.android.prototype.presenter.ProductBottomSheetPresenter;
+import java.util.ArrayList;
 
 import it.cosenonjaviste.daggermock.DaggerMockRule;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.verify;
+import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFragment;
 
 /**
  * @author LeeMeehan.
  * @since Created on 13-Apr-16
  */
-@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP, application = com.overstock.android.prototype.TestOAppPrototypeApplication.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP, application =  com.overstock.android.prototype.TestOAppPrototypeApplication.class)
 @RunWith(RobolectricGradleTestRunner.class)
 public class ProductBottomSheetFragmentTest {
+
+  @Rule
+  public final DaggerMockRule<ApplicationComponent> mockRule = new DaggerMockRule<>(ApplicationComponent.class,
+      new ApplicationModule(new OAppPrototypeApplication()))
+          .set(new DaggerMockRule.ComponentSetter<ApplicationComponent>() {
+            @Override
+            public void setComponent(ApplicationComponent applicationComponent) {
+              ((OAppPrototypeApplication) RuntimeEnvironment.application).setComponent(applicationComponent);
+            }
+          });
 
   private static final Integer PRODUCT_DETAIL_ID = 1001;
 
@@ -49,8 +59,6 @@ public class ProductBottomSheetFragmentTest {
   private static final String IMAGE_LARGE = "TEST_IMAGE_LARGE";
 
   private static final String IMAGE_MEDIUM = "TEST_IMAGE_MEDIUM";
-
-  private static final String REVIEWS = "4.3";
 
   private static final Float PRICE = Float.valueOf("22.50");
 
@@ -65,16 +73,6 @@ public class ProductBottomSheetFragmentTest {
   private static final String DESCRIPTION = "TEST_DESCRIPTION";
 
   private static final String OPTION_DESCRIPTION = "TEST_OPTION_DESCRIPTION";
-
-  @Rule
-  public final DaggerMockRule<ApplicationComponent> mockRule = new DaggerMockRule<>(ApplicationComponent.class,
-      new ApplicationModule(new OAppPrototypeApplication()))
-          .set(new DaggerMockRule.ComponentSetter<ApplicationComponent>() {
-            @Override
-            public void setComponent(ApplicationComponent applicationComponent) {
-              ((OAppPrototypeApplication) RuntimeEnvironment.application).setComponent(applicationComponent);
-            }
-          });
 
   private ProductBottomSheetFragment productBottomSheetFragment;
 
@@ -93,7 +91,7 @@ public class ProductBottomSheetFragmentTest {
         OPTION_PRICE);
     options.add(option);
     productDetails = new ProductDetail(PRODUCT_DETAIL_ID, PRODUCT_NAME, IMAGE_LARGE, IMAGE_MEDIUM, PRICE, QUANTITY,
-        DESCRIPTION, options, null, REVIEWS);
+        DESCRIPTION, options, null);
     productBottomSheetFragment = new ProductBottomSheetFragment();
     Bundle bundle = new Bundle();
     bundle.putParcelable("productDetails", Parcels.wrap(productDetails));

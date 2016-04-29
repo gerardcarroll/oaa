@@ -9,3 +9,4 @@
 .idea
 *.tap
 patch.txt
+/perftesting
