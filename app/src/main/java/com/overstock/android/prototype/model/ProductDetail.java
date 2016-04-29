@@ -1,8 +1,8 @@
 package com.overstock.android.prototype.model;
 
-import org.parceler.Parcel;
-
 import android.os.Parcelable;
+
+import org.parceler.Parcel;
 
 import java.util.List;
 
@@ -27,6 +27,8 @@ public class ProductDetail implements Parcelable {
 
   protected String description;
 
+  protected String reviews;
+
   protected List<Options> options;
 
   protected List<OViewerImage> oViewerImages;
@@ -34,7 +36,7 @@ public class ProductDetail implements Parcelable {
   protected ProductDetail() {}
 
   public ProductDetail(final int id, final String name, final String imageLarge, final String image, final float price,
-      final int quantity, final String description, final List<Options> options,
+      final int quantity, final String description, final String reviews, final List<Options> options,
       final List<OViewerImage> oViewerImages) {
     this.id = id;
     this.name = name;
@@ -43,6 +45,7 @@ public class ProductDetail implements Parcelable {
     this.memberPrice = price;
     this.quantity = quantity;
     this.description = description;
+    this.reviews = reviews;
     this.options = options;
     this.oViewerImages = oViewerImages;
   }
@@ -54,6 +57,7 @@ public class ProductDetail implements Parcelable {
     imageMedium1 = in.readString();
     memberPrice = in.readFloat();
     description = in.readString();
+    reviews = in.readString();
   }
 
   public static final Creator<ProductDetail> CREATOR = new Creator<ProductDetail>() {
@@ -100,6 +104,10 @@ public class ProductDetail implements Parcelable {
     return description;
   }
 
+  public String getReviews() {
+    return reviews;
+  }
+
   public String getImageLarge() {
     return imageLarge;
   }
@@ -125,5 +133,6 @@ public class ProductDetail implements Parcelable {
     dest.writeString(imageMedium1);
     dest.writeFloat(memberPrice);
     dest.writeString(description);
+    dest.writeString(reviews);
   }
 }

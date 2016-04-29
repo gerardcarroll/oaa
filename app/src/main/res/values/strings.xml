@@ -119,5 +119,6 @@
     <string name="shipping_title_text">Shipping Information</string>
     <string name="details_title_text">Description</string>
     <string name="returns_title_text">Returns</string>
+    <string name="reviews_text"> / 5 </string>
 
 </resources>

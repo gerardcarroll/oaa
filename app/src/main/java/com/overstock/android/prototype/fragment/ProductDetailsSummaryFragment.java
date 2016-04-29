@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.overstock.android.prototype.R;
@@ -46,6 +47,12 @@ public class ProductDetailsSummaryFragment extends Fragment implements ProductDe
 
     @Bind(R.id.product_detail_product_price)
     TextView productPrice;
+
+    @Bind(R.id.product_detail_product_review)
+    TextView productReview;
+
+    @Bind(R.id.review_star)
+    ImageView reviewStar;
 
     @Bind(R.id.txt_more_information_link)
     TextView txtMoreInformationLink;
@@ -97,6 +104,16 @@ public class ProductDetailsSummaryFragment extends Fragment implements ProductDe
         }
         ButterKnife.bind(this, view);
         productName.setText(productDetail.getName());
+        String review = productDetail.getReviews();
+        if (review != null) {
+            productName.getLayoutParams().width = 600;
+            productReview.setText(" " + review + " " + getResources().getString(R.string.reviews_text));
+        } else {
+            productName.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
+            productReview.setVisibility(View.INVISIBLE);
+            reviewStar.setVisibility(View.INVISIBLE);
+        }
+
         final String currencyCode = Currency.getInstance(Locale.US).getSymbol();
         productPrice.setText(this.getString(R.string.product_price_fmt, currencyCode, String.valueOf(productDetail.getMemberPrice())));
 //        //TODO: move to child presenter
