@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="HERE"/>
-
     <android.support.v4.view.ViewPager
+        android:fillViewport="true"
         android:id="@+id/viewpager_more_info"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp" >
+        android:layout_height="500dp"
+        android:layout_margin="15dp"
+        android:nestedScrollingEnabled="true">
 
         <android.support.v4.view.PagerTabStrip
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </android.support.v4.view.PagerTabStrip>
+            android:layout_height="wrap_content"/>
 
     </android.support.v4.view.ViewPager>
 </FrameLayout>

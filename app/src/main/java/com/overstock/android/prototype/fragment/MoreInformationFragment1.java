@@ -87,9 +87,9 @@ public class MoreInformationFragment1 extends Fragment implements MoreInformatio
 //        moreInfoPagerAdapter = new MoreInfoPagerAdapter(this.getContext(), viewPager);
 //
         viewPager.setCurrentItem(0);
-//
-//        moreInformationPresenter.setView(this);
-//        moreInformationPresenter.retrieveProductDetails(productDetail.getId());
+
+//       moreInformationPresenter.setView(this);
+//       moreInformationPresenter.retrieveProductDetails(productDetail.getId());
         return view;
     }
 
