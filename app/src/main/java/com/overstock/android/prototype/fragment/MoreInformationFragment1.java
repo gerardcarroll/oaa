@@ -45,24 +45,6 @@ public class MoreInformationFragment1 extends Fragment implements MoreInformatio
     @Bind(R.id.viewpager_more_info)
     ViewPager viewPager;
 
-    @Bind(R.id.details_title)
-    TextView detailsTitle;
-
-    @Bind(R.id.more_info_product_detail_content)
-    WebView productDescription;
-    @Bind(R.id.shipping_title)
-    TextView shippingTitle;
-
-    @Bind(R.id.shipping_lorem_ipsum_text)
-    TextView shippingText;
-
-    @Bind(R.id.returns_title)
-    TextView returnsTitle;
-
-    @Bind(R.id.returns_lorem_ipsum_text)
-    TextView returnsText;
-
-
     public MoreInformationFragment1(){}
 
     public static MoreInformationFragment1 newInstance(ProductDetail productDetail) {
@@ -90,17 +72,17 @@ public class MoreInformationFragment1 extends Fragment implements MoreInformatio
         ButterKnife.bind(this, view);
 
         // Set the ViewPager adapter
-//        WizardPagerAdapter adapter = new WizardPagerAdapter();
-//        viewPager.setAdapter(adapter);
+        WizardPagerAdapter adapter = new WizardPagerAdapter();
+        viewPager.setAdapter(adapter);
 
 
-//        final View shippingReturnsView = inflater.inflate(R.layout.fragment_more_info_shipping_returns, viewPager, false);
-//        shippingReturnsView.setTag("Shipping/Returns");
-//        final View detailsView = inflater.inflate(R.layout.fragment_more_info_details, viewPager, false);
-//        detailsView.setTag("Detailed Info");
+        final View shippingReturnsView = inflater.inflate(R.layout.fragment_more_info_shipping_returns, viewPager, false);
+        shippingReturnsView.setTag("Shipping/Returns");
+        final View detailsView = inflater.inflate(R.layout.fragment_more_info_details, viewPager, false);
+        detailsView.setTag("Detailed Info");
 //
-////        setShippingViewChildViews(shippingReturnsView, productDetail);
-        setDetailsViewChildViews(productDetail);
+        setShippingViewChildViews(shippingReturnsView, productDetail);
+        setDetailsViewChildViews(detailsView, productDetail);
 //
 //        moreInfoPagerAdapter = new MoreInfoPagerAdapter(this.getContext(), viewPager);
 //
@@ -112,21 +94,22 @@ public class MoreInformationFragment1 extends Fragment implements MoreInformatio
     }
 
     private void setShippingViewChildViews(View shippingReturnsView, ProductDetail productDetail){
-        shippingTitle.setText("TODO");
-        shippingText.setText("TODO");
-        returnsTitle.setText("TODO");
-        returnsText.setText("TODO");
+        ShippingReturnsViewHolder shippingReturnsViewHolder = new ShippingReturnsViewHolder(shippingReturnsView);
+        shippingReturnsViewHolder.shippingTitle.setText(getString(R.string.shipping_title_text));
+        shippingReturnsViewHolder.shippingText.setText(getString(R.string.lorem_ipsum_text));
+        shippingReturnsViewHolder.returnsTitle.setText(getString(R.string.returns_title_text));
+        shippingReturnsViewHolder.returnsText.setText(getString(R.string.lorem_ipsum_text));
     }
 
-    private void setDetailsViewChildViews(ProductDetail productDetail){
-        detailsTitle.setText(productDetail.getName());
-        productDescription.loadData(productDetail.getDescription().trim(), getString(R.string.webview_html_encoding), null);
+    private void setDetailsViewChildViews(View detailsView, ProductDetail productDetail){
+        DetailsViewHolder detailsViewHolder = new DetailsViewHolder(detailsView);
+        detailsViewHolder.detailsTitle.setText(getString(R.string.details_title_text));
+        detailsViewHolder.productDescription.loadData(productDetail.getDescription().trim(), getString(R.string.webview_html_encoding), null);
     }
 
     @Override
     public void displayDetails(ProductDetail productDetail) {
         Log.d(TAG, "Displaying Product Details." + productDetail.toString());
-
         //productDescription.loadData(productDetail.getDescription().trim(), getString(R.string.webview_html_encoding), null);
     }
 
@@ -202,33 +185,45 @@ class MoreInfoPagerAdapter extends PagerAdapter  {
         notifyDataSetChanged();
         return position;
     }
-
-
 }
 
-class DetailsViewGroup {
+class DetailsViewHolder {
 
+    @Bind(R.id.details_title)
+    TextView detailsTitle;
 
-    DetailsViewGroup (View v){
+    @Bind(R.id.more_info_product_detail_content)
+    WebView productDescription;
+
+    DetailsViewHolder(View v){
         ButterKnife.bind(this, v);
     }
 }
-class ShippingReturnsViewGroup{
+class ShippingReturnsViewHolder {
 
-    ShippingReturnsViewGroup(View v){
+    @Bind(R.id.shipping_title)
+    TextView shippingTitle;
+
+    @Bind(R.id.shipping_lorem_ipsum_text)
+    TextView shippingText;
+
+    @Bind(R.id.returns_title)
+    TextView returnsTitle;
+
+    @Bind(R.id.returns_lorem_ipsum_text)
+    TextView returnsText;
+
+    ShippingReturnsViewHolder(View v){
         ButterKnife.bind(this, v);
     }
 
 
 }
-
-
 
 class WizardPagerAdapter extends PagerAdapter {
 
     public WizardPagerAdapter() {
     }
-
 
     public Object instantiateItem(ViewGroup collection, int position) {
         LayoutInflater inflater = (LayoutInflater) collection.getContext()
