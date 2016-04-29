@@ -1,17 +1,5 @@
 package com.overstock.android.prototype.espresso.activity;
 
-import android.support.test.espresso.contrib.RecyclerViewActions;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-
-import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.activity.CommunityActivity;
-
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -22,6 +10,26 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.not;
 
+import java.util.concurrent.TimeUnit;
+
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.Timeout;
+import org.junit.runner.RunWith;
+
+import android.support.test.espresso.contrib.RecyclerViewActions;
+import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
+
+import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.activity.CommunityActivity;
+import com.overstock.android.prototype.espresso.common.PerfTest;
+import com.overstock.android.prototype.espresso.testrules.EnableLogcatDump;
+import com.overstock.android.prototype.espresso.testrules.EnableNetStatsDump;
+import com.overstock.android.prototype.espresso.testrules.EnablePostTestDumpsys;
+import com.overstock.android.prototype.espresso.testrules.EnableTestTracing;
+
 /**
  * Espresso tests to check the general functionality of the Communities activity.
  *
@@ -30,12 +38,12 @@ import static org.hamcrest.Matchers.not;
 
 @RunWith(AndroidJUnit4.class)
 public class CommunitiesActivityTest {
-
   @Rule
-  public ActivityTestRule<CommunityActivity> activityRule = new ActivityTestRule<>(CommunityActivity.class, true, false);
+  public ActivityTestRule<CommunityActivity> activityRule = new ActivityTestRule<>(CommunityActivity.class, true,
+      false);
 
   @Before
-  public void setUp(){
+  public void setUp() {
     activityRule.launchActivity(null);
   }
 

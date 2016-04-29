@@ -1,30 +1,5 @@
 package com.overstock.android.prototype.espresso.activity;
 
-import android.os.SystemClock;
-import android.support.annotation.NonNull;
-import android.support.test.espresso.contrib.DrawerActions;
-import android.support.test.espresso.contrib.RecyclerViewActions;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.api.OptionalPendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
-import com.overstock.android.prototype.R;
-import com.overstock.android.prototype.activity.HomeActivity;
-import com.overstock.android.prototype.espresso.dagger.rules.OAppPrototypeApplicationMockRule;
-import com.overstock.android.prototype.service.OappGoogleAuthService;
-
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-
-import java.util.concurrent.TimeUnit;
-
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -39,11 +14,47 @@ import static org.hamcrest.Matchers.not;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.concurrent.TimeUnit;
+
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.Timeout;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+
+import android.os.SystemClock;
+import android.support.annotation.NonNull;
+import android.support.test.espresso.contrib.DrawerActions;
+import android.support.test.espresso.contrib.RecyclerViewActions;
+import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
+
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.api.OptionalPendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.overstock.android.prototype.R;
+import com.overstock.android.prototype.activity.HomeActivity;
+import com.overstock.android.prototype.espresso.common.PerfTest;
+import com.overstock.android.prototype.espresso.dagger.rules.OAppPrototypeApplicationMockRule;
+import com.overstock.android.prototype.espresso.testrules.EnableLogcatDump;
+import com.overstock.android.prototype.espresso.testrules.EnableNetStatsDump;
+import com.overstock.android.prototype.espresso.testrules.EnablePostTestDumpsys;
+import com.overstock.android.prototype.espresso.testrules.EnableTestTracing;
+import com.overstock.android.prototype.service.OappGoogleAuthService;
+
 /**
  * @author itowey Created on 14/03/16.
  */
 @RunWith(AndroidJUnit4.class)
+@PerfTest
 public class AppInstrumentationTest_E2E {
+
+  public static final int SCROLL_TIME_IN_MILLIS = 4000;
+
+  public static final long MAX_ADAPTER_VIEW_PROCESSING_TIME_IN_MILLIS = 500;
 
   public static final String USERNAME = "johnsmith@gmail.com";
 
@@ -52,6 +63,22 @@ public class AppInstrumentationTest_E2E {
 
   @Rule
   public OAppPrototypeApplicationMockRule oAppPrototypeApplicationMockRule = new OAppPrototypeApplicationMockRule();
+
+  @Rule
+  public Timeout globalTimeout = new Timeout(SCROLL_TIME_IN_MILLIS + MAX_ADAPTER_VIEW_PROCESSING_TIME_IN_MILLIS,
+      TimeUnit.MILLISECONDS);
+
+  @Rule
+  public EnableTestTracing mEnableTestTracing = new EnableTestTracing();
+
+  @Rule
+  public EnablePostTestDumpsys mEnablePostTestDumpsys = new EnablePostTestDumpsys();
+
+  @Rule
+  public EnableLogcatDump mEnableLogcatDump = new EnableLogcatDump();
+
+  @Rule
+  public EnableNetStatsDump mEnableNetStatsDump = new EnableNetStatsDump();
 
   @Mock
   OappGoogleAuthService oappGoogleAuthService;
@@ -108,6 +135,7 @@ public class AppInstrumentationTest_E2E {
   }
 
   @Test
+  @PerfTest
   public void appTest() {
 
     onView(withId(R.id.googlePlus_login_btn)).perform(click());
@@ -150,7 +178,6 @@ public class AppInstrumentationTest_E2E {
     onView(withText("Top NFL Fan Products for 2016")).check(matches(isDisplayed()));
     onView(withId(R.id.rv_feed)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
     onView(withId(R.id.brand_activity)).check(matches(isDisplayed()));
-
 
     /* Back stack Navigation */
     pressBack();

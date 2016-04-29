@@ -1,3 +1,5 @@
+import com.overstock.android.prototype.perf.PerfTestTaskGeneratorPlugin
+
 buildscript {
     repositories {
         maven { url 'https://maven.fabric.io/public' }
@@ -177,3 +179,7 @@ apply plugin: 'com.google.gms.google-services'
 
 apply from: '../jacoco.gradle'
 apply from: '../sonar.gradle'
+
+// Create performance testing tasks for all connected Android devices using a Gradle plugin defined
+// in the buildSrc directory.
+apply plugin: PerfTestTaskGeneratorPlugin

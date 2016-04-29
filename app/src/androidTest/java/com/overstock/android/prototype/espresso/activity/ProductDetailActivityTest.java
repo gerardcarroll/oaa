@@ -59,7 +59,8 @@ public class ProductDetailActivityTest {
         connection.disconnect();
         final Intent intent = new Intent(context, ProductDetailActivity.class);
         intent.putExtra("image", bitmapExtra);
-        intent.putExtra(ProductDetailsFragment.PRODUCT_DETAILS_PARCEL, Parcels.wrap(new Product(251790, "L924666.jpg", "P924666.jpg", "Invicta Men's 9212 Speedway GS Chronograph Watch", 95.58f)));
+        intent.putExtra(ProductDetailsFragment.PRODUCT_DETAILS_PARCEL, Parcels.wrap(new Product(251790, "L924666" +
+                ".jpg", "P924666.jpg", "T924666.jpg", "Invicta Men's 9212 Speedway GS Chronograph Watch", 95.58f)));
 
         activityRule.launchActivity(intent);
 
