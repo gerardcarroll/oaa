@@ -64,7 +64,7 @@ public class ProductBottomSheetFragmentTest {
     intent.putExtra("image", bitmapExtra);
     intent.putExtra(ProductDetailsFragment.PRODUCT_DETAILS_PARCEL,
       Parcels.wrap(new Product(8939543, "8939543/Alternative-Apparel-Mens-Eco-Jersey-Football-T-Shirt-L16153098.jpg",
-          "8939543/Alternative-Apparel-Mens-Eco-Jersey-Football-T-Shirt-P16153098.jpg",
+          "8939543/Alternative-Apparel-Mens-Eco-Jersey-Football-T-Shirt-P16153098.jpg", "8939543/Alternative-Apparel-Mens-Eco-Jersey-Football-T-Shirt-T16153098.jpg",
           "Alternative Apparel Men's Eco-Jersey Football T-Shirt", 28.89f)));
 
     activityRule.launchActivity(intent);

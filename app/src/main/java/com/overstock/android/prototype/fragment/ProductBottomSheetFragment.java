@@ -40,7 +40,7 @@ import com.overstock.android.prototype.view.ProductBottomSheetView;
 
 /**
  * This class is used to display the BottomSheetDialogFragment. It also handles interactions between the UI on the
- * ProductBottomSheet. It is responsible for displaying UI only all logical processes are in the presenter.
+ * ProductBottomSheet. It is responsible for displaying UI only, all logical processes are in the presenter.
  *
  * @author LeeMeehan
  * @since Created on 07-Apr-16.

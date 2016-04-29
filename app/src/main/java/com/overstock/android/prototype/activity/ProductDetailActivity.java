@@ -1,5 +1,9 @@
 package com.overstock.android.prototype.activity;
 
+import org.parceler.Parcels;
+
+import retrofit2.http.HEAD;
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -10,13 +14,12 @@ import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.fragment.ProductDetailsFragment;
 import com.overstock.android.prototype.model.Product;
 
-import org.parceler.Parcels;
-
-
 /**
  * @author RayConnolly, LeeMeehan Created on 21-03-2016
  */
 public class ProductDetailActivity extends AppCompatActivity {
+
+  private static final String TAG = ProductDetailActivity.class.getName();
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
@@ -28,9 +31,9 @@ public class ProductDetailActivity extends AppCompatActivity {
       final Product product = Parcels.unwrap(extras.getParcelable(ProductDetailsFragment.PRODUCT_DETAILS_PARCEL));
 
       getSupportFragmentManager().beginTransaction()
-              .add(R.id.product_detils_activity_frm, ProductDetailsFragment.newInstance(product), product.getName())
-              .addToBackStack(product.getName())
-              .commit();
+            .add(R.id.product_detils_activity_frm, ProductDetailsFragment.newInstance(product), product.getName())
+            .addToBackStack(product.getName())
+            .commit();
     }
   }
 
@@ -38,19 +41,21 @@ public class ProductDetailActivity extends AppCompatActivity {
   public void onBackPressed() {
 
     int currentNumberOfFragments = getSupportFragmentManager().getBackStackEntryCount();
-    if( currentNumberOfFragments <= 1){
-      //the fragment container is an empty view, need to simulate an extra backbutton click to get back to previous activity
+    if (currentNumberOfFragments <= 1) {
+      // the fragment container is an empty view, need to simulate an extra backbutton click to get back to previous
+      // activity
       super.onBackPressed();
       super.onBackPressed();
-    } else {
+    }
+    else {
       getSupportFragmentManager().popBackStackImmediate();
-      //get the fragment before the current visible fragment
-      String fragmentName =  getSupportFragmentManager().getBackStackEntryAt(currentNumberOfFragments-2).getName();
-      ProductDetailsFragment previousProductDetailsFragment =  (ProductDetailsFragment)getSupportFragmentManager().findFragmentByTag(fragmentName);
+      // get the fragment before the current visible fragment
+      String fragmentName = getSupportFragmentManager().getBackStackEntryAt(currentNumberOfFragments - 2).getName();
+      ProductDetailsFragment previousProductDetailsFragment = (ProductDetailsFragment) getSupportFragmentManager()
+          .findFragmentByTag(fragmentName);
 
-      getSupportFragmentManager().beginTransaction()
-              .replace(R.id.product_detils_activity_frm, previousProductDetailsFragment, previousProductDetailsFragment.getProduct().getName())
-              .commit();
+      getSupportFragmentManager().beginTransaction().replace(R.id.product_detils_activity_frm,
+        previousProductDetailsFragment, previousProductDetailsFragment.getProduct().getName()).commit();
     }
 
   }

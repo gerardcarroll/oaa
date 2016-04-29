@@ -1,5 +1,7 @@
 package com.overstock.android.prototype.presenter.impl;
 
+import javax.inject.Inject;
+
 import android.util.Log;
 
 import com.overstock.android.prototype.presenter.SignInWithEmailPresenter;
@@ -17,6 +19,7 @@ public class SignInWithEmailPresenterImpl implements SignInWithEmailPresenter {
 
   private ParseService parseService;
 
+  @Inject
   public SignInWithEmailPresenterImpl(ParseService parseService) {
     this.parseService = parseService;
   }
@@ -28,12 +31,22 @@ public class SignInWithEmailPresenterImpl implements SignInWithEmailPresenter {
 
   @Override
   public void onSignIn(final String username, final String password) {
-    Log.d(TAG, "Calling ParseService for user SignIn");
-    parseService.loginParseUser(username, password);
+    Log.d(TAG, "Calling Parse Service for user Sign In");
+    parseService.loginParseUser(username, password, signInWithEmailView);
   }
 
   @Override
   public void onDestroy() {
     this.signInWithEmailView = null;
+  }
+
+  @Override
+  public void validateCredentials(String username, String password) {
+    if (username.isEmpty() || password.isEmpty()) {
+      signInWithEmailView.displayToast("All fields are required.");
+    }
+    else {
+      onSignIn(username, password);
+    }
   }
 }

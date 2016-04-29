@@ -11,7 +11,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.overstock.android.prototype.model.Options;
 import com.overstock.android.prototype.model.ProductDetail;
-import com.overstock.android.prototype.model.ProductImages;
+import com.overstock.android.prototype.model.ProductImage;
 
 /**
  * @author RayConnolly on 4/14/2016.
@@ -40,15 +40,15 @@ public class ProductDetailDeserializerUtil implements JsonDeserializer<ProductDe
           element.getAsJsonObject().get("price").getAsFloat()));
     }
 
-    List<ProductImages> productImages = new ArrayList<>();
+    List<ProductImage> productImages = new ArrayList<>();
     JsonArray oViewerImages = json.getAsJsonObject().get("oViewerImages").getAsJsonArray();
     for (int i = 0; i < oViewerImages.size(); i++) {
       JsonElement element = oViewerImages.get(i);
-      productImages.add(new ProductImages(element.getAsJsonObject().get("imageSizes").getAsJsonArray().get(2)
+      productImages.add(new ProductImage(element.getAsJsonObject().get("imageSizes").getAsJsonArray().get(2)
           .getAsJsonObject().get("imagePath").getAsString()));
     }
-    ProductDetail productDetail = new ProductDetail(id, name, imageLarge, image, Float.valueOf(price), 0, description,
-        options, productImages);
-    return productDetail;
+//    ProductDetail productDetail = new ProductDetail(id, name, imageLarge, image, Float.valueOf(price), 0, description,
+//              options, productImages);
+      return null;
   }
 }

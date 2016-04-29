@@ -12,4 +12,6 @@ public interface SignInWithEmailPresenter {
   void onSignIn(final String username, final String password);
 
   void onDestroy();
+
+  void validateCredentials(final String username, final String password);
 }

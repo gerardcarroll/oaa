@@ -7,3 +7,5 @@
 /build
 /captures
 .idea
+*.tap
+patch.txt
