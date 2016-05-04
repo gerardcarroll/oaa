@@ -116,7 +116,7 @@ public class ProductImageUtilTest {
   }
 
   @Test
-  public void testGetOptimizedImages_NO_SIZES() {
+  public void testGetOptimizedImages_NO_SIZES_LOWER_RES() {
     assertNotNull(productImageUtil);
     configuration.screenLayout = 2;
     when(resources.getConfiguration()).thenReturn(configuration);
@@ -125,6 +125,20 @@ public class ProductImageUtilTest {
     oViewerImages.add(new OViewerImage(ORIGINAL_IMAGE_URL, 1260, 1260, new ArrayList<ImageSizes>()));
     List<String> optimizedImageUrls = productImageUtil.getOptimizedImages(oViewerImages);
     assertEquals(ORIGINAL_IMAGE_URL, optimizedImageUrls.get(0));
+  }
+
+  @Test
+  public void testGetOptimizedImages_ONE_SIZE_ENTRY() {
+    assertNotNull(productImageUtil);
+    configuration.screenLayout = 2;
+    when(resources.getConfiguration()).thenReturn(configuration);
+    when(applicationContext.getResources()).thenReturn(resources);
+    oViewerImages = new ArrayList<>();
+    final List<ImageSizes> imageSizes = new ArrayList<>();
+    imageSizes.add(new ImageSizes(SMALL_IMAGE_URL, 320, 320));
+    oViewerImages.add(new OViewerImage(ORIGINAL_IMAGE_URL, 1260, 1260, imageSizes));
+    List<String> optimizedImageUrls = productImageUtil.getOptimizedImages(oViewerImages);
+    assertEquals(0, optimizedImageUrls.size());
   }
 
   @Test(expected = NullPointerException.class)
