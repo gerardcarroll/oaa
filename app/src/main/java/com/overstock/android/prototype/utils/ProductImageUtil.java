@@ -9,7 +9,6 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.overstock.android.prototype.model.OViewerImage;
@@ -22,7 +21,7 @@ import com.overstock.android.prototype.model.OViewerImage;
  */
 public class ProductImageUtil {
 
-  public static final String TAG = ProductImageUtil.class.getName();
+  private static final String TAG = ProductImageUtil.class.getName();
 
   private Context context;
 
@@ -38,15 +37,18 @@ public class ProductImageUtil {
    * @return Image Urls.
    */
   @NonNull
-  public List<String> getOptimizedImages(List<OViewerImage> oViewerImages) {
-    List<String> imagesPaths = new ArrayList<>();
-    final int ImageSizeId = getSizeId();
+  public List<String> getOptimizedImages(final List<OViewerImage> oViewerImages) {
+    final List<String> imagesPaths = new ArrayList<>();
+    final int imageSizeId = getSizeIndex();
     for (int i = 0; i < oViewerImages.size(); i++) {
       if (oViewerImages.get(i).getImageSizes().isEmpty()) {
         imagesPaths.add(oViewerImages.get(i).getOriginalImagePath());
       }
+      else if (imageSizeId >= 0 && imageSizeId < oViewerImages.get(i).getImageSizes().size()) {
+        imagesPaths.add(oViewerImages.get(i).getImageSizes().get(imageSizeId).getImagePath());
+      }
       else
-        imagesPaths.add(oViewerImages.get(i).getImageSizes().get(ImageSizeId).getImagePath());
+        Log.d(TAG, "Image exists but resolution not suitable quality for current display");
     }
     return imagesPaths;
   }
@@ -56,27 +58,33 @@ public class ProductImageUtil {
    *
    * @return sizeId.
    */
-  private int getSizeId() {
+  private int getSizeIndex() {
     int screenLayout = context.getResources().getConfiguration().screenLayout;
     screenLayout &= Configuration.SCREENLAYOUT_SIZE_MASK;
-
+    int sizeIndex;
     switch (screenLayout) {
       case Configuration.SCREENLAYOUT_SIZE_SMALL:
-        Log.d(TAG, "Device Size Small. Returning image size id: 0");
-        return 0;
+        Log.d(TAG, "Device Size Small.");
+        sizeIndex = 0;
+        break;
       case Configuration.SCREENLAYOUT_SIZE_NORMAL:
-        Log.d(TAG, "Device Size NORMAL. Returning image size id: 1");
-        return 1;
+        Log.d(TAG, "Device Size NORMAL.");
+        sizeIndex = 1;
+        break;
       case Configuration.SCREENLAYOUT_SIZE_LARGE:
-        Log.d(TAG, "Device Size LARGE. Returning image size id: 2");
-        return 2;
+        Log.d(TAG, "Device Size LARGE.");
+        sizeIndex = 2;
+        break;
       case Configuration.SCREENLAYOUT_SIZE_XLARGE:
-        Log.d(TAG, "Device Size XLARGE. Returning image size id: 2");
-        return 2;
+        Log.d(TAG, "Device Size XLARGE.");
+        sizeIndex = 2;
+        break;
       default:
-        Log.d(TAG, "Device Size Unknown. Returning default value. Returning default value 1.");
-        return 1;
+        Log.d(TAG, "Device Size Unknown. Returning default value.");
+        sizeIndex = 1;
     }
+    Log.d(TAG, "Returning image size id: " + sizeIndex);
+    return sizeIndex;
   }
 
 }
