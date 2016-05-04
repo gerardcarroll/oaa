@@ -72,6 +72,8 @@ public class ProductBottomSheetFragmentTest {
 
   private static final String DESCRIPTION = "TEST_DESCRIPTION";
 
+  private static final String REVIEW = "TEST_REVIEW";
+
   private static final String OPTION_DESCRIPTION = "TEST_OPTION_DESCRIPTION";
 
   private ProductBottomSheetFragment productBottomSheetFragment;
@@ -91,7 +93,7 @@ public class ProductBottomSheetFragmentTest {
         OPTION_PRICE);
     options.add(option);
     productDetails = new ProductDetail(PRODUCT_DETAIL_ID, PRODUCT_NAME, IMAGE_LARGE, IMAGE_MEDIUM, PRICE, QUANTITY,
-        DESCRIPTION, options, null);
+        DESCRIPTION, REVIEW, options, null);
     productBottomSheetFragment = new ProductBottomSheetFragment();
     Bundle bundle = new Bundle();
     bundle.putParcelable("productDetails", Parcels.wrap(productDetails));

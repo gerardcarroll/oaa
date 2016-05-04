@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,13 +104,15 @@ public class ProductDetailsSummaryFragment extends Fragment implements ProductDe
             productDetail = getArguments().getParcelable(ProductDetailsFragment.PRODUCT_DETAILS_PARCEL);
         }
         ButterKnife.bind(this, view);
+
         productName.setText(productDetail.getName());
-        String review = productDetail.getReviews();
+
+        final String review = productDetail.getReviews();
         if (review != null) {
-            productName.getLayoutParams().width = 700;
+            productName.getLayoutParams().width = setRelativeViewWidth(100.0, 60);
             productReview.setText(" " + review + " " + getResources().getString(R.string.reviews_text));
         } else {
-            productName.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
+            productName.getLayoutParams().width = setRelativeViewWidth(100.0, 100);
             productReview.setVisibility(View.INVISIBLE);
             reviewStar.setVisibility(View.INVISIBLE);
         }
@@ -121,6 +124,20 @@ public class ProductDetailsSummaryFragment extends Fragment implements ProductDe
 //        //End TODO
         presenter.addSimilarItemsRecyclerView();
         return view;
+    }
+
+    /**
+     * Method to set width of view relative to current screen width
+     * @param percentageVal
+     * @param widthVal
+     * @return
+     */
+    private int setRelativeViewWidth(double percentageVal, int widthVal){
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        int width = display.getWidth();
+        double widthPercentage = ((float) (width)) / percentageVal;
+        int newWidth = (int)(widthPercentage * widthVal);
+        return newWidth;
     }
 
     @OnClick(R.id.txt_more_information_link)
