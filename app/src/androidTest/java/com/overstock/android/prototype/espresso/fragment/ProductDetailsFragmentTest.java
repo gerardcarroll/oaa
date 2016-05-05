@@ -1,5 +1,22 @@
 package com.overstock.android.prototype.espresso.fragment;
 
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.parceler.Parcels;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,23 +34,6 @@ import com.overstock.android.prototype.espresso.matcher.SliderMatcher;
 import com.overstock.android.prototype.fragment.ProductDetailsFragment;
 import com.overstock.android.prototype.model.Product;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.parceler.Parcels;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
-
 /**
  * Created by itowey on 26/04/16.
  */
@@ -41,46 +41,49 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 @RunWith(AndroidJUnit4.class)
 public class ProductDetailsFragmentTest {
 
-    @Rule
-    public ActivityTestRule<ProductDetailActivity> activityRule = new ActivityTestRule<>(ProductDetailActivity.class, true, false);
+  @Rule
+  public ActivityTestRule<ProductDetailActivity> activityRule = new ActivityTestRule<>(ProductDetailActivity.class,
+      true, false);
 
-    @Before
-    public void setUp() throws IOException {
+  @Before
+  public void setUp() throws IOException {
 
-        final Context context = InstrumentationRegistry.getInstrumentation().getTargetContext().getApplicationContext();
+    final Context context = InstrumentationRegistry.getInstrumentation().getTargetContext().getApplicationContext();
 
-        URL url = new URL("http://images-common.test.overstock.com/images/products/T924666.jpg");
+    URL url = new URL("http://images-common.test.overstock.com/images/products/T924666.jpg");
 
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setDoInput(true);
-        connection.setRequestProperty("connection", "close");
-        connection.connect();
-        InputStream input = connection.getInputStream();
-        Bitmap bitmapExtra = BitmapFactory.decodeStream(input);
-        connection.disconnect();
-        final Intent intent = new Intent(context, ProductDetailActivity.class);
-        intent.putExtra("image", bitmapExtra);
-        intent.putExtra(ProductDetailsFragment.PRODUCT_DETAILS_PARCEL, Parcels.wrap(new Product(251790, "L924666.jpg", "P924666.jpg", "Invicta Men's 9212 Speedway GS Chronograph Watch", 95.58f)));
+    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+    connection.setDoInput(true);
+    connection.setRequestProperty("connection", "close");
+    connection.connect();
+    InputStream input = connection.getInputStream();
+    Bitmap bitmapExtra = BitmapFactory.decodeStream(input);
+    connection.disconnect();
+    final Intent intent = new Intent(context, ProductDetailActivity.class);
+    intent.putExtra("image", bitmapExtra);
+    intent.putExtra(ProductDetailsFragment.PRODUCT_DETAILS_PARCEL, Parcels.wrap(new Product(251790, "L924666.jpg",
+        "P924666.jpg", "251790/T924666.jpg", "Invicta Men's 9212 Speedway GS Chronograph Watch", 95.58f)));
 
-        activityRule.launchActivity(intent);
+    activityRule.launchActivity(intent);
 
-    }
+  }
 
-    @Test
-    public void testProductDetailRendering() {
-        SystemClock.sleep(1000);
-        // Click Connect With Email button
-        onView(withId(R.id.slider)).check(matches(isDisplayed()));
+  @Test
+  public void testProductDetailRendering() {
+    SystemClock.sleep(1000);
+    // Click Connect With Email button
+    onView(withId(R.id.slider)).check(matches(isDisplayed()));
 
-        onView(withId(R.id.product_detail_product_name)).check(matches(withText("Invicta Men's 9212 Speedway GS Chronograph Watch")));
-        onView(withId(R.id.product_detail_product_name)).perform(ViewActions.swipeUp());
-        onView(withId(R.id.slider)).check(matches(isDisplayed()));
-        onView(withId(R.id.slider)).check(ViewAssertions.matches(SliderMatcher.withCurrentPositiom(0)));
-        onView(withId(R.id.slider)).perform(ViewActions.swipeLeft());
-        onView(withId(R.id.slider)).perform(ViewActions.swipeLeft());
-        onView(withId(R.id.slider)).check(ViewAssertions.matches(SliderMatcher.withCurrentPositiom(2)));
-        onView(withId(R.id.slider)).perform(ViewActions.swipeRight());
-        onView(withId(R.id.slider)).check(ViewAssertions.matches(SliderMatcher.withCurrentPositiom(1)));
-    }
+    onView(withId(R.id.product_detail_product_name))
+        .check(matches(withText("Invicta Men's 9212 Speedway GS Chronograph Watch")));
+    onView(withId(R.id.product_detail_product_name)).perform(ViewActions.swipeUp());
+    onView(withId(R.id.slider)).check(matches(isDisplayed()));
+    onView(withId(R.id.slider)).check(ViewAssertions.matches(SliderMatcher.withCurrentPositiom(0)));
+    onView(withId(R.id.slider)).perform(ViewActions.swipeLeft());
+    onView(withId(R.id.slider)).perform(ViewActions.swipeLeft());
+    onView(withId(R.id.slider)).check(ViewAssertions.matches(SliderMatcher.withCurrentPositiom(2)));
+    onView(withId(R.id.slider)).perform(ViewActions.swipeRight());
+    onView(withId(R.id.slider)).check(ViewAssertions.matches(SliderMatcher.withCurrentPositiom(1)));
+  }
 
 }
