@@ -15,6 +15,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.CoordinatorLayout;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -158,7 +159,14 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
 
     if (behavior != null && behavior instanceof BottomSheetBehavior) {
       ((BottomSheetBehavior) behavior).setBottomSheetCallback(bottomSheetCallback);
+      ((BottomSheetBehavior) behavior).setPeekHeight(getOptimizedPeekHeight());
     }
+  }
+
+  private int getOptimizedPeekHeight() {
+    DisplayMetrics displayMetrics = new DisplayMetrics();
+    getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+    return displayMetrics.heightPixels;
   }
 
   @Override

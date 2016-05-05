@@ -60,7 +60,7 @@ public class ImageGalleryFragmentTest {
         connection.disconnect();
         final Intent intent = new Intent(context, ProductDetailActivity.class);
         intent.putExtra("image", bitmapExtra);
-        intent.putExtra(ProductDetailsFragment.PRODUCT_DETAILS_PARCEL, Parcels.wrap(new Product(9260610, "9260610/L16428339.jpg", "9260610/P16428339.jpg", "Fanmats NFL Grill Mat", 28.89f)));
+        intent.putExtra(ProductDetailsFragment.PRODUCT_DETAILS_PARCEL, Parcels.wrap(new Product(9260610, "9260610/L16428339.jpg", "9260610/P16428339.jpg","251790/T924666.jpg" ,"Fanmats NFL Grill Mat", 28.89f)));
 
         activityRule.launchActivity(intent);
 
