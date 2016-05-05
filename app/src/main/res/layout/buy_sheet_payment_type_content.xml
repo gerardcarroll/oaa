@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_paymentMethod"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_pay_google_wallet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/oapp_button"
+        android:drawableStart="@drawable/ic_account_balance_wallet_24dp"
+        android:padding="10dp"
+        android:text="@string/btn_pay_google_wallet_text"
+        android:textAlignment="center"
+        android:textColor="@color/oapp_primary_text"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn_pay_credit_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/oapp_button"
+        android:drawableStart="@drawable/ic_payment_24dp"
+        android:padding="10dp"
+        android:text="@string/btn_pay_credit_card_text"
+        android:textAlignment="center"
+        android:textColor="@color/oapp_primary_text"
+        android:textStyle="bold" />
+</LinearLayout>

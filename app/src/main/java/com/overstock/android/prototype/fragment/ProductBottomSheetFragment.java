@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.model.Options;
 import com.overstock.android.prototype.model.ProductDetail;
 import com.overstock.android.prototype.presenter.ProductBottomSheetPresenter;
+import com.overstock.android.prototype.utils.ViewAnimationUtils;
 import com.overstock.android.prototype.view.ProductBottomSheetView;
 
 /**
@@ -88,6 +90,9 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
 
   @Bind(R.id.product_options_txt)
   TextView productOptionsTxt;
+
+  @Bind(R.id.product_options_sheet)
+  LinearLayout productOptionsSheet;
 
   @Nullable
   @Override
@@ -238,6 +243,20 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
 
       }
     });
+  }
+
+  @OnClick(R.id.add_option_btn)
+  public void showOptionSheet() {
+    if (productOptionsSheet.getVisibility() == View.GONE) {
+      ViewAnimationUtils.expand(productOptionsSheet);
+    }
+  }
+
+  @OnClick(R.id.btn_product_options_btn)
+  public void hideOptionSheet() {
+    if (productOptionsSheet.getVisibility() == View.VISIBLE) {
+      ViewAnimationUtils.collapse(productOptionsSheet);
+    }
   }
 
   /* Method for handling UI disabling and enabling of quantity buttons. */
