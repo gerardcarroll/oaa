@@ -52,7 +52,7 @@ public class GuestLoginEndToEnd {
 //        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
     }
-    
+
     @Ignore
     @Test
     public void startMainActivityFromHomeScreen() throws RemoteException, UiObjectNotFoundException {
