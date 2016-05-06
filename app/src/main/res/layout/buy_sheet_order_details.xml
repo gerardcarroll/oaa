@@ -16,7 +16,7 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
         android:paddingTop="6dp"
-        android:text="Rewards Used"
+        android:text="@string/order_details_rewards_label"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -32,7 +32,7 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
         android:paddingTop="6dp"
-        android:text="$00.00"
+        android:text="@string/order_details_rewards_placeholder"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -47,7 +47,7 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
         android:paddingTop="6dp"
-        android:text="Shipping"
+        android:text="@string/order_details_shipping_label"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -63,7 +63,7 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
         android:paddingTop="6dp"
-        android:text="FREE"
+        android:text="@string/order_details_shipping_placeholder"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -78,7 +78,7 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
         android:paddingTop="6dp"
-        android:text="Tax"
+        android:text="@string/order_details_tax_label"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -94,7 +94,7 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
         android:paddingTop="6dp"
-        android:text="$24.00"
+        android:text="@string/order_details_tax_placeholder"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -110,7 +110,7 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
         android:paddingTop="16dp"
-        android:text="Total"
+        android:text="@string/order_details_total_label"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -128,7 +128,7 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
         android:paddingTop="16dp"
-        android:text="$486.43"
+        android:text="@string/order_details_total_placeholder"
         android:textSize="18sp"
         android:textStyle="bold" />
 </GridLayout>

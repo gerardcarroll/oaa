@@ -129,13 +129,27 @@
 
 
     <!--Additional Purchase Information Strings-->
+    <string name="order_sheet_info_label">Additional Information</string>
     <string name="add_option_btn_text">Add Option </string>
-    <string name="add_add_card_btn_text">Add Card </string>
+    <string name="add_option_label">Product Option</string>
+    <string name="add_card_btn_text">Add Card </string>
+    <string name="add_add_card_label">Billing Info</string>
     <string name="add_address_btn_text">Add Address </string>
+    <string name="add_address_label">Shipping Address</string>
     <string name="select_shipping_btn_text">Standard </string>
+    <string name="select_shipping_label">Shipping Method</string>
+
+    <!--Buy Sheet Order Details Strings-->
+    <string name="order_details_rewards_label">Rewards Used</string>
+    <string name="order_details_shipping_label">Shipping</string>
+    <string name="order_details_tax_label">Tax</string>
+    <string name="order_details_total_label">Total</string>
+    <string name="order_details_rewards_placeholder">$00.00</string>
+    <string name="order_details_shipping_placeholder">FREE</string>
+    <string name="order_details_tax_placeholder">$24.00</string>
+    <string name="order_details_total_placeholder">$486.43</string>
 
     <!-- More Information link text -->
-    <string name="more_information_link_text">More Information +</string>
     <string name="more_info_details_button_text">Details</string>
     <string name="more_info_shipping_button_text">Shipping/Returns</string>
     <string name="lorem_ipsum_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra quis mauris et congue. Mauris lacinia porttitor vestibulum. Donec id ipsum at tortor iaculis pulvinar sed id nunc. Mauris lacinia porttitor vestibulum. Donec id ipsum at tortor iaculis pulvinar sed id nunc.</string>

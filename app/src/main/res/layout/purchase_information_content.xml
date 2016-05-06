@@ -16,7 +16,7 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
         android:paddingTop="16dp"
-        android:text="Additional Information"
+        android:text="@string/order_sheet_info_label"
         android:textColor="@color/path_black"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -32,7 +32,7 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
         android:paddingTop="@dimen/vertical_margin"
-        android:text="Product Option"
+        android:text="@string/add_option_label"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -64,7 +64,7 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
         android:paddingTop="@dimen/vertical_margin"
-        android:text="Billing Info"
+        android:text="@string/add_add_card_label"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -80,7 +80,7 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
         android:paddingTop="@dimen/vertical_margin"
-        android:text="@string/add_add_card_btn_text"
+        android:text="@string/add_card_btn_text"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -94,7 +94,7 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
         android:paddingTop="@dimen/vertical_margin"
-        android:text="Shipping Address"
+        android:text="@string/add_address_label"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -125,7 +125,7 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
         android:paddingTop="@dimen/vertical_margin"
-        android:text="Shipping Method"
+        android:text="@string/select_shipping_label"
         android:textSize="18sp"
         android:textStyle="bold" />
 
