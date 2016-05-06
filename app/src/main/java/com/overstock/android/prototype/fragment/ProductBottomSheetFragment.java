@@ -96,7 +96,7 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
   LinearLayout productOptionsSheet;
 
   @Bind(R.id.purchase_information)
-  GridLayout purchaseInformation;
+  GridLayout purchaseInformationLayout;
 
   @Bind(R.id.layout_paymentMethod)
   LinearLayout paymentLayout;
@@ -104,11 +104,8 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
   @Bind(R.id.layout_rewards)
   LinearLayout rewardsLayout;
 
-  @Bind(R.id.add_option_btn)
-  TextView addOptionBtn;
-
   @Bind(R.id.order_information)
-  GridLayout orderInformation;
+  GridLayout orderInformationLayout;
 
   @Nullable
   @Override
@@ -158,7 +155,7 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
     }
   }
 
-  @OnClick(R.id.btn_pay_google_wallet)
+  @OnClick(R.id.btn_android_pay)
   public void payWithGoogleWallet() {
     final Toast toast = Toast.makeText(getActivity(), "Android Pay coming soon!", Toast.LENGTH_SHORT);
     toast.setGravity(Gravity.BOTTOM, 0, 20);
@@ -166,7 +163,7 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
     dismiss();
   }
 
-  @OnClick(R.id.btn_pay_credit_card)
+  @OnClick(R.id.btn_submit_order)
   public void payWithCreditCard() {
     final Toast toast = Toast.makeText(getActivity(), "Checkout coming soon!", Toast.LENGTH_SHORT);
     toast.setGravity(Gravity.BOTTOM, 0, 20);
@@ -292,16 +289,16 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
   private void collapseOrderInformationContent() {
     ViewAnimationUtils.collapse(rewardsLayout);
     ViewAnimationUtils.collapse(paymentLayout);
-    ViewAnimationUtils.collapse(purchaseInformation);
-    ViewAnimationUtils.collapse(orderInformation);
+    ViewAnimationUtils.collapse(purchaseInformationLayout);
+    ViewAnimationUtils.collapse(orderInformationLayout);
   }
 
   /* Method that handel's collapsing all necessary ui views. */
   private void expandOrderInformationContent() {
     ViewAnimationUtils.expand(rewardsLayout);
     ViewAnimationUtils.expand(paymentLayout);
-    ViewAnimationUtils.expand(purchaseInformation);
-    ViewAnimationUtils.expand(orderInformation);
+    ViewAnimationUtils.expand(purchaseInformationLayout);
+    ViewAnimationUtils.expand(orderInformationLayout);
   }
 
   /* Method for handling UI disabling and enabling of quantity buttons. */

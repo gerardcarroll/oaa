@@ -6,7 +6,7 @@
     android:weightSum="2">
 
     <Button
-        android:id="@+id/btn_pay_google_wallet"
+        android:id="@+id/btn_android_pay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -24,7 +24,7 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/btn_pay_credit_card"
+        android:id="@+id/btn_submit_order"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
