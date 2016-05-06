@@ -76,6 +76,7 @@ public class ImageGalleryFragment extends Fragment implements ImageGalleryView {
       product = getArguments().getParcelable(PRODUCT_DETAILS_PARCEL);
     }
     ButterKnife.bind(this, view);
+
     sliderLayout.stopAutoCycle();
     imageGalleryPresenter.setView(this);
     imageGalleryPresenter.retrieveProductDetails(product.getId());

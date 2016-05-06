@@ -1,9 +1,5 @@
 package com.overstock.android.prototype.utils;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -12,6 +8,10 @@ import com.google.gson.JsonParseException;
 import com.overstock.android.prototype.model.Options;
 import com.overstock.android.prototype.model.ProductDetail;
 import com.overstock.android.prototype.model.ProductImage;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author RayConnolly on 4/14/2016.
@@ -28,6 +28,7 @@ public class ProductDetailDeserializerUtil implements JsonDeserializer<ProductDe
     String image = json.getAsJsonObject().get("imageMedium1").getAsString();
     String price = json.getAsJsonObject().get("memberPrice").getAsString();
     String description = json.getAsJsonObject().get("description").getAsString();
+    String reviews = json.getAsJsonObject().get("reviews").getAsString();
 
     List<Options> options = new ArrayList<>();
     JsonArray optionsJson = json.getAsJsonObject().get("options").getAsJsonArray();
@@ -47,7 +48,7 @@ public class ProductDetailDeserializerUtil implements JsonDeserializer<ProductDe
       productImages.add(new ProductImage(element.getAsJsonObject().get("imageSizes").getAsJsonArray().get(2)
           .getAsJsonObject().get("imagePath").getAsString()));
     }
-//    ProductDetail productDetail = new ProductDetail(id, name, imageLarge, image, Float.valueOf(price), 0, description,
+//    ProductDetail productDetail = new ProductDetail(id, name, imageLarge, image, Float.valueOf(price), 0, description, reviews,
 //              options, productImages);
       return null;
   }

@@ -46,6 +46,8 @@ public class ProductBottomSheetPresenterTest {
 
   private static final String DESCRIPTION = "TEST_DESCRIPTION";
 
+  private static final String REVIEW = "TEST_REVIEW";
+
   private static final String OPTION_DESCRIPTION = "TEST_OPTION_DESCRIPTION";
 
   private static final Integer MAX_QUANTITY_ALLOWED = 2;
@@ -118,7 +120,7 @@ public class ProductBottomSheetPresenterTest {
     options.add(option);
     options.add(option);
     final ProductDetail productDetail = new ProductDetail(PRODUCT_DETAIL_ID, PRODUCT_NAME, IMAGE_LARGE, IMAGE_MEDIUM,
-        PRICE, QUANTITY, DESCRIPTION, options, null);
+        PRICE, QUANTITY, DESCRIPTION, REVIEW, options, null);
     productBottomSheetPresenter.updateProductPage(productDetail);
     verify(productBottomSheetView).updateFinalPrice(productDetail.getMemberPrice());
     verify(productBottomSheetView).updateSpinner((ArrayList<Options>) options);
@@ -131,7 +133,7 @@ public class ProductBottomSheetPresenterTest {
         OPTION_PRICE);
     options.add(option);
     final ProductDetail productDetail = new ProductDetail(PRODUCT_DETAIL_ID, PRODUCT_NAME, IMAGE_LARGE, IMAGE_MEDIUM,
-        PRICE, QUANTITY, DESCRIPTION, options, null);
+        PRICE, QUANTITY, DESCRIPTION, REVIEW, options, null);
     productBottomSheetPresenter.updateProductPage(productDetail);
     verify(productBottomSheetView).updateFinalPrice(productDetail.getMemberPrice());
     verify(productBottomSheetView, never()).updateSpinner((ArrayList<Options>) options);

@@ -2,6 +2,8 @@ package com.overstock.android.prototype.activity;
 
 import org.parceler.Parcels;
 
+import retrofit2.http.HEAD;
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -29,9 +31,9 @@ public class ProductDetailActivity extends AppCompatActivity {
       final Product product = Parcels.unwrap(extras.getParcelable(ProductDetailsFragment.PRODUCT_DETAILS_PARCEL));
 
       getSupportFragmentManager().beginTransaction()
-          .add(R.id.product_detils_activity_frm, ProductDetailsFragment.newInstance(product), product.getName())
-          .addToBackStack(product.getName()).commit();
-
+            .add(R.id.product_detils_activity_frm, ProductDetailsFragment.newInstance(product), product.getName())
+            .addToBackStack(product.getName())
+            .commit();
     }
   }
 

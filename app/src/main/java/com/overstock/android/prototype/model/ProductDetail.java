@@ -1,14 +1,17 @@
 package com.overstock.android.prototype.model;
 
-import java.util.List;
+import android.os.Parcelable;
 
 import org.parceler.Parcel;
+
+import java.util.List;
+
 
 /**
  * @author Rayconnolly Created on 3/21/2016.
  */
 @Parcel
-public class ProductDetail {
+public class ProductDetail implements Parcelable {
 
   protected int id;
 
@@ -24,6 +27,8 @@ public class ProductDetail {
 
   protected String description;
 
+  protected String reviews;
+
   protected List<Options> options;
 
   protected List<OViewerImage> oViewerImages;
@@ -31,7 +36,7 @@ public class ProductDetail {
   protected ProductDetail() {}
 
   public ProductDetail(final int id, final String name, final String imageLarge, final String image, final float price,
-      final int quantity, final String description, final List<Options> options,
+      final int quantity, final String description, final String reviews, final List<Options> options,
       final List<OViewerImage> oViewerImages) {
     this.id = id;
     this.name = name;
@@ -40,9 +45,32 @@ public class ProductDetail {
     this.memberPrice = price;
     this.quantity = quantity;
     this.description = description;
+    this.reviews = reviews;
     this.options = options;
     this.oViewerImages = oViewerImages;
   }
+
+  protected ProductDetail(android.os.Parcel in) {
+    id = in.readInt();
+    name = in.readString();
+    imageLarge = in.readString();
+    imageMedium1 = in.readString();
+    memberPrice = in.readFloat();
+    description = in.readString();
+    reviews = in.readString();
+  }
+
+  public static final Creator<ProductDetail> CREATOR = new Creator<ProductDetail>() {
+    @Override
+    public ProductDetail createFromParcel(android.os.Parcel in) {
+      return new ProductDetail(in);
+    }
+
+    @Override
+    public ProductDetail[] newArray(int size) {
+      return new ProductDetail[size];
+    }
+  };
 
   public int getId() {
     return id;
@@ -76,6 +104,10 @@ public class ProductDetail {
     return description;
   }
 
+  public String getReviews() {
+    return reviews;
+  }
+
   public String getImageLarge() {
     return imageLarge;
   }
@@ -88,4 +120,19 @@ public class ProductDetail {
     return oViewerImages;
   }
 
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(android.os.Parcel dest, int flags) {
+    dest.writeInt(id);
+    dest.writeString(name);
+    dest.writeString(imageLarge);
+    dest.writeString(imageMedium1);
+    dest.writeFloat(memberPrice);
+    dest.writeString(description);
+    dest.writeString(reviews);
+  }
 }

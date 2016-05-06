@@ -134,4 +134,14 @@
     <string name="add_address_btn_text">Add Address </string>
     <string name="select_shipping_btn_text">Standard </string>
 
+    <!-- More Information link text -->
+    <string name="more_information_link_text">More Information +</string>
+    <string name="more_info_details_button_text">Details</string>
+    <string name="more_info_shipping_button_text">Shipping/Returns</string>
+    <string name="lorem_ipsum_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra quis mauris et congue. Mauris lacinia porttitor vestibulum. Donec id ipsum at tortor iaculis pulvinar sed id nunc. Mauris lacinia porttitor vestibulum. Donec id ipsum at tortor iaculis pulvinar sed id nunc.</string>
+    <string name="shipping_title_text">Shipping Information</string>
+    <string name="details_title_text">Description</string>
+    <string name="returns_title_text">Returns</string>
+    <string name="reviews_text"> / 5 </string>
+
 </resources>

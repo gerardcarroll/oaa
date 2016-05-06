@@ -8,13 +8,17 @@ import com.overstock.android.prototype.model.ProductDataService;
 import com.overstock.android.prototype.presenter.BrandPresenter;
 import com.overstock.android.prototype.presenter.CommunityPresenter;
 import com.overstock.android.prototype.presenter.ImageGalleryPresenter;
+import com.overstock.android.prototype.presenter.MoreInformationPresenter;
 import com.overstock.android.prototype.presenter.ProductBottomSheetPresenter;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
+import com.overstock.android.prototype.presenter.ProductDetailsSummaryPresenter;
 import com.overstock.android.prototype.presenter.impl.BrandPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.CommunityPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.ImageGalleryPresenterImpl;
+import com.overstock.android.prototype.presenter.impl.MoreInformationPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.ProductBottomSheetPresenterImpl;
 import com.overstock.android.prototype.presenter.impl.ProductDetailPresenterImpl;
+import com.overstock.android.prototype.presenter.impl.ProductDetailsSummaryPresenterImpl;
 import com.overstock.android.prototype.service.CheckOutCoordinator;
 import com.overstock.android.prototype.service.CheckOutCoordinatorImpl;
 import com.overstock.android.prototype.service.CommunityService;
@@ -116,6 +120,18 @@ public class ApplicationModule {
   public ImageGalleryPresenter imageGalleryPresenter(final Application applicationContext,
     final ProductDataService productDataService) {
     return new ImageGalleryPresenterImpl(applicationContext, productDataService);
+  }
+
+  @Provides
+  public MoreInformationPresenter moreInformationPresenter(final Application applicationContext,
+    final ProductDataService productDataService) {
+    return new MoreInformationPresenterImpl(applicationContext, productDataService);
+  }
+
+  @Provides
+  public ProductDetailsSummaryPresenter providesProductDetailsSummaryPresenter(final Application applicationContext,
+    final ProductDataService productDataService) {
+    return new ProductDetailsSummaryPresenterImpl(applicationContext, productDataService);
   }
 
 }

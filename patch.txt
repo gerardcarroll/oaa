@@ -1,0 +1,897 @@
+diff --git a/app/src/androidTest/java/com/overstock/android/prototype/espresso/fragment/ImageGalleryFragmentTest.java b/app/src/androidTest/java/com/overstock/android/prototype/espresso/fragment/ImageGalleryFragmentTest.java
+new file mode 100644
+index 0000000..20439c1
+--- /dev/null
++++ b/app/src/androidTest/java/com/overstock/android/prototype/espresso/fragment/ImageGalleryFragmentTest.java
+@@ -0,0 +1,93 @@
++package com.overstock.android.prototype.espresso.fragment;
++
++import android.content.Context;
++import android.content.Intent;
++import android.graphics.Bitmap;
++import android.graphics.BitmapFactory;
++import android.os.SystemClock;
++import android.support.test.InstrumentationRegistry;
++import android.support.test.espresso.action.ViewActions;
++import android.support.test.espresso.assertion.ViewAssertions;
++import android.support.test.rule.ActivityTestRule;
++import android.support.test.runner.AndroidJUnit4;
++
++import com.overstock.android.prototype.R;
++import com.overstock.android.prototype.activity.ProductDetailActivity;
++import com.overstock.android.prototype.espresso.matcher.SliderMatcher;
++import com.overstock.android.prototype.fragment.ProductDetailsFragment;
++import com.overstock.android.prototype.model.Product;
++
++import org.junit.Before;
++import org.junit.Rule;
++import org.junit.Test;
++import org.junit.runner.RunWith;
++import org.parceler.Parcels;
++
++import java.io.IOException;
++import java.io.InputStream;
++import java.net.HttpURLConnection;
++import java.net.URL;
++
++import static android.support.test.espresso.Espresso.onView;
++import static android.support.test.espresso.assertion.ViewAssertions.matches;
++import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
++import static android.support.test.espresso.matcher.ViewMatchers.withId;
++import static android.support.test.espresso.matcher.ViewMatchers.withText;
++
++/**
++ * @author RayConnolly, created on 4/26/2016.
++ */
++
++@RunWith(AndroidJUnit4.class)
++public class ImageGalleryFragmentTest {
++
++    @Rule
++    public ActivityTestRule<ProductDetailActivity> activityRule = new ActivityTestRule<>(ProductDetailActivity.class, true, false);
++
++    @Before
++    public void setUp() throws IOException {
++
++        final Context context = InstrumentationRegistry.getInstrumentation().getTargetContext().getApplicationContext();
++
++        URL url = new URL("http://images-common.test.overstock.com/images/products/9260610/T16428339.jpg");
++
++        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
++        connection.setDoInput(true);
++        connection.setRequestProperty("connection", "close");
++        connection.connect();
++        InputStream input = connection.getInputStream();
++        Bitmap bitmapExtra = BitmapFactory.decodeStream(input);
++        connection.disconnect();
++        final Intent intent = new Intent(context, ProductDetailActivity.class);
++        intent.putExtra("image", bitmapExtra);
++        intent.putExtra(ProductDetailsFragment.PRODUCT_DETAILS_PARCEL, Parcels.wrap(new Product(9260610, "9260610/L16428339.jpg", "9260610/P16428339.jpg", "Fanmats NFL Grill Mat", 28.89f)));
++
++        activityRule.launchActivity(intent);
++
++    }
++
++    @Test
++    public void testProductDetailRendering() {
++
++        SystemClock.sleep(1000);
++
++        // Check Image Gallery fragment is displayed
++        onView(withId(R.id.slider)).check(matches(isDisplayed()));
++
++        // Check product details are displayed
++        onView(withId(R.id.product_detail_product_name)).check(matches(withText("Fanmats NFL Grill Mat")));
++        onView(withId(R.id.product_detail_product_price)).check(matches(withText("$ 28.89")));
++        onView(withId(R.id.product_detail_product_name)).perform(ViewActions.swipeUp());
++
++        // Check Image Gallery swipe actions
++        onView(withId(R.id.slider)).check(matches(isDisplayed()));
++        onView(withId(R.id.slider)).check(ViewAssertions.matches(SliderMatcher.withCurrentPositiom(0)));
++        onView(withId(R.id.slider)).perform(ViewActions.swipeLeft());
++        onView(withId(R.id.slider)).perform(ViewActions.swipeLeft());
++        onView(withId(R.id.slider)).check(ViewAssertions.matches(SliderMatcher.withCurrentPositiom(2)));
++        onView(withId(R.id.slider)).perform(ViewActions.swipeRight());
++        onView(withId(R.id.slider)).check(ViewAssertions.matches(SliderMatcher.withCurrentPositiom(1)));
++    }
++}
++
++
+diff --git a/app/src/main/java/com/overstock/android/prototype/activity/ProductDetailActivity.java b/app/src/main/java/com/overstock/android/prototype/activity/ProductDetailActivity.java
+index 2c80ae0..75e6d95 100644
+--- a/app/src/main/java/com/overstock/android/prototype/activity/ProductDetailActivity.java
++++ b/app/src/main/java/com/overstock/android/prototype/activity/ProductDetailActivity.java
+@@ -12,6 +12,7 @@ import com.overstock.android.prototype.model.Product;
+ 
+ import org.parceler.Parcels;
+ 
++
+ /**
+  * @author RayConnolly, LeeMeehan Created on 21-03-2016
+  */
+diff --git a/app/src/main/java/com/overstock/android/prototype/component/ApplicationInject.java b/app/src/main/java/com/overstock/android/prototype/component/ApplicationInject.java
+index 083f4e5..f962e62 100644
+--- a/app/src/main/java/com/overstock/android/prototype/component/ApplicationInject.java
++++ b/app/src/main/java/com/overstock/android/prototype/component/ApplicationInject.java
+@@ -7,6 +7,7 @@ import com.overstock.android.prototype.adapters.FeedAdapter;
+ import com.overstock.android.prototype.adapters.ProductAdapter;
+ import com.overstock.android.prototype.fragment.BrandFragment;
+ import com.overstock.android.prototype.fragment.GoogleFederatedIdentityFragment;
++import com.overstock.android.prototype.fragment.ImageGalleryFragment;
+ import com.overstock.android.prototype.fragment.ProductBottomSheetFragment;
+ import com.overstock.android.prototype.fragment.ProductDetailsFragment;
+ import com.overstock.android.prototype.fragment.SignInWithEmailFragment;
+@@ -43,4 +44,6 @@ public interface ApplicationInject {
+ 
+   void inject(final SignUpWithEmailFragment signUpWithEmailFragment);
+ 
++  void inject(final ImageGalleryFragment imageGalleryFragment);
++
+ }
+diff --git a/app/src/main/java/com/overstock/android/prototype/fragment/ImageGalleryFragment.java b/app/src/main/java/com/overstock/android/prototype/fragment/ImageGalleryFragment.java
+new file mode 100644
+index 0000000..e4a3d86
+--- /dev/null
++++ b/app/src/main/java/com/overstock/android/prototype/fragment/ImageGalleryFragment.java
+@@ -0,0 +1,141 @@
++package com.overstock.android.prototype.fragment;
++
++import android.os.Bundle;
++import android.support.v4.app.Fragment;
++import android.util.Log;
++import android.view.LayoutInflater;
++import android.view.MotionEvent;
++import android.view.View;
++import android.view.ViewGroup;
++
++import com.daimajia.slider.library.Indicators.PagerIndicator;
++import com.daimajia.slider.library.SliderLayout;
++import com.daimajia.slider.library.SliderTypes.BaseSliderView;
++import com.daimajia.slider.library.SliderTypes.TextSliderView;
++import com.overstock.android.prototype.R;
++import com.overstock.android.prototype.animatorutils.CustomDescriptionAnimation;
++import com.overstock.android.prototype.component.ApplicationComponent;
++import com.overstock.android.prototype.listener.PageChangeListener;
++import com.overstock.android.prototype.model.Product;
++import com.overstock.android.prototype.model.ProductDetail;
++import com.overstock.android.prototype.model.ProductImages;
++import com.overstock.android.prototype.presenter.ImageGalleryPresenter;
++import com.overstock.android.prototype.view.ImageGalleryView;
++import com.overstock.android.prototype.widgets.PageNumberIndicator;
++
++import java.util.List;
++
++import javax.inject.Inject;
++
++import butterknife.Bind;
++import butterknife.ButterKnife;
++
++/**
++ * @author RayConnolly, created on 4/25/2016.
++ */
++public class ImageGalleryFragment extends Fragment implements ImageGalleryView {
++
++    private static final String TAG = ImageGalleryFragment.class.getName();
++
++    public static final String PRODUCT_DETAILS_PARCEL = "PRODUCT_DETAILS_PARCEL";
++
++    @Inject
++    ImageGalleryPresenter imageGalleryPresenter;
++
++    @Bind(R.id.slider)
++    SliderLayout sliderLayout;
++
++    @Bind(R.id.custom_Indicator)
++    PageNumberIndicator pagerIndicator;
++
++    private Product product;
++
++    private String baseImageUrl;
++
++    public ImageGalleryFragment() {}
++
++    public static ImageGalleryFragment newInstance(Product product) {
++        ImageGalleryFragment fragment = new ImageGalleryFragment();
++        Bundle args = new Bundle();
++        args.putParcelable(PRODUCT_DETAILS_PARCEL, product);
++        fragment.setArguments(args);
++        return fragment;
++    }
++
++    @Override
++    public void onCreate(final Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        ApplicationComponent.Initializer.init(this.getActivity().getApplication()).inject(this);
++        baseImageUrl = this.getActivity().getString(R.string.cdn_img_url);
++    }
++
++    @Override
++    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
++        View view = inflater.inflate(R.layout.fragment_image_gallery, container, false);
++        if (getArguments() != null) {
++            product = getArguments().getParcelable(PRODUCT_DETAILS_PARCEL);
++        }
++        ButterKnife.bind(this, view);
++        sliderLayout.stopAutoCycle();
++        imageGalleryPresenter.setView(this);
++        imageGalleryPresenter.retrieveProductDetails(product.getId());
++        return view;
++    }
++
++    @Override
++    public void onDestroyView() {
++        super.onDestroyView();
++        ButterKnife.unbind(this);
++        imageGalleryPresenter.onDestroy();
++    }
++
++    @Override
++    public void displayImages(ProductDetail productDetail) {
++        if (productDetail.getProductImages().isEmpty() || productDetail.getProductImages().size() == 1) {
++          populateImageSlider(null, productDetail.getImageLarge());
++        }
++        else {
++          populateImageSlider(productDetail.getProductImages(), null);
++        }
++    }
++
++    public void populateImageSlider(List<ProductImages> productImages, String productImage) {
++        TextSliderView textSliderView;
++        if (productImages != null) {
++            pagerIndicator.setTotalNumberOfPages(productImages.size());
++            for (ProductImages image : productImages) {
++                textSliderView = new TextSliderView(this.getActivity().getApplicationContext());
++                Log.d(TAG, "Passing " + baseImageUrl + image.getImagePath() + " to image slider to be displayed");
++                textSliderView.image(baseImageUrl + image.getImagePath())
++                        .setScaleType(BaseSliderView.ScaleType.FitCenterCrop);
++                sliderLayout.addSlider(textSliderView);
++            }
++            sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
++            sliderLayout.setCustomAnimation(new CustomDescriptionAnimation());
++            sliderLayout.addOnPageChangeListener(new PageChangeListener() {
++                @Override
++                public void onPageSelected(int position) {
++                    if (pagerIndicator != null) {
++                        pagerIndicator.setCurrentPageNumber(position + 1);
++                    }
++                }
++            });
++            sliderLayout.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Invisible);
++            sliderLayout.setOnTouchListener(new View.OnTouchListener() {
++                @Override
++                public boolean onTouch(View v, MotionEvent event) {
++                    sliderLayout.stopAutoCycle();
++                    return true;
++                }
++            });
++        }
++        else {
++            textSliderView = new TextSliderView(this.getActivity().getApplicationContext());
++            Log.d(TAG, "Passing " + baseImageUrl + productImage + " to image slider to be displayed");
++            textSliderView.image(baseImageUrl + productImage).setScaleType(BaseSliderView.ScaleType.FitCenterCrop);
++            sliderLayout.addSlider(textSliderView);
++            sliderLayout.setCustomAnimation(new CustomDescriptionAnimation());
++            sliderLayout.stopAutoCycle();
++        }
++    }
++}
+diff --git a/app/src/main/java/com/overstock/android/prototype/fragment/ProductDetailsFragment.java b/app/src/main/java/com/overstock/android/prototype/fragment/ProductDetailsFragment.java
+index 268e820..af76423 100644
+--- a/app/src/main/java/com/overstock/android/prototype/fragment/ProductDetailsFragment.java
++++ b/app/src/main/java/com/overstock/android/prototype/fragment/ProductDetailsFragment.java
+@@ -8,33 +8,23 @@ import android.support.v4.app.Fragment;
+ import android.support.v7.widget.Toolbar;
+ import android.util.Log;
+ import android.view.LayoutInflater;
+-import android.view.MotionEvent;
+ import android.view.View;
+ import android.view.ViewGroup;
+ import android.webkit.WebView;
+ import android.widget.TextView;
+ 
+-import com.daimajia.slider.library.Indicators.PagerIndicator;
+-import com.daimajia.slider.library.SliderLayout;
+-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+-import com.daimajia.slider.library.SliderTypes.TextSliderView;
+ import com.overstock.android.prototype.R;
+-import com.overstock.android.prototype.animatorutils.CustomDescriptionAnimation;
+ import com.overstock.android.prototype.component.ApplicationComponent;
+-import com.overstock.android.prototype.listener.PageChangeListener;
+ import com.overstock.android.prototype.model.Product;
+ import com.overstock.android.prototype.model.ProductDetail;
+-import com.overstock.android.prototype.model.ProductImages;
+ import com.overstock.android.prototype.presenter.ProductDetailPresenter;
+ import com.overstock.android.prototype.view.ProductDetailView;
+-import com.overstock.android.prototype.widgets.PageNumberIndicator;
+ import com.squareup.picasso.Picasso;
+ 
+ import org.parceler.Parcels;
+ 
+ import java.util.ArrayList;
+ import java.util.Currency;
+-import java.util.List;
+ import java.util.Locale;
+ 
+ import javax.inject.Inject;
+@@ -67,8 +57,6 @@ public class ProductDetailsFragment extends Fragment implements ProductDetailVie
+ 
+     private OnFragmentInteractionListener mListener;
+ 
+-    private String baseImageUrl;
+-
+     @Inject
+     ProductDetailPresenter presenter;
+ 
+@@ -90,12 +78,6 @@ public class ProductDetailsFragment extends Fragment implements ProductDetailVie
+     @Bind(R.id.btn_buy)
+     FloatingActionButton btn_buy;
+ 
+-    @Bind(R.id.slider)
+-    SliderLayout sliderLayout;
+-
+-    @Bind(R.id.custom_Indicator)
+-    PageNumberIndicator pagerIndicator;
+-
+     public ProductDetailsFragment() {
+     }
+ 
+@@ -119,7 +101,6 @@ public class ProductDetailsFragment extends Fragment implements ProductDetailVie
+         super.onCreate(savedInstanceState);
+         //Dagger inject dependencies
+         ApplicationComponent.Initializer.init(this.getActivity().getApplication()).inject(this);
+-        baseImageUrl = this.getActivity().getString(R.string.cdn_img_url);
+     }
+ 
+     @Override
+@@ -139,15 +120,25 @@ public class ProductDetailsFragment extends Fragment implements ProductDetailVie
+ 
+         ButterKnife.bind(this, view);
+ 
++        // Add image gallery
++        addImageGalleryFragment();
++
+         productName.setText(product.getName());
+         final String currencyCode = Currency.getInstance(Locale.US).getSymbol();
+         productPrice.setText(this.getString(R.string.product_price_fmt, currencyCode, String.valueOf(product.getMemberPrice())));
+-        sliderLayout.stopAutoCycle();
++
+         presenter.setView(this);
+         presenter.retrieveProductDetails(product.getId());
+         return view;
+     }
+ 
++    private void addImageGalleryFragment() {
++        this.getChildFragmentManager()
++                .beginTransaction()
++                .add(R.id.image_gallery_fragment_container, ImageGalleryFragment.newInstance(product))
++                .commit();
++    }
++
+     @OnClick(R.id.btn_buy)
+     public void expandBottom_sheet() {
+         ProductDetail productDetails = presenter.getProductDetails();
+@@ -181,57 +172,9 @@ public class ProductDetailsFragment extends Fragment implements ProductDetailVie
+     public void displayProductDetails(final ProductDetail productDetail) {
+         Log.d(TAG, "Displaying Product Details." + productDetail.toString());
+         productDescription.loadData(productDetail.getDescription().trim(), getString(R.string.webview_html_encoding), null);
+-
+-        if (productDetail.getProductImages().isEmpty() || productDetail.getProductImages().size() == 1) {
+-            populateImageSlider(null, productDetail.getImageLarge());
+-        }
+-        else {
+-            populateImageSlider(productDetail.getProductImages(), null);
+-        }
+         btn_buy.setVisibility(View.VISIBLE);
+     }
+ 
+-    private void populateImageSlider(List<ProductImages> productImages, String largeImage) {
+-        TextSliderView textSliderView;
+-        if (productImages != null) {
+-            pagerIndicator.setTotalNumberOfPages(productImages.size());
+-            for (ProductImages image : productImages) {
+-                textSliderView = new TextSliderView(this.getContext());
+-                Log.d(TAG, "Passing " + baseImageUrl + image.getImagePath() + " to image slider to be displayed");
+-                textSliderView.image(baseImageUrl + image.getImagePath())
+-                        .setScaleType(BaseSliderView.ScaleType.FitCenterCrop);
+-                sliderLayout.addSlider(textSliderView);
+-            }
+-            sliderLayout.setPresetTransformer(SliderLayout.Transformer.Accordion);
+-            sliderLayout.setCustomAnimation(new CustomDescriptionAnimation());
+-            sliderLayout.addOnPageChangeListener(new PageChangeListener() {
+-                @Override
+-                public void onPageSelected(int position) {
+-                    if (pagerIndicator != null) {
+-                        pagerIndicator.setCurrentPageNumber(position + 1);
+-                    }
+-                }
+-            });
+-            sliderLayout.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Invisible);
+-            sliderLayout.setOnTouchListener(new View.OnTouchListener() {
+-                @Override
+-                public boolean onTouch(View v, MotionEvent event) {
+-                    sliderLayout.stopAutoCycle();
+-                    return true;
+-                }
+-            });
+-
+-        }
+-        else {
+-            textSliderView = new TextSliderView(this.getContext());
+-            Log.d(TAG, "Passing " + baseImageUrl + largeImage + " to image slider to be displayed");
+-            textSliderView.image(baseImageUrl + largeImage).setScaleType(BaseSliderView.ScaleType.FitCenterCrop);
+-            sliderLayout.addSlider(textSliderView);
+-            sliderLayout.setCustomAnimation(new CustomDescriptionAnimation());
+-            sliderLayout.stopAutoCycle();
+-        }
+-    }
+-
+     @Override
+     public void addHorizontalRecyclerView(int layoutResourceId, ArrayList<Product> products, String displayText) {
+         Log.d(TAG, "Passing " + displayText + " products to adapter to be displayed. List size : " + products.size());
+diff --git a/app/src/main/java/com/overstock/android/prototype/module/ApplicationModule.java b/app/src/main/java/com/overstock/android/prototype/module/ApplicationModule.java
+index 5eb29bb..c569861 100644
+--- a/app/src/main/java/com/overstock/android/prototype/module/ApplicationModule.java
++++ b/app/src/main/java/com/overstock/android/prototype/module/ApplicationModule.java
+@@ -8,12 +8,14 @@ import com.overstock.android.prototype.model.ProductDataService;
+ import com.overstock.android.prototype.module.scope.ApplicationScope;
+ import com.overstock.android.prototype.presenter.BrandPresenter;
+ import com.overstock.android.prototype.presenter.CommunityPresenter;
++import com.overstock.android.prototype.presenter.ImageGalleryPresenter;
+ import com.overstock.android.prototype.presenter.ProductBottomSheetPresenter;
+ import com.overstock.android.prototype.presenter.ProductDetailPresenter;
+ import com.overstock.android.prototype.presenter.SignInWithEmailPresenter;
+ import com.overstock.android.prototype.presenter.SignUpWithEmailPresenter;
+ import com.overstock.android.prototype.presenter.impl.BrandPresenterImpl;
+ import com.overstock.android.prototype.presenter.impl.CommunityPresenterImpl;
++import com.overstock.android.prototype.presenter.impl.ImageGalleryPresenterImpl;
+ import com.overstock.android.prototype.presenter.impl.ProductBottomSheetPresenterImpl;
+ import com.overstock.android.prototype.presenter.impl.ProductDetailPresenterImpl;
+ import com.overstock.android.prototype.presenter.impl.SignInWithEmailPresenterImpl;
+@@ -36,93 +38,98 @@ import dagger.Provides;
+ @ApplicationScope
+ public class ApplicationModule {
+ 
+-  Application application;
+-
+-  public ApplicationModule(Application application) {
+-    this.application = application;
+-  }
+-
+-  @Provides
+-  public Application providesApplication() {
+-    return application;
+-  }
+-
+-  @Provides
+-  public BrandPresenter providesBrandPresenter(final ProductDataService productDataService) {
+-    return new BrandPresenterImpl(productDataService);
+-  }
+-
+-  @Provides
+-  public ProductDetailPresenter productDetailPresenter(final Application applicationContext,
+-    final ProductDataService productDataService) {
+-    return new ProductDetailPresenterImpl(applicationContext, productDataService);
+-  }
+-
+-  public ProductDataService providesProductDataService(final ProductService productService) {
+-    return new ProductDataService(productService);
+-  }
+-
+-  @Provides
+-  public CommunityPresenter communitiesPresenter(CommunityService communityService) {
+-    return new CommunityPresenterImpl(communityService);
+-  }
+-
+-  @Provides
+-  public CommunityClient providesCommunityClient(Application application) {
+-    return new CommunityClient(application.getApplicationContext());
+-  }
+-
+-  @Provides
+-  public TheOAppClient providesTheOAppClient(Application application) {
+-    return new TheOAppClient(application.getApplicationContext());
+-  }
+-
+-  @Provides
+-  public CommunityService providesCommunityService(final CommunityClient communityClient) {
+-    return communityClient.getClient();
+-  }
+-
+-  @Provides
+-  public ProductBottomSheetPresenter productBottomSheetPresenter() {
+-    return new ProductBottomSheetPresenterImpl();
+-  }
+-
+-  @Provides
+-  public ProductService providesProductService(final TheOAppClient theOAppClient) {
+-    return theOAppClient.getClient();
+-  }
+-
+-  @Provides
+-  public OappGoogleAuthService providesOappGoogleAuthService(final Application application) {
+-    return new OappGoogleAuthService(application);
+-  }
+-
+-  @Provides
+-  public Picasso providesPicasso(final Application application) {
+-    final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+-    final int cacheSize = maxMemory / 8;
+-    final Picasso picasso = new Picasso.Builder(application).memoryCache(new LruCache(cacheSize)).build();
+-    return picasso;
+-  }
+-
+-  @Provides
+-  public SignUpWithEmailPresenter signUpWithEmailPresenter(Application applicationContext) {
+-    return new SignUpWithEmailPresenterImpl(providesParseService(applicationContext));
+-  }
+-
+-  @Provides
+-  public SignInWithEmailPresenter signInWithEmailPresenter(Application applicationContext) {
+-    return new SignInWithEmailPresenterImpl(providesParseService(applicationContext));
+-  }
+-
+-  @Provides
+-  public ParseService providesParseService(final Application applicationContext) {
+-    return new ParseService(applicationContext);
+-  }
+-
+-  @Provides
+-  public ParseInit providesParseInit(final Application applicationContext) {
+-    return new ParseInit(applicationContext);
+-  }
++    Application application;
++
++    public ApplicationModule(Application application) {
++        this.application = application;
++    }
++
++    @Provides
++    public Application providesApplication() {
++        return application;
++    }
++
++    @Provides
++    public BrandPresenter providesBrandPresenter(final ProductDataService productDataService) {
++        return new BrandPresenterImpl(productDataService);
++    }
++
++    @Provides
++    public ProductDetailPresenter productDetailPresenter(final Application applicationContext,
++                                                         final ProductDataService productDataService) {
++        return new ProductDetailPresenterImpl(applicationContext, productDataService);
++    }
++
++    public ProductDataService providesProductDataService(final ProductService productService) {
++        return new ProductDataService(productService);
++    }
++
++    @Provides
++    public CommunityPresenter communitiesPresenter(CommunityService communityService) {
++        return new CommunityPresenterImpl(communityService);
++    }
++
++    @Provides
++    public CommunityClient providesCommunityClient(Application application) {
++        return new CommunityClient(application.getApplicationContext());
++    }
++
++    @Provides
++    public TheOAppClient providesTheOAppClient(Application application) {
++        return new TheOAppClient(application.getApplicationContext());
++    }
++
++    @Provides
++    public CommunityService providesCommunityService(final CommunityClient communityClient) {
++        return communityClient.getClient();
++    }
++
++    @Provides
++    public ProductBottomSheetPresenter productBottomSheetPresenter() {
++        return new ProductBottomSheetPresenterImpl();
++    }
++
++    @Provides
++    public ProductService providesProductService(final TheOAppClient theOAppClient) {
++        return theOAppClient.getClient();
++    }
++
++    @Provides
++    public OappGoogleAuthService providesOappGoogleAuthService(final Application application) {
++        return new OappGoogleAuthService(application);
++    }
++
++    @Provides
++    public Picasso providesPicasso(final Application application) {
++        final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
++        final int cacheSize = maxMemory / 8;
++        final Picasso picasso = new Picasso.Builder(application).memoryCache(new LruCache(cacheSize)).build();
++        return picasso;
++    }
++
++    @Provides
++    public SignUpWithEmailPresenter signUpWithEmailPresenter(Application applicationContext) {
++        return new SignUpWithEmailPresenterImpl(providesParseService(applicationContext));
++    }
++
++    @Provides
++    public SignInWithEmailPresenter signInWithEmailPresenter(Application applicationContext) {
++        return new SignInWithEmailPresenterImpl(providesParseService(applicationContext));
++    }
++
++    @Provides
++    public ParseService providesParseService(final Application applicationContext) {
++        return new ParseService(applicationContext);
++    }
++
++    @Provides
++    public ImageGalleryPresenter imageGalleryPresenter(final Application applicationContext, final ProductDataService productDataService) {
++        return new ImageGalleryPresenterImpl(applicationContext, productDataService);
++    }
++
++    @Provides
++    public ParseInit providesParseInit(final Application applicationContext) {
++        return new ParseInit(applicationContext);
++    }
+ 
+ }
+diff --git a/app/src/main/java/com/overstock/android/prototype/presenter/ImageGalleryPresenter.java b/app/src/main/java/com/overstock/android/prototype/presenter/ImageGalleryPresenter.java
+new file mode 100644
+index 0000000..c004c5b
+--- /dev/null
++++ b/app/src/main/java/com/overstock/android/prototype/presenter/ImageGalleryPresenter.java
+@@ -0,0 +1,18 @@
++package com.overstock.android.prototype.presenter;
++
++import com.overstock.android.prototype.model.ProductDetail;
++import com.overstock.android.prototype.view.ImageGalleryView;
++
++/**
++ * @author RayConnolly, created on 4/25/2016.
++ */
++public interface ImageGalleryPresenter {
++
++    void setView(final ImageGalleryView imageGalleryView);
++
++    ProductDetail getProductDetails();
++
++    void retrieveProductDetails(final Integer productId);
++
++    void onDestroy();
++}
+diff --git a/app/src/main/java/com/overstock/android/prototype/presenter/impl/ImageGalleryPresenterImpl.java b/app/src/main/java/com/overstock/android/prototype/presenter/impl/ImageGalleryPresenterImpl.java
+new file mode 100644
+index 0000000..9357743
+--- /dev/null
++++ b/app/src/main/java/com/overstock/android/prototype/presenter/impl/ImageGalleryPresenterImpl.java
+@@ -0,0 +1,92 @@
++package com.overstock.android.prototype.presenter.impl;
++
++import android.app.Application;
++import android.content.Context;
++import android.util.Log;
++
++import com.overstock.android.prototype.model.ProductDataService;
++import com.overstock.android.prototype.model.ProductDetail;
++import com.overstock.android.prototype.presenter.ImageGalleryPresenter;
++import com.overstock.android.prototype.view.ImageGalleryView;
++
++import javax.inject.Inject;
++
++import rx.Observer;
++import rx.Subscription;
++import rx.android.schedulers.AndroidSchedulers;
++import rx.schedulers.Schedulers;
++import rx.subscriptions.Subscriptions;
++
++/**
++ * @author RayConnolly, created on 4/25/2016.
++ */
++public class ImageGalleryPresenterImpl implements ImageGalleryPresenter {
++
++    private static final String TAG = ImageGalleryPresenterImpl.class.getName();
++
++    private ImageGalleryView imageGalleryView;
++
++    private ProductDetail productDetails;
++
++    private Subscription subscription = Subscriptions.empty();
++
++    private final ProductDataService productDataService;
++
++    private Context context;
++
++    @Inject
++    public ImageGalleryPresenterImpl(final Application applicationContext, final ProductDataService productDataService) {
++        this.productDataService = productDataService;
++        this.context = applicationContext;
++    }
++
++    @Override
++    public void setView(ImageGalleryView imageGalleryView) {
++        this.imageGalleryView = imageGalleryView;
++    }
++
++    @Override
++    public void retrieveProductDetails(Integer productId) {
++        if (imageGalleryView == null) {
++            subscription.unsubscribe();
++        }
++        else {
++            refresh(productId);
++        }
++    }
++
++    @Override
++    public ProductDetail getProductDetails() {
++        if (productDetails != null) {
++            return productDetails;
++        }
++        return null;
++    }
++
++    @Override
++    public void onDestroy() {
++        imageGalleryView = null;
++    }
++
++    private void refresh(final Integer productId) {
++        subscription = productDataService.getProductDetails(productId).subscribeOn(Schedulers.newThread())
++                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ProductDetail>() {
++                    @Override
++                    public void onCompleted() {
++                        Log.d(TAG, "COMPLETED, Finished loading Product Details");
++                    }
++
++                    @Override
++                    public void onError(Throwable e) {
++                        Log.w(TAG, "FAILURE, Failed to load Product Details");
++                    }
++
++                    @Override
++                    public void onNext(ProductDetail productDetail) {
++                        Log.d(TAG, "SUCCESS, Product Details successfully loaded");
++                        productDetails = productDetail;
++                        imageGalleryView.displayImages(productDetail);
++                    }
++                });
++    }
++}
+diff --git a/app/src/main/java/com/overstock/android/prototype/view/ImageGalleryView.java b/app/src/main/java/com/overstock/android/prototype/view/ImageGalleryView.java
+new file mode 100644
+index 0000000..1428a48
+--- /dev/null
++++ b/app/src/main/java/com/overstock/android/prototype/view/ImageGalleryView.java
+@@ -0,0 +1,11 @@
++package com.overstock.android.prototype.view;
++
++import com.overstock.android.prototype.model.ProductDetail;
++
++/**
++ * @author RayConnolly, created on 4/25/2016.
++ */
++public interface ImageGalleryView {
++
++    void displayImages(final ProductDetail productDetail);
++}
+diff --git a/app/src/main/res/layout/fragment_image_gallery.xml b/app/src/main/res/layout/fragment_image_gallery.xml
+new file mode 100644
+index 0000000..e38014b
+--- /dev/null
++++ b/app/src/main/res/layout/fragment_image_gallery.xml
+@@ -0,0 +1,29 @@
++<?xml version="1.0" encoding="utf-8"?>
++<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    android:layout_width="match_parent"
++    android:layout_height="wrap_content">
++
++    <com.daimajia.slider.library.SliderLayout
++        android:id="@+id/slider"
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:background="@color/white"
++        app:auto_cycle="true"
++        app:indicator_visibility="invisible"
++        app:pager_animation="Accordion"
++        app:pager_animation_span="1100" />
++
++    <com.overstock.android.prototype.widgets.PageNumberIndicator
++        android:id="@+id/custom_Indicator"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:textColor="@color/oapp_primary_text"
++        android:textSize="@dimen/pager_indicator_text_size"
++        android:paddingTop="@dimen/pager_indicator_padding_horizontal"
++        android:paddingBottom="@dimen/pager_indicator_padding_horizontal"
++        android:paddingStart="@dimen/pager_indicator_padding_vertical"
++        android:paddingEnd="@dimen/pager_indicator_padding_vertical"
++        android:layout_gravity="end" />
++
++</FrameLayout>
+\ No newline at end of file
+diff --git a/app/src/main/res/layout/image_slider.xml b/app/src/main/res/layout/image_slider.xml
+deleted file mode 100644
+index 5095908..0000000
+--- a/app/src/main/res/layout/image_slider.xml
++++ /dev/null
+@@ -1,30 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    android:layout_width="match_parent"
+-    android:layout_height="wrap_content">
+-
+-    <com.daimajia.slider.library.SliderLayout
+-        android:id="@+id/slider"
+-        android:layout_width="match_parent"
+-        android:layout_height="match_parent"
+-        android:background="@color/white"
+-        app:auto_cycle="true"
+-        app:indicator_visibility="invisible"
+-        app:pager_animation="Accordion"
+-        app:pager_animation_span="1100" />
+-
+-    <com.overstock.android.prototype.widgets.PageNumberIndicator
+-        android:id="@+id/custom_Indicator"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:textColor="@color/oapp_primary_text"
+-        android:textSize="@dimen/pager_indicator_text_size"
+-        android:paddingTop="@dimen/pager_indicator_padding_horizontal"
+-        android:paddingBottom="@dimen/pager_indicator_padding_horizontal"
+-        android:paddingStart="@dimen/pager_indicator_padding_vertical"
+-        android:paddingEnd="@dimen/pager_indicator_padding_vertical"
+-        android:layout_gravity="end" />
+-
+-
+-</FrameLayout>
+\ No newline at end of file
+diff --git a/app/src/main/res/layout/product_detail_content.xml b/app/src/main/res/layout/product_detail_content.xml
+index 31add0f..8af23f4 100644
+--- a/app/src/main/res/layout/product_detail_content.xml
++++ b/app/src/main/res/layout/product_detail_content.xml
+@@ -27,7 +27,13 @@
+                 android:layout_height="300dp"
+                 app:layout_collapseMode="parallax">
+ 
+-                <include layout="@layout/image_slider" />
++                <!-- IMAGE GALLERY FRAGMENT CONTAINER -->
++                <FrameLayout
++                    android:id="@+id/image_gallery_fragment_container"
++                    android:layout_width="fill_parent"
++                    android:layout_height="wrap_content"
++                    android:orientation="vertical" >
++                </FrameLayout>
+ 
+                 <ImageView
+                     android:layout_width="30dp"
+@@ -87,7 +93,7 @@
+                 android:layout_marginTop="12dp"
+                 android:textSize="24sp"
+                 android:textStyle="bold" />
+-
++            
+             <TextView
+                 android:id="@+id/product_detail_product_price"
+                 android:layout_width="match_parent"
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+index d54a4f3..86b488d 100644
+--- a/app/src/main/res/values/strings.xml
++++ b/app/src/main/res/values/strings.xml
+@@ -86,7 +86,7 @@
+     <string name="title_activity_test">TestActivity</string>
+     <string name="drawer_open">Open navigation drawer</string>
+     <string name="drawer_close">Close navigation drawer</string>
+-    <string name="product_img_base_url">http://ak1.ostkcdn.com/images/products/</string>
++    <!--<string name="product_img_base_url">http://ak1.ostkcdn.com/images/products/</string>-->
+     <string name="ostk_base_rest_url">http://www.overstock.com/api/</string>
+     <string name="similar_producst_labels">Similar Products</string>
+     <string name="webview_html_encoding">text/html; charset=UTF-8</string>
+@@ -104,6 +104,7 @@
+     <string name="successful_oapp_sign_up_message">User was signed up successfully.</string>
+     <string name="sign_up_required_fields_message">Please enter required fields.</string>
+     <string name="sign_up_passwordconfirm_error_message">Password and Confirm Password fields do not match.</string>
++    <string name="product_base_image_url">http://ak1.ostkcdn.com/images/products/</string>
+ 
+     <!-- TODO: Remove or change this placeholder text -->
+     <string name="hello_blank_fragment">Hello blank fragment</string>
