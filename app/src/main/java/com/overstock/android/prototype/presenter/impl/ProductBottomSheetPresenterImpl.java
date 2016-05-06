@@ -1,5 +1,8 @@
 package com.overstock.android.prototype.presenter.impl;
 
+import android.util.Log;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 
 import com.overstock.android.prototype.model.Options;
@@ -16,7 +19,7 @@ import com.overstock.android.prototype.view.ProductBottomSheetView;
  */
 public class ProductBottomSheetPresenterImpl implements ProductBottomSheetPresenter {
 
-  // private static final String TAG = ProductDetailPresenterImpl.class.getName();
+  private static final String TAG = ProductDetailPresenterImpl.class.getName();
 
   private ProductBottomSheetView productBottomSheetView;
 
@@ -62,6 +65,11 @@ public class ProductBottomSheetPresenterImpl implements ProductBottomSheetPresen
   @Override
   public void resetRewards() {
     productBottomSheetView.updateRewardsAmount(rewardsApplied);
+  }
+
+  @Override
+  public void initiateCheckout() {
+    Log.d(TAG,"initiating checkout");
   }
 
   @Override

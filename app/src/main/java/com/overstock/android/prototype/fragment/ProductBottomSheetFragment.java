@@ -267,24 +267,35 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
   public void showOptionSheet() {
     if (productOptionsSheet.getVisibility() == View.GONE) {
       ViewAnimationUtils.expand(productOptionsSheet);
-      ViewAnimationUtils.collapse(rewardsLayout);
-      ViewAnimationUtils.collapse(paymentLayout);
-      ViewAnimationUtils.collapse(purchaseInformation);
-      ViewAnimationUtils.collapse(orderInformation);
-      addOptionBtn.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_keyboard_arrow_left_24dp, 0);
+      collapseOrderInformationContent();
     }
   }
 
   @OnClick(R.id.btn_product_options_btn)
   public void hideOptionSheet() {
+    if (spinner.getSelectedItemPosition() > 0) {
+      Options selectedOption = (Options) spinner.getSelectedItem();
+      Log.i(TAG, selectedOption.getDescription());
+      presenter.initiateCheckout();
+    }
     if (productOptionsSheet.getVisibility() == View.VISIBLE) {
       ViewAnimationUtils.collapse(productOptionsSheet);
-      ViewAnimationUtils.expand(rewardsLayout);
-      ViewAnimationUtils.expand(paymentLayout);
-      ViewAnimationUtils.expand(purchaseInformation);
-      ViewAnimationUtils.expand(orderInformation);
-      addOptionBtn.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_keyboard_arrow_right_24dp, 0);
+      expandOrderInformationContent();
     }
+  }
+
+  private void collapseOrderInformationContent() {
+    ViewAnimationUtils.collapse(rewardsLayout);
+    ViewAnimationUtils.collapse(paymentLayout);
+    ViewAnimationUtils.collapse(purchaseInformation);
+    ViewAnimationUtils.collapse(orderInformation);
+  }
+
+  private void expandOrderInformationContent() {
+    ViewAnimationUtils.expand(rewardsLayout);
+    ViewAnimationUtils.expand(paymentLayout);
+    ViewAnimationUtils.expand(purchaseInformation);
+    ViewAnimationUtils.expand(orderInformation);
   }
 
   /* Method for handling UI disabling and enabling of quantity buttons. */
