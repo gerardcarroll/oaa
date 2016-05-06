@@ -110,7 +110,6 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
   @Bind(R.id.order_information)
   GridLayout orderInformation;
 
-
   @Nullable
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -149,7 +148,6 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
 
   @OnClick(R.id.rewards_btn_apply)
   public void applyDiscount() {
-    // TODO replace placeholder logic to real implementation.
     String totalPrice = totalAmount.getText().toString().substring(1);
     String discountApplied = rewardsAmount.getText().toString().substring(1);
     presenter.applyDiscount(totalPrice, discountApplied);
@@ -157,7 +155,7 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
 
   @OnClick(R.id.btn_pay_google_wallet)
   public void payWithGoogleWallet() {
-    final Toast toast = Toast.makeText(getActivity(), "Google Wallet Payment coming soon!", Toast.LENGTH_SHORT);
+    final Toast toast = Toast.makeText(getActivity(), "Android Pay coming soon!", Toast.LENGTH_SHORT);
     toast.setGravity(Gravity.BOTTOM, 0, 20);
     toast.show();
     dismiss();
@@ -165,7 +163,7 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
 
   @OnClick(R.id.btn_pay_credit_card)
   public void payWithCreditCard() {
-    final Toast toast = Toast.makeText(getActivity(), "Credit Card Payment coming soon!", Toast.LENGTH_SHORT);
+    final Toast toast = Toast.makeText(getActivity(), "Checkout coming soon!", Toast.LENGTH_SHORT);
     toast.setGravity(Gravity.BOTTOM, 0, 20);
     toast.show();
     dismiss();
@@ -285,6 +283,7 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
     }
   }
 
+  /* Method that handel's collapsing all unnecessary ui views. */
   private void collapseOrderInformationContent() {
     ViewAnimationUtils.collapse(rewardsLayout);
     ViewAnimationUtils.collapse(paymentLayout);
@@ -292,6 +291,7 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
     ViewAnimationUtils.collapse(orderInformation);
   }
 
+  /* Method that handel's collapsing all necessary ui views. */
   private void expandOrderInformationContent() {
     ViewAnimationUtils.expand(rewardsLayout);
     ViewAnimationUtils.expand(paymentLayout);
@@ -304,9 +304,11 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
   public void handleQuantityIcons(final int currentQuantity, final int maxQuantityAllowed) {
     if (currentQuantity == maxQuantityAllowed) {
       imageViewAdd.setImageResource(R.drawable.ic_add_circle_disabled_24dp);
+      imageViewRemove.setImageResource(R.drawable.ic_remove_circle_24dp);
     }
     else if (currentQuantity == 1) {
       imageViewRemove.setImageResource(R.drawable.ic_remove_circle_disabled_24dp);
+      imageViewAdd.setImageResource(R.drawable.ic_add_circle_24dp);
     }
     else {
       imageViewAdd.setImageResource(R.drawable.ic_add_circle_24dp);

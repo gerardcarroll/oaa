@@ -6,6 +6,8 @@ import android.view.animation.Transformation;
 import android.widget.LinearLayout;
 
 /**
+ * Class that handel's collapsing and expanding view elements on the ui.
+ *
  * @author LeeMeehan on 05-May-16.
  */
 public class ViewAnimationUtils {

@@ -34,7 +34,7 @@ public class ProductBottomSheetPresenterImpl implements ProductBottomSheetPresen
   private float rewardsApplied;
 
   @Inject
-  public ProductBottomSheetPresenterImpl(final CheckOutCoordinator checkOutCoordinator){
+  public ProductBottomSheetPresenterImpl(final CheckOutCoordinator checkOutCoordinator) {
     this.checkOutCoordinator = checkOutCoordinator;
   }
 
@@ -78,9 +78,9 @@ public class ProductBottomSheetPresenterImpl implements ProductBottomSheetPresen
 
   @Override
   public void initiateCheckout() {
-    Log.d(TAG, "initiating checkout");
+    Log.d(TAG, "Initiating Checkout");
     String userCartId = checkOutCoordinator.getCartIdForParseUser();
-    Log.d(TAG, "Users Cart Id is : " + userCartId);
+    Log.d(TAG, "Users CartId is : " + userCartId);
   }
 
   @Override
