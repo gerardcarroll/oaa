@@ -10,4 +10,8 @@ public interface CheckOutCoordinator {
 
   String getCartIdForParseUser();
 
+  String getOstkCustIdForParseUser();
+
+  String getOstkAddressIdForParseUser();
+
 }
