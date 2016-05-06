@@ -32,12 +32,6 @@ import com.overstock.android.prototype.activity.HomeActivity;
 @RunWith(AndroidJUnit4.class)
 public class HomeActivityInstrumentationTest_Email {
 
-  private static final String registeredUsername = "testuser1@gmail.com";
-
-  private static final String password = "androidsignuptest";
-
-  private static final String passwordConfirm = "androidsignuptest2";
-
   private static final String uniqueID = UUID.randomUUID().toString();
 
   private final String newUsername = uniqueID + "@gmail.com";
@@ -65,9 +59,11 @@ public class HomeActivityInstrumentationTest_Email {
     navigateToSignInPage();
     checkElementsOfSignInPageDisplayed();
     // Enter username/email
-    onView(withId(R.id.et_username)).perform(clearText(), typeText(registeredUsername));
+    onView(withId(R.id.et_username)).perform(clearText(),
+      typeText(activityTestRule.getActivity().getString(R.string.parse_test_username)));
     // Enter password
-    onView(withId(R.id.et_password)).perform(clearText(), typeText(password));
+    onView(withId(R.id.et_password)).perform(clearText(),
+      typeText(activityTestRule.getActivity().getString(R.string.parse_test_user_password)));
     // Close keyboard
     Espresso.closeSoftKeyboard();
     // Click Sign In
@@ -83,7 +79,8 @@ public class HomeActivityInstrumentationTest_Email {
     navigateToSignInPage();
     checkElementsOfSignInPageDisplayed();
     // Enter username/email
-    onView(withId(R.id.et_username)).perform(clearText(), typeText(registeredUsername));
+    onView(withId(R.id.et_username)).perform(clearText(),
+      typeText(activityTestRule.getActivity().getString(R.string.parse_test_username)));
     // Enter incorrect password
     onView(withId(R.id.et_password)).perform(clearText(), typeText("zzzz"));
     // Close keyboard
@@ -103,9 +100,11 @@ public class HomeActivityInstrumentationTest_Email {
     navigateToSignUpPage();
     onView(withId(R.id.et_username)).perform(clearText(), typeText(newUsername));
     // Enter password
-    onView(withId(R.id.et_password)).perform(clearText(), typeText(password));
+    onView(withId(R.id.et_password)).perform(clearText(),
+      typeText(activityTestRule.getActivity().getString(R.string.parse_test_user_password)));
     // Enter password confirm
-    onView(withId(R.id.et_confirm_password)).perform(clearText(), typeText(password));
+    onView(withId(R.id.et_confirm_password)).perform(clearText(),
+      typeText(activityTestRule.getActivity().getString(R.string.parse_test_user_password)));
     // Close keyboard
     Espresso.closeSoftKeyboard();
     // Click Sign In
@@ -120,11 +119,14 @@ public class HomeActivityInstrumentationTest_Email {
   public void testEmailSignUp_UnSuccessful_UserAlreadyExists() {
     navigateToSignUpPage();
     // Enter username/email
-    onView(withId(R.id.et_username)).perform(clearText(), typeText(registeredUsername));
+    onView(withId(R.id.et_username)).perform(clearText(),
+      typeText(activityTestRule.getActivity().getString(R.string.parse_test_username)));
     // Enter password
-    onView(withId(R.id.et_password)).perform(clearText(), typeText(password));
+    onView(withId(R.id.et_password)).perform(clearText(),
+      typeText(activityTestRule.getActivity().getString(R.string.parse_test_user_password)));
     // Enter password confirm
-    onView(withId(R.id.et_confirm_password)).perform(clearText(), typeText(password));
+    onView(withId(R.id.et_confirm_password)).perform(clearText(),
+      typeText(activityTestRule.getActivity().getString(R.string.parse_test_user_password)));
     // Close keyboard
     Espresso.closeSoftKeyboard();
     // Click Sign In
