@@ -63,7 +63,6 @@ public class ImageGalleryFragmentTest {
         intent.putExtra(ProductDetailsFragment.PRODUCT_DETAILS_PARCEL, Parcels.wrap(new Product(9260610, "9260610/L16428339.jpg", "9260610/P16428339.jpg", "9260610/T16428339.jpg", "Fanmats NFL Grill Mat", 28.89f)));
 
         activityRule.launchActivity(intent);
-
     }
 
     @Test

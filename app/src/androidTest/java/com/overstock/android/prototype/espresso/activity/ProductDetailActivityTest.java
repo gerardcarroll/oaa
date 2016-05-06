@@ -1,5 +1,21 @@
 package com.overstock.android.prototype.espresso.activity;
 
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.parceler.Parcels;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,22 +32,6 @@ import com.overstock.android.prototype.activity.ProductDetailActivity;
 import com.overstock.android.prototype.espresso.matcher.SliderMatcher;
 import com.overstock.android.prototype.fragment.ProductDetailsFragment;
 import com.overstock.android.prototype.model.Product;
-
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.parceler.Parcels;
-
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
  * Created by rconnolly on 3/24/2016.
@@ -62,8 +62,8 @@ public class ProductDetailActivityTest {
         intent.putExtra(ProductDetailsFragment.PRODUCT_DETAILS_PARCEL, Parcels.wrap(new Product(251790, "L924666.jpg", "P924666.jpg", "T924666.jpg", "Invicta Men's 9212 Speedway GS Chronograph Watch", 95.58f)));
 
         activityRule.launchActivity(intent);
-
     }
+
     @Test
     public void testProductDetailRendering(){
 
@@ -80,5 +80,5 @@ public class ProductDetailActivityTest {
         onView(withId(R.id.slider)).perform(ViewActions.swipeRight());
         onView(withId(R.id.slider)).check(ViewAssertions.matches(SliderMatcher.withCurrentPositiom(1)));
     }
-}
 
+}
