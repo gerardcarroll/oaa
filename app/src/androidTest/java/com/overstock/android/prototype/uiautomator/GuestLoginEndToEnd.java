@@ -20,6 +20,7 @@ import android.support.test.uiautomator.Until;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -51,7 +52,8 @@ public class GuestLoginEndToEnd {
 //        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
     }
-
+    
+    @Ignore
     @Test
     public void startMainActivityFromHomeScreen() throws RemoteException, UiObjectNotFoundException {
 
