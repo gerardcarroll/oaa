@@ -1,26 +1,15 @@
 package com.overstock.android.prototype.fragment;
 
-import java.util.ArrayList;
-import java.util.Currency;
-import java.util.Locale;
-
-import javax.inject.Inject;
-
-import org.parceler.Parcels;
-
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.component.ApplicationComponent;
@@ -29,6 +18,14 @@ import com.overstock.android.prototype.model.ProductDetail;
 import com.overstock.android.prototype.presenter.ProductDetailPresenter;
 import com.overstock.android.prototype.view.ProductDetailView;
 import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
+
+import javax.inject.Inject;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * ProductDetailsFragment A simple {@link Fragment} subclass. Activities that contain this fragment must implement the
@@ -63,6 +60,9 @@ public class ProductDetailsFragment extends Fragment implements ProductDetailVie
 
     @Bind(R.id.product_detail_toolbar)
     Toolbar toolbar;
+
+    @Bind(R.id.product_details_nested_scroll_view)
+    NestedScrollView nestedScrollView;
 
     public ProductDetailsFragment() {
     }
@@ -106,6 +106,8 @@ public class ProductDetailsFragment extends Fragment implements ProductDetailVie
 
         ButterKnife.bind(this, view);
 
+        nestedScrollView.setFillViewport(true);
+
         presenter.setView(this);
         presenter.retrieveProductDetails(product.getId());
         return view;
@@ -115,7 +117,7 @@ public class ProductDetailsFragment extends Fragment implements ProductDetailVie
     public void addProductDetailsSummaryFragment(ProductDetail productDetail) {
         this.getChildFragmentManager()
                 .beginTransaction()
-                .add(R.id.prod_details_placeholder, ProductDetailsSummaryFragment.newInstance(productDetail))
+                .replace(R.id.prod_details_placeholder, ProductDetailsSummaryFragment.newInstance(productDetail))
                 .commit();
     }
 

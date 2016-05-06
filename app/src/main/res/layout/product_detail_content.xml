@@ -70,13 +70,15 @@
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
-    <!-- PRODUCT DETAILS CONTAINER -->
+
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/product_details_nested_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+        <!-- PRODUCT DETAILS CONTAINER -->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

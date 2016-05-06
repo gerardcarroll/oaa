@@ -78,5 +78,9 @@
     <color name="scrim">#42000000</color>
     <color name="dark_scrim">#92000000</color>
 
+    <!-- More Info buttons colors -->
+    <color name="details_text_color">#FFFFFF</color>
+    <color name="shipping_text_color">#727272</color>
+
 
 </resources>

@@ -2,7 +2,6 @@ package com.overstock.android.prototype.presenter.impl;
 
 import android.app.Application;
 import android.content.Context;
-import android.util.Log;
 
 import com.overstock.android.prototype.model.ProductDataService;
 import com.overstock.android.prototype.model.ProductDetail;
@@ -11,10 +10,7 @@ import com.overstock.android.prototype.view.MoreInformationView;
 
 import javax.inject.Inject;
 
-import rx.Observer;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
 
 /**
@@ -53,40 +49,40 @@ public class MoreInformationPresenterImpl implements MoreInformationPresenter {
         return null;
     }
 
-    @Override
-    public void retrieveProductDetails(Integer productId) {
-        if (moreInformationView == null) {
-            subscription.unsubscribe();
-        }
-        else {
-            refresh(productId);
-        }
-    }
+//    @Override
+//    public void retrieveProductDetails(Integer productId) {
+//        if (moreInformationView == null) {
+//            subscription.unsubscribe();
+//        }
+//        else {
+//            refresh(productId);
+//        }
+//    }
 
     @Override
     public void onDestroy() {
         moreInformationView = null;
     }
 
-    private void refresh(final Integer productId) {
-        subscription = productDataService.getProductDetails(productId).subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ProductDetail>() {
-                    @Override
-                    public void onCompleted() {
-                        Log.d(TAG, "COMPLETED, Finished loading Product Details");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.w(TAG, "FAILURE, Failed to load Product Details");
-                    }
-
-                    @Override
-                    public void onNext(ProductDetail productDetail) {
-                        Log.d(TAG, "SUCCESS, Product Details successfully loaded");
-                        productDetails = productDetail;
-                        moreInformationView.displayDetails(productDetail);
-                    }
-                });
-    }
+//    private void refresh(final Integer productId) {
+//        subscription = productDataService.getProductDetails(productId).subscribeOn(Schedulers.newThread())
+//                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ProductDetail>() {
+//                    @Override
+//                    public void onCompleted() {
+//                        Log.d(TAG, "COMPLETED, Finished loading Product Details");
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        Log.w(TAG, "FAILURE, Failed to load Product Details");
+//                    }
+//
+//                    @Override
+//                    public void onNext(ProductDetail productDetail) {
+//                        Log.d(TAG, "SUCCESS, Product Details successfully loaded");
+//                        productDetails = productDetail;
+//                        moreInformationView.displayDetails(productDetail);
+//                    }
+//                });
+//    }
 }

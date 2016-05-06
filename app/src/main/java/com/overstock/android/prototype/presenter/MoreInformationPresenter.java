@@ -12,7 +12,7 @@ public interface MoreInformationPresenter {
 
     ProductDetail getProductDetails();
 
-    void retrieveProductDetails(final Integer productId);
+    //void retrieveProductDetails(final Integer productId);
 
     void onDestroy();
 }

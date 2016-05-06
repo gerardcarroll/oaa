@@ -3,7 +3,6 @@ package com.overstock.android.prototype.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,15 +71,15 @@ public class MoreInformationFragment extends Fragment implements MoreInformation
         displayMoreInfoFragments();
 
         moreInformationPresenter.setView(this);
-        moreInformationPresenter.retrieveProductDetails(productDetail.getId());
+        //moreInformationPresenter.retrieveProductDetails(productDetail.getId());
         return view;
     }
 
-    @Override
-    public void displayDetails(ProductDetail productDetail) {
-        Log.d(TAG, "Displaying Product Details." + productDetail.toString());
-        //productDescription.loadData(productDetail.getDescription().trim(), getString(R.string.webview_html_encoding), null);
-    }
+//    @Override
+//    public void displayDetails(ProductDetail productDetail) {
+//        Log.d(TAG, "Displaying Product Details." + productDetail.toString());
+//        //productDescription.loadData(productDetail.getDescription().trim(), getString(R.string.webview_html_encoding), null);
+//    }
 
     private void displayMoreInfoFragments(){
         View.OnClickListener listener = new View.OnClickListener() {
