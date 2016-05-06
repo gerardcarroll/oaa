@@ -96,6 +96,33 @@ public class MoreInformationFragment1 extends Fragment implements MoreInformatio
 
         navigateViewPagerViews();
 
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(final int position, final float positionOffset, final int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(final int position) {
+                if (position == 0){
+                    detailsBtn.setBackground(getResources().getDrawable(R.drawable.details));
+                    detailsBtn.setTextColor(getResources().getColor(R.color.details_text_color));
+                    shippingReturnsBtn.setBackground(getResources().getDrawable(R.drawable.shipping));
+                    shippingReturnsBtn.setTextColor(getResources().getColor(R.color.shipping_text_color));
+                } else {
+                    shippingReturnsBtn.setBackground(getResources().getDrawable(R.drawable.details));
+                    shippingReturnsBtn.setTextColor(getResources().getColor(R.color.details_text_color));
+                    detailsBtn.setBackground(getResources().getDrawable(R.drawable.shipping));
+                    detailsBtn.setTextColor(getResources().getColor(R.color.shipping_text_color));
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(final int state) {
+
+            }
+        });
+
         moreInformationPresenter.setView(this);
         return view;
     }
