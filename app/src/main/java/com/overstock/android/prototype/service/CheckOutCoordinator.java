@@ -8,4 +8,6 @@ public interface CheckOutCoordinator {
 
   void checkOut();
 
+  String getCartIdForParseUser();
+
 }
