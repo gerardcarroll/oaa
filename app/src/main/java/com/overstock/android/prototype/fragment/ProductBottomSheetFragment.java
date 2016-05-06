@@ -148,9 +148,14 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
 
   @OnClick(R.id.rewards_btn_apply)
   public void applyDiscount() {
-    String totalPrice = totalAmount.getText().toString().substring(1);
-    String discountApplied = rewardsAmount.getText().toString().substring(1);
-    presenter.applyDiscount(totalPrice, discountApplied);
+    try {
+      String totalPrice = totalAmount.getText().toString().substring(1);
+      String discountApplied = rewardsAmount.getText().toString().substring(1);
+      presenter.applyDiscount(totalPrice, discountApplied);
+    }
+    catch (Exception ex){
+      Log.e(TAG,"Catching exception due to placeholder code." + ex.toString());
+    }
   }
 
   @OnClick(R.id.btn_pay_google_wallet)
