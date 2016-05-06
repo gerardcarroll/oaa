@@ -19,4 +19,16 @@ public class CheckOutCoordinatorImpl implements CheckOutCoordinator {
     return ParseUser.getCurrentUser().getString("cart_id");
   }
 
+  @Override
+  @Nullable
+  public String getOstkCustIdForParseUser() {
+    return ParseUser.getCurrentUser().getString("ostk_customer_id");
+  }
+
+  @Override
+  @Nullable
+  public String getOstkAddressIdForParseUser() {
+    return ParseUser.getCurrentUser().getString("ostk_customer_addr_id");
+  }
+
 }
