@@ -55,9 +55,6 @@ public class ProductDetailsFragment extends Fragment implements ProductDetailVie
     @Inject
     Picasso picasso;
 
-//    @Bind(R.id.product_detail_content)
-//    WebView productDescription;
-
     @Bind(R.id.product_detail_toolbar)
     Toolbar toolbar;
 
@@ -150,13 +147,6 @@ public class ProductDetailsFragment extends Fragment implements ProductDetailVie
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
-//        try {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } catch (ClassCastException e) {
-//            throw new ClassCastException(context.toString() + " must implement OnFragmentInteractionListener");
-//        }
-
     }
 
     @Override
