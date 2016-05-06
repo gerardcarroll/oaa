@@ -126,6 +126,12 @@
     <!--Buy Sheet Strings-->
     <string name="total_price_header_label">Total Price :</string>
     <string name="total_price_placeholder">$200.99</string>
-    <string name="add_option_btn_text">Add Option +</string>
+
+
+    <!--Additional Purchase Information Strings-->
+    <string name="add_option_btn_text">Add Option </string>
+    <string name="add_add_card_btn_text">Add Card </string>
+    <string name="add_address_btn_text">Add Address </string>
+    <string name="select_shipping_btn_text">Standard </string>
 
 </resources>

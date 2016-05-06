@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -94,6 +95,21 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
   @Bind(R.id.product_options_sheet)
   LinearLayout productOptionsSheet;
 
+  @Bind(R.id.purchase_information)
+  GridLayout purchaseInformation;
+
+  @Bind(R.id.layout_paymentMethod)
+  LinearLayout paymentLayout;
+
+  @Bind(R.id.layout_rewards)
+  LinearLayout rewardsLayout;
+
+  @Bind(R.id.add_option_btn)
+  TextView addOptionBtn;
+
+  @Bind(R.id.order_information)
+  GridLayout orderInformation;
+
   @Nullable
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -103,8 +119,10 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
     final ProductDetail productDetail = Parcels.unwrap(getArguments().getParcelable("productDetails"));
     Log.i(TAG, String.format("Product Id: %s", productDetail.getId()));
     presenter.setView(this);
+
     final String placeholderRewards = "12.50";
     presenter.setRewardsApplied(Float.valueOf(placeholderRewards));
+
     presenter.updateProductPage(productDetail);
     return view;
   }
@@ -249,6 +267,11 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
   public void showOptionSheet() {
     if (productOptionsSheet.getVisibility() == View.GONE) {
       ViewAnimationUtils.expand(productOptionsSheet);
+      ViewAnimationUtils.collapse(rewardsLayout);
+      ViewAnimationUtils.collapse(paymentLayout);
+      ViewAnimationUtils.collapse(purchaseInformation);
+      ViewAnimationUtils.collapse(orderInformation);
+      addOptionBtn.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_keyboard_arrow_left_24dp, 0);
     }
   }
 
@@ -256,6 +279,11 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
   public void hideOptionSheet() {
     if (productOptionsSheet.getVisibility() == View.VISIBLE) {
       ViewAnimationUtils.collapse(productOptionsSheet);
+      ViewAnimationUtils.expand(rewardsLayout);
+      ViewAnimationUtils.expand(paymentLayout);
+      ViewAnimationUtils.expand(purchaseInformation);
+      ViewAnimationUtils.expand(orderInformation);
+      addOptionBtn.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_keyboard_arrow_right_24dp, 0);
     }
   }
 
