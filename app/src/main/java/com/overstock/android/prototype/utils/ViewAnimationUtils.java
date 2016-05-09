@@ -22,8 +22,8 @@ public class ViewAnimationUtils {
       @Override
       protected void applyTransformation(float interpolatedTime, Transformation t) {
         view.getLayoutParams().height = interpolatedTime == 1
-            ? LinearLayout.LayoutParams.WRAP_CONTENT
-            : (int) (targetHeight * interpolatedTime);
+                ? LinearLayout.LayoutParams.WRAP_CONTENT
+                : (int) (targetHeight * interpolatedTime);
         view.requestLayout();
       }
 
