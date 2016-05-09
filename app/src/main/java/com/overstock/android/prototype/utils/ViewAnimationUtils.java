@@ -61,5 +61,4 @@ public class ViewAnimationUtils {
     animation.setDuration((int) (initialHeight / view.getContext().getResources().getDisplayMetrics().density));
     view.startAnimation(animation);
   }
-
 }

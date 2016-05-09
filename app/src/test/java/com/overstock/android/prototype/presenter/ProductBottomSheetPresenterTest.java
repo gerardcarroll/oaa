@@ -1,22 +1,23 @@
 package com.overstock.android.prototype.presenter;
 
-import com.overstock.android.prototype.model.Options;
-import com.overstock.android.prototype.model.ProductDetail;
-import com.overstock.android.prototype.presenter.impl.ProductBottomSheetPresenterImpl;
-import com.overstock.android.prototype.view.ProductBottomSheetView;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
+import com.overstock.android.prototype.model.Options;
+import com.overstock.android.prototype.model.ProductDetail;
+import com.overstock.android.prototype.presenter.impl.ProductBottomSheetPresenterImpl;
+import com.overstock.android.prototype.service.CheckOutCoordinatorImpl;
+import com.overstock.android.prototype.view.ProductBottomSheetView;
 
 /**
  * @author LeeMeehan
@@ -62,7 +63,7 @@ public class ProductBottomSheetPresenterTest {
   @Before
   public void setUp() {
     MockitoAnnotations.initMocks(this);
-    productBottomSheetPresenter = new ProductBottomSheetPresenterImpl();
+    productBottomSheetPresenter = new ProductBottomSheetPresenterImpl(new CheckOutCoordinatorImpl());
     productBottomSheetPresenter.setView(productBottomSheetView);
     productBottomSheetPresenter.setCurrentPrice(CURRENT_PRICE);
   }

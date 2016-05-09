@@ -272,7 +272,7 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
     }
   }
 
-  @OnClick(R.id.btn_product_options_btn)
+  @OnClick(R.id.btn_product_options)
   public void hideOptionSheet() {
     if (spinner.getSelectedItemPosition() > 0) {
       Options selectedOption = (Options) spinner.getSelectedItem();
