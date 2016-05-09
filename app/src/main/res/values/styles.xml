@@ -52,4 +52,11 @@
         <item name="android:background">@drawable/arc_menu_white_oval</item>
     </style>
 
+    <!-- Pager Tab Strip style -->
+    <style name="PagerTabStripText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>

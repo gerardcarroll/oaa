@@ -6,14 +6,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.SystemClock;
 import android.support.test.InstrumentationRegistry;
-import android.support.test.espresso.action.ViewActions;
-import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.activity.ProductDetailActivity;
-import com.overstock.android.prototype.espresso.matcher.SliderMatcher;
 import com.overstock.android.prototype.fragment.ProductDetailsFragment;
 import com.overstock.android.prototype.model.Product;
 
@@ -35,11 +32,11 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
- * @author RayConnolly, created on 4/26/2016.
+ * Created by rconnolly on 5/4/2016.
  */
 
 @RunWith(AndroidJUnit4.class)
-public class ImageGalleryFragmentTest {
+public class ProductDetailsSummaryFragmentTest {
 
     @Rule
     public ActivityTestRule<ProductDetailActivity> activityRule = new ActivityTestRule<>(ProductDetailActivity.class, true, false);
@@ -49,7 +46,7 @@ public class ImageGalleryFragmentTest {
 
         final Context context = InstrumentationRegistry.getInstrumentation().getTargetContext().getApplicationContext();
 
-        URL url = new URL("http://images-common.test.overstock.com/images/products/9260610/T16428339.jpg");
+        URL url = new URL("http://images-common.test.overstock.com/images/products/9175867/Green-Bay-Packers-68-inch-Economy-Grill-Cover-T16351980.jpg");
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setDoInput(true);
@@ -60,33 +57,33 @@ public class ImageGalleryFragmentTest {
         connection.disconnect();
         final Intent intent = new Intent(context, ProductDetailActivity.class);
         intent.putExtra("image", bitmapExtra);
-        intent.putExtra(ProductDetailsFragment.PRODUCT_DETAILS_PARCEL, Parcels.wrap(new Product(9260610, "9260610/L16428339.jpg", "9260610/P16428339.jpg", "9260610/T16428339.jpg", "Fanmats NFL Grill Mat", 28.89f)));
+        intent.putExtra(ProductDetailsFragment.PRODUCT_DETAILS_PARCEL, Parcels.wrap(new Product(9175867, "9175867/Green-Bay-Packers-68-inch-Economy-Grill-Cover-L16351980.jpg", "9175867/Green-Bay-Packers-68-inch-Economy-Grill-Cover-P16351980.jpg", "9175867/Green-Bay-Packers-68-inch-Economy-Grill-Cover-T16351980.jpg", "Green Bay Packers 68-inch Economy Grill Cover", 31.52f)));
 
         activityRule.launchActivity(intent);
     }
 
     @Test
-    public void testProductDetailRendering() {
-
+    public void testViewsRendering() {
         SystemClock.sleep(1000);
 
-        // Check Image Gallery fragment is displayed
-        onView(withId(R.id.slider)).check(matches(isDisplayed()));
+        // Check Name view is displayed
+        onView(withId(R.id.product_detail_product_name)).check(matches(isDisplayed()));
 
-        // Check product details are displayed
-        onView(withId(R.id.product_detail_product_name)).check(matches(withText("Fanmats NFL Grill Mat")));
-        onView(withId(R.id.product_detail_product_price)).check(matches(withText("$ 28.89")));
-        onView(withId(R.id.product_detail_product_name)).perform(ViewActions.swipeUp());
+        // Check Price view is displayed
+        onView(withId(R.id.product_detail_product_price)).check(matches(isDisplayed()));
 
-        // Check Image Gallery swipe actions
-        onView(withId(R.id.slider)).check(matches(isDisplayed()));
-        onView(withId(R.id.slider)).check(ViewAssertions.matches(SliderMatcher.withCurrentPositiom(0)));
-        onView(withId(R.id.slider)).perform(ViewActions.swipeLeft());
-        onView(withId(R.id.slider)).perform(ViewActions.swipeLeft());
-        onView(withId(R.id.slider)).check(ViewAssertions.matches(SliderMatcher.withCurrentPositiom(2)));
-        onView(withId(R.id.slider)).perform(ViewActions.swipeRight());
-        onView(withId(R.id.slider)).check(ViewAssertions.matches(SliderMatcher.withCurrentPositiom(1)));
+        // Check Review views are displayed
+        onView(withId(R.id.product_detail_product_review)).check(matches(isDisplayed()));
+        onView(withId(R.id.review_star)).check(matches(isDisplayed()));
     }
+
+    @Test
+    public void testSummaryDetails(){
+        SystemClock.sleep(1000);
+
+        // Check Product details
+        onView(withId(R.id.product_detail_product_name)).check(matches(withText("Green Bay Packers 68-inch Economy Grill Cover")));
+        onView(withId(R.id.product_detail_product_price)).check(matches(withText("$ 31.52")));
+    }
+
 }
-
-

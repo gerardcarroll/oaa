@@ -30,4 +30,6 @@ public interface ProductBottomSheetPresenter {
   void applyDiscount(final String totalPrice, final String discount);
 
   void resetRewards();
+
+  void initiateCheckout();
 }

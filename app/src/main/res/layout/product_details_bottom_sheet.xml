@@ -6,167 +6,36 @@
     android:orientation="vertical"
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
-    <GridLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="200dp"
-        android:columnCount="4"
         android:orientation="vertical">
 
-        <LinearLayout
+        <include
+            layout="@layout/purchase_information_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_columnSpan="3"
-            android:layout_row="0"
-            android:background="@color/oapp_primary_500">
+            android:layout_height="wrap_content" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Total Price : "
-                android:textColor="@color/oapp_accent_a200"
-                android:textSize="26sp" />
-
-            <TextView
-                android:id="@+id/totalPrice_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="$200.99"
-                android:textColor="@color/white"
-                android:textSize="26sp" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/product_options_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_columnSpan="3"
-            android:layout_gravity="start"
-            android:layout_row="1"
-            android:paddingBottom="10dp"
-            android:paddingStart="16dp"
-            android:paddingTop="16dp"
-            android:text="Product Options"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <Spinner
-            android:id="@+id/options_spinner"
+        <include
+            layout="@layout/product_options_sheet"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:drawSelectorOnTop="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_weight="1"
-            android:paddingBottom="10dp"
-            android:paddingStart="16dp"
-            android:paddingTop="16dp"
-            android:text="Quantity"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:id="@+id/layout_quantity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="3">
-
-            <ImageView
-                android:id="@+id/quantity_remove"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="16dp"
-                android:src="@drawable/ic_remove_circle_disabled_24dp" />
-
-            <TextView
-                android:id="@+id/quantity_indicator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="16dp"
-                android:text="1"
-                android:textAlignment="center"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/quantity_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="16dp"
-                android:src="@drawable/ic_add_circle_24dp" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:paddingBottom="10dp"
-            android:paddingStart="16dp"
-            android:paddingTop="16dp"
-            android:text="Rewards"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content" />
 
         <include
             layout="@layout/rewards_edit_box"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp" />
+            android:layout_height="wrap_content" />
 
-        <LinearLayout
-            android:id="@+id/layout_paymentMethod"
+        <include
+            layout="@layout/buy_sheet_order_details"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content" />
 
-            <Button
-                android:id="@+id/btn_pay_google_wallet"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/oapp_button"
-                android:drawableStart="@drawable/ic_account_balance_wallet_24dp"
-                android:padding="10dp"
-                android:text="Pay with Google wallet"
-                android:textAlignment="center"
-                android:textColor="@color/oapp_primary_text"
-                android:textStyle="bold" />
+        <include
+            layout="@layout/buy_sheet_payment_type_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-            <Button
-                android:id="@+id/btn_pay_credit_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="16dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/oapp_button"
-                android:drawableStart="@drawable/ic_payment_24dp"
-                android:padding="10dp"
-                android:text="Pay with Credit Card"
-                android:textAlignment="center"
-                android:textColor="@color/oapp_primary_text"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-
-    </GridLayout>
+    </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

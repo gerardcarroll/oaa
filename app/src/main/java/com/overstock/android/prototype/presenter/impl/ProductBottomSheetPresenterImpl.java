@@ -2,9 +2,14 @@ package com.overstock.android.prototype.presenter.impl;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
+import android.util.Log;
+
 import com.overstock.android.prototype.model.Options;
 import com.overstock.android.prototype.model.ProductDetail;
 import com.overstock.android.prototype.presenter.ProductBottomSheetPresenter;
+import com.overstock.android.prototype.service.CheckOutCoordinator;
 import com.overstock.android.prototype.view.ProductBottomSheetView;
 
 /**
@@ -16,7 +21,9 @@ import com.overstock.android.prototype.view.ProductBottomSheetView;
  */
 public class ProductBottomSheetPresenterImpl implements ProductBottomSheetPresenter {
 
-  // private static final String TAG = ProductDetailPresenterImpl.class.getName();
+  private static final String TAG = ProductDetailPresenterImpl.class.getName();
+
+  private CheckOutCoordinator checkOutCoordinator;
 
   private ProductBottomSheetView productBottomSheetView;
 
@@ -25,6 +32,11 @@ public class ProductBottomSheetPresenterImpl implements ProductBottomSheetPresen
   private int maxQuantityAllowed;
 
   private float rewardsApplied;
+
+  @Inject
+  public ProductBottomSheetPresenterImpl(final CheckOutCoordinator checkOutCoordinator){
+    this.checkOutCoordinator = checkOutCoordinator;
+  }
 
   @Override
   public void setView(final ProductBottomSheetView productBottomSheetView) {
@@ -65,12 +77,19 @@ public class ProductBottomSheetPresenterImpl implements ProductBottomSheetPresen
   }
 
   @Override
+  public void initiateCheckout() {
+    Log.d(TAG, "initiating checkout");
+    String userCartId = checkOutCoordinator.getCartIdForParseUser();
+    Log.d(TAG, "Users Cart Id is : " + userCartId);
+  }
+
+  @Override
   public void updateProductPage(final ProductDetail productDetail) {
     final ArrayList<Options> options = (ArrayList<Options>) productDetail.getOptions();
     productBottomSheetView.updateFinalPrice(productDetail.getMemberPrice());
     currentPrice = productDetail.getMemberPrice();
     if (options.size() > 1) {
-      productBottomSheetView.updateSpinner((ArrayList<Options>)options.clone());
+      productBottomSheetView.updateSpinner((ArrayList<Options>) options.clone());
     }
     else
       productBottomSheetView.toggleSpinner();

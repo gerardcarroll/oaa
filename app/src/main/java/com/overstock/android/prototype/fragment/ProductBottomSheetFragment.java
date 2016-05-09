@@ -22,7 +22,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +39,7 @@ import com.overstock.android.prototype.main.OAppPrototypeApplication;
 import com.overstock.android.prototype.model.Options;
 import com.overstock.android.prototype.model.ProductDetail;
 import com.overstock.android.prototype.presenter.ProductBottomSheetPresenter;
+import com.overstock.android.prototype.utils.ViewAnimationUtils;
 import com.overstock.android.prototype.view.ProductBottomSheetView;
 
 /**
@@ -89,6 +92,25 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
   @Bind(R.id.product_options_txt)
   TextView productOptionsTxt;
 
+  @Bind(R.id.product_options_sheet)
+  LinearLayout productOptionsSheet;
+
+  @Bind(R.id.purchase_information)
+  GridLayout purchaseInformation;
+
+  @Bind(R.id.layout_paymentMethod)
+  LinearLayout paymentLayout;
+
+  @Bind(R.id.layout_rewards)
+  LinearLayout rewardsLayout;
+
+  @Bind(R.id.add_option_btn)
+  TextView addOptionBtn;
+
+  @Bind(R.id.order_information)
+  GridLayout orderInformation;
+
+
   @Nullable
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -98,8 +120,10 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
     final ProductDetail productDetail = Parcels.unwrap(getArguments().getParcelable("productDetails"));
     Log.i(TAG, String.format("Product Id: %s", productDetail.getId()));
     presenter.setView(this);
+
     final String placeholderRewards = "12.50";
     presenter.setRewardsApplied(Float.valueOf(placeholderRewards));
+
     presenter.updateProductPage(productDetail);
     return view;
   }
@@ -238,6 +262,41 @@ public class ProductBottomSheetFragment extends BottomSheetDialogFragment implem
 
       }
     });
+  }
+
+  @OnClick(R.id.add_option_btn)
+  public void showOptionSheet() {
+    if (productOptionsSheet.getVisibility() == View.GONE) {
+      ViewAnimationUtils.expand(productOptionsSheet);
+      collapseOrderInformationContent();
+    }
+  }
+
+  @OnClick(R.id.btn_product_options_btn)
+  public void hideOptionSheet() {
+    if (spinner.getSelectedItemPosition() > 0) {
+      Options selectedOption = (Options) spinner.getSelectedItem();
+      Log.i(TAG, selectedOption.getDescription());
+      presenter.initiateCheckout();
+    }
+    if (productOptionsSheet.getVisibility() == View.VISIBLE) {
+      ViewAnimationUtils.collapse(productOptionsSheet);
+      expandOrderInformationContent();
+    }
+  }
+
+  private void collapseOrderInformationContent() {
+    ViewAnimationUtils.collapse(rewardsLayout);
+    ViewAnimationUtils.collapse(paymentLayout);
+    ViewAnimationUtils.collapse(purchaseInformation);
+    ViewAnimationUtils.collapse(orderInformation);
+  }
+
+  private void expandOrderInformationContent() {
+    ViewAnimationUtils.expand(rewardsLayout);
+    ViewAnimationUtils.expand(paymentLayout);
+    ViewAnimationUtils.expand(purchaseInformation);
+    ViewAnimationUtils.expand(orderInformation);
   }
 
   /* Method for handling UI disabling and enabling of quantity buttons. */

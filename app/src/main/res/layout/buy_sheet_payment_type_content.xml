@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_paymentMethod"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="2">
+
+    <Button
+        android:id="@+id/btn_pay_google_wallet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="6dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="6dp"
+        android:layout_weight="1"
+        android:background="@drawable/oapp_button"
+        android:drawableStart="@drawable/ic_android_24dp"
+        android:padding="10dp"
+        android:text="Pay"
+        android:textAlignment="center"
+        android:textColor="@color/oapp_primary_text"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn_pay_credit_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="6dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="6dp"
+        android:layout_weight="1"
+        android:background="@drawable/oapp_button"
+        android:padding="10dp"
+        android:text="Submit Order"
+        android:textAlignment="center"
+        android:textColor="@color/oapp_primary_text"
+        android:textStyle="bold" />
+</LinearLayout>
