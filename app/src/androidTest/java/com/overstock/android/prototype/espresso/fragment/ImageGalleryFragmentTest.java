@@ -75,7 +75,7 @@ public class ImageGalleryFragmentTest {
 
         // Check product details are displayed
         onView(withId(R.id.product_detail_product_name)).check(matches(withText("Fanmats NFL Grill Mat")));
-        onView(withId(R.id.product_detail_product_price)).check(matches(withText("$ 28.89")));
+        onView(withId(R.id.product_detail_product_price)).check(matches(withText("$ 30.99")));
         onView(withId(R.id.product_detail_product_name)).perform(ViewActions.swipeUp());
 
         // Check Image Gallery swipe actions
