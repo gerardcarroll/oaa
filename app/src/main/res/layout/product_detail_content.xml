@@ -27,8 +27,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 app:layout_collapseMode="parallax"
-                android:elevation="15dp"
-                android:background="@drawable/shadow"
+                android:elevation="30dp"
+                android:background="@color/grey"
                 android:padding="2dp">
 
                     <!-- IMAGE GALLERY FRAGMENT CONTAINER -->

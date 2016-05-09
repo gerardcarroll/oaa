@@ -63,9 +63,7 @@ public class ProductDetailsSummaryFragment extends Fragment implements ProductDe
     @Inject
     ProductDetailsSummaryPresenter presenter;
 
-    public ProductDetailsSummaryFragment() {
-        // Required empty public constructor
-    }
+    public ProductDetailsSummaryFragment() {}
 
     /**
      * Use this factory method to create a new instance of
@@ -74,7 +72,6 @@ public class ProductDetailsSummaryFragment extends Fragment implements ProductDe
      * @param productDetail
      * @return A new instance of fragment ProductDetailsSummaryFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static ProductDetailsSummaryFragment newInstance(ProductDetail productDetail) {
         ProductDetailsSummaryFragment fragment = new ProductDetailsSummaryFragment();
         Bundle args = new Bundle();
@@ -109,75 +106,39 @@ public class ProductDetailsSummaryFragment extends Fragment implements ProductDe
 
         final String review = productDetail.getReviews();
         if (review != null) {
-            productName.getLayoutParams().width = setRelativeViewWidth(100.0, 60);
+            productName.getLayoutParams().width = setRelativeViewWidth(60);
             productReview.setText(" " + review + " " + getResources().getString(R.string.reviews_text));
         } else {
-            productName.getLayoutParams().width = setRelativeViewWidth(100.0, 100);
+            productName.getLayoutParams().width = setRelativeViewWidth(100);
             productReview.setVisibility(View.INVISIBLE);
             reviewStar.setVisibility(View.INVISIBLE);
         }
 
         final String currencyCode = Currency.getInstance(Locale.US).getSymbol();
         productPrice.setText(this.getString(R.string.product_price_fmt, currencyCode, String.valueOf(productDetail.getMemberPrice())));
-//        //TODO: move to child presenter
-//        productDetailView.displayProductDetails(productDetail);
-//        //End TODO
+
         presenter.addSimilarItemsRecyclerView();
         return view;
-    }
-
-    /**
-     * Method to set width of view relative to current screen width
-     * @param percentageVal
-     * @param widthVal
-     * @return
-     */
-    private int setRelativeViewWidth(double percentageVal, int widthVal){
-        Display display = getActivity().getWindowManager().getDefaultDisplay();
-        int width = display.getWidth();
-        double widthPercentage = ((float) (width)) / percentageVal;
-        int newWidth = (int)(widthPercentage * widthVal);
-        return newWidth;
     }
 
     @OnClick(R.id.txt_more_information_link)
     public void moreInformation_onClick() {
         this.getParentFragment().getChildFragmentManager()
                 .beginTransaction()
-                .replace(R.id.prod_details_placeholder, MoreInformationFragment1.newInstance(productDetail), String.valueOf(R.id.prod_details_placeholder))
+                .replace(R.id.prod_details_placeholder, MoreInformationFragment.newInstance(productDetail), String.valueOf(R.id.prod_details_placeholder))
+                .addToBackStack(null)
                 .commit();
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    @Override
-    public void displayProductDetails(final ProductDetail productDetail) {
-//        Log.d(TAG, "Displaying Product Details." + productDetail.toString());
-//        productDescription.loadData(productDetail.getDescription().trim(), getString(R.string.webview_html_encoding), null);
-        //TODO
-//        btn_buy.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -191,19 +152,20 @@ public class ProductDetailsSummaryFragment extends Fragment implements ProductDe
 
     }
 
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(Uri uri);
+    }
 
     /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
+     * Method to set width of view relative to current screen width
+     * @param widthVal
+     * @return
      */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    private int setRelativeViewWidth(int widthVal){
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        int width = display.getWidth();
+        double widthPercentage = ((float) (width)) / 100.0;
+        int newWidth = (int)(widthPercentage * widthVal);
+        return newWidth;
     }
 }

@@ -1,9 +1,5 @@
 package com.overstock.android.prototype.activity;
 
-import org.parceler.Parcels;
-
-import retrofit2.http.HEAD;
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -13,6 +9,8 @@ import android.widget.Toast;
 import com.overstock.android.prototype.R;
 import com.overstock.android.prototype.fragment.ProductDetailsFragment;
 import com.overstock.android.prototype.model.Product;
+
+import org.parceler.Parcels;
 
 /**
  * @author RayConnolly, LeeMeehan Created on 21-03-2016
@@ -57,7 +55,6 @@ public class ProductDetailActivity extends AppCompatActivity {
       getSupportFragmentManager().beginTransaction().replace(R.id.product_detils_activity_frm,
         previousProductDetailsFragment, previousProductDetailsFragment.getProduct().getName()).commit();
     }
-
   }
 
   @Override
