@@ -1,0 +1,79 @@
+apply from: "$rootDir/androidlibrarymodule.gradle"
+
+android {
+    dataBinding {
+        enabled true
+    }
+}
+
+apt {
+    arguments {
+        fragmentArgsLib true
+    }
+}
+
+
+
+dependencies {
+//    compile project(":common-binding")
+  //  compile project(":common-ui")
+    compile project(":ss-libs")
+    compile project(":checkout-api")
+ //   compile project(":account-api")
+ //   compile project(":analytics-api")
+ //   compile project(":product-api")
+ //   compile project(":cart-api")
+   // compile project(":webview-api")
+ //   compile project(":promobanner-api")
+ //   compile project(":vendor-binding")
+ //   compile project(":clubo-binding")
+ //   compile project(":home-api")
+
+    compile icepick;
+    compile supportDependencies.support_v4;
+    compile supportDependencies.recyclerView_v7;
+    compile playServices.playServicesAnalytics;
+    compile googleConversionTracking;
+    compile flurry;
+    compile kahuna;
+    compile facebook;
+    compile adobemobile
+    compile playServices.playServicesWallet
+    compile fragmentargs
+
+    provided javaxAnnotation_TMP
+    provided dependencies.create("com.google.auto.value:auto-value:1.2") {
+        exclude group: "com.google.guava"
+    }
+
+    provided dependencies.create("com.google.auto.factory:auto-factory:1.0-beta3") {
+        exclude group: "com.google.guava";
+        exclude group: "com.google.auto", module : "auto-common"
+    }
+
+    apt dagger.daggerCompiler
+    apt auto_value_apt
+    apt auto_factory
+    apt supportDependencies.supportAnnotation
+    apt icepick
+    apt fragmentargs_apt
+
+    testCompile retrofit2_mock.mock
+
+    testCompile junit
+    testCompile assertj
+    testCompile supportDependencies.supportAnnotation
+    testCompile mockitoCore
+    testCompile hamcrest
+    testApt auto_value_apt
+
+    testCompile (powermock_api_mockito) {
+        exclude module: 'hamcrest-core'
+        exclude module: 'objenesis'
+    }
+    testCompile (powermock_module_junit4) {
+        exclude module: 'hamcrest-core'
+        exclude module: 'objenesis'
+    }
+
+}

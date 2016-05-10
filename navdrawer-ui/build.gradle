@@ -6,8 +6,8 @@ dependencies {
 
     compile gson
     compile circleimageview
-    compile supportDependencies.recyclerView
-    compile supportDependencies.appCompat
+    compile supportDependencies.recyclerView_v7
+    compile supportDependencies.appCompat_v7
     compile parcelerApi
     compile rx.rxandroid
     compile rx.rxjava

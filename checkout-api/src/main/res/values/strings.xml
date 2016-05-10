@@ -1,0 +1,12 @@
+<resources>
+  <string name="app_name">Checkout Api</string>
+  <!-- Google Wallet errors -->
+  <string name="wallet_error_limit_exceeded">Sorry, Spending Limit Exceeded</string>
+  <string name="wallet_error_code_authentication_failure">Authentication Failed</string>
+  <string name="wallet_error_code_buyer_account_error">Error with Buyer Account</string>
+  <string name="wallet_error_code_invalid_transaction">Invalid Transaction</string>
+  <string name="wallet_error_code_merchant_account_error">Error with Merchant Account</string>
+  <string name="wallet_error_service_unavailable">Service Unavailable</string>
+  <string name="wallet_error_unknown">Unknown Error</string>
+  <string name="wallet_error_unsupported_api_version">Unsupported Play Services API</string>
+</resources>

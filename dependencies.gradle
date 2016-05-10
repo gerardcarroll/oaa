@@ -1,19 +1,20 @@
 ext {
     //Version
-    supportLibraryVersion = '23.2.1'
+//    supportLibraryVersion = '23.2.1'
+    supportLibraryVersion = '23.3.0'
     jUnitVersion = '4.12'
     mockitoCoreVersion = '1.10.19'
     daggerMockVersion = '0.5'
-    daggerVersion = '2.0.2'
+    daggerVersion = '2.2'
     robolectricVersion = '3.0'
     javaxAnnotationVersion = '10.0-b28'
     autoParcelProcessorVersion = '0.3.1'
     icepickProcessorVersion = '3.2.0'
     espressoVersion = '2.2.1'
     dexmakerVersion = '1.2'
-    gsonVersion = '2.4'
+    gsonVersion = '2.6.2'
     parcelerVersion = '1.0.4'
-    playServicesAuthVersion = '8.4.0'
+    playServicesVersion = '8.4.0'
     butterknifeVersion = '7.0.1'
     androidProcessButtonVersion = '1.0.4'
     autoParcelVersion = '0.3.1'
@@ -22,7 +23,7 @@ ext {
     rxjavaVersion =  '1.1.1'
     rxandroidVersion = '1.1.0'
     picassoVersion = '2.5.2'
-    retrofitVersion = '2.0.0-beta4'
+    retrofitVersion = '2.0.2'
     circleimageviewVersion = '2.0.0'
     easyfontsVersion = '1.0.0'
     boltsAndroidVersion = '1.+'
@@ -34,6 +35,7 @@ ext {
     nineoldandroidsLibraryVersion = '2.4.0'
     sliderLibraryVersion = '1.1.5@aar'
     uiautomatorVersion = '2.1.1'
+    autoValueParcelVersion = "0.2.1"
 
     javaxAnnotation = "org.glassfish:javax.annotation:${javaxAnnotationVersion}"
     autoParcelProcessor = "com.github.frankiesardo:auto-parcel-processor:${autoParcelProcessorVersion}"
@@ -57,11 +59,51 @@ ext {
     javaxInject = "javax.inject:javax.inject:${javaxInjectVersion}"
     nineoldandroidsLibrary = "com.nineoldandroids:library:${nineoldandroidsLibraryVersion}"
     sliderLibrary = "com.daimajia.slider:library:${sliderLibraryVersion}"
+    googleConversionTracking = "com.google.ads.conversiontracking:GoogleConversionTrackingSdk:2.2.4"
+    flurry = "com.flurry.android:FlurryAnalytics:6.2.0"
+    kahuna = 'com.kahuna.sdk:kahuna:2.3.2'
+    adobemobile = "com.adobe.mobile.android:adobeMobileLibrary:4.8.3"
+    facebook = 'com.facebook.android:facebook-android-sdk:4.11.0'
+    fragmentargs = "com.hannesdorfmann.fragmentargs:annotation:3.0.2"
+    javaxAnnotation_TMP = "javax.annotation:jsr250-api:1.0"
+    auto_value = "com.google.auto.value:auto-value:1.2"
+    auto_value_parcel_version = "0.2.1"
+    auto_factory = 'com.google.auto.factory:auto-factory:1.0-beta3'
+    fragmentargs_apt = "com.hannesdorfmann.fragmentargs:processor:3.0.2"
+    hamcrest = 'org.hamcrest:hamcrest-library:1.3'
+    powermockVersion = "1.6.2"
+    powermock_api_mockito ="org.powermock:powermock-api-mockito:${powermockVersion}"
+    powermock_module_junit4 = "org.powermock:powermock-module-junit4:${powermockVersion}"
+    okhttpVersion = '3.2.0'
+    clans_fab = "com.github.clans:ClansFloatingActionButton:1.5.4@aar"
+    threetenbp = "com.jakewharton.threetenabp:threetenabp:1.0.3"
+    apptentive = 'com.apptentive:apptentive-android:2.1.4'
+    timber = 'com.jakewharton.timber:timber:4.1.0@aar'
+    yozio = "com.yozio.android:yozio-android-sdk:1.1.13"
+    otto = 'com.squareup:otto:1.3.8'
+    mortar = "com.squareup.mortar:mortar:0.20"
+    daggerMock    =  "com.github.fabioCollini:DaggerMock:${daggerMockVersion}"
+
+    autoValueParcelAdapter = "com.ryanharter.auto.value:auto-value-parcel-adapter:${autoValueParcelVersion}"
+
+    glide = [
+            "com.github.bumptech.glide:glide:3.7.0",
+            "com.github.bumptech.glide:okhttp3-integration:1.4.0@aar"
+    ]
+
+    okhttp = [
+            "com.squareup.okhttp3:okhttp:$okhttpVersion",
+            "com.squareup.okhttp3:okhttp-urlconnection:$okhttpVersion"
+    ]
 
     retrofit2 = [
-            retrofit : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-            adapterRxjava : "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
-            converterGson : "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+            "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
+            "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+    ]
+
+    retrofit2_mock = [
+            mock : "com.squareup.retrofit2:retrofit-mock:${retrofitVersion}"
     ]
 
     rx = [
@@ -69,21 +111,29 @@ ext {
             rxandroid : "io.reactivex:rxandroid:${rxandroidVersion}"
     ]
 
+    rxjava_android = [
+            'io.reactivex:rxandroid:1.1.0',
+            'com.trello:rxlifecycle:0.5.0',
+            'com.trello:rxlifecycle-components:0.5.0'
+    ]
+
     //Support Libraries dependencies
     supportDependencies = [
             design           : "com.android.support:design:${supportLibraryVersion}",
-            recyclerView     : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
-            cardView         : "com.android.support:cardview-v7:${supportLibraryVersion}",
-            appCompat        : "com.android.support:appcompat-v7:${supportLibraryVersion}",
+            recyclerView_v7     : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
+            cardView_v7         : "com.android.support:cardview-v7:${supportLibraryVersion}",
+            appCompat_v7        : "com.android.support:appcompat-v7:${supportLibraryVersion}",
             supportAnnotation: "com.android.support:support-annotations:${supportLibraryVersion}",
-            support          : "com.android.support:support-v4:${supportLibraryVersion}",
-            palette          : "com.android.support:palette-v7:${supportLibraryVersion}"
+            support_v4       : "com.android.support:support-v4:${supportLibraryVersion}",
+            palette_v7          : "com.android.support:palette-v7:${supportLibraryVersion}",
+            customtabs       : "com.android.support:customtabs:${supportLibraryVersion}",
+            support_v13       :  "com.android.support:support-v13:${supportLibraryVersion}",
+            gridlayout_v7    : "com.android.support:gridlayout-v7:${supportLibraryVersion}"
     ]
 
     dagger = [
             dagger        : "com.google.dagger:dagger:${daggerVersion}",
             daggerCompiler: "com.google.dagger:dagger-compiler:${daggerVersion}",
-            daggerMock    : "com.github.fabioCollini:DaggerMock:${daggerMockVersion}"
     ]
 
     robolectric = [
@@ -108,7 +158,22 @@ ext {
     ]
 
     playServices = [
-            playServicesAuth : "com.google.android.gms:play-services-auth:${playServicesAuthVersion}"
+            playServicesAuth : "com.google.android.gms:play-services-auth:${playServicesVersion}",
+            playServicesWallet : "com.google.android.gms:play-services-wallet:${playServicesVersion}",
+            playServicesAnalytics : "com.google.android.gms:play-services-analytics:${playServicesVersion}",
+            playServicesBase : "com.google.android.gms:play-services-base:${playServicesVersion}"
+
     ]
 
+    auto_value_apt = [   auto_value,
+                        "com.ryanharter.auto.value:auto-value-gson:0.2.2",
+                        "com.ryanharter.auto.value:auto-value-parcel:$auto_value_parcel_version",
+                        "com.ryanharter.auto.value:auto-value-parcel-adapter:$auto_value_parcel_version",
+                        "com.squareup:javapoet:1.6.1"
+    ]
+
+    assertj = [
+            'org.assertj:assertj-core:1.7.1',
+            'com.squareup.assertj:assertj-android:1.1.1'
+    ]
 }

@@ -14,9 +14,8 @@ buildscript {
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'org.ajoberstar:gradle-jacoco:0.1.0'
         classpath 'org.sonarqube.gradle:gradle-sonarqube-plugin:1.0'
+        classpath "me.tatarka:gradle-retrolambda:3.3.0-beta4"
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
     }
 }
 
@@ -24,7 +23,7 @@ ext {
     minSdkVersion = 21
     targetSdkVersion = 23
     compileSdkVersion = 23
-    buildToolsVersion = "23.0.2"
+    buildToolsVersion = "23.0.3"
     versionCode = System.getenv("BUILD_NUMBER") as Integer ?: 9999
     versionName = "${version}"
 
@@ -36,9 +35,14 @@ apply from: 'dependencies.gradle'
 allprojects {
 
     repositories {
+        flatDir {
+            dirs "$rootDir/libs"
+        }
         jcenter()
+//        maven { url 'http://repository.overstock.com/content/groups/public' }
         maven { url "https://clojars.org/repo/" }
         maven { url "https://jitpack.io" }
+        maven { url "https://kahuna.github.io/kahuna-android/sdk" }
     }
 
 }

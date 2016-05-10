@@ -75,6 +75,10 @@ android {
             testCoverageEnabled true
         }
     }
+
+    dataBinding {
+        enabled true
+    }
 }
 
 dependencies {
@@ -82,19 +86,50 @@ dependencies {
     compile project(':parse-services')
     compile project(':navdrawer-ui')
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile dagger.dagger
+    compile gson
+    compile playServices.playServicesAuth
+    compile supportDependencies.appCompat_v7
+    compile supportDependencies.support_v4
+    compile supportDependencies.recyclerView_v7
+    compile supportDependencies.cardView_v7
+    compile supportDependencies.design
+    compile supportDependencies.palette_v7
+    compile butterknife
+    compile androidProcessButton
+    compile autoParcel
+    compile parcelerApi
+    compile icepick
+    compile rx.rxjava
+    compile rx.rxandroid
+    compile picasso
+    compile retrofit2
+    compile circleimageview
+    compile easyfonts
+    compile arclayoutLibrary
+    compile boltsAndroid
+    compile nineoldandroidsLibrary
+    compile sliderLibrary
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+        transitive = true;
+    }
 
     testCompile junit
     testCompile mockitoCore
-    testCompile dagger.daggerMock
-
+    testCompile ('com.github.fabioCollini:DaggerMock:0.5') {
+        exclude group : 'com.google.dagger', module: 'dagger'
+    }
     testCompile robolectric.robolectric
     testCompile robolectric.shadowsSupport
+    testCompile dagger.daggerCompiler
+
     apt dagger.daggerCompiler
-    provided javaxAnnotation
     apt autoParcelProcessor
+    apt parceler
+
+    provided javaxAnnotation
     provided icepickProcessor
 
-    testCompile dagger.daggerCompiler
     androidTestApt dagger.daggerCompiler
 
     androidTestCompile(supportTestDependencies.espresso.espressoContrib) {
@@ -103,7 +138,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude module: 'recyclerview-v7'
     }
-
     androidTestCompile(supportTestDependencies.espresso.espressoCore) {
         // Necessary if your app targets Marshmallow (since Espresso
         // hasn't moved to Marshmallow yet)
@@ -114,58 +148,21 @@ dependencies {
         // hasn't moved to Marshmallow yet)
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    //added for UI Automation
-    androidTestCompile supportTestDependencies.rules
-    androidTestCompile supportTestDependencies.uiautomator
-    androidTestCompile supportDependencies.supportAnnotation
-
-    androidTestCompile(supportTestDependencies.espresso.espressoIntents) {
-        exclude module: 'espresso-core'
-    }
-
-    androidTestCompile dexmaker.dexmaker
     androidTestCompile(dexmaker.dexmakerMockito) {
         exclude group: 'org.hamcrest', module: 'hamcrest-core'
     }
-    androidTestCompile mockitoCore
-    androidTestCompile dagger.daggerMock
-
-    apt parceler
-
-    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
-        transitive = true;
+    androidTestCompile(supportTestDependencies.espresso.espressoIntents) {
+        exclude module: 'espresso-core'
     }
-    compile dagger.dagger
-    compile gson
-    compile playServices.playServicesAuth
-    compile supportDependencies.appCompat
-    compile supportDependencies.support
-    compile supportDependencies.recyclerView
-    compile supportDependencies.cardView
-    compile supportDependencies.design
-    compile supportDependencies.palette
-    compile butterknife
-    compile androidProcessButton
-    compile autoParcel
+    androidTestCompile supportTestDependencies.rules
+    androidTestCompile supportTestDependencies.uiautomator
+    androidTestCompile supportDependencies.supportAnnotation
+    androidTestCompile dexmaker.dexmaker
+    androidTestCompile mockitoCore
 
-    compile parcelerApi
-    compile icepick
-    compile rx.rxjava
-    compile rx.rxandroid
-    compile picasso
-    compile retrofit2.retrofit
-    compile retrofit2.adapterRxjava
-    compile retrofit2.converterGson
-    compile circleimageview
-    compile easyfonts
-
-    compile arclayoutLibrary
-
-    compile boltsAndroid
-
-    // Image Slider dependencies
-    compile nineoldandroidsLibrary
-    compile sliderLibrary
+    androidTestCompile ('com.github.fabioCollini:DaggerMock:0.5') {
+        exclude group : 'com.google.dagger', module: 'dagger'
+    }
 
 }
 
@@ -174,6 +171,5 @@ afterEvaluate {
 }
 
 apply plugin: 'com.google.gms.google-services'
-
 apply from: '../jacoco.gradle'
 apply from: '../sonar.gradle'

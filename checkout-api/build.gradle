@@ -1,0 +1,5 @@
+apply from: "$rootDir/androidlibrarymodule.gradle"
+
+dependencies {
+    compile playServices.playServicesWallet
+}
