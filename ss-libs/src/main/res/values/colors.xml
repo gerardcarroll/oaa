@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="accent_ostk_red">#C7202C</color>
+
+    <color name="ostk_primary_text">#444444</color>
+    <color name="ostk_disabled_text">#42444444</color>
+    <color name="ostk_secondary_text">#89444444</color>
+    <color name="white">#FFFFFF</color>
+    <color name="primary_gray">#F6F6F6</color>
+    <color name="accent_action">#0272A2</color>
+    <color name="app_background">#FAFAFA</color>
+
+</resources>

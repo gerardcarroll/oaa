@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="appbar_elevation">4dp</dimen>
+    <dimen name="toolbar_content_inset_start">72dp</dimen>
+    <dimen name="card_inset_toolbar_content_inset_start">0dp</dimen>
+    <dimen name="window_content_overlay_height">0dp</dimen>
+    <dimen name="cart_badge_padding">4dp</dimen>
+    <dimen name="cart_menu_quantity_text_size">11dp</dimen>
+    <dimen name="badge_icon_border_width">1dp</dimen>
+
+</resources>

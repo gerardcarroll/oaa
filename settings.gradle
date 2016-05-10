@@ -1,1 +1,1 @@
-include ':app', ':navdrawer-ui', ':parse-services', ':checkout-api', ':checkout-impl'
+include ':app', ':navdrawer-ui', ':parse-services', ':checkout-api', ':checkout-impl', ':ss-lib'

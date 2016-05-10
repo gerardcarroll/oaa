@@ -1,0 +1,17 @@
+<resources>
+    <string name="sans_serif_condensed">sans-serif-condensed</string>
+
+    <string name="app_name">ss-libs</string>
+    <string name="appbar_transition">com.overstock.appbar</string>
+    <string name="toolbar_transition">com.overstock.toolbar</string>
+    <string name="read_more">READ MORE</string>
+    <string name="pin">PIN</string>
+    <string name="gift_card_number">Gift Card Number</string>
+
+    <string name="no_network_message">No Connection</string>
+    <string name="no_network_message_detail">No network connection found</string>
+    <string name="unknown_error_title">OOPS!</string>
+    <string name="unknown_error_detail">An Unknown Error Occurred</string>
+    <string name="try_again">Try Again</string>
+
+</resources>

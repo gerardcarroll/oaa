@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="tintColor" format="reference|color" />
+
+    <declare-styleable name="ExpandableTextViewLayout">
+        <attr name="maxCollapsedLines" format="integer"/>
+    </declare-styleable>
+    <declare-styleable name="ForegroundImageView">
+        <attr name="android:foreground" />
+        <attr name="android:foregroundInsidePadding" />
+        <attr name="android:foregroundGravity" />
+    </declare-styleable>
+    <declare-styleable name="TintImageView">
+        <attr name="tintColor" />
+    </declare-styleable>
+
+    <declare-styleable name="TintDrawableTextView">
+        <attr name="tintColor" />
+    </declare-styleable>
+
+    <declare-styleable name="TintDrawableButton">
+        <attr name="tintColor" />
+    </declare-styleable>
+
+    <declare-styleable name="TintImageButton">
+        <attr name="tintColor" />
+    </declare-styleable>
+</resources>
