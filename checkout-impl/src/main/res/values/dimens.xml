@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="first_checkout_total_padding_top">16dp</dimen>
+  <dimen name="checkout_item_image_size">64dp</dimen>
+  <dimen name="alt_payment_dialog_min_width">312dp</dimen>
+</resources>

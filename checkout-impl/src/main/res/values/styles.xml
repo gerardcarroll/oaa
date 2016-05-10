@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <style name="Theme.Overstock.Transaction.Checkout">
+  </style>
+
+  <style name="Theme.Overstock.Transaction.Checkout.Dialogs">
+  </style>
+
+  <style name="Theme.Overstock.Action.OrderComplete">
+  </style>
+
+  <!--Wallet styling-->
+  <style name="wallet_details_text_appearance">
+    <item name="android:textColor">#222</item>
+    <item name="android:textSize">14sp</item>
+  </style>
+
+  <style name="wallet_header_text_appearance" parent="wallet_details_text_appearance">
+    <item name="android:textStyle">bold</item>
+    <item name="android:textSize">16sp</item>
+    <item name="android:textAllCaps">true</item>
+  </style>
+
+  <style name="wallet_button_text_apperance_style">
+    <item name="android:textStyle">bold</item>
+    <item name="android:textSize">14sp</item>
+  </style>
+
+</resources>

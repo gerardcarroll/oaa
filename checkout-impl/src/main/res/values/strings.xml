@@ -1,0 +1,62 @@
+<resources>
+  <string name="app_name">Checkout Impl</string>
+
+  <string name="shipping_method">Shipping Method</string>
+  <string name="discount_total_format">-%s</string>
+  <string name="total">Total</string>
+
+  <string name="checkout_items_header">SELECT SHIPPING METHODS</string>
+
+  <string name="covered_by_warranty">This item is covered by the <![CDATA[<b>%s</b>]]> warranty plan added to your order.</string>
+
+  <string name="order_complete">Order Complete</string>
+  <string name="order_conf_title">We appreciate your business and hope you come back soon</string>
+  <string name="order_conf_order_number_text">Your order number is: #%s</string>
+
+  <string name="order_conf_header_text1">
+    <![CDATA[Your order confirmation has been sent to <b>%s</b><br>
+    When your order is shipped, a shipping notification with tracking will be emailed to you.
+    ]]>
+  </string>
+  <string name="order_conf_header_text2">
+    <![CDATA[You can check the status of your order by visiting the <a href="ostk://www.overstock.com/account">My Account</a> page and then clicking on the order status link.]]>
+  </string>
+
+  <string name="book_order_progress_title">Booking your order</string>
+  <string name="book_order_progress_message">Please wait while we book your order</string>
+
+  <string name="billing_information">Billing Information</string>
+  <string name="shipping_information">Shipping Information</string>
+
+  <string name="checkout_url">https://www.overstock.com/checkout</string>
+  <string name="checkout_title">Checkout</string>
+
+  <string name="continue_shopping">Continue Shopping</string>
+  <string name="submit">Submit</string>
+  <string name="shipping_method_update_error">Error updating shipping method</string>
+  <string name="load_checkout_error">Error loading checkout</string>
+  <string name="reload">Reload</string>
+  <string name="alt_payment_gift_card_title">Add Gift Card</string>
+  <string name="apply">Apply</string>
+  <string name="gift_card_dialog_title">Gift Card</string>
+  <string name="alt_payment_promo_title">Add Promo Code</string>
+  <string name="alt_payment_clubo_title">Apply Club O Rewards</string>
+  <string name="promo_code">Promo Code</string>
+  <string name="apply_clubo_rewards">Apply Club O Rewards</string>
+  <string name="earned_this_order">Earned this order:</string>
+  <string name="available_to_apply">Available to Apply:</string>
+  <string name="enter_dollar_amount">Enter Dollar Amount</string>
+
+  <!-- Gift Card Redemption -->
+  <string name="gift_card_applied">Gift Card Applied</string>
+  <string name="gift_card_redemption_endpoint">https://www.overstock.com/api/giftcard-redeem.json</string>
+
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="where_is_my_pin">Where is my PIN?</string>
+  <string name="please_enter_valid_clubo_amount">Please enter a valid amount amount of club o points to apply.</string>
+  <string name="insufficient_clubo_points_available">Please enter an amount less than or equal to your available club o points.</string>
+  <string name="promo_code_applied_successfully">Promo code applied.</string>
+  <string name="club_o_applied_successfully">ClubO points applied.</string>
+  <string name="enter_a_promo_code">Please enter a promo code</string>
+</resources>
